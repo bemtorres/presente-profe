@@ -23,7 +23,7 @@ function activeTab($urls, $blockers = array()){
 }
 
 function activeOpen($urls, $blockers = array()){
-  return activeValidate($urls, $blockers) ? 'menu-open' : '';
+  return activeValidate($urls, $blockers) ? 'show' : '';
 }
 
 function helperDateFormat(string $date) {

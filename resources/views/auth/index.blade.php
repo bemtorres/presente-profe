@@ -9,7 +9,7 @@
   <meta name="author" content="Łukasz Holeczek">
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
   <title>CoreUI Free Bootstrap Admin Template</title>
-  <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('app/assets/favicon/apple-icon-57x57.png') }}">
+  {{-- <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('app/assets/favicon/apple-icon-57x57.png') }}">
   <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('app/assets/favicon/apple-icon-60x60.png') }}">
   <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('app/assets/favicon/apple-icon-72x72.png') }}">
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('app/assets/favicon/apple-icon-76x76.png') }}">
@@ -26,54 +26,50 @@
   <link rel="manifest" href="{{ asset('app/assets/favicon/manifest.json') }}">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="{{ asset('app/assets/favicon/ms-icon-144x144.png') }}">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#ffffff"> --}}
   <link rel="stylesheet" href="{{ asset('vendors/simplebar/css/simplebar.css') }}">
   <link rel="stylesheet" href="{{ asset('app/css/vendors/simplebar.css') }}">
   <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
   {{-- <link href="{{ asset('app/css/examples.css') }}" rel="stylesheet"> --}}
 </head>
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+<div class="bg-dark min-vh-100 d-flex flex-row align-items-center">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="card-group d-block d-md-flex row">
-          <div class="card col-md-5 text-white bg-primary py-5">
+          <div class="d-none d-sm-none d-md-block card col-md-5 py-5" style="background-image: url('{{ asset('app/pexels-jess-bailey-designs-768472.jpg') }}'); background-size: cover;">
             <div class="card-body text-center">
               <div>
-
+                <img src="{{ asset('app/img/planificadoracademico3.png') }}" alt="" srcset="">
               </div>
             </div>
           </div>
           <div class="card col-md-7 p-4 mb-0">
             <div class="card-body">
-                <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your account</p>
-                <div class="input-group mb-3"><span class="input-group-text">
-                        <svg class="icon">
-                            <use
-                                xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-user') }}">
-                            </use>
-                        </svg></span>
-                    <input class="form-control" type="text" placeholder="Username">
-                </div>
-                <div class="input-group mb-4"><span class="input-group-text">
-                        <svg class="icon">
-                            <use
-                                xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}">
-                            </use>
-                        </svg></span>
-                    <input class="form-control" type="password" placeholder="Password">
-                </div>
-                <div class="row">
-                    <div class="d-grid">
-                        <button class="btn btn-primary" type="button">Iniciar sesión</button>
+                <h1>Acceso</h1>
+                {{-- <p class="text-medium-emphasis">Sign In to your account</p> --}}
+                <form action="{{ route('login') }}" method="POST">
+                  @csrf
+                  <div class="mb-3">
+                    <label for="correo" class="form-label">Correo electronico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                  </div>
 
-                        <button class="btn btn-danger mt-3" type="button">DUOC</button>
-                    </div>
-                    <div class="col-12 text-center">
-                        <button class="btn btn-link px-0" type="button"><small>¿He olvidado mi contraseña?</small></button>
-                    </div>
-                </div>
+                  <div class="d-grid">
+                      <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+
+                      {{-- <a class="btn btn-light mt-3" type="submit">
+                        Iniciar con
+                      </a> --}}
+                  </div>
+                  <div class="col-12 text-center">
+                      {{-- <button class="btn btn-link px-0" type="button"><small>¿He olvidado mi contraseña?</small></button> --}}
+                  </div>
+                </form>
             </div>
           </div>
         </div>
