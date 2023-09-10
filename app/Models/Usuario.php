@@ -36,9 +36,18 @@ class Usuario extends Authenticatable
     );
   }
 
-  public function scopefindBycorreo($query, $correo){
+  public function scopefindByCorreo($query, $correo){
     return $query->where('correo',$correo);
   }
+
+  function inte_google_id(){
+    return $this->integrations['google_id'] ?? null;
+  }
+
+  function info_img(){
+    return $this->info['img'] ?? null;
+  }
+
 
   // public function team(){
   //   return $this->belongsTo(Team::class,'id_team');

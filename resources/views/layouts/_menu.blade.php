@@ -28,11 +28,15 @@
         </svg> Typography
       </a>
     </li> --}}
+    <li class="nav-item">
+      <a class="nav-link {{ activeTab(['planes*']) }}" href="{{ route('planes.index') }}">
+        <i class="nav-icon fa-regular fa-clock"></i>
+        <small>Disponibilidad Horaria</small>
+      </a>
+    </li>
     <li class="nav-title">Configuración</li>
     <li class="nav-group {{ activeOpen(['usuario*','asignaturas']) }}"><a class="nav-link nav-group-toggle" href="#">
-        <svg class="nav-icon">
-          <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
-        </svg> Admin</a>
+      <i class="nav-icon fa-solid fa-gear"></i> Admin</a>
       <ul class="nav-group-items">
         <li class="nav-item">
           <a class="nav-link {{ activeTab(['usuario*']) }}" href="{{ route('usuarios.index') }}">

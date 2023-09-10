@@ -6,78 +6,74 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-  <meta name="author" content="Łukasz Holeczek">
+  <meta name="author" content="BEMTORRES">
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-  <title>CoreUI Free Bootstrap Admin Template</title>
-  {{-- <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('app/assets/favicon/apple-icon-57x57.png') }}">
-  <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('app/assets/favicon/apple-icon-60x60.png') }}">
-  <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('app/assets/favicon/apple-icon-72x72.png') }}">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('app/assets/favicon/apple-icon-76x76.png') }}">
-  <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('app/assets/favicon/apple-icon-114x114.png') }}">
-  <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('app/assets/favicon/apple-icon-120x120.png') }}">
-  <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('app/assets/favicon/apple-icon-144x144.png') }}">
-  <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('app/assets/favicon/apple-icon-152x152.png') }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app/assets/favicon/apple-icon-180x180.png') }}">
-  <link rel="icon" type="image/png" sizes="192x192"
-      href="{{ asset('app/assets/favicon/android-icon-192x192.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('app/assets/favicon/favicon-32x32.png') }}">
-  <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('app/assets/favicon/favicon-96x96.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('app/assets/favicon/favicon-16x16.png') }}">
-  <link rel="manifest" href="{{ asset('app/assets/favicon/manifest.json') }}">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="{{ asset('app/assets/favicon/ms-icon-144x144.png') }}">
-  <meta name="theme-color" content="#ffffff"> --}}
+  <title>PA - Planificador Academico</title>
+
+  <link rel="shortcut icon" href="{{ asset('app/img/planificadoracademico.svg') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('vendors/simplebar/css/simplebar.css') }}">
   <link rel="stylesheet" href="{{ asset('app/css/vendors/simplebar.css') }}">
   <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
-  {{-- <link href="{{ asset('app/css/examples.css') }}" rel="stylesheet"> --}}
+  <link href="{{ asset('app/css/planificador.css') }}" rel="stylesheet">
+
+  <style>
+  </style>
 </head>
-<div class="bg-dark min-vh-100 d-flex flex-row align-items-center">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="card-group d-block d-md-flex row">
-          <div class="d-none d-sm-none d-md-block card col-md-5 py-5" style="background-image: url('{{ asset('app/pexels-jess-bailey-designs-768472.jpg') }}'); background-size: cover;">
-            <div class="card-body text-center">
-              <div>
-                <img src="{{ asset('app/img/planificadoracademico3.png') }}" alt="" srcset="">
+  <div class="bg-dark min-vh-100 d-flex flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card-group d-block d-md-flex row">
+            <div class="d-none d-sm-none d-md-block card col-md-5 py-5" style="background-image: url('{{ asset('app/pexels-jess-bailey-designs-768472.jpg') }}'); background-size: cover;">
+              <div class="card-body text-center">
+                <div>
+                  <img src="{{ asset('app/img/planificadoracademico3.png') }}" alt="" srcset="">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card col-md-7 p-4 mb-0">
-            <div class="card-body">
-                <h1>Acceso</h1>
-                {{-- <p class="text-medium-emphasis">Sign In to your account</p> --}}
-                <form action="{{ route('login') }}" method="POST">
-                  @csrf
-                  <div class="mb-3">
-                    <label for="correo" class="form-label">Correo electronico</label>
-                    <input type="email" class="form-control" id="correo" name="correo" required>
+            <div class="card col-md-7 p-4 mb-0">
+              <div class="card-body">
+                  <h1>Acceso</h1>
+                  @if (session('info'))
+                  <div class="col-12 text-center mt-4">
+                      <span class="badge bg-info">Error. intente nuevamente</span>
                   </div>
-                  <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                  </div>
+                  @endif
+                  {{-- <p class="text-medium-emphasis">Sign In to your account</p> --}}
+                  <form action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                      <label for="correo" class="form-label">Correo electronico</label>
+                      <input type="email" class="form-control" id="correo" name="correo" value="admin@gmail.com" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Contraseña</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
 
-                  <div class="d-grid">
-                      <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+                    <div class="d-grid">
+                        <button class="btn btn-primary pa-azul" type="submit">Iniciar sesión</button>
 
-                      {{-- <a class="btn btn-light mt-3" type="submit">
-                        Iniciar con
-                      </a> --}}
-                  </div>
-                  <div class="col-12 text-center">
-                      {{-- <button class="btn btn-link px-0" type="button"><small>¿He olvidado mi contraseña?</small></button> --}}
-                  </div>
-                </form>
+                        <br>
+
+                        <a href="{{ url('auth/google') }}" class="btn btn-sm btn-light btn-lg">
+                          <span aria-hidden="true" class="NA_Img dkWypw"><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M20.64 12.2c0-.63-.06-1.25-.16-1.84H12v3.49h4.84a4.14 4.14 0 0 1-1.8 2.71v2.26h2.92a8.78 8.78 0 0 0 2.68-6.62z" fill="#4285F4"></path><path d="M12 21a8.6 8.6 0 0 0 5.96-2.18l-2.91-2.26a5.4 5.4 0 0 1-8.09-2.85h-3v2.33A9 9 0 0 0 12 21z" fill="#34A853"></path><path d="M6.96 13.71a5.41 5.41 0 0 1 0-3.42V7.96h-3a9 9 0 0 0 0 8.08l3-2.33z" fill="#FBBC05"></path><path d="M12 6.58c1.32 0 2.5.45 3.44 1.35l2.58-2.59A9 9 0 0 0 3.96 7.95l3 2.34A5.36 5.36 0 0 1 12 6.58z" fill="#EA4335"></path></g></svg></span>
+                          Inicia sesión con Google
+                        </a>
+                    </div>
+                    <div class="col-12 text-end mt-4">
+                        {{-- <button class="btn btn-link px-0" type="button"><small>¿He olvidado mi contraseña?</small></button> --}}
+                      <strong><small><span class="badge bg-dark">v0.1.0</span></small></strong>
+                    </div>
+                  </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<script src="{{ asset('vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
-<script src="{{ asset('vendors/simplebar/js/simplebar.min.js') }}"></script>
+  <script src="{{ asset('vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendors/simplebar/js/simplebar.min.js') }}"></script>
 </body>
 </html>

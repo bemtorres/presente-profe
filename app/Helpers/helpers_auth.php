@@ -21,6 +21,6 @@ function close_sessions() {
   //   Auth::guard('inscripcion')->logout();
   // }
   // session()->flush();
-  session()->forget('gp_config');
+  // session()->forget('gp_config');
   return true;
 }

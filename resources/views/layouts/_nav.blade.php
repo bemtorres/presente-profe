@@ -30,11 +30,35 @@
     </ul> --}}
     <ul class="header-nav ms-3">
       <li class="nav-item dropdown">
+
         <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <div class="avatar avatar-md">
-            <img class="avatar-img" src="{{ asset('app/assets/img/avatars/8.jpg') }}" alt="user@email.com'">
+          <div class="d-flex align-items-center">
+            <div class="avatar avatar-md">
+              <img class="avatar-img" src="{{ current_user()->info_img() ? current_user()->info_img() : asset('app/img/negro.jpg') }}" alt="">
+            </div>
+            <div class="ms-2">
+              <span class="h6 mt-2 mt-sm-0">{{ current_user()->nombre_completo() }}</span>
+              <p class="small m-0">{{ current_user()->correo }}</p>
+            </div>
           </div>
         </a>
+
+        {{-- <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <div class="avatar avatar-md">
+            <img class="avatar-img" src="{{ current_user()->info_img() ? current_user()->info_img() : asset('app/assets/img/avatars/8.jpg') }}">
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="avatar me-3">
+              <img class="avatar-img rounded-circle shadow" src="{{ current_user()->info_img() ? current_user()->info_img() : asset('app/assets/img/avatars/8.jpg') }}" alt="avatar">
+            </div>
+            <div>
+              <a class="h6 mt-2 mt-sm-0" href="#">Lori Ferguson</a>
+              <p class="small m-0">example@gmail.com</p>
+            </div>
+          </div>
+        </a> --}}
+
+
         <div class="dropdown-menu dropdown-menu-end pt-0">
           {{-- <div class="dropdown-header bg-light py-2">
             <div class="fw-semibold">Account</div>

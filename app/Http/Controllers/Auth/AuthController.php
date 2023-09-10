@@ -22,7 +22,7 @@ class AuthController extends Controller
 
   public function login(Request $request){
     try {
-      $u = Usuario::findBycorreo($request->correo)->firstOrFail();
+      $u = Usuario::findByCorreo($request->correo)->firstOrFail();
 
       $pass =  hash('sha256', $request->password);
       if($u->password==$pass){
@@ -38,7 +38,6 @@ class AuthController extends Controller
         return back()->with('info','Error. Intente nuevamente.');
       }
     } catch (\Throwable $th) {
-      return $th;
       return back()->with('info','Error. Intente nuevamente.');
     }
   }

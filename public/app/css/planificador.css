@@ -1,0 +1,72 @@
+.pa-morado {
+  background: rgba(149, 33, 178, 1);
+}
+
+.pa-morado-gradiente {
+  background: linear-gradient(-45deg, rgba(149, 33, 178, .9) 0%, rgba(149, 33, 178, .5) 100%);
+}
+
+.pa-rojo {
+  background: rgba(213, 0, 50, 1);
+}
+
+.pa-rojo-gradiente {
+  background: linear-gradient(-45deg, rgba(213, 0, 50, 0) 50%, rgba(213, 0, 50, 1) 50%);
+}
+
+.pa-narajo {
+  background: rgba(232, 119, 34, 1);
+}
+
+.pa-narajo-gradiente {
+  background: linear-gradient(-45deg, rgba(232, 119, 34, 0) 50%, rgba(232, 119, 34, 1) 50%);
+}
+
+.pa-amarillo {
+  background: rgba(196, 214, 0, 1);
+}
+
+.pa-amarillo-gradiente {
+  background: linear-gradient(-45deg, rgba(196, 214, 0, 0) 50%, rgba(196, 214, 0, 1) 50%);
+}
+
+.pa-salmon {
+  background: rgba(255, 88, 93, 1);
+}
+
+.pa-salmon-gradiente {
+  background: linear-gradient(-45deg, rgba(255, 88, 93, 0) 50%, rgba(255, 88, 93, 1) 50%);
+}
+
+.pa-azul {
+  background: rgba(48, 127, 226, 1);
+}
+
+.pa-azul-gradiente {
+  background: linear-gradient(-45deg, rgba(48, 127, 226, 0) 50%, rgba(48, 127, 226, 1) 50%);
+}
+
+.pa-verde {
+  background: rgba(67, 176, 42, 1);
+
+}
+
+.pa-verde-gradiente {
+  background: linear-gradient(-45deg, rgba(67, 176, 42, 0) 50%, rgba(67, 176, 42, 1) 50%);
+}
+
+.pa-celeste {
+  background: rgba(91, 194, 231, 1);
+}
+
+.pa-celeste-gradiente {
+  background: linear-gradient(-45deg, rgba(91, 194, 231, 0) 50%, rgba(91, 194, 231, 1) 50%);
+}
+
+.pa-celeste-2 {
+  background: rgba(0, 164, 153, 1);
+}
+
+.pa-celeste-2-gradiente {
+  background: linear-gradient(-45deg, rgba(0, 164, 153, 0) 50%, rgba(0, 164, 153, 1) 50%);
+}

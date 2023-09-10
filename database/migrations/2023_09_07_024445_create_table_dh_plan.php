@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion',500)->nullable();
             $table->string('codigo')->nullable();
+            $table->json('info')->nullable();
+
+            $table->unsignedBigInteger('id_usuario')->nullable();
+            $table->foreign('id_usuario')->nullable()->references('id')->on('usuario');
+
             $table->integer('estado')->default(0);
             $table->timestamps();
         });
