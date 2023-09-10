@@ -7,17 +7,17 @@
   <div class="col-md-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form action="{{ route('asignaturas.store') }}" method="POST">
+        <form class="form-sample form-submit" action="{{ route('asignaturas.store') }}" method="POST">
           @csrf
           <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" name="nombre">
+              <label for="nombre" class="form-label">Nombre<small class="text-danger">*</small></label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
           </div>
           <div class="mb-3">
-              <label for="sigla" class="form-label">Sigla</label>
-              <input type="text" class="form-control" id="sigla" name="sigla">
+              <label for="sigla" class="form-label">Sigla<small class="text-danger">*</small></label>
+              <input type="text" class="form-control" id="sigla" name="sigla" required>
           </div>
-          <div class="mb-3">
+          {{-- <div class="mb-3">
             <label for="" class="form-label">City</label>
             <select class="form-select" name="" id="">
               <option value="">New Delhi</option>
@@ -29,8 +29,10 @@
               <label for="carrera" class="form-label">Carrera</label>
               select
               <input type="text" class="form-control" id="carrera" name="carrera">
+          </div> --}}
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
       </div>
     </div>

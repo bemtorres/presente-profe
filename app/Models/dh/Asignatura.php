@@ -11,4 +11,8 @@ class Asignatura extends Model
 
   protected $table = 'dh_asignatura';
 
+
+  function toString() {
+    return $this->sigla . ' - ' . $this->nombre;
+  }
 }

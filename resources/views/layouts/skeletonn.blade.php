@@ -38,7 +38,7 @@
     @include('layouts._nav')
     <div class="body flex-grow-1 px-3">
       <div class="container-lg text-sm">
-        <div id="app">
+        <div id="">
           @yield('app')
         </div>
       </div>

@@ -13,20 +13,18 @@ class UsuarioController extends Controller
   }
 
   public function create() {
-    return view('usuario.create');
+    $tipos = Usuario::TIPOS;
+    return view('usuario.create', compact('tipos'));
   }
 
   public function store(Request $request) {
     $u = new Usuario();
-    $u->run = $request->input('run');
     $u->correo = $request->input('correo');
     $u->nombre = $request->input('nombre');
-    $u->apellido = $request->input('apellido');
-    $u->username = $request->input('correo');
-    $u->password = hash('sha256', $request->input('pass'));
-    $u->admin = $request->input('admin') == 1 ? true : false;
-    $u->id_team = $request->input('team');
-    $u->tipo_usuario = $request->input('tipo');
+    $u->apellido_materno = $request->input('apellido_m');
+    $u->apellido_paterno = $request->input('apellido_p');
+    $u->password = hash('sha256', $u->correo);
+    $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
     $u->save();
 
     return redirect()->route('usuarios.index')->with('success','Se ha creado correctamente');
@@ -53,13 +51,10 @@ class UsuarioController extends Controller
 
     if ($request->nombre) {
       $u->correo = $request->input('correo');
-      $u->run = $request->input('run');
       $u->nombre = $request->input('nombre');
-      $u->apellido = $request->input('apellido');
-      $u->username = $request->input('correo');
-      $u->admin = $request->input('admin') == 1 ? true : false;
-      $u->id_team = $request->input('team');
-      $u->tipo_usuario = $request->input('tipo');
+      $u->apellido_paterno = $request->input('apellido_p');
+      $u->apellido_materno = $request->input('apellido_m');
+      $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
       $u->update();
     }
     return back()->with('success','Se ha actualizado');

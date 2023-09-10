@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form action="{{ route('planes.store') }}" method="POST">
+        <form class="form-sample form-submit" action="{{ route('planes.store') }}" method="POST">
           @csrf
           <div class="mb-3">
               <label for="nombre" class="form-label">Nombre</label>
@@ -18,15 +18,17 @@
               <input type="text" class="form-control" id="descripcion" name="descripcion">
           </div>
 
-          <div class="mb-3">
+          {{-- <div class="mb-3">
             <label for="" class="form-label">Estado</label>
             <select class="form-select" name="" id="">
               <option value="">New Delhi</option>
               <option value="">Istanbul</option>
               <option value="">Jakarta</option>
             </select>
+          </div> --}}
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
       </div>
     </div>

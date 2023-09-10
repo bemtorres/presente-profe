@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('stylesheet')
+@push('css')
 
 <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
@@ -45,7 +45,7 @@
   </div>
 </div>
 @endsection
-@push('javascript')
+@push('js')
   <script src="{{ asset('vendors/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('vendors/datatables/dataTables.bootstrap4.min.js') }}"></script>
 

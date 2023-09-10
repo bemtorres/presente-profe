@@ -5,19 +5,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-  <meta name="author" content="BEMTORRES">
-  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-  <title>PA - Planificador Academico</title>
-
+  <meta name="author" content="Bemtorres">
+  <title>Planificador Académico</title>
   <link rel="shortcut icon" href="{{ asset('app/img/planificadoracademico.svg') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('vendors/simplebar/css/simplebar.css') }}">
   <link rel="stylesheet" href="{{ asset('app/css/vendors/simplebar.css') }}">
   <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('app/css/planificador.css') }}" rel="stylesheet">
-
-  <style>
-  </style>
 </head>
   <div class="bg-dark min-vh-100 d-flex flex-row align-items-center">
     <div class="container">
@@ -40,7 +34,7 @@
                   </div>
                   @endif
                   {{-- <p class="text-medium-emphasis">Sign In to your account</p> --}}
-                  <form action="{{ route('login') }}" method="POST">
+                  <form class="form-sample form-submit" action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                       <label for="correo" class="form-label">Correo electronico</label>

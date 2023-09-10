@@ -10,4 +10,8 @@ class DetallePlan extends Model
   use HasFactory;
 
   protected $table = 'dh_detalle_plan';
+
+  public function asignatura(){
+    return $this->belongsTo(Asignatura::class,'id_asignatura');
+  }
 }

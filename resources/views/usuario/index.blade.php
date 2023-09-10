@@ -18,6 +18,7 @@
               <th>id</th>
               <th>Correo</th>
               <th>Nombre</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +27,16 @@
               <td>{{ $u->id }}</td>
               <td><a href="{{ route('usuarios.show',$u->id) }}">{{ $u->correo }}</a></td>
               <td>{{ $u->nombre_completo() }}</td>
+              <td>
+                @if ($u->tipo_usuario == 1)
+                  <i class="fa-solid fa-user-shield"></i>
+                @elseif ($u->tipo_usuario == 2)
+                  <i class="fa-solid fa-user text-primary"></i>
+                @endif
+                @if ($u->inte_google_id())
+                  <span class="ms-2"><i class="fa-brands fa-google text-danger"></i></span>
+                @endif
+              </td>
             </tr>
             @endforeach
           </tbody>

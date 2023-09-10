@@ -29,7 +29,7 @@ class AsignaturaController extends Controller
       $a = new Asignatura();
       $a->nombre = $request->input('nombre');
       $a->sigla = $request->input('sigla');
-      $a->carrera = $request->input('carrera');
+      // $a->carrera = $request->input('carrera');
       $a->save();
 
       return redirect()->route('asignaturas.index')->with('success', 'Asignatura creada exitosamente.');
@@ -38,8 +38,8 @@ class AsignaturaController extends Controller
     // Mostrar formulario de edición
     public function edit($id)
     {
-        $asignatura = Asignatura::findOrFail($id);
-        return view('asignaturas.edit', compact('asignatura'));
+        $a = Asignatura::findOrFail($id);
+        return view('asignaturas.edit', compact('a'));
     }
 
     // Actualizar asignatura
@@ -49,10 +49,12 @@ class AsignaturaController extends Controller
             'nombre' => 'required',
         ]);
 
-        $asignatura = Asignatura::findOrFail($id);
-        $asignatura->update($request->all());
+        $a = Asignatura::findOrFail($id);
+        $a->nombre = $request->input('nombre');
+        $a->sigla = $request->input('sigla');
+        $a->update();
 
-        return redirect()->route('asignaturas.index')->with('success', 'Asignatura actualizada exitosamente.');
+        return back()->with('success', 'Asignatura actualizada exitosamente.');
     }
 
     // Eliminar asignatura

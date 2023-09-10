@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('stylesheet')
+@push('css')
 
 @endpush
 @section('content')
@@ -19,9 +19,22 @@
             <div class="col-lg-4 mb-4">
               <div class="card mb-4">
                 <div class="card-body">
-                  <h4 class="m-0 font-weight-bold">
+
+                  <div class="col-md-12 mb-3">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-md">
+                        <img class="avatar-img" src="{{ $u->getImg() }}" alt="">
+                      </div>
+                      <div class="ms-2">
+                        <span class="h6 mt-2 mt-sm-0">{{ $u->nombre_completo() }}</span>
+                        <p class="small m-0">{{ $u->correo }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {{-- <h4 class="m-0 font-weight-bold">
                     {{ $u->nombre_completo() }}
-                  </h4>
+                  </h4> --}}
                   {{-- <div class="text-center">
                     <img src="{{ asset($p->present()->getImagen()) }}" width="300px" class="rounded mt-3 mb-4" alt="...">
                   </div> --}}

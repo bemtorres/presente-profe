@@ -34,7 +34,7 @@
         <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <div class="d-flex align-items-center">
             <div class="avatar avatar-md">
-              <img class="avatar-img" src="{{ current_user()->info_img() ? current_user()->info_img() : asset('app/img/negro.jpg') }}" alt="">
+              <img class="avatar-img" src="{{ current_user()->getImg() }}" alt="">
             </div>
             <div class="ms-2">
               <span class="h6 mt-2 mt-sm-0">{{ current_user()->nombre_completo() }}</span>
@@ -107,7 +107,7 @@
             </svg> Projects<span class="badge badge-sm bg-primary ms-2">42</span>
           </a> --}}
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="{{  route('admin.perfil') }}">
             <svg class="icon me-2">
               <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}"></use>
             </svg> Perfil

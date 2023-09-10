@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('stylesheet')
+@push('css')
 
 <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
@@ -8,7 +8,7 @@
 <h1 class="h3 mb-2 text-gray-800"><small>Plan Disponibilidad Horaria</small></h1>
 @include('planes._tabs')
 <div class="row">
-  <div class="col-md-7">
+  <div class="col-md-12">
     <div class="card shadow mb-4">
       <div class="card-body">
         <div class="table-responsive">
@@ -38,7 +38,7 @@
   </div>
 </div>
 @endsection
-@push('javascript')
+@push('js')
   <script src="{{ asset('vendors/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('vendors/datatables/dataTables.bootstrap4.min.js') }}"></script>
 

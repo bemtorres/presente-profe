@@ -18,8 +18,8 @@ class Usuario extends Authenticatable
   protected $guard = 'usuario';
 
   const TIPOS = [
-    0 => 'normal',
     1 => 'admin',
+    2 => 'normal',
   ];
 
   protected function info(): Attribute {
@@ -68,6 +68,10 @@ class Usuario extends Authenticatable
 
   public function nombre_completo() {
     return $this->nombre . ' ' . $this->apellido_paterno;
+  }
+
+  public function getImg() {
+    return $this->info_img() ?? asset('app/img/negro.jpg');
   }
 
   // public function myQR() {

@@ -35,7 +35,7 @@
       </a>
     </li>
     <li class="nav-title">Configuración</li>
-    <li class="nav-group {{ activeOpen(['usuario*','asignaturas']) }}"><a class="nav-link nav-group-toggle" href="#">
+    <li class="nav-group {{ activeOpen(['usuario*','asignaturas*']) }}"><a class="nav-link nav-group-toggle" href="#">
       <i class="nav-icon fa-solid fa-gear"></i> Admin</a>
       <ul class="nav-group-items">
         <li class="nav-item">
