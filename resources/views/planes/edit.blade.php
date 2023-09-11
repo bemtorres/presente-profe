@@ -23,15 +23,14 @@
               <label for="sigla" class="form-label">Descripcion</label>
               <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ $plan->descripcion }}">
           </div>
-
-          {{-- <div class="mb-3">
-            <label for="" class="form-label">Estado</label>
-            <select class="form-select" name="" id="">
-              <option value="">New Delhi</option>
-              <option value="">Istanbul</option>
-              <option value="">Jakarta</option>
+          <div class="mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <select class="form-select" name="estado" id="estado">
+              @foreach ($estados as $key => $value)
+                <option value="{{ $key }}" {{ $plan->estado == $key ? 'selected' : '' }}>{{ $value }}</option>
+              @endforeach
             </select>
-          </div> --}}
+          </div>
           <div class="text-end">
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>

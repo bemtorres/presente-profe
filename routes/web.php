@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleUserController;
 
 use App\Http\Controllers\AsignaturaController;
+use App\Http\Controllers\DisponibilidadHorarioController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuarioController;
@@ -22,8 +23,16 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/perfil', [HomeController::class, 'perfil'])->name('admin.perfil');
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
 
-  Route::resource('asignaturas', AsignaturaController::class);
+  Route::get('dh/{id}', [DisponibilidadHorarioController::class, 'show'])->name('disponibilidad.show');
+  Route::get('dh/{id}/asignaturas', [DisponibilidadHorarioController::class, 'asignaturas'])->name('disponibilidad.asignaturas');
+  Route::get('dh/{id}/asignaturas/create', [DisponibilidadHorarioController::class, 'asignaturasCreate'])->name('disponibilidad.asignaturas.create');
+  Route::post('dh/{id}/asignaturas', [DisponibilidadHorarioController::class, 'asignaturasStore'])->name('disponibilidad.asignaturas.store');
 
+  Route::get('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'calendario'])->name('disponibilidad.calendario');
+
+
+// ADMIN
+  Route::resource('asignaturas', AsignaturaController::class);
   Route::resource('usuarios', UsuarioController::class);
   Route::resource('planes', PlanController::class);
   Route::get('planes/{id}/participantes', [PlanController::class, 'participantes'])->name('planes.participantes');
@@ -35,8 +44,9 @@ Route::middleware('auth.user')->group( function () {
   Route::get('planes/{id}/asignaturas/add', [PlanController::class, 'asignaturasAdd'])->name('planes.asignaturasAdd');
 
   // @API
-  // '
   Route::put('api/v0/planes/{id}/asignaturas/change_position', [PlanController::class, 'apiAsignaturaChangePosition'])->name('api.interna.asignatura.changePosition');
 
+  // me
+  Route::put('api/v0/planes/{id}/measignaturas/change_position', [DisponibilidadHorarioController::class, 'apiAsignaturaChangePosition'])->name('api.interna.measignatura.changePosition');
 });
 

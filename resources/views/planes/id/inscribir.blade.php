@@ -15,31 +15,25 @@
 
 
 <style>
-  .moveall,
-.removeall {
-  border: 1px solid #ccc !important;
+  .moveall, .removeall {
+    border: 1px solid #ccc !important;
 
-  &:hover {
-    background: #efefef;
+    &:hover {
+      background: #efefef;
+    }
   }
-}
+  .moveall::after {
+    content: attr(title);
+  }
 
-// Only included because button labels aren't showing
+  .removeall::after {
+    content: attr(title);
+  }
 
-.moveall::after {
-  content: attr(title);
-
-}
-
-.removeall::after {
-  content: attr(title);
-}
-
-// Custom styling form
-.form-control option {
-    padding: 10px;
-    border-bottom: 1px solid #efefef;
-}
+  .form-control option {
+      padding: 10px;
+      border-bottom: 1px solid #efefef;
+  }
 </style>
 
 @endpush
@@ -84,8 +78,9 @@
     nonSelectedListLabel: 'Usuarios sin asignar',
     selectedListLabel: 'Usuarios registradas',
     preserveSelectionOnMove: 'Mover',
-    moveAllLabel: 'Mover todos',
-    removeAllLabel: 'Remover todos'
+    moveAllLabel: 'Mover',
+    removeAllLabel: 'Remover todos',
+    infoTextEmpty: 'No hay datos',
   });
 </script>
 @endpush

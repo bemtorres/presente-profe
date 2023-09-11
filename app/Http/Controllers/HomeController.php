@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
+use App\Models\dh\AsociadoPlan;
 use App\Models\Sistema;
 use App\Models\Usuario;
 use App\Services\DuocHorario;
@@ -19,9 +20,9 @@ class HomeController extends Controller
 
     $horarios = DuocHorario::TIMES;
 
-    // return $horario;
+    $planes_asociados = AsociadoPlan::where('id_usuario', current_user()->id)->with('plan')->get();
 
-    return view('home.index', compact('horarios'));
+    return view('home.index', compact('horarios','planes_asociados'));
   }
 
   public function perfil() {

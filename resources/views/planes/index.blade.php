@@ -16,18 +16,28 @@
             <thead>
               <tr>
                 <th>id</th>
-                {{-- <th>Codigo</th> --}}
                 <th>Nombre</th>
                 <th>Descripcion</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               @foreach ($planes as $p)
               <tr>
                 <td>{{ $p->id }}</td>
-                {{-- <td>{{ $p->codigo }}</td> --}}
                 <td><a href="{{ route('planes.show', $p->id) }}">{{ $p->nombre }}</a></td>
                 <td>{{ $p->descripcion }}</td>
+                <td>
+                  @if ($p->estado == 1)
+                    <span class="badge bg-info">Edición</span>
+                  @elseif ($p->estado == 2)
+                    <span class="badge bg-primary">En proceso</span>
+                  @elseif ($p->estado == 3)
+                    <span class="badge bg-success">Finalizado</span>
+                  @elseif ($p->estado == 10)
+                    <span class="badge bg-danger">Borrado</span>
+                  @endif
+                </td>
               </tr>
               @endforeach
             </tbody>

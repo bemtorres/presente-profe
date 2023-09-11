@@ -5,10 +5,12 @@
       <svg class="icon icon-lg">
         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-menu') }}"></use>
       </svg>
-    </button><a class="header-brand d-md-none" href="#">
+    </button>
+    {{-- <a class="header-brand d-md-none" href="#">
       <svg width="118" height="46" alt="CoreUI Logo">
         <use xlink:href="{{ asset('app/assets/brand/coreui.svg#full') }}"></use>
-      </svg></a>
+      </svg>
+    </a> --}}
     {{-- <ul class="header-nav d-none d-md-flex">
       <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Users</a></li>

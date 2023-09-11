@@ -8,11 +8,20 @@ use App\Models\dh\AsociadoPlan;
 use App\Models\dh\DetallePlan;
 use App\Models\dh\Plan;
 use App\Models\Usuario;
+use App\Services\Policies\PlanePolicy;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+  private $policy;
+
+  public function __construct() {
+    $this->policy = new PlanePolicy();
+  }
+
   public function index() {
+    $this->policy->index(current_user());
+
     $planes = Plan::where('id_usuario', current_user()->id)->get();
 
     return view('planes.index', compact('planes'));
@@ -23,29 +32,33 @@ class PlanController extends Controller
   }
 
   public function store(Request $request) {
+    $this->policy->store(current_user());
 
     $p = new Plan();
     $p->nombre = $request->input('nombre');
     $p->descripcion = $request->input('descripcion');
     $p->id_usuario = current_user()->id;
-    // $p->estado = $request->input('estado');
-    $p->estado = 0;
-    // $p->codigo =
+    $p->estado = 1;
     $p->save();
 
     return redirect()->route('planes.index')->with('success','Se ha creado correctamente');
   }
 
   public function show($id) {
+    $this->policy->show(current_user());
+
     $plan = Plan::where('id_usuario', current_user()->id)->with('detalle_plan')->findOrFail($id);
 
     return view('planes.show', compact('plan'));
   }
 
   public function edit($id) {
-    $plan = Plan::where('id_usuario', current_user()->id)->findOrFail($id);
+    $this->policy->edit(current_user());
 
-    return view('planes.edit', compact('plan'));
+    $plan = Plan::where('id_usuario', current_user()->id)->findOrFail($id);
+    $estados = Plan::ESTADOS;
+
+    return view('planes.edit', compact('plan','estados'));
   }
 
 
@@ -54,7 +67,7 @@ class PlanController extends Controller
     $p->nombre = $request->input('nombre');
     $p->descripcion = $request->input('descripcion');
     // $p->id_usuario = current_user()->id;
-    // $p->estado = $request->input('estado');
+    $p->estado = $request->input('estado');
     // $p->estado = 0;
     // $p->codigo =
     $p->update();
@@ -64,6 +77,8 @@ class PlanController extends Controller
 
 
   public function participantes($id) {
+    $this->policy->participantes(current_user());
+
     $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
 
     return view('planes.id.participantes', compact('plan'));
@@ -129,11 +144,11 @@ class PlanController extends Controller
 
 
 
-  public function compartir($id) {
-    $plan = Plan::where('id_usuario', current_user()->id)->findOrFail($id);
+  // public function compartir($id) {
+  //   $plan = Plan::where('id_usuario', current_user()->id)->findOrFail($id);
 
-    return view('planes.id.compartir', compact('plan'));
-  }
+  //   return view('planes.id.compartir', compact('plan'));
+  // }
 
   public function asignaturas($id) {
     $plan = Plan::where('id_usuario', current_user()->id)->with('detalle_plan')->findOrFail($id);
@@ -227,7 +242,6 @@ class PlanController extends Controller
 
       return response()->json(['message' => 'Se ha actualizado.'], 200);
     } catch (\Throwable $th) {
-      return $th;
       return response()->json(['message' => 'Error. Intente nuevamente'], 400);
     }
   }

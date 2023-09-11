@@ -9,10 +9,12 @@
     <img src="{{ asset('app/img/planificadoracademico3.png') }}" width="118" alt="">
   </div>
   <ul class="sidebar-nav {{ activeTab(["asignaturas*"]) }}" data-coreui="navigation" data-simplebar="">
-    <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">
-        <svg class="nav-icon">
-          <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-speedometer') }}"></use>
-        </svg> Home<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('home.index') }}">
+        <i class="nav-icon fa-solid fa-house-chimney"></i>
+        Inicio
+      </a>
+    </li>
     {{-- <li class="nav-title">Theme</li> --}}
     {{-- <li class="nav-item">
       <a class="nav-link" href="colors.html">
@@ -28,6 +30,7 @@
         </svg> Typography
       </a>
     </li> --}}
+    @if (current_user()->tipo_usuario == 1)
     <li class="nav-item">
       <a class="nav-link {{ activeTab(['planes*']) }}" href="{{ route('planes.index') }}">
         <i class="nav-icon fa-regular fa-clock"></i>
@@ -52,6 +55,7 @@
         </li>
       </ul>
     </li>
+    @endif
 
 
     {{-- <li class="nav-item mt-auto"><a class="nav-link" href="https://coreui.io/docs/templates/installation/"

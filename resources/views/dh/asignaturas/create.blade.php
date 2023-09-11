@@ -1,15 +1,7 @@
 @extends('layouts.appp')
 @push('css')
 
-{{-- <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
-{{-- <link rel="stylesheet" href="{{ asset('vendors/duallistbox/bootstrap-duallistbox.css') }}"> --}}
-
-<!-- common libraries -->
-{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> --}}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-{{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
-
-<!-- plugin -->
 
 <link rel="stylesheet" type="text/css" href="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/bootstrap-duallistbox.css">
 
@@ -39,30 +31,27 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('planes.asignaturas',$plan->id))
+@slot('route', route('disponibilidad.asignaturas',$plan->id))
 @slot('color', 'secondary')
-@slot('body', '<small>Compartir - <strong>' . $plan->nombre . '</strong></small>')
+@slot('body', '<small>Inscribir asignatura - <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent
 <div class="row">
   <div class="col-md-12">
     <div class="card shadow mb-4">
       <div class="card-body">
-        <form class="form-sample form-submit" action="{{ route('planes.asignaturas',$plan->id) }}" method="post">
+        <form class="form-sample form-submit" action="{{ route('disponibilidad.asignaturas.store',$plan->id) }}" method="post">
           @csrf
-          @method('PUT')
           <div class="col-md-12 mb-3">
             <select  size="10" class="form-control select2 {{ $errors->has('asignaturas_ids') ? 'is-invalid' : '' }} " data-dropdown-css-class="select2-green" style="width: 100%;" multiple="multiple" id="asignaturas_ids" name="asignaturas_ids[]" required>
-            @foreach  ($asignaturas as $a)
-              <option {{ $a->selected ? 'selected' : '' }} value="{{ $a->id }}">{{ $a->toString() }}</option>
+            @foreach  ($plan->detalle_plan as $dp)
+              <option {{ $dp->selected ? 'selected' : '' }} value="{{ $dp->asignatura->id }}">{{ $dp->asignatura->toString() }}</option>
             @endforeach
             </select>
           </div>
-
           <div class="col-md-12 text-end">
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
-
       </div>
     </div>
   </div>

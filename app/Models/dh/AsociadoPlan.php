@@ -15,4 +15,8 @@ class AsociadoPlan extends Model
   public function usuario(){
     return $this->belongsTo(Usuario::class,'id_usuario');
   }
+
+  public function plan(){
+    return $this->belongsTo(Plan::class,'id_plan');
+  }
 }

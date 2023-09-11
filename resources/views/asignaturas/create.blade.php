@@ -17,14 +17,7 @@
               <label for="sigla" class="form-label">Sigla<small class="text-danger">*</small></label>
               <input type="text" class="form-control" id="sigla" name="sigla" required>
           </div>
-          {{-- <div class="mb-3">
-            <label for="" class="form-label">City</label>
-            <select class="form-select" name="" id="">
-              <option value="">New Delhi</option>
-              <option value="">Istanbul</option>
-              <option value="">Jakarta</option>
-            </select>
-          </div>
+          {{--
           <div class="mb-3">
               <label for="carrera" class="form-label">Carrera</label>
               select

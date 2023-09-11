@@ -1,7 +1,5 @@
 @extends('layouts.appp')
 @push('css')
-
-{{-- <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
 <style>
   .handle {
     cursor: move;
@@ -10,18 +8,27 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('planes.show', $plan->id))
+@slot('route', route('home.index'))
 @slot('color', 'secondary')
-@slot('body', '<small>Asignaturas - <strong>' . $plan->nombre . '</strong></small>')
+@slot('body', '<small>Disponibilidad Horaria - <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent
-@include('planes._tabs_gestion_edit')
+
+@if ($plan->estado == 3)
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-danger" role="alert">
+      <p class="mb-0">📣 La edición de <strong>disponibilidad horaria</strong> ha sido desactivada.</p>
+    </div>
+  </div>
+</div>
+@endif
+@include('dh._tabs')
 <div class="row">
   <div class="col-md-12">
     <div class="card shadow mb-4">
-      <div class="row p-2">
+      <div class="row p-3">
         <div class="mb-3">
-
-          <a href="{{ route('planes.asignaturasAdd',$plan->id) }}" class="btn btn-primary btn-sm">Registrar asignatura</a>
+          <a href="{{ route('disponibilidad.asignaturas.create',$plan->id) }}" class="btn btn-primary">Registrar asignatura</a>
         </div>
         <div class="col-12">
           <div class="card mb-4">
@@ -31,31 +38,28 @@
                   <thead>
                     <tr>
                       <th></th>
-                      {{-- <th>id</th> --}}
+                      <th>Priorización</th>
                       <th>Nombre</th>
                       <th>Sigla</th>
                       <th>Carrera</th>
                     </tr>
                   </thead>
                   <tbody id="items">
-                    @foreach ($plan->detalle_plan as $dp)
-                    <tr data-id="{{ $dp->id }}" data-position="{{ $dp->posicion }}">
-                      <td  class="handle">
-                        <i class="fa fa-arrows-alt"></i>
-                      </td>
-                      {{-- <td>{{ $dp->posicion }}</td> --}}
-                      <td>{{ $dp->asignatura->nombre }}</td>
-                      <td>{{ $dp->asignatura->sigla }}</td>
-                      <td>{{ $dp->asignatura->carrera }}</td>
-                      {{-- <td><a href="{{ route('admin.usuario.show',$u->id) }}">{{ $u->correo }}</a></td> --}}
-                      {{-- <td>{{ $u->nombre_completo() }}</td> --}}
-                      {{-- <td>{{ $u->team->nombre ?? '' }}</td> --}}
-                      {{-- <td> --}}
-                        {{-- <img src="{{ asset(current_config()->present()->getImagenCoin()) }}" width="20px" alt=""> --}}
-                        {{-- {{ $u->getCredito() }} --}}
-                      {{-- </td> --}}
-                    </tr>
-                    @endforeach
+                    @forelse ($asignaturas_preferidas as $key => $ap)
+                      <tr data-id="{{ $ap->id }}" data-position="{{ $ap->posicion }}">
+                        <td  class="handle">
+                          <i class="fa fa-arrows-alt"></i>
+                        </td>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $ap->asignatura->nombre }}</td>
+                        <td>{{ $ap->asignatura->sigla }}</td>
+                        <td>{{ $ap->asignatura->carrera }}</td>
+                      </tr>
+                    @empty
+                      <tr>
+                        <td colspan="4" class="text-center">No hay asignaturas registradas</td>
+                      </tr>
+                    @endforelse
                   </tbody>
                 </table>
               </div>
@@ -68,19 +72,11 @@
 </div>
 @endsection
 @push('js')
-  {{-- <script src="{{ asset('vendors/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('vendors/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-  <script>
-    $(document).ready(function() {
-      $('#dataTable').DataTable();
-    });
-  </script> --}}
 
   <script src="{{ asset('vendors/sortableJS/js/Sortable.js') }}"></script>
   <script>
 
-    const url = "{{ route('api.interna.asignatura.changePosition', $plan->id) }}";
+    const url = "{{ route('api.interna.measignatura.changePosition', $plan->id) }}";
     var el = document.getElementById('items');
 
     var sortable = Sortable.create(el, {
