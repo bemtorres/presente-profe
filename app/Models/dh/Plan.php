@@ -25,4 +25,8 @@ class Plan extends Model
   public function asociado_plan(){
     return $this->hasMany(AsociadoPlan::class,'id_plan')->with(['usuario']);
   }
+
+  public function users_asignaturas(){
+    return $this->hasMany(AsignaturaPreferida::class,'id_plan')->with(['usuario']);
+  }
 }

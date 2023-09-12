@@ -12,6 +12,6 @@
     <a class="nav-link {{ activeTab(["planes/".$plan->id."/participantes"]) }}" href="{{ route('planes.participantes', $plan->id) }}"><i class="fa fa-users me-2"></i> Participantes</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ activeTab(["planes"]) }}" href="{{ route('planes.index') }}"><i class="fa-solid fa-chart-simple me-2"></i>Reportes</a>
+    <a class="nav-link {{ activeTab(["planes/".$plan->id."/reporte"]) }}" href="{{ route('planes.reporte', $plan->id) }}"><i class="fa-solid fa-chart-simple me-2"></i>Reportes</a>
   </li>
 </ul>

@@ -49,11 +49,11 @@
                 <td>
                   {{-- <span class="badge bg-primary">New</span> --}}
                   {{-- <span class="badge bg-danger">New!</span> --}}
-                  <span class="badge bg-warning">Pendiente</span>
-                  <span class="badge bg-success">OK</span>
+                  {{-- <span class="badge bg-warning">Pendiente</span> --}}
+                  {{-- <span class="badge bg-success">OK</span> --}}
                 </td>
                 <td>
-                  <a href="{{ 'asdasd' }}" class="btn btn-success btn-sm">Ver</a>
+                  <a href="{{ route('planes.participantes.show',[$plan->id, $asociado->id]) }}" class="btn btn-success btn-sm">Ver</a>
                 </td>
                 <td></td>
               </tr>

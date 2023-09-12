@@ -109,11 +109,11 @@ class DisponibilidadHorarioController extends Controller
   public function calendario($id) {
     $plan = Plan::findOrFail($id);
     $ap = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->firstOrFail();
-    $horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', current_user()->id)->get();
+    $mis_horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', current_user()->id)->get();
 
     $my_horario = [];
-    if ($horarios->count() != 0) {
-      $my_horario = $horarios->map(function ($horario) {
+    if ($mis_horarios->count() != 0) {
+      $my_horario = $mis_horarios->map(function ($horario) {
         return $horario->to_raw();
       });
     }

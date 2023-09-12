@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\dh\Asignatura;
+use App\Models\dh\AsignaturaPreferida;
 use App\Models\dh\AsociadoPlan;
 use App\Models\dh\DetallePlan;
+use App\Models\dh\HorarioPlan;
 use App\Models\dh\Plan;
 use App\Models\Usuario;
+use App\Services\DuocHorario;
 use App\Services\Policies\PlanePolicy;
 use Illuminate\Http\Request;
 
@@ -142,6 +145,28 @@ class PlanController extends Controller
     }
   }
 
+  public function participantesShow($id, $id_asociado) {
+    $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
+    $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($id_asociado);
+    $u = $asociado->usuario;
+
+    // reporte 1
+    $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $u->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
+
+    // reporte 2
+    $mis_horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', $u->id)->get();
+
+    $my_horario = [];
+    if ($mis_horarios->count() != 0) {
+      $my_horario = $mis_horarios->map(function ($horario) {
+        return $horario->to_raw();
+      });
+    }
+
+    $horarios = DuocHorario::TIMES;
+
+    return view('planes.id.participantes.show', compact('plan','asociado','u', 'asignaturas_preferidas','my_horario','horarios'));
+  }
 
 
   // public function compartir($id) {
@@ -220,6 +245,16 @@ class PlanController extends Controller
       return $th;
       return back()->with('info','Error Intente nuevamente.');
     }
+  }
+
+  function reporte($id) {
+    $plan = Plan::with(['detalle_plan','users_asignaturas'])->findOrFail($id);
+
+    $users_asignaturas =$plan->users_asignaturas;
+
+    // return $users_asignaturas;
+
+    return view('planes.id.reporte', compact('plan','users_asignaturas'));
   }
 
 

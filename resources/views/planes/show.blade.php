@@ -41,7 +41,7 @@
           <ul class="list-group list-group-flush">
             @foreach ($plan->detalle_plan as $dp)
               <li class="list-group-item">
-                {{ $dp->asignatura->toString() }}
+                <span class="badge bg-dark me-2">{{ $dp->asignatura->semestre }}</span> {{ $dp->asignatura->toString() }}
               </li>
             @endforeach
           </ul>

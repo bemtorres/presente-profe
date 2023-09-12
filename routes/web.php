@@ -39,6 +39,10 @@ Route::middleware('auth.user')->group( function () {
   Route::get('planes/{id}/participantes', [PlanController::class, 'participantes'])->name('planes.participantes');
   Route::put('planes/{id}/participantes', [PlanController::class, 'participantesUpdate'])->name('planes.participantes');
   Route::get('planes/{id}/participantes/add', [PlanController::class, 'participantesAdd'])->name('planes.participantesAdd');
+  Route::get('planes/{id}/participantes/{id_asociado}', [PlanController::class, 'participantesShow'])->name('planes.participantes.show');
+
+  Route::get('planes/{id}/reporte', [PlanController::class, 'reporte'])->name('planes.reporte');
+
   Route::get('planes/{id}/compartir', [PlanController::class, 'compartir'])->name('planes.compartir');
   Route::get('planes/{id}/asignaturas', [PlanController::class, 'asignaturas'])->name('planes.asignaturas');
   Route::put('planes/{id}/asignaturas', [PlanController::class, 'asignaturasUpdate'])->name('planes.asignaturas');
