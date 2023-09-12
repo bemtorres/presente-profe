@@ -41,7 +41,7 @@
 @component('components.button._back')
 @slot('route', route('planes.asignaturas',$plan->id))
 @slot('color', 'secondary')
-@slot('body', '<small>Compartir - <strong>' . $plan->nombre . '</strong></small>')
+@slot('body', '<small>Asignar asignaturas para <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent
 <div class="row">
   <div class="col-md-12">
@@ -53,7 +53,7 @@
           <div class="col-md-12 mb-3">
             <select  size="10" class="form-control select2 {{ $errors->has('asignaturas_ids') ? 'is-invalid' : '' }} " data-dropdown-css-class="select2-green" style="width: 100%;" multiple="multiple" id="asignaturas_ids" name="asignaturas_ids[]" required>
             @foreach  ($asignaturas as $a)
-              <option {{ $a->selected ? 'selected' : '' }} value="{{ $a->id }}">{{ $a->toString() }}</option>
+              <option {{ $a->selected ? 'selected' : '' }} value="{{ $a->id }}">[{{ $a->semestre }}] {{ $a->toString() }}</option>
             @endforeach
             </select>
           </div>

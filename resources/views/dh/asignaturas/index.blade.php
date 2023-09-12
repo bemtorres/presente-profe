@@ -28,7 +28,9 @@
     <div class="card shadow mb-4">
       <div class="row p-3">
         <div class="mb-3">
+          @if ($plan->estado == 2)
           <a href="{{ route('disponibilidad.asignaturas.create',$plan->id) }}" class="btn btn-primary">Registrar asignatura</a>
+          @endif
         </div>
         <div class="col-12">
           <div class="card mb-4">
@@ -38,10 +40,11 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th>Priorización</th>
+                      {{-- <th>Priorización</th> --}}
                       <th>Nombre</th>
-                      <th>Sigla</th>
-                      <th>Carrera</th>
+                      <th>Código</th>
+                      <th>Semestre</th>
+                      <th>Programa</th>
                     </tr>
                   </thead>
                   <tbody id="items">
@@ -50,14 +53,15 @@
                         <td  class="handle">
                           <i class="fa fa-arrows-alt"></i>
                         </td>
-                        <td>{{ $key + 1 }}</td>
+                        {{-- <td>{{ $key + 1 }}</td> --}}
                         <td>{{ $ap->asignatura->nombre }}</td>
                         <td>{{ $ap->asignatura->sigla }}</td>
-                        <td>{{ $ap->asignatura->carrera }}</td>
+                        <td>{{ $ap->asignatura->semestre }}</td>
+                        <td>{{ $ap->asignatura->programa }}</td>
                       </tr>
                     @empty
                       <tr>
-                        <td colspan="4" class="text-center">No hay asignaturas registradas</td>
+                        <td colspan="5" class="text-center">No hay asignaturas registradas</td>
                       </tr>
                     @endforelse
                   </tbody>

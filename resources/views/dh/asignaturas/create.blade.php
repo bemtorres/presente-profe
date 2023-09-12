@@ -44,7 +44,7 @@
           <div class="col-md-12 mb-3">
             <select  size="10" class="form-control select2 {{ $errors->has('asignaturas_ids') ? 'is-invalid' : '' }} " data-dropdown-css-class="select2-green" style="width: 100%;" multiple="multiple" id="asignaturas_ids" name="asignaturas_ids[]" required>
             @foreach  ($plan->detalle_plan as $dp)
-              <option {{ $dp->selected ? 'selected' : '' }} value="{{ $dp->asignatura->id }}">{{ $dp->asignatura->toString() }}</option>
+              <option {{ $dp->selected ? 'selected' : '' }} value="{{ $dp->asignatura->id }}">[{{ $dp->asignatura->semestre }}] {{ $dp->asignatura->toString() }}</option>
             @endforeach
             </select>
           </div>

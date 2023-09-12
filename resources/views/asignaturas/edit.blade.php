@@ -13,27 +13,29 @@
         <form class="form-sample form-submit" action="{{ route('asignaturas.update',$a->id) }}" method="POST">
           @csrf
           @method('PUT')
+
           <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre<small class="text-danger">*</small></label>
-              <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $a->nombre }}" required>
+            <label for="programa" class="form-label">Programa<small class="text-danger">*</small></label>
+            <input type="text" class="form-control" id="programa" name="programa" value="{{ $a->programa }}" required>
           </div>
           <div class="mb-3">
-              <label for="sigla" class="form-label">Sigla<small class="text-danger">*</small></label>
-              <input type="text" class="form-control" id="sigla" name="sigla" value="{{ $a->sigla }}" required>
-          </div>
-          {{-- <div class="mb-3">
-            <label for="" class="form-label">City</label>
-            <select class="form-select" name="" id="">
-              <option value="">New Delhi</option>
-              <option value="">Istanbul</option>
-              <option value="">Jakarta</option>
+            <label for="semestre" class="form-label">Semestre<small class="text-danger">*</small></label>
+            <select class="form-select form-select" name="semestre" id="semestre">
+              @for ($i = 1; $i <= 8; $i++)
+                <option value="{{ $i }}" {{ $a->semestre == $i ? 'selected' : '' }}>{{ $i }}</option>
+              @endfor
             </select>
           </div>
           <div class="mb-3">
-              <label for="carrera" class="form-label">Carrera</label>
-              select
-              <input type="text" class="form-control" id="carrera" name="carrera">
-          </div> --}}
+            <label for="sigla" class="form-label">Código<small class="text-danger">*</small></label>
+            <input type="text" class="form-control" id="sigla" name="sigla" value="{{ $a->sigla }}" required>
+          </div>
+
+          <div class="mb-3">
+              <label for="nombre" class="form-label">Descripción<small class="text-danger">*</small></label>
+              <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $a->nombre }}" required>
+          </div>
+
           <div class="text-end">
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>

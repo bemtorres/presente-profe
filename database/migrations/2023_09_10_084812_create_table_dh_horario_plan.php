@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dh_calendario', function (Blueprint $table) {
+        Schema::create('dh_horario_plan', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('id_asociado_plan')->nullable();
-            $table->foreign('id_asociado_plan')->nullable()->references('id')->on('dh_asociado_plan');
+            $table->integer('id_asociado_plan')->nullable(); // no se usa en caso que sea borrado
+
+            $table->unsignedBigInteger('id_plan')->nullable();
+            $table->foreign('id_plan')->nullable()->references('id')->on('dh_plan');
 
             $table->unsignedBigInteger('id_usuario')->nullable();
             $table->foreign('id_usuario')->nullable()->references('id')->on('usuario');
@@ -37,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dh_calendario');
+        Schema::dropIfExists('dh_horario_plan');
     }
 };

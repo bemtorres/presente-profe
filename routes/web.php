@@ -29,6 +29,7 @@ Route::middleware('auth.user')->group( function () {
   Route::post('dh/{id}/asignaturas', [DisponibilidadHorarioController::class, 'asignaturasStore'])->name('disponibilidad.asignaturas.store');
 
   Route::get('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'calendario'])->name('disponibilidad.calendario');
+  Route::post('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'apiAsignaturaStore'])->name('disponibilidad.calendario.store');
 
 
 // ADMIN

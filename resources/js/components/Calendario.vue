@@ -27,49 +27,117 @@
 </template>
 
 <script>
+  import { isProxy, toRaw } from 'vue';
+
   export default {
     name: 'Calendario',
     props: {
+      editable: {
+        type: Boolean,
+        default: true,
+      },
       horarios: {
         type: Array,
         default: [],
       },
+      myhorario: {
+        type: Array,
+        default: [],
+      }
+    },
+    created() {
+      if (this.myhorario.length > 0) {
+        this.data = this.myhorario;
+      } else {
+        this.data = [];
+      }
+
+      if (isProxy(this.data) && this.editable){
+        mainPushData(toRaw(this.data));
+      }
     },
     data() {
       return {
         semanas: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
         dias: ['L','M','X','J','V','S'],
-        calendario: {},
-        mensaje: 'hola'
+        data: []
       }
     },
     methods: {
-      selectedHorario(name) {
-        console.log(this.calendario);
-        // Comprueba si la celda ya tiene un color asignado
-        if (this.calendario[name]) {
-          // Si ya tiene color, cambia el color al siguiente en la secuencia
-          if (this.calendario[name] == 'verde') {
-            this.calendario[name] = 'amarillo';
-          } else {
-            // Si es amarillo o cualquier otro color, quita el color
-            delete this.calendario[name];
+      selectedHorario(casilla) {
+        if (!this.editable) { return; }
+
+        var arreglo = casilla.split("-");
+        var selecionado = {
+          'id': casilla,
+          'dia': arreglo[0],
+          'modulo': arreglo[1],
+          'estado': 1,
+          'color': 'verde',
+        }
+
+        var obj = this.buscarPorId(selecionado.id);
+        if (obj != null) {
+          if (obj.color == 'verde') {
+            obj.color = 'amarillo';
+            obj.estado = 2;
+            this.actualizarPorId(obj.id, obj);
+          } else if (obj.color == 'amarillo') {
+            this.eliminarPorId(obj.id);
           }
         } else {
-          // Si la celda no tiene color, asigna el color verde
-          this.calendario[name] = 'verde';
+          this.agregarObjeto(selecionado);
+        }
+
+        if (isProxy(this.data)){
+          mainPushData(toRaw(this.data));
         }
       },
-      selectClases(name) {
-        if (this.calendario[name]) {
-          if (this.calendario[name] === 'verde') {
+      selectClases(casilla) {
+        var obj = this.buscarPorId(casilla);
+        if (obj != null) {
+          if (obj.color == 'verde') {
             return 'bg-success';
-          } else if (this.calendario[name] === 'amarillo') {
+          } else if (obj.color == 'amarillo') {
             return 'bg-warning';
           }
         } else {
           return '';
         }
+      },
+      agregarObjeto(objeto) {
+        var existe = this.data.some(item => item.id === objeto.id);
+
+        if (!existe) {
+            this.data.push(objeto);
+            return true; // Éxito
+        }
+
+        return false; // El objeto ya existe
+      },
+      buscarPorId(id) {
+        var obj = this.data.find(item => item.id === id);
+        return obj || null;
+      },
+      actualizarPorId(id, nuevoObjeto) {
+        var index = this.data.findIndex(item => item.id === id);
+
+        if (index !== -1) {
+            this.data[index] = nuevoObjeto;
+            return true; // Éxito
+        }
+
+        return false; // No se encontró el objeto
+      },
+      eliminarPorId(id) {
+        var index = this.data.findIndex(item => item.id === id);
+
+        if (index !== -1) {
+            this.data.splice(index, 1);
+            return true; // Éxito
+        }
+
+        return false; // No se encontró el objeto
       }
     },
   }

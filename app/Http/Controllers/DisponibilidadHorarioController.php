@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Config;
 use App\Models\dh\AsignaturaPreferida;
 use App\Models\dh\AsociadoPlan;
+use App\Models\dh\HorarioPlan;
 use App\Models\dh\Plan;
 use App\Models\Sistema;
 use App\Models\Usuario;
@@ -108,9 +109,18 @@ class DisponibilidadHorarioController extends Controller
   public function calendario($id) {
     $plan = Plan::findOrFail($id);
     $ap = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->firstOrFail();
+    $horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', current_user()->id)->get();
 
+    $my_horario = [];
+    if ($horarios->count() != 0) {
+      $my_horario = $horarios->map(function ($horario) {
+        return $horario->to_raw();
+      });
+    }
 
-    return view('dh.calendario.index', compact('plan','ap'));
+    $horarios = DuocHorario::TIMES;
+
+    return view('dh.calendario.index', compact('plan','ap','horarios','my_horario'));
   }
 
   // @api INTERNA
@@ -140,4 +150,71 @@ class DisponibilidadHorarioController extends Controller
     }
   }
 
+  public function apiAsignaturaStore(Request $request, $id) {
+    try {
+      //code...
+      $plan = Plan::findOrFail($id);
+      $ap = AsociadoPlan::where('id_usuario', current_user()->id)
+                        ->where('id_plan', $plan->id)->firstOrFail();
+      $my_horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', current_user()->id)->get();
+
+      $in_calendario = $request->input('calendario');
+
+
+      if ($my_horarios->count() == 0) { // VÁCIO
+        foreach ($in_calendario as $key => $value) {
+          $dia = array_flip(HorarioPlan::DAYS)[$value['dia']];
+
+          $horario = new HorarioPlan();
+          $horario->id_plan = $plan->id;
+          $horario->id_usuario = current_user()->id;
+          $horario->dia = $dia;
+          $horario->modulo = $value['modulo'];
+          $horario->estado = $value['estado'];
+          $horario->save();
+        }
+      } else {
+        foreach ($in_calendario as $key => $value) {
+          $in_calendario[$key]['encontado'] = false;
+        }
+
+        foreach ($my_horarios as $mh) {
+          $raw = $mh->to_raw();
+          $encontrado = false;
+
+          foreach ($in_calendario as $key => $value) {
+            if ($raw['dia'] == $value['dia'] && $mh->modulo == $value['modulo']) {
+              $encontrado = true;
+              $mh->estado = $value['estado'];
+              $mh->update();
+              $in_calendario[$key]['encontado'] = true;
+              break;
+            }
+          }
+
+          if (!$encontrado) {
+            $mh->delete();
+          }
+        }
+
+        foreach ($in_calendario as $key => $value) {
+          if (!$value['encontado']) {
+            $dia = array_flip(HorarioPlan::DAYS)[$value['dia']];
+
+            $horario = new HorarioPlan();
+            $horario->id_plan = $plan->id;
+            $horario->id_usuario = current_user()->id;
+            $horario->dia = $dia;
+            $horario->modulo = $value['modulo'];
+            $horario->estado = $value['estado'];
+            $horario->save();
+          }
+        }
+      }
+
+      return response()->json(['message' => 'Se ha actualizado.', 'status' => 200], 200);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => 'error intente nuevamente.', 'status' => 500], 500);
+    }
+  }
 }

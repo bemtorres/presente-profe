@@ -29,6 +29,8 @@ class AsignaturaController extends Controller
       $a = new Asignatura();
       $a->nombre = $request->input('nombre');
       $a->sigla = $request->input('sigla');
+      $a->semestre = $request->input('semestre');
+      $a->programa = $request->input('programa');
       // $a->carrera = $request->input('carrera');
       $a->save();
 
@@ -52,6 +54,8 @@ class AsignaturaController extends Controller
         $a = Asignatura::findOrFail($id);
         $a->nombre = $request->input('nombre');
         $a->sigla = $request->input('sigla');
+        $a->semestre = $request->input('semestre');
+        $a->programa = $request->input('programa');
         $a->update();
 
         return back()->with('success', 'Asignatura actualizada exitosamente.');

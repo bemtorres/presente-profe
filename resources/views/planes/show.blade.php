@@ -21,7 +21,7 @@
           <p class="card-text">{{ $plan->descripcion }}</p>
 
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">
+            {{-- <li class="list-group-item">
               <i class="fa fa-users"></i> 10 participantes
             </li>
             <li class="list-group-item">
@@ -29,7 +29,7 @@
             </li>
             <li class="list-group-item">
               <i class="fa fa-users"></i> 10 participantes
-            </li>
+            </li> --}}
           </ul>
         </div>
       </div>
@@ -37,7 +37,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <p class="card-text">{{ $plan->descripcion }}</p>
+          <p class="card-text">📖 Asignaturas</p>
           <ul class="list-group list-group-flush">
             @foreach ($plan->detalle_plan as $dp)
               <li class="list-group-item">

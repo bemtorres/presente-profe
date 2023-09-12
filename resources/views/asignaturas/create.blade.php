@@ -10,14 +10,28 @@
         <form class="form-sample form-submit" action="{{ route('asignaturas.store') }}" method="POST">
           @csrf
           <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre<small class="text-danger">*</small></label>
-              <input type="text" class="form-control" id="nombre" name="nombre" required>
+              <label for="programa" class="form-label">Programa<small class="text-danger">*</small></label>
+              <input type="text" class="form-control" id="programa" name="programa" required>
           </div>
           <div class="mb-3">
-              <label for="sigla" class="form-label">Sigla<small class="text-danger">*</small></label>
-              <input type="text" class="form-control" id="sigla" name="sigla" required>
+            <label for="semestre" class="form-label">Semestre<small class="text-danger">*</small></label>
+            <select class="form-select form-select" name="semestre" id="semestre">
+              @for ($i = 1; $i <= 8; $i++)
+                <option value="{{ $i }}">{{ $i }}</option>
+              @endfor
+            </select>
           </div>
-          {{--
+          <div class="mb-3">
+            <label for="sigla" class="form-label">Código<small class="text-danger">*</small></label>
+            <input type="text" class="form-control" id="sigla" name="sigla" required>
+          </div>
+
+          <div class="mb-3">
+              <label for="nombre" class="form-label">Descripción<small class="text-danger">*</small></label>
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+
+            {{--
           <div class="mb-3">
               <label for="carrera" class="form-label">Carrera</label>
               select

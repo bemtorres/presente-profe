@@ -8,26 +8,32 @@
 <h1 class="h3 mb-2 text-gray-800">Asignaturas</h1>
 @include('asignaturas._tabs')
 <div class="row">
-  <div class="col-md-7">
+  <div class="col-md-12">
     <div class="card shadow mb-4">
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>id</th>
-                <th>Nombre</th>
-                <th>Sigla</th>
-                <th>Carrera</th>
+                {{-- <th>id</th> --}}
+                <th>Programa</th>
+                <th>Semestre</th>
+                <th>Cod. Asig</th>
+                <th>Descripcion</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               @foreach ($asignaturas as $a)
               <tr>
-                <td>{{ $a->id }}</td>
-                <td><a href="{{ route('asignaturas.edit', $a->id) }}">{{ $a->nombre }}</a></td>
+                {{-- <td>{{ $a->id }}</td> --}}
+                <td>{{ $a->programa }}</td>
+                <td>{{ $a->semestre }}</td>
                 <td>{{ $a->sigla }}</td>
-                <td>{{ $a->carrera }}</td>
+                <td>{{ $a->nombre }}</td>
+                <td>
+                  <a href="{{ route('asignaturas.edit', $a->id) }}">Editar</a>
+                </td>
                 {{-- <td><a href="{{ route('admin.usuario.show',$u->id) }}">{{ $u->correo }}</a></td> --}}
                 {{-- <td>{{ $u->nombre_completo() }}</td> --}}
                 {{-- <td>{{ $u->team->nombre ?? '' }}</td> --}}

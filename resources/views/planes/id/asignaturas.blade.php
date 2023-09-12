@@ -32,9 +32,10 @@
                     <tr>
                       <th></th>
                       {{-- <th>id</th> --}}
+                      <th>Código</th>
                       <th>Nombre</th>
-                      <th>Sigla</th>
-                      <th>Carrera</th>
+                      <th>Semestre</th>
+                      <th>Programa</th>
                     </tr>
                   </thead>
                   <tbody id="items">
@@ -43,17 +44,10 @@
                       <td  class="handle">
                         <i class="fa fa-arrows-alt"></i>
                       </td>
-                      {{-- <td>{{ $dp->posicion }}</td> --}}
-                      <td>{{ $dp->asignatura->nombre }}</td>
                       <td>{{ $dp->asignatura->sigla }}</td>
-                      <td>{{ $dp->asignatura->carrera }}</td>
-                      {{-- <td><a href="{{ route('admin.usuario.show',$u->id) }}">{{ $u->correo }}</a></td> --}}
-                      {{-- <td>{{ $u->nombre_completo() }}</td> --}}
-                      {{-- <td>{{ $u->team->nombre ?? '' }}</td> --}}
-                      {{-- <td> --}}
-                        {{-- <img src="{{ asset(current_config()->present()->getImagenCoin()) }}" width="20px" alt=""> --}}
-                        {{-- {{ $u->getCredito() }} --}}
-                      {{-- </td> --}}
+                      <td>{{ $dp->asignatura->nombre }}</td>
+                      <td>{{ $dp->asignatura->semestre }}</td>
+                      <td>{{ $dp->asignatura->programa }}</td>
                     </tr>
                     @endforeach
                   </tbody>
