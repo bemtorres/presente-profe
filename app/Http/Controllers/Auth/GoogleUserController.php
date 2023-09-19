@@ -48,6 +48,8 @@ class GoogleUserController extends Controller
 
       // return $user->getRaw();
 
+
+
       // // only allow people with @company.com to login
       if($provider == 'duocuc.cl' || $provider == 'profesor.duoc.cl' ){
         // $u = Usuario::findByCorreo($email)->first();

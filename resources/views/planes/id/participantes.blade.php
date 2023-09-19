@@ -25,7 +25,7 @@
             <thead>
               <tr>
                 <th>Participantes</th>
-                <th>Estado</th>
+                {{-- <th>Estado</th> --}}
                 <th></th>
               </tr>
             </thead>
@@ -46,16 +46,17 @@
                     </div>
                   </div>
                 </td>
-                <td>
+                {{-- <td> --}}
                   {{-- <span class="badge bg-primary">New</span> --}}
                   {{-- <span class="badge bg-danger">New!</span> --}}
                   {{-- <span class="badge bg-warning">Pendiente</span> --}}
                   {{-- <span class="badge bg-success">OK</span> --}}
-                </td>
+                {{-- </td> --}}
                 <td>
                   <a href="{{ route('planes.participantes.show',[$plan->id, $asociado->id]) }}" class="btn btn-success btn-sm">Ver</a>
+                  <a href="{{ route('pdf.diponibilidad',[$plan->id, $asociado->id]) }}" class="ms-2 btn btn-danger btn-sm">PDF</a>
+
                 </td>
-                <td></td>
               </tr>
               @endforeach
             </tbody>

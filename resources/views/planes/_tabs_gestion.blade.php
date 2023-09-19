@@ -14,4 +14,11 @@
   <li class="nav-item">
     <a class="nav-link {{ activeTab(["planes/".$plan->id."/reporte"]) }}" href="{{ route('planes.reporte', $plan->id) }}"><i class="fa-solid fa-chart-simple me-2"></i>Reportes</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link {{ activeTab(["planes/".$plan->id."/reporte/listado"]) }}" href="{{ route('planes.reporte.listado', $plan->id) }}"><i class="fa-solid fa-chart-simple me-2"></i>Reportes Listado</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link {{ activeTab(["planes/".$plan->id."/reporte/listado/export"]) }}" href="{{ route('planes.reporte.listado.export', $plan->id) }}"><i class="fa-solid fa-chart-simple me-2"></i>Reportes Listado Export</a>
+
 </ul>

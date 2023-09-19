@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 // import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import HelloWorld from '@/components/HelloWorld.vue';
 import Calendario from '@/components/Calendario.vue';
+import CalendarioUser from '@/components/CalendarioUser.vue';
 // import Calendario from '@/components/Calendario.vue'
 
 createApp({
@@ -14,6 +15,7 @@ createApp({
     },
     components: {
       'hello': HelloWorld,
-      'calendario': Calendario
+      'calendario': Calendario,
+      'calendariouser': CalendarioUser
     },
 }).mount('#app');

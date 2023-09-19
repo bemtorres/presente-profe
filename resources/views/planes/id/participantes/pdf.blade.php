@@ -16,10 +16,9 @@
     <div class="card shadow mb-4">
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-4 mb-4">
+          <div class="col-lg-12 mb-4">
             <div class="card mb-4">
               <div class="card-body">
-
                 <div class="col-md-12 mb-3">
                   <div class="d-flex align-items-center">
                     <div class="avatar avatar-md">
@@ -31,45 +30,16 @@
                     </div>
                   </div>
                 </div>
-
-                {{-- <a href="{{ route('pdf.diponibilidad', [$plan->id, $asociado->id]) }}" class="btn btn-danger">VER PDF</a> --}}
-
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">📖 <strong>Mis asignaturas</strong></p>
-                <ul class="list-group list-group-flush">
-                  @forelse ($asignaturas_preferidas as $ap)
-                    <li class="list-group-item">
-                      {{ $ap->asignatura->toString() }}
-                    </li>
-                  @empty
-                    <li class="list-group-item">
-                      No hay asignaturas
-                    </li>
-                  @endforelse
-                </ul>
+                <a href="{{ route('pdf.diponibilidad', [$plan->id, $asociado->id]) }}" class="btn btn-danger">VER PDF</a>
               </div>
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <p class="card-text d-flex justify-content-between align-items-center">
-                  <span>
-                    📅<strong>Calendario:</strong>
-                    <small>
-                      Registra tu calendario de disponibilidad horaria.
-                      <br>
-                      <strong>
-                        🟩 Disponible
-                        🟨 Posible disponibilidad
-                      </strong>
-                    </small>
-                  </span>
-                </p>
-                <calendario :horarios=@json($horarios) :myhorario=@json($my_horario) :editable="false"></calendario>
+                <iframe src="{{ route('pdf.diponibilidad',[$plan->id, $asociado->id]) }}" style="width:100%; height:700px;" frameborder="0" ></iframe>
               </div>
             </div>
           </div>
