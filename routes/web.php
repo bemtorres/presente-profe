@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\GoogleUserController;
 use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\DisponibilidadHorarioController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PdfSolicitudController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UsuarioController;
 
@@ -36,12 +37,18 @@ Route::middleware('auth.user')->group( function () {
   Route::resource('asignaturas', AsignaturaController::class);
   Route::resource('usuarios', UsuarioController::class);
   Route::resource('planes', PlanController::class);
+
   Route::get('planes/{id}/participantes', [PlanController::class, 'participantes'])->name('planes.participantes');
   Route::put('planes/{id}/participantes', [PlanController::class, 'participantesUpdate'])->name('planes.participantes');
   Route::get('planes/{id}/participantes/add', [PlanController::class, 'participantesAdd'])->name('planes.participantesAdd');
   Route::get('planes/{id}/participantes/{id_asociado}', [PlanController::class, 'participantesShow'])->name('planes.participantes.show');
+  // PDF
+  Route::get('planes/{id}/participantes/{id_asociado}/pdf', [PlanController::class, 'participantesShowPDF'])->name('planes.participantes.showPDF');
+
+  Route::get('planes/{id}/reporte/listado', [PlanController::class, 'reporteListado'])->name('planes.reporte.listado');
 
   Route::get('planes/{id}/reporte', [PlanController::class, 'reporte'])->name('planes.reporte');
+  Route::get('planes/{id}/reporte/pdf', [PlanController::class, 'showPDF'])->name('planes.pdf');
 
   Route::get('planes/{id}/compartir', [PlanController::class, 'compartir'])->name('planes.compartir');
   Route::get('planes/{id}/asignaturas', [PlanController::class, 'asignaturas'])->name('planes.asignaturas');
@@ -53,5 +60,20 @@ Route::middleware('auth.user')->group( function () {
 
   // me
   Route::put('api/v0/planes/{id}/measignaturas/change_position', [DisponibilidadHorarioController::class, 'apiAsignaturaChangePosition'])->name('api.interna.measignatura.changePosition');
-});
 
+
+  // EXCEL
+  Route::get('planes/{id}/reporte/listado/export', [PlanController::class, 'exportReporteListado'])->name('planes.reporte.listado.export');
+
+  // PDF
+  Route::get('pdf/planes/{plan_id}/diponibilidad/{asociado_id}', [PdfSolicitudController::class,'disponibilidad'])->name('pdf.diponibilidad');
+  Route::get('pdf/planes/{plan_id}/diponibilidad_general', [PdfSolicitudController::class,'disponibilidad_general'])->name('pdf.diponibilidad_general');
+
+});
+// Route::get('pdf', [PdfSolicitudController::class,'uno'])->name('pdf.uno');
+
+// use Maatwebsite\Excel\Facades\Excel;
+
+// Route::get('/export-main', function () {
+//   return Excel::download(new MainExport, 'sales.xls');
+// });

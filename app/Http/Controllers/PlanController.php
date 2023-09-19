@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use App\Models\dh\Asignatura;
 use App\Models\dh\AsignaturaPreferida;
@@ -146,6 +147,10 @@ class PlanController extends Controller
   }
 
   public function participantesShow($id, $id_asociado) {
+
+    // create un usuario
+
+
     $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
     $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($id_asociado);
     $u = $asociado->usuario;
@@ -168,6 +173,22 @@ class PlanController extends Controller
     return view('planes.id.participantes.show', compact('plan','asociado','u', 'asignaturas_preferidas','my_horario','horarios'));
   }
 
+  public function participantesShowPDF($id, $id_asociado) {
+    $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
+    $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($id_asociado);
+    $u = $asociado->usuario;
+
+
+    return view('planes.id.participantes.pdf', compact('plan','asociado', 'u'));
+  }
+
+  public function showPDF($id) {
+    $this->policy->show(current_user());
+
+    $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
+
+    return view('planes.id.reporte.general_pdf', compact('plan'));
+  }
 
   // public function compartir($id) {
   //   $plan = Plan::where('id_usuario', current_user()->id)->findOrFail($id);
@@ -247,15 +268,35 @@ class PlanController extends Controller
     }
   }
 
-  function reporte($id) {
+  public function reporte($id) {
     $plan = Plan::with(['detalle_plan','users_asignaturas'])->findOrFail($id);
 
     $users_asignaturas =$plan->users_asignaturas;
 
     // return $users_asignaturas;
 
-    return view('planes.id.reporte', compact('plan','users_asignaturas'));
+    return view('planes.id.reporte.index', compact('plan','users_asignaturas'));
   }
+
+  public function reporteListado($id) {
+    $plan = Plan::with(['detalle_plan','users_asignaturas'])->findOrFail($id);
+
+    $horarios = HorarioPlan::where('id_plan', $plan->id)->with('usuario')->get();
+    // $users_asignaturas =$plan->users_asignaturas;
+
+    // return $users_asignaturas;
+
+
+    return view('planes.id.reporte.listado', compact('plan','horarios'));
+  }
+
+  public function exportReporteListado($id) {
+    $plan = Plan::with(['detalle_plan','users_asignaturas'])->findOrFail($id);
+
+    // return $plan;
+    return (new ReportExport($id))->download();
+  }
+
 
 
   // @api INTERNA
