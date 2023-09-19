@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\dh\Asignatura;
 use App\Services\CarreraData;
+use App\Services\ImportFile;
 
 class AsignaturaController extends Controller
 {
@@ -31,6 +32,22 @@ class AsignaturaController extends Controller
       $a->sigla = $request->input('sigla');
       $a->semestre = $request->input('semestre');
       $a->programa = $request->input('programa');
+
+      $info = [];
+      $info['url'] = $request->input('url');
+
+      if(!empty($request->file('file'))){
+        $filename = 'file'. time();
+        $folder = 'document_asignatura_web/' . date('Y');
+        $name = ImportFile::save($request, 'file', $filename, $folder, false);
+
+        if ($name == 400) {
+          return back()->with('error','error archivo no válido');
+        }
+        $info['file'] = $name;
+      }
+
+      $a->info = $info;
       // $a->carrera = $request->input('carrera');
       $a->save();
 
@@ -56,6 +73,21 @@ class AsignaturaController extends Controller
         $a->sigla = $request->input('sigla');
         $a->semestre = $request->input('semestre');
         $a->programa = $request->input('programa');
+
+        $info = $a->info;
+        $info['url'] = $request->input('url');
+
+        if(!empty($request->file('file'))){
+          $filename = 'file'. time();
+          $folder = 'document_asignatura_web/' . date('Y');
+          $name = ImportFile::save($request, 'file', $filename, $folder, false);
+
+          if ($name == 400) {
+            return back()->with('error','error archivo no válido');
+          }
+          $info['file'] = $name;
+        }
+        $a->info = $info;
         $a->update();
 
         return back()->with('success', 'Asignatura actualizada exitosamente.');
