@@ -1,10 +1,6 @@
-@extends('layouts.appp')
+@extends('layouts.app')
 @push('css')
-<style>
-  .handle {
-    cursor: move;
-  }
-</style>
+
 @endpush
 @section('content')
 @component('components.button._back')
@@ -26,49 +22,49 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card shadow mb-4">
-      <div class="row p-3">
-        <div class="mb-3">
-          @if ($plan->estado == 2)
-          <a href="{{ route('disponibilidad.asignaturas.create',$plan->id) }}" class="btn btn-primary">Registrar asignatura</a>
-          @endif
-        </div>
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-hover" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      {{-- <th>Priorización</th> --}}
-                      <th>Nombre</th>
-                      <th>Código</th>
-                      <th>Semestre</th>
-                      <th>Programa</th>
-                    </tr>
-                  </thead>
-                  <tbody id="items">
-                    @forelse ($asignaturas_preferidas as $key => $ap)
-                      <tr data-id="{{ $ap->id }}" data-position="{{ $ap->posicion }}">
-                        <td  class="handle">
-                          <i class="fa fa-arrows-alt"></i>
-                        </td>
-                        {{-- <td>{{ $key + 1 }}</td> --}}
-                        <td>{{ $ap->asignatura->nombre }}</td>
-                        <td>{{ $ap->asignatura->sigla }}</td>
-                        <td>{{ $ap->asignatura->semestre }}</td>
-                        <td>{{ $ap->asignatura->programa }}</td>
-                      </tr>
-                    @empty
-                      <tr>
-                        <td colspan="5" class="text-center">No hay asignaturas registradas</td>
-                      </tr>
-                    @endforelse
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                {{-- <th>id</th> --}}
+                <th>Programa</th>
+                <th>Semestre</th>
+                <th>Cod. Asig</th>
+                <th>Descripcion</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($plan->detalle_plan as $dp)
+              @php
+                  $a = $dp->asignatura;
+              @endphp
+              <tr>
+                {{-- <td>{{ $a->id }}</td> --}}
+                <td>{{ $a->programa }}</td>
+                <td>{{ $a->semestre }}</td>
+                <td>{{ $a->sigla }}</td>
+                <td>{{ $a->nombre }}</td>
+                <td>
+                  @if ($a->getFile())
+                    <a href="{{ route('disponibilidad.asignaturasPDF', [$plan->id,$a->id]) }}" class="btn btn-sm btn-danger me-2"><strong>PDF</strong></a>
+                  @endif
+                  @if ($a->getUrl())
+                    <a href="{{ $a->getUrl() }}" target="_blank" class="btn btn-sm btn-dark me-2"><strong>LINK</strong></a>
+                  @endif
+                </td>
+                {{-- <td><a href="{{ route('admin.usuario.show',$u->id) }}">{{ $u->correo }}</a></td> --}}
+                {{-- <td>{{ $u->nombre_completo() }}</td> --}}
+                {{-- <td>{{ $u->team->nombre ?? '' }}</td> --}}
+                {{-- <td> --}}
+                  {{-- <img src="{{ asset(current_config()->present()->getImagenCoin()) }}" width="20px" alt=""> --}}
+                  {{-- {{ $u->getCredito() }} --}}
+                {{-- </td> --}}
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -77,49 +73,4 @@
 @endsection
 @push('js')
 
-  <script src="{{ asset('vendors/sortableJS/js/Sortable.js') }}"></script>
-  <script>
-
-    const url = "{{ route('api.interna.measignatura.changePosition', $plan->id) }}";
-    var el = document.getElementById('items');
-
-    var sortable = Sortable.create(el, {
-      animation: 300,
-      handle: '.handle',
-      sort: true,
-      chosenClass: 'active',
-      dataIdAttr: 'data-id',
-      onEnd: function(evt) {
-        var list = sortable.toArray();
-        changePosition(list);
-      }
-    });
-
-    function changePosition(list){
-      axios
-        .put(url, {
-          list,
-          code: "{{ $plan->id }}"
-        })
-        .then(response => {
-          console.log(response);
-          popup(response);
-        })
-        .catch(e => {
-          console.log(e);
-        })
-    };
-
-    function popup(response){
-      let { status } = response;
-      let { message } = response.data;
-
-      if(status == 200){
-        iziToast.success({
-          backgroundColor: '#47c363',
-          message
-        });
-      }
-    }
-  </script>
 @endpush

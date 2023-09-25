@@ -2,11 +2,11 @@
 @section('content')
 
 @component('components.button._back')
-@slot('route', route('asignaturas.index'))
+@slot('route', route('disponibilidad.asignaturas',$plan->id))
 @slot('color', 'secondary')
-@slot('body', '<small>Editar - <strong>' . $a->nombre . '</strong></small>')
+@slot('body', '<small>Disponibilidad Horaria - <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent
-<div class="row">
+{{-- <div class="row">
   <div class="col-md-8">
     <div class="card shadow mb-4">
       <div class="card-body">
@@ -32,7 +32,7 @@
 
           <div class="mb-3 col-md-6">
               <label for="nombre" class="form-label">Descripción<small class="text-danger">*</small></label>
-              <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $a->nombre }}" required>
+              <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $a->descripcion }}">
           </div>
 
 
@@ -50,6 +50,44 @@
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div> --}}
+<div class="row justify-content-center">
+  <div class="col">
+    <div class="card">
+
+
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">PROGRAMA</th>
+                <th scope="col">SEMESTRE</th>
+                <th scope="col">SIGLA</th>
+                <th scope="col">DESCRIPCION</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="">
+                <td>{{ $a->programa }}</td>
+                <td>{{ $a->semestre }}</td>
+                <td>{{ $a->sigla }}</td>
+                <td>{{ $a->nombre }}</td>
+                <td>
+                  <div class="col-md-12 text-center mb-3">
+                    <a href="{{ asset($a->getPDF()) }}" target="_blank" class="btn btn-danger btn-sm text-white"><i class="fa fa-file-pdf me-2"></i><strong>VER PDF</strong></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <iframe src="{{ asset($a->getPDF()) }}" style="width:100%; height:700px;" frameborder="0" ></iframe>
       </div>
     </div>
   </div>

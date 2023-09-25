@@ -65,7 +65,6 @@ class PlanController extends Controller
     return view('planes.edit', compact('plan','estados'));
   }
 
-
   public function update(Request $request, $id) {
     $p = Plan::where('id_usuario', current_user()->id)->findOrFail($id);
     $p->nombre = $request->input('nombre');
@@ -290,12 +289,23 @@ class PlanController extends Controller
     return view('planes.id.reporte.listado', compact('plan','horarios'));
   }
 
+  public function reporteAsignatura($id) {
+    $plan = Plan::with(['detalle_plan','users_asignaturas'])->findOrFail($id);
+    $users_asignaturas =$plan->users_asignaturas;
+
+    // return $users_asignaturas;
+
+
+    return view('planes.id.reporte.asignaturas', compact('plan','users_asignaturas'));
+  }
+
   public function exportReporteListado($id) {
     $plan = Plan::with(['detalle_plan','users_asignaturas'])->findOrFail($id);
 
     // return $plan;
     return (new ReportExport($id))->download();
   }
+
 
 
 

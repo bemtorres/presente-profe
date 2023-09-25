@@ -31,7 +31,7 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('disponibilidad.asignaturas',$plan->id))
+@slot('route', route('disponibilidad.mis_asignaturas',$plan->id))
 @slot('color', 'secondary')
 @slot('body', '<small>Inscribir asignatura - <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent

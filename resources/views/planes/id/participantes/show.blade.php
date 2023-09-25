@@ -70,8 +70,6 @@
 
                 {{-- <a href="{{ route('pdf.diponibilidad', [$plan->id, $asociado->id]) }}" class="btn btn-danger">VER PDF</a> --}}
 
-
-
               </div>
             </div>
             <div class="card">

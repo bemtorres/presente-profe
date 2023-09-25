@@ -36,6 +36,7 @@
                       <th>Nombre</th>
                       <th>Semestre</th>
                       <th>Programa</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody id="items">
@@ -48,6 +49,14 @@
                       <td>{{ $dp->asignatura->nombre }}</td>
                       <td>{{ $dp->asignatura->semestre }}</td>
                       <td>{{ $dp->asignatura->programa }}</td>
+                      <td>
+                        @if ($dp->asignatura->getFile())
+                          <a href="{{ asset($dp->asignatura->getPDF()) }}" target="_blank" class="btn btn-danger btn-sm text-white"><i class="fa fa-file-pdf me-2"></i><strong>VER PDF</strong></a>
+                        @endif
+                        @if ($dp->asignatura->getUrl())
+                        <a href="{{ $dp->asignatura->getUrl() }}" target="_blank" class="btn btn-sm btn-dark me-2"><strong>LINK</strong></a>
+                        @endif
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>

@@ -6,11 +6,10 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('planes.show', $plan->id))
+@slot('route', route('planes.reporte', $plan->id))
 @slot('color', 'secondary')
 @slot('body', '<small>Reporte - <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent
-@include('planes._tabs_gestion')
 <div class="row">
   <div class="col-md-12">
     <div class="card shadow mb-4">

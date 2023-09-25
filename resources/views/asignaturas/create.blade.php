@@ -28,7 +28,7 @@
 
           <div class="mb-3 col-md-6">
               <label for="nombre" class="form-label">Descripción<small class="text-danger">*</small></label>
-              <input type="text" class="form-control" id="nombre" name="nombre">
+              <input type="text" class="form-control" id="nombre" name="nombre" required>
           </div>
 
 

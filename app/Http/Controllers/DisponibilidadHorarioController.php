@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
+use App\Models\dh\Asignatura;
 use App\Models\dh\AsignaturaPreferida;
 use App\Models\dh\AsociadoPlan;
 use App\Models\dh\HorarioPlan;
@@ -33,6 +34,24 @@ class DisponibilidadHorarioController extends Controller
     $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
 
     return view('dh.asignaturas.index', compact('plan','ap','asignaturas_preferidas'));
+  }
+
+  public function asignaturasPDF($id, $id_asignatura) {
+    $plan = Plan::findOrFail($id);
+    $ap = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->firstOrFail();
+    $a = Asignatura::findOrFail($id_asignatura);
+
+    return view('dh.asignaturas.pdf', compact('plan','ap','a'));
+  }
+
+
+  public function mis_asignaturas($id) {
+    $plan = Plan::findOrFail($id);
+    $ap = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->firstOrFail();
+
+    $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
+
+    return view('dh.asignaturas.me', compact('plan','ap','asignaturas_preferidas'));
   }
 
   public function asignaturasCreate($id) {

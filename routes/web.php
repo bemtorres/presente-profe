@@ -26,8 +26,11 @@ Route::middleware('auth.user')->group( function () {
 
   Route::get('dh/{id}', [DisponibilidadHorarioController::class, 'show'])->name('disponibilidad.show');
   Route::get('dh/{id}/asignaturas', [DisponibilidadHorarioController::class, 'asignaturas'])->name('disponibilidad.asignaturas');
-  Route::get('dh/{id}/asignaturas/create', [DisponibilidadHorarioController::class, 'asignaturasCreate'])->name('disponibilidad.asignaturas.create');
-  Route::post('dh/{id}/asignaturas', [DisponibilidadHorarioController::class, 'asignaturasStore'])->name('disponibilidad.asignaturas.store');
+  Route::get('dh/{id}/asignaturas/{id_a}/pdf', [DisponibilidadHorarioController::class, 'asignaturasPDF'])->name('disponibilidad.asignaturasPDF');
+
+  Route::get('dh/{id}/mis_asignaturas', [DisponibilidadHorarioController::class, 'mis_asignaturas'])->name('disponibilidad.mis_asignaturas');
+  Route::get('dh/{id}/mis_asignaturas/create', [DisponibilidadHorarioController::class, 'asignaturasCreate'])->name('disponibilidad.asignaturas.create');
+  Route::post('dh/{id}/mis_asignaturas', [DisponibilidadHorarioController::class, 'asignaturasStore'])->name('disponibilidad.asignaturas.store');
 
   Route::get('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'calendario'])->name('disponibilidad.calendario');
   Route::post('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'apiAsignaturaStore'])->name('disponibilidad.calendario.store');
@@ -35,6 +38,8 @@ Route::middleware('auth.user')->group( function () {
 
 // ADMIN
   Route::resource('asignaturas', AsignaturaController::class);
+  Route::get('asignaturas/{id}/pdf', [AsignaturaController::class, 'pdf'])->name('asignaturas.pdf');
+
   Route::resource('usuarios', UsuarioController::class);
   Route::resource('planes', PlanController::class);
 
@@ -46,6 +51,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('planes/{id}/participantes/{id_asociado}/pdf', [PlanController::class, 'participantesShowPDF'])->name('planes.participantes.showPDF');
 
   Route::get('planes/{id}/reporte/listado', [PlanController::class, 'reporteListado'])->name('planes.reporte.listado');
+  Route::get('planes/{id}/reporte/asignatura', [PlanController::class, 'reporteAsignatura'])->name('planes.reporte.asignaturas');
 
   Route::get('planes/{id}/reporte', [PlanController::class, 'reporte'])->name('planes.reporte');
   Route::get('planes/{id}/reporte/pdf', [PlanController::class, 'showPDF'])->name('planes.pdf');

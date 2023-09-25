@@ -22,13 +22,14 @@
               <div class="card-body">
 
                 <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                  {{-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                     The current link item
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+                  </a> --}}
+                  <a href="{{ route('planes.reporte.listado',$plan->id) }}" class="list-group-item list-group-item-action">Listado</a>
+                  <a href="{{ route('planes.reporte.asignaturas',$plan->id) }}" class="list-group-item list-group-item-action">Asignatura</a>
+                  {{-- <a href="#" class="list-group-item list-group-item-action">A third link item</a> --}}
+                  {{-- <a href="#" class="list-group-item list-group-item-action">A fourth link item</a> --}}
+                  {{-- <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a> --}}
                 </div>
               </div>
             </div>
@@ -40,8 +41,8 @@
 
                 <div class="list-group">
                   <a href="{{ route('planes.pdf', $plan->id) }}" class="list-group-item list-group-item-action"><i class="fa fa-file-pdf text-danger"></i> PDF Disponibilidad General</a>
-                  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                  {{-- <a href="#" class="list-group-item list-group-item-action">A third link item</a> --}}
+                  {{-- <a href="#" class="list-group-item list-group-item-action">A fourth link item</a> --}}
                 </div>
               </div>
             </div>

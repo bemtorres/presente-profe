@@ -6,11 +6,10 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('planes.show', $plan->id))
+@slot('route', route('planes.reporte', $plan->id))
 @slot('color', 'secondary')
 @slot('body', '<small>Reporte - <strong>' . $plan->nombre . '</strong></small>')
 @endcomponent
-@include('planes._tabs_gestion')
 <div class="row">
   <div class="col-12">
 
@@ -21,17 +20,6 @@
           <div class="col-md-3">
             <div class="card">
               <div class="card-body">
-
-                <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                    The current link item
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
-                </div>
-
                 <small class="badge rounded-pill text-bg-primary">Semestre {{ $dp->asignatura->semestre }}</small> <br>
                 <strong class="card-title">{{ $dp->asignatura->nombre }}</strong>
                 <p class="card-text">{{ $dp->asignatura->sigla }}</p>
@@ -49,7 +37,6 @@
             </div>
           </div>
         @endforeach
-
 
       </div>
     </div>

@@ -64,33 +64,29 @@ class AsignaturaController extends Controller
     // Actualizar asignatura
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nombre' => 'required',
-        ]);
+      $a = Asignatura::findOrFail($id);
+      $a->nombre = $request->input('nombre');
+      $a->sigla = $request->input('sigla');
+      $a->semestre = $request->input('semestre');
+      $a->programa = $request->input('programa');
 
-        $a = Asignatura::findOrFail($id);
-        $a->nombre = $request->input('nombre');
-        $a->sigla = $request->input('sigla');
-        $a->semestre = $request->input('semestre');
-        $a->programa = $request->input('programa');
+      $info = $a->info;
+      $info['url'] = $request->input('url');
 
-        $info = $a->info;
-        $info['url'] = $request->input('url');
+      if(!empty($request->file('file'))){
+        $filename = 'file'. time();
+        $folder = 'document_asignatura_web/' . date('Y');
+        $name = ImportFile::save($request, 'file', $filename, $folder, false);
 
-        if(!empty($request->file('file'))){
-          $filename = 'file'. time();
-          $folder = 'document_asignatura_web/' . date('Y');
-          $name = ImportFile::save($request, 'file', $filename, $folder, false);
-
-          if ($name == 400) {
-            return back()->with('error','error archivo no válido');
-          }
-          $info['file'] = $name;
+        if ($name == 400) {
+          return back()->with('error','error archivo no válido');
         }
-        $a->info = $info;
-        $a->update();
+        $info['file'] = $name;
+      }
+      $a->info = $info;
+      $a->update();
 
-        return back()->with('success', 'Asignatura actualizada exitosamente.');
+      return back()->with('success', 'Asignatura actualizada exitosamente.');
     }
 
     // Eliminar asignatura
@@ -101,4 +97,11 @@ class AsignaturaController extends Controller
 
         return redirect()->route('asignaturas.index')->with('success', 'Asignatura eliminada exitosamente.');
     }
+
+  public function pdf($id) {
+
+    $a = Asignatura::findOrFail($id);
+    return view('asignaturas.pdf', compact('a'));
+  }
+
 }

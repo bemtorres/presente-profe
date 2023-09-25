@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class Asignatura extends Model
 {
   use HasFactory;
@@ -26,6 +29,10 @@ class Asignatura extends Model
 
   function getFile() {
     return $this->info['file'] ?? null;
+  }
+
+  function getPDF() {
+    return \Storage::url($this->getFile());
   }
 
   function getUrl() {
