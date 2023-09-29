@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Config;
+use App\Models\dh\Asignatura;
 use App\Models\dh\AsociadoPlan;
 use App\Models\Sistema;
 use App\Models\Usuario;
+use App\Services\CarrerasInformaticas;
 use App\Services\DuocHorario;
 use Auth;
 use Illuminate\Http\Request;
@@ -49,5 +51,26 @@ class HomeController extends Controller
     }
 
     return back()->with('success','Se ha actualizado');
+  }
+
+
+  public function run(Request $request) {
+    $asignatura = Asignatura::where('sigla', CarrerasInformaticas::INFO_IMPARES[0][1])->first();
+
+    if ($asignatura == null) {
+      $asignaturas = CarrerasInformaticas::INFO_IMPARES;
+      foreach ($asignaturas as $key => $as) {
+        $a = new Asignatura();
+        $a->programa = $as[0];
+        $a->semestre   = $as[3];
+        $a->nombre = $as[2];
+        $a->sigla = $as[1];
+        $a->save();
+      }
+
+      return "ok";
+    }
+
+    return "ya existe";
   }
 }

@@ -78,6 +78,7 @@
                 <ul class="list-group list-group-flush">
                   @forelse ($asignaturas_preferidas as $ap)
                     <li class="list-group-item">
+                      <span class="badge badge-pill bg-dark">{{  $ap->asignatura->semestre }}</span>
                       {{ $ap->asignatura->toString() }}
                     </li>
                   @empty

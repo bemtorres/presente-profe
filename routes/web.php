@@ -22,6 +22,9 @@ Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCa
 
 Route::middleware('auth.user')->group( function () {
   Route::get('home', [HomeController::class, 'index'])->name('home.index');
+  Route::get('run', [HomeController::class, 'run'])->name('home.run');
+
+
   Route::get('admin/perfil', [HomeController::class, 'perfil'])->name('admin.perfil');
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
 
