@@ -77,7 +77,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('pdf/planes/{plan_id}/diponibilidad_general', [PdfSolicitudController::class,'disponibilidad_general'])->name('pdf.diponibilidad_general');
 
 
-  Route::get('comparte_duoc', [ComparteController::class, 'index'])->name('comparte.index');
+  // Route::get('comparte_duoc', [ComparteController::class, 'index'])->name('comparte.index');
 
 
 });
