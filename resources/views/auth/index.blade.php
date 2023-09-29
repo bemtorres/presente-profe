@@ -37,8 +37,8 @@
                   <form class="form-sample form-submit" action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                      <label for="correo" class="form-label">Correo electronico</label>
-                      <input type="email" class="form-control" id="correo" name="correo" value="admin@gmail.com" required>
+                      <label for="correo" class="form-label">Correo electrónico</label>
+                      <input type="email" class="form-control" id="correo" name="correo" value="" required>
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Contraseña</label>

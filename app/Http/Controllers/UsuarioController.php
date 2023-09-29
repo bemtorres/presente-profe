@@ -36,7 +36,7 @@ class UsuarioController extends Controller
     $u->nombre = $request->input('nombre');
     $u->apellido_materno = $request->input('apellido_m');
     $u->apellido_paterno = $request->input('apellido_p');
-    $u->password = hash('sha256', $u->correo);
+    $u->password = hash('sha256', $request->input('pass'));
     $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
     $u->save();
 

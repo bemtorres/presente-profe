@@ -5,6 +5,7 @@ import { createApp } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import Calendario from '@/components/Calendario.vue';
 import CalendarioUser from '@/components/CalendarioUser.vue';
+import CalendarioComparte from '@/components/CalendarioComparte.vue';
 // import Calendario from '@/components/Calendario.vue'
 
 createApp({
@@ -16,6 +17,7 @@ createApp({
     components: {
       'hello': HelloWorld,
       'calendario': Calendario,
-      'calendariouser': CalendarioUser
+      'calendariouser': CalendarioUser,
+      'calendariocomparte': CalendarioComparte
     },
 }).mount('#app');

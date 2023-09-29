@@ -21,7 +21,7 @@
                 <div class="form-group row">
                   <label class="col-sm-12" for="correo">Correo <small class="text-danger">*</small></label>
                   <div class="col-sm-12">
-                    <input type="email" class="form-control {{ $errors->has('correo') ? 'is-invalid' : '' }}" name="correo" id="correo" value="{{ old('correo') }}"/>
+                    <input type="email" class="form-control {{ $errors->has('correo') ? 'is-invalid' : '' }}" name="correo" id="correo" value="{{ old('correo') }}" required/>
                     {!! $errors->first('correo', ' <small id="inputPassword" class="form-text text-danger">:message</small>') !!}
                   </div>
                 </div>
@@ -36,14 +36,14 @@
                 </div>
               </div> --}}
 
-              {{-- <div class="col-md-4 mb-3">
+              <div class="col-md-12 mb-3">
                 <div class="form-group row">
                   <label class="col-sm-12" for="pass">Contraseña <small class="text-danger">*</small></label>
                   <div class="col-sm-12">
                     <input type="password" class="form-control" name="pass" id="pass" value="" required/>
                   </div>
                 </div>
-              </div> --}}
+              </div>
 
               {{-- <div class="col-md-4 mb-3">
               </div> --}}

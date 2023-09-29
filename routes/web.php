@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleUserController;
 
 use App\Http\Controllers\AsignaturaController;
+use App\Http\Controllers\ComparteController;
 use App\Http\Controllers\DisponibilidadHorarioController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PdfSolicitudController;
@@ -74,6 +75,10 @@ Route::middleware('auth.user')->group( function () {
   // PDF
   Route::get('pdf/planes/{plan_id}/diponibilidad/{asociado_id}', [PdfSolicitudController::class,'disponibilidad'])->name('pdf.diponibilidad');
   Route::get('pdf/planes/{plan_id}/diponibilidad_general', [PdfSolicitudController::class,'disponibilidad_general'])->name('pdf.diponibilidad_general');
+
+
+  Route::get('comparte_duoc', [ComparteController::class, 'index'])->name('comparte.index');
+
 
 });
 // Route::get('pdf', [PdfSolicitudController::class,'uno'])->name('pdf.uno');
