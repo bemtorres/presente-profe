@@ -24,7 +24,17 @@ class DisponibilidadHorarioController extends Controller
 
     $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
 
-    return view('dh.show', compact('plan','ap','asignaturas_preferidas'));
+    $has_horario = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', current_user()->id)->get()->count() > 0;
+
+    return view('dh.show', compact('plan','ap','asignaturas_preferidas','has_horario'));
+  }
+
+  public function showPDF($id) {
+    // solo el usuario puede ver su pdf
+    $plan = Plan::with('asociado_plan')->findOrFail($id);
+    $asociado = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->firstOrFail();
+    $u = $asociado->usuario;
+    return view('dh.pdf', compact('plan','asociado','u'));
   }
 
   public function asignaturas($id) {

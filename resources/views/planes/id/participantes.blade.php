@@ -25,7 +25,8 @@
             <thead>
               <tr>
                 <th>Participantes</th>
-                {{-- <th>Estado</th> --}}
+                <th>Asignaturas</th>
+                <th>Calendario</th>
                 <th></th>
               </tr>
             </thead>
@@ -46,12 +47,20 @@
                     </div>
                   </div>
                 </td>
-                {{-- <td> --}}
-                  {{-- <span class="badge bg-primary">New</span> --}}
-                  {{-- <span class="badge bg-danger">New!</span> --}}
-                  {{-- <span class="badge bg-warning">Pendiente</span> --}}
-                  {{-- <span class="badge bg-success">OK</span> --}}
-                {{-- </td> --}}
+                <td>
+                  @if ($asociado->has_asignaturas)
+                    <span class="ms-1 badge bg-success">Completado</span>
+                  @else
+                    <span class="ms-1 badge bg-warning">Pendiente</span>
+                  @endif
+                </td>
+                <td>
+                  @if ($asociado->has_horario)
+                    <span class="ms-1 badge bg-success">Completado</span>
+                  @else
+                    <span class="ms-1 badge bg-warning">Pendiente</span>
+                  @endif
+                </td>
                 <td>
                   <a href="{{ route('planes.participantes.show',[$plan->id, $asociado->id]) }}" class="btn btn-success btn-sm">Ver</a>
                   <a href="{{ route('pdf.diponibilidad',[$plan->id, $asociado->id]) }}" class="ms-2 btn btn-danger btn-sm">PDF</a>

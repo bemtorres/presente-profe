@@ -31,6 +31,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('dh/{id}', [DisponibilidadHorarioController::class, 'show'])->name('disponibilidad.show');
   Route::get('dh/{id}/asignaturas', [DisponibilidadHorarioController::class, 'asignaturas'])->name('disponibilidad.asignaturas');
   Route::get('dh/{id}/asignaturas/{id_a}/pdf', [DisponibilidadHorarioController::class, 'asignaturasPDF'])->name('disponibilidad.asignaturasPDF');
+  Route::get('dh/{id}/pdf', [DisponibilidadHorarioController::class, 'showPDF'])->name('disponibilidad.show.pdf');
 
   Route::get('dh/{id}/mis_asignaturas', [DisponibilidadHorarioController::class, 'mis_asignaturas'])->name('disponibilidad.mis_asignaturas');
   Route::get('dh/{id}/mis_asignaturas/create', [DisponibilidadHorarioController::class, 'asignaturasCreate'])->name('disponibilidad.asignaturas.create');
@@ -77,6 +78,7 @@ Route::middleware('auth.user')->group( function () {
 
   // PDF
   Route::get('pdf/planes/{plan_id}/diponibilidad/{asociado_id}', [PdfSolicitudController::class,'disponibilidad'])->name('pdf.diponibilidad');
+  Route::get('pdf/planes/{plan_id}/dh/{asociado_id}', [PdfSolicitudController::class,'disponibilidad_personal'])->name('pdf.diponibilidad.personal');
   Route::get('pdf/planes/{plan_id}/diponibilidad_general', [PdfSolicitudController::class,'disponibilidad_general'])->name('pdf.diponibilidad_general');
 
 

@@ -84,6 +84,15 @@ class PlanController extends Controller
 
     $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
 
+    $asociados = $plan->asociado_plan;
+
+    foreach ($asociados as $key => $asociado) {
+      $u_id = $asociado->id_usuario;
+
+      $asociado['has_asignaturas'] = AsignaturaPreferida::where('id_usuario', $u_id)->where('id_plan', $plan->id)->get()->count() > 0;
+      $asociado['has_horario'] = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', $u_id)->get()->count() > 0;
+    }
+
     return view('planes.id.participantes', compact('plan'));
   }
 
