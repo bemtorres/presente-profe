@@ -27,6 +27,10 @@ class HomeController extends Controller
     return view('home.index', compact('horarios','planes_asociados'));
   }
 
+  public function tutorial() {
+    return view('home.tutorial');
+  }
+
   public function perfil() {
     $u = current_user();
 
