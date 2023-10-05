@@ -45,7 +45,7 @@
     <div class="col-md-4 mb-3">
       <div class="card">
         <div class="card-body">
-          <p class="card-text">📣 <strong>Mi progreso</strong></p>
+          <p class="card-text">📣 <strong>Mis tareas</strong></p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               - <small>Añadir asignturas</small>
