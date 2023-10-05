@@ -21,7 +21,7 @@
 @include('dh._tabs')
 <div class="card shadow mb-4">
   <div class="row p-3">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card">
         <img src="{{ asset('app/teamwork-3213924_640.jpg') }}" class="card-img-top" alt="...">
         <div class="card-body">
@@ -35,11 +35,38 @@
             <li class="list-group-item d-grid">
               <a class="btn btn-outline-warning btn-sm text-dark" href="{{ route('disponibilidad.calendario',$plan->id) }}">📅 Calendario</a>
             </li>
+            <li class="list-group-item d-grid">
+              <a class="btn btn-outline-warning btn-sm text-dark" href="{{ route('disponibilidad.show.pdf',$plan->id) }}">🗒️ Ver resumen en pdf</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">📣 <strong>Mi progreso</strong></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              - <small>Añadir asignturas</small>
+                @if (count($asignaturas_preferidas) > 0)
+                  <small><span class="ms-1 badge bg-success">Completado</span></small>
+                @else
+                  <small><span class="ms-1 badge bg-warning">Pendiente</span></small>
+                @endif
+            </li>
+            <li class="list-group-item">
+              - <small>Completar calendario</small>
+              @if ($has_horario)
+                <small><span class="ms-1 badge bg-success">Completado</span></small>
+              @else
+                <small><span class="ms-1 badge bg-warning">Pendiente</span></small>
+              @endif
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="col-md-5">
       <div class="card">
         <div class="card-body">
@@ -47,7 +74,7 @@
           <ul class="list-group list-group-flush">
             @forelse ($asignaturas_preferidas as $ap)
               <li class="list-group-item">
-                {{ $ap->asignatura->toString() }}
+                <span class="ms-2 badge bg-success">{{ $ap->asignatura->semestre }}</span> <small>{{ $ap->asignatura->toString() }}</small>
               </li>
             @empty
               <li class="list-group-item">

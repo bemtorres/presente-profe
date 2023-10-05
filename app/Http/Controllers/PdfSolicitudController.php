@@ -32,6 +32,22 @@ class PdfSolicitudController extends Controller
     return $pdf->stream("nuevo.pdf");
   }
 
+  public function disponibilidad_personal($plan_id, $asociado_id) {
+    $plan = Plan::with('asociado_plan')->findOrFail($plan_id);
+    $asociado = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->findOrFail($asociado_id);
+    $u = $asociado->usuario;
+
+    // reporte 1
+    $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $u->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
+
+    // reporte 2
+    $horarios = DuocHorario::TIMES;
+    $calendario = (new CelendarioDisponibilidadH($plan->id, $asociado->id))->call();
+
+    $pdf = Pdf::loadView('pdf.diponibilidad_pdf',compact('u','calendario','asignaturas_preferidas','horarios'));
+    return $pdf->stream("DH_".str_replace(' ','_',$u->nombre_completo()).".pdf");
+  }
+
   public function disponibilidad($plan_id, $asociado_id) {
     $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($plan_id);
     $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($asociado_id);
