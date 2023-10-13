@@ -37,9 +37,11 @@ Route::middleware('auth.user')->group( function () {
   Route::get('dh/{id}/mis_asignaturas', [DisponibilidadHorarioController::class, 'mis_asignaturas'])->name('disponibilidad.mis_asignaturas');
   Route::get('dh/{id}/mis_asignaturas/create', [DisponibilidadHorarioController::class, 'asignaturasCreate'])->name('disponibilidad.asignaturas.create');
   Route::post('dh/{id}/mis_asignaturas', [DisponibilidadHorarioController::class, 'asignaturasStore'])->name('disponibilidad.asignaturas.store');
+  Route::post('dh/{id}/mis_asignaturas/{id_asociado}', [DisponibilidadHorarioController::class, 'asignaturasStoreMain'])->name('disponibilidad.asignaturas.store.main');
 
   Route::get('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'calendario'])->name('disponibilidad.calendario');
   Route::post('dh/{id}/calendario', [DisponibilidadHorarioController::class, 'apiAsignaturaStore'])->name('disponibilidad.calendario.store');
+  Route::post('dh/{id}/calendario/{usuario_id}', [DisponibilidadHorarioController::class, 'apiAsignaturaStoreMain'])->name('disponibilidad.calendario.store.main');
 
 
 // ADMIN
@@ -53,6 +55,8 @@ Route::middleware('auth.user')->group( function () {
   Route::put('planes/{id}/participantes', [PlanController::class, 'participantesUpdate'])->name('planes.participantes');
   Route::get('planes/{id}/participantes/add', [PlanController::class, 'participantesAdd'])->name('planes.participantesAdd');
   Route::get('planes/{id}/participantes/{id_asociado}', [PlanController::class, 'participantesShow'])->name('planes.participantes.show');
+  Route::get('planes/{id}/participantes/{id_asociado}/asignatura', [PlanController::class, 'participantesAsignatura'])->name('planes.participantes.asignatura');
+  Route::get('planes/{id}/participantes/{id_asociado}/asignatura/create', [PlanController::class, 'participantesAsignaturaCreate'])->name('planes.participantes.asignatura.create');
   // PDF
   Route::get('planes/{id}/participantes/{id_asociado}/pdf', [PlanController::class, 'participantesShowPDF'])->name('planes.participantes.showPDF');
 
@@ -72,6 +76,7 @@ Route::middleware('auth.user')->group( function () {
 
   // me
   Route::put('api/v0/planes/{id}/measignaturas/change_position', [DisponibilidadHorarioController::class, 'apiAsignaturaChangePosition'])->name('api.interna.measignatura.changePosition');
+  Route::put('api/v0/planes/{id}/measignaturas/change_position_main/{id_usuario}', [DisponibilidadHorarioController::class, 'apiAsignaturaChangePositionMain'])->name('api.interna.measignatura.changePositionMain');
 
 
   // EXCEL
@@ -83,10 +88,10 @@ Route::middleware('auth.user')->group( function () {
   Route::get('pdf/planes/{plan_id}/diponibilidad_general', [PdfSolicitudController::class,'disponibilidad_general'])->name('pdf.diponibilidad_general');
 
 
-  // Route::get('comparte_duoc', [ComparteController::class, 'index'])->name('comparte.index');
 
 
 });
+Route::get('comparte', [ComparteController::class, 'index'])->name('comparte.index');
 // Route::get('pdf', [PdfSolicitudController::class,'uno'])->name('pdf.uno');
 
 // use Maatwebsite\Excel\Facades\Excel;

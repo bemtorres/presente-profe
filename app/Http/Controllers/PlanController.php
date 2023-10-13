@@ -155,10 +155,6 @@ class PlanController extends Controller
   }
 
   public function participantesShow($id, $id_asociado) {
-
-    // create un usuario
-
-
     $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
     $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($id_asociado);
     $u = $asociado->usuario;
@@ -180,6 +176,47 @@ class PlanController extends Controller
 
     return view('planes.id.participantes.show', compact('plan','asociado','u', 'asignaturas_preferidas','my_horario','horarios'));
   }
+
+  public function participantesAsignatura($id, $id_asociado) {
+    $plan = Plan::with('asociado_plan')->findOrFail($id);
+    $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($id_asociado);
+    $u = $asociado->usuario;
+
+    $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $u->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
+
+    return view('planes.id.participantes.asignaturas', compact('plan','asociado','u', 'asignaturas_preferidas'));
+  }
+
+  public function participantesAsignaturaCreate($id, $id_asociado) {
+
+    $plan = Plan::with('detalle_plan')->findOrFail($id);
+    $ap = AsociadoPlan::where('id_plan', $plan->id)->findOrFail($id_asociado);
+    $u = $ap->usuario;
+
+    $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $u->id)->where('id_plan', $plan->id)->with('asignatura')->get();
+
+    foreach ($plan->detalle_plan as $dp) {
+      $dp->selected = false;
+      foreach ($asignaturas_preferidas as $aap) {
+        if ($dp->id_asignatura == $aap->id_asignatura) {
+          $dp->selected = true;
+        }
+      }
+    }
+
+    return view('planes.id.participantes.asignatura_add', compact('plan','ap', 'u'));
+  }
+
+  public function participantesAsignaturaStore($id, $id_asociado) {
+    $plan = Plan::with('asociado_plan')->findOrFail($id);
+    $asociado = AsociadoPlan::where('id_plan',$plan->id)->with('usuario')->findOrFail($id_asociado);
+    $u = $asociado->usuario;
+
+    $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $u->id)->where('id_plan', $plan->id)->with('asignatura')->orderBy('posicion')->get();
+
+    return view('planes.id.participantes.asignaturas', compact('plan','asociado','u', 'asignaturas_preferidas'));
+  }
+
 
   public function participantesShowPDF($id, $id_asociado) {
     $plan = Plan::where('id_usuario', current_user()->id)->with('asociado_plan')->findOrFail($id);
@@ -314,7 +351,6 @@ class PlanController extends Controller
     // return $plan;
     return (new ReportExport($id))->download();
   }
-
 
 
 

@@ -13,8 +13,8 @@ class ComparteController extends Controller
 {
 
   public function index() {
-    $id = 6;
-    $id_asociado = 16;
+    $id = 1;
+    $id_asociado = 2;
     // create un usuario
 
 

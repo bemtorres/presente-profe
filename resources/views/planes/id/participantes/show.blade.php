@@ -52,16 +52,16 @@
                   </li>
                 </ul>
                 <ul class="list-group" id="lista" style="display: none;">
-                  @foreach ($plan->asociado_plan as $asociado)
-                    @continue($asociado->id_usuario == $u->id)
-                    <li class="list-group-item list-group-item-action d-flex cursor" onclick="window.location = '{{ route('planes.participantes.show',[$plan->id, $asociado->id]) }}'">
+                  @foreach ($plan->asociado_plan as $asociadoo)
+                    @continue($asociadoo->id_usuario == $u->id)
+                    <li class="list-group-item list-group-item-action d-flex cursor" onclick="window.location = '{{ route('planes.participantes.show',[$plan->id, $asociadoo->id]) }}'">
                       <div class="d-flex align-items-center">
                         <div class="avatar avatar-md">
-                          <img class="avatar-img" src="{{ $asociado->usuario->getImg() }}" alt="">
+                          <img class="avatar-img" src="{{ $asociadoo->usuario->getImg() }}" alt="">
                         </div>
                         <div class="ms-2">
-                          <span class="h6 mt-2 mt-sm-0">{{ $asociado->usuario->nombre_completo() }}</span>
-                          <p class="small m-0">{{ $asociado->usuario->correo }}</p>
+                          <span class="h6 mt-2 mt-sm-0">{{ $asociadoo->usuario->nombre_completo() }}</span>
+                          <p class="small m-0">{{ $asociadoo->usuario->correo }}</p>
                         </div>
                       </div>
                     </li>
@@ -74,7 +74,12 @@
             </div>
             <div class="card">
               <div class="card-body">
-                <p class="card-text">📖 <strong>Mis asignaturas</strong></p>
+                <div class="row">
+                  <p class="card-text">
+                    📖 <strong>Mis asignaturas</strong>
+                    <a href="{{ route('planes.participantes.asignatura', [$plan->id, $asociado->id]) }}" class="ms-2 btn btn-sm btn-primary">Editar</a>
+                  </p>
+                </div>
                 <ul class="list-group list-group-flush">
                   @forelse ($asignaturas_preferidas as $ap)
                     <li class="list-group-item">
@@ -93,20 +98,7 @@
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <p class="card-text d-flex justify-content-between align-items-center">
-                  <span>
-                    📅<strong>Calendario:</strong>
-                    <small>
-                      Registra tu calendario de disponibilidad horaria.
-                      <br>
-                      <strong>
-                        🟩 Disponible
-                        🟨 Posible disponibilidad
-                      </strong>
-                    </small>
-                  </span>
-                </p>
-                <calendario :horarios=@json($horarios) :myhorario=@json($my_horario) :editable="false"></calendario>
+                <calendariomain :horarios=@json($horarios) :myhorario=@json($my_horario)></calendariomain>
               </div>
             </div>
           </div>
@@ -133,7 +125,56 @@ $(document).ready(function () {
     // Marcar el elemento seleccionado
     $(this).addClass("list-group-item-selected");
   });
+
+
 });
+
 </script>
 
+<script>
+
+  var myCalendar = [];
+
+  function mainPushData(calendario) {
+    myCalendar = calendario;
+  }
+
+  function saveCalendario() {
+    // enviar un post
+    btn = document.getElementById('btn-enviar');
+    spinner = document.getElementById('spinner-enviar');
+    textSave = document.getElementById('text-guardar');
+
+    btn.disabled = true;
+    spinner.hidden = false;
+    textSave.hidden = true;
+
+    axios.post("{{ route('disponibilidad.calendario.store.main', [$plan->id, $u->id]) }}", {
+      calendario: myCalendar
+    }).then(function(response) {
+      btn.disabled = false;
+      spinner.hidden = true;
+      textSave.hidden = false;
+
+      console.log(response);
+      if (response.data.status == 200) {
+        iziToast.success({
+          backgroundColor: '#47c363',
+          message: "Calendario guardado"
+        });
+      }
+    }).catch(function(error) {
+      console.log(error);
+      btn.disabled = false;
+      spinner.hidden = true;
+      textSave.hidden = false;
+
+      iziToast.error({
+        timeout: 0,
+        backgroundColor: '#fc544b',
+        message: "Error al guardar calendario"
+      });
+    });
+  }
+</script>
 @endpush

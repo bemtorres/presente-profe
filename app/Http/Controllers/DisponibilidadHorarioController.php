@@ -72,8 +72,8 @@ class DisponibilidadHorarioController extends Controller
 
     foreach ($plan->detalle_plan as $dp) {
       $dp->selected = false;
-      foreach ($asignaturas_preferidas as $ap) {
-        if ($dp->id_asignatura == $ap->id_asignatura) {
+      foreach ($asignaturas_preferidas as $aap) {
+        if ($dp->id_asignatura == $aap->id_asignatura) {
           $dp->selected = true;
         }
       }
@@ -83,11 +83,19 @@ class DisponibilidadHorarioController extends Controller
   }
 
   public function asignaturasStore(Request $request, $id) {
+    return $this->_asignaturasStore($request, $id, current_user()->id);
+  }
+
+  public function asignaturasStoreMain(Request $request, $id, $id_usuario) {
+    return $this->_asignaturasStore($request, $id, $id_usuario);
+  }
+
+  private function _asignaturasStore(Request $request, $id, $id_usuario) {
     try {
       $plan = Plan::with('detalle_plan')->findOrFail($id);
-      $ap = AsociadoPlan::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->firstOrFail();
+      $ap = AsociadoPlan::where('id_usuario', $id_usuario)->where('id_plan', $plan->id)->firstOrFail();
 
-      $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->with('asignatura')->get();
+      $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $id_usuario)->where('id_plan', $plan->id)->with('asignatura')->get();
 
       $asignaturas_ids = $request->input('asignaturas_ids');
 
@@ -109,20 +117,20 @@ class DisponibilidadHorarioController extends Controller
         }
       }
 
-      $n = AsignaturaPreferida::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->count() + 1;
+      $n = AsignaturaPreferida::where('id_usuario', $id_usuario)->where('id_plan', $plan->id)->count() + 1;
 
       foreach ($plan->detalle_plan as $asig) {
         if (!$asig->selected && $asig->form) { //nuevo
           $ap = new AsignaturaPreferida();
           $ap->id_plan = $plan->id;
           $ap->id_asignatura = $asig->id_asignatura;
-          $ap->id_usuario = current_user()->id;
+          $ap->id_usuario = $id_usuario;
           $ap->posicion = $n;
           $ap->save();
 
           $n = $n + 1;
         } elseif ($asig->selected && !$asig->form) {
-          $ap = AsignaturaPreferida::where('id_usuario', current_user()->id)
+          $ap = AsignaturaPreferida::where('id_usuario', $id_usuario)
                                   ->where('id_plan',$plan->id)
                                   ->where('id_asignatura',$asig->id_asignatura)
                                   ->first();
@@ -134,6 +142,7 @@ class DisponibilidadHorarioController extends Controller
       return back()->with('info','Error Intente nuevamente.');
     }
   }
+
 
   public function calendario($id) {
     $plan = Plan::findOrFail($id);
@@ -154,15 +163,22 @@ class DisponibilidadHorarioController extends Controller
 
   // @api INTERNA
   public function apiAsignaturaChangePosition(Request $request, $id) {
+    $id_usuario = current_user()->id;
+    return $this->_apiAsignaturaChangePosition($request, $id, $id_usuario);
+  }
+
+  public function apiAsignaturaChangePositionMain(Request $request, $id, $id_usuario) {
+    return $this->_apiAsignaturaChangePosition($request, $id, $id_usuario);
+  }
+
+  private function _apiAsignaturaChangePosition(Request $request, $id, $id_usuario) {
     try {
       $plan = Plan::with('detalle_plan')->findOrFail($id);
 
       $id = $request->input('code');
       $posiciones = $request->input('list');
 
-      $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', current_user()->id)->where('id_plan', $plan->id)->with('asignatura')->get();
-
-      // $detalles_planes =  DetallePlan::where('id_plan',$id)->orderBy('posicion')->get();
+      $asignaturas_preferidas = AsignaturaPreferida::where('id_usuario', $id_usuario)->where('id_plan', $plan->id)->with('asignatura')->get();
 
       foreach ($asignaturas_preferidas as $ap) {
         for ($i=0; $i < count($posiciones); $i++) {
@@ -180,12 +196,21 @@ class DisponibilidadHorarioController extends Controller
   }
 
   public function apiAsignaturaStore(Request $request, $id) {
+    $user_id = current_user()->id;
+    return $this->_apiAsignaturaStore($request, $id, $user_id);
+  }
+
+  public function apiAsignaturaStoreMain(Request $request, $id, $id_usuario) {
+    return $this->_apiAsignaturaStore($request, $id, $id_usuario);
+  }
+
+  // PRIVATE
+  private function _apiAsignaturaStore(Request $request, $id, $user_id) {
     try {
-      //code...
       $plan = Plan::findOrFail($id);
-      $ap = AsociadoPlan::where('id_usuario', current_user()->id)
+      $ap = AsociadoPlan::where('id_usuario', $user_id)
                         ->where('id_plan', $plan->id)->firstOrFail();
-      $my_horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', current_user()->id)->get();
+      $my_horarios = HorarioPlan::where('id_plan', $plan->id)->where('id_usuario', $user_id)->get();
 
       $in_calendario = $request->input('calendario');
 
@@ -196,7 +221,7 @@ class DisponibilidadHorarioController extends Controller
 
           $horario = new HorarioPlan();
           $horario->id_plan = $plan->id;
-          $horario->id_usuario = current_user()->id;
+          $horario->id_usuario = $user_id;
           $horario->dia = $dia;
           $horario->modulo = $value['modulo'];
           $horario->estado = $value['estado'];
@@ -232,7 +257,7 @@ class DisponibilidadHorarioController extends Controller
 
             $horario = new HorarioPlan();
             $horario->id_plan = $plan->id;
-            $horario->id_usuario = current_user()->id;
+            $horario->id_usuario = $user_id;
             $horario->dia = $dia;
             $horario->modulo = $value['modulo'];
             $horario->estado = $value['estado'];
