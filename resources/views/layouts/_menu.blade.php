@@ -32,7 +32,7 @@
     </li> --}}
     @if (current_user()->tipo_usuario == 1)
     <li class="nav-item">
-      <a class="nav-link {{ activeTab(['planes*']) }}" href="{{ route('planes.index') }}">
+      <a class="nav-link {{ activeTab(['planes*']) }}" href="">
         <i class="nav-icon fa-regular fa-clock"></i>
         <small>Disponibilidad Horaria</small>
       </a>

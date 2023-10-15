@@ -6,7 +6,7 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('planes.index'))
+@slot('route', '')
 @slot('color', 'secondary')
 @slot('body', '<small>Disponibilidad Horaria - <strong>' . $plan->nombre . '</strong>  <a class="btn btn-outline-primary btn-sm" style="--cui-btn-padding-y: .25rem; --cui-btn-padding-x: .5rem; --cui-btn-font-size: .75rem;" href="'. route('planes.edit', $plan->id) .'"><i class="fa fa-edit"></i>Editar</a></small>')
 @endcomponent
