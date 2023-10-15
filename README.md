@@ -1,5 +1,9 @@
 # 🚀 Comparte DUOC 🚀
 
+<center>
+<img src="public/app/img/comparte-logo2.svg" width="100px">
+</center>
+
 ## Descripción
 
 Plataforma de registro de tomas de salas en horarios disponibles
@@ -56,7 +60,7 @@ if you reinstall the database, run the following command: 😄
 php artisan migrate:fresh
 ```
 
-### Material extra
+### Others
 
  * CoreUI - HTML, CSS, and JavaScript UI Components Library
  * @version v4.2.6

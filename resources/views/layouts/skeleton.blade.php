@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta name="author" content="Bemtorres">
-  <title>Planificador Académico</title>
+  <title>Comparte Duoc</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="shortcut icon" href="{{ asset('app/img/planificadoracademico.svg') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('app/img/comparte-icono.svg') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('vendors/simplebar/css/simplebar.css') }}">
   <link rel="stylesheet" href="{{ asset('app/css/vendors/simplebar.css') }}">
   <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
@@ -29,7 +29,7 @@
     }
   </style>
   {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-  <link href="{{ asset('app/css/planificador.css') }}" rel="stylesheet">
+  <link href="{{ asset('app/css/comparteduoc.css') }}" rel="stylesheet">
   @stack('css')
 </head>
 <body>

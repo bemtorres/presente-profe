@@ -70,3 +70,31 @@
 .pa-celeste-2-gradiente {
   background: linear-gradient(-45deg, rgba(0, 164, 153, 0) 50%, rgba(0, 164, 153, 1) 50%);
 }
+
+
+.bg-cd-warning {
+  background: #f6b21c;
+}
+
+.bd-cd-primary {
+  background: #04243c;
+}
+
+.btn-primary {
+  --cui-btn-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-bg: #04243c;
+  --cui-btn-border-color: #04243c;
+  --cui-btn-hover-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-hover-bg: #000000;
+  --cui-btn-hover-border-color: #000000;
+  --cui-btn-focus-shadow-rgb: 75, 58, 223;
+  --cui-btn-active-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-active-bg: #000000;
+  --cui-btn-active-border-color: #000000;
+  --cui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 21, 0.125);
+  --cui-btn-disabled-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-disabled-bg: #04243c;
+  --cui-btn-disabled-border-color: #04243c;
+}
+
+
