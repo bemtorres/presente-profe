@@ -98,3 +98,72 @@
 }
 
 
+
+
+/* Ejemplo de uso de colores en CSS */
+
+/* Color rojo */
+.rojo {
+  color: #FF0000; /* Texto rojo */
+  background-color: #FF0000; /* Fondo rojo */
+}
+
+/* Color verde */
+.verde {
+  color: #00FF00; /* Texto verde */
+  background-color: #00FF00; /* Fondo verde */
+}
+
+/* Color azul */
+.azul {
+  color: #0000FF; /* Texto azul */
+  background-color: #0000FF; /* Fondo azul */
+}
+
+/* Color amarillo */
+.amarillo {
+  color: #FFFF00; /* Texto amarillo */
+  background-color: #FFFF00; /* Fondo amarillo */
+}
+
+/* Color naranja */
+.naranja {
+  color: #FFA500; /* Texto naranja */
+  background-color: #FFA500; /* Fondo naranja */
+}
+
+/* Color púrpura */
+.purpura {
+  color: #800080; /* Texto púrpura */
+  background-color: #800080; /* Fondo púrpura */
+}
+
+/* Color rosa */
+.rosa {
+  color: #FFC0CB; /* Texto rosa */
+  background-color: #FFC0CB; /* Fondo rosa */
+}
+
+/* Color gris */
+.gris {
+  color: #808080; /* Texto gris */
+  background-color: #808080; /* Fondo gris */
+}
+
+/* Color marrón */
+.marron {
+  color: #A52A2A; /* Texto marrón */
+  background-color: #A52A2A; /* Fondo marrón */
+}
+
+/* Color cian */
+.cian {
+  color: #00FFFF; /* Texto cian */
+  background-color: #00FFFF; /* Fondo cian */
+}
+
+/* Color lima */
+.lima {
+  color: #00FF00; /* Texto lima */
+  background-color: #00FF00; /* Fondo lima */
+}

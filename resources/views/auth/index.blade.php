@@ -23,12 +23,12 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-9">
-          <div class="card">
+          <div class="card shadow-lg">
             <div class="card-body row">
-              <div class="d-none d-sm-none d-md-block col-md-6 py-5" style="background-image: url('{{ asset('app/pexels-jess-bailey-designs-768472.jpg') }}'); background-size: cover;">
-                <div class="text-center">
+              <div class="d-none d-sm-none d-md-block col-md-6 py-5" style="background-image: url('{{ asset('app/img/fondo.jpg') }}'); background-size: cover;">
+                <div class="justify-content-center align-content-center d-flex flex-wrap">
                   <div>
-                    <img src="{{ asset('app/img/comparte-logo2.svg') }}" alt="" srcset="">
+                    <img src="{{ asset('app/img/comparte-logo2.svg') }}" alt="" width="150px" srcset="">
                   </div>
                 </div>
               </div>

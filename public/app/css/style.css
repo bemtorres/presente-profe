@@ -2246,7 +2246,7 @@ html:not([dir=rtl]) .offset-11 {
   color: var(--cui-input-color, rgba(44, 56, 74, 0.95));
   background-color: var(--cui-input-bg, #fff);
   background-clip: padding-box;
-  /* border: 1px solid var(--cui-input-border-color, #b1b7c1); */
+  border: 1px solid var(--cui-input-border-color, #b1b7c1);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
