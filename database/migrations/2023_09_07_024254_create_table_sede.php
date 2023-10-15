@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,13 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dh_asignatura', function (Blueprint $table) {
+        Schema::create('sede', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('sigla')->nullable();
-            $table->string('carrera')->nullable();
+            $table->string('img')->nullable();
+            $table->json('integrations')->nullable();
+            $table->boolean('comparte')->default(false);
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
+
+        DB::unprepared(file_get_contents('database/import/sql_sedes.sql'));
     }
 
     /**
@@ -29,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dh_asignatura');
+        Schema::dropIfExists('sede');
     }
 };

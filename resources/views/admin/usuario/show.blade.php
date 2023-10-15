@@ -12,7 +12,7 @@
     @endcomponent
 
     <div class="col-md-12">
-      @include('usuario._tabs_usuario')
+      @include('admin.usuario._tabs_usuario')
       <div class="card shadow mb-4">
         <div class="card-body">
           <div class="row">

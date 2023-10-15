@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\GoogleUserController;
 
 use App\Http\Controllers\ComparteController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Admin\UsuarioController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +24,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/perfil', [HomeController::class, 'perfil'])->name('admin.perfil');
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
 
-  Route::resource('usuarios', UsuarioController::class);
+  Route::resource('admin/usuarios', UsuarioController::class);
 
 
   Route::get('comparte', [ComparteController::class, 'index'])->name('comparte.index');

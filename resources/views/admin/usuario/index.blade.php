@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
   <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
-  @include('usuario._tabs')
+  @include('admin.usuario._tabs')
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="table-responsive">

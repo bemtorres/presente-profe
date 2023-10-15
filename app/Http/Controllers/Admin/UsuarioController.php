@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use App\Services\Policies\UsuarioPolicy;
 use Illuminate\Http\Request;
@@ -18,14 +19,14 @@ class UsuarioController extends Controller
     $this->policy->admin(current_user());
 
     $usuarios = Usuario::get();
-    return view('usuario.index', compact('usuarios'));
+    return view('admin.usuario.index', compact('usuarios'));
   }
 
   public function create() {
     $this->policy->admin(current_user());
 
     $tipos = Usuario::TIPOS;
-    return view('usuario.create', compact('tipos'));
+    return view('admin.usuario.create', compact('tipos'));
   }
 
   public function store(Request $request) {
@@ -48,14 +49,14 @@ class UsuarioController extends Controller
 
     $u = Usuario::findOrFail($id);
 
-    return view('usuario.show', compact('u'));
+    return view('admin.usuario.show', compact('u'));
   }
 
   public function edit($id) {
     $this->policy->admin(current_user());
 
     $u = Usuario::findOrFail($id);
-    return view('usuario.edit', compact('u'));
+    return view('admin.usuario.edit', compact('u'));
   }
 
   public function update(Request $request, $id) {
@@ -78,10 +79,4 @@ class UsuarioController extends Controller
     }
     return back()->with('success','Se ha actualizado');
   }
-
-  // public function historial($id) {
-  //   $u = Usuario::with(['transacciones'])->findOrFail($id);
-
-  //   return view('usuario.historial', compact('u'));
-  // }
 }

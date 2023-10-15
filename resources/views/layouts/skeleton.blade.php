@@ -15,8 +15,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
+/*
+.bg-cd-warning {
+  background: #f6b21c;
+}
+
+.bd-cd-primary {
+  background: #04243c;
+} */
+
+
     .sidebar {
-      background: #1a1a1a !important;
+      background: #04243c!important;
     }
 
     .sidebar-nav .nav-link {
@@ -24,7 +34,7 @@
     }
 
     .nav-icon {
-      color: rgba(255, 184, 0, 1) !important;
+      color: #f6b21c !important;
     }
   </style>
   {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}

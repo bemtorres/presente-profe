@@ -6,7 +6,7 @@
     <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
       <use xlink:href="{{ asset('app/img/planificadoracademico3.png') }}"></use>
     </svg> --}}
-    <img src="{{ asset('app/img/planificadoracademico3.png') }}" width="118" alt="">
+    <img src="{{ asset('app/img/comparte-logo.svg') }}" class="m-3" width="100" alt="">
   </div>
   <ul class="sidebar-nav {{ activeTab(["asignaturas*"]) }}" data-coreui="navigation" data-simplebar="">
     <li class="nav-item">
@@ -31,12 +31,12 @@
       </a>
     </li> --}}
     @if (current_user()->tipo_usuario == 1)
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a class="nav-link {{ activeTab(['planes*']) }}" href="">
         <i class="nav-icon fa-regular fa-clock"></i>
         <small>Disponibilidad Horaria</small>
       </a>
-    </li>
+    </li> --}}
     <li class="nav-title">Configuración</li>
     <li class="nav-group {{ activeOpen(['usuario*','asignaturas*']) }}"><a class="nav-link nav-group-toggle" href="#">
       <i class="nav-icon fa-solid fa-gear"></i> Admin</a>
@@ -47,12 +47,12 @@
             Usuarios
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{ activeTab(['asignaturas*']) }}" href="{{ route('asignaturas.index') }}">
+        {{-- <li class="nav-item">
+          <a class="nav-link {{ activeTab(['asignaturas*']) }}" href="">
             <span class="nav-icon"></span>
             Asignatura
           </a>
-        </li>
+        </li> --}}
       </ul>
     </li>
     @endif
