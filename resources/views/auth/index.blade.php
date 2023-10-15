@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-12 text-end mt-4">
                         {{-- <button class="btn btn-link px-0" type="button"><small>¿He olvidado mi contraseña?</small></button> --}}
-                      <strong><small><span class="badge bg-dark">v0.2.0</span></small></strong>
+                      <strong><small><span class="badge bg-dark">v0.1.0</span></small></strong>
                     </div>
                   </form>
               </div>
