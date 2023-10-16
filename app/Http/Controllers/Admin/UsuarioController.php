@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sede;
 use App\Models\Usuario;
 use App\Services\Policies\UsuarioPolicy;
 use Illuminate\Http\Request;
@@ -26,12 +27,12 @@ class UsuarioController extends Controller
     $this->policy->admin(current_user());
 
     $tipos = Usuario::TIPOS;
-    return view('admin.usuario.create', compact('tipos'));
+    $sedes = Sede::all();
+    return view('admin.usuario.create', compact('tipos','sedes'));
   }
 
   public function store(Request $request) {
     $this->policy->admin(current_user());
-
     $u = new Usuario();
     $u->correo = $request->input('correo');
     $u->nombre = $request->input('nombre');
@@ -39,8 +40,8 @@ class UsuarioController extends Controller
     $u->apellido_paterno = $request->input('apellido_p');
     $u->password = hash('sha256', $request->input('pass'));
     $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
+    $u->id_sede = $request->input('sede');
     $u->save();
-
     return redirect()->route('usuarios.index')->with('success','Se ha creado correctamente');
   }
 
@@ -75,6 +76,7 @@ class UsuarioController extends Controller
       $u->apellido_paterno = $request->input('apellido_p');
       $u->apellido_materno = $request->input('apellido_m');
       $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
+      $u->id_sede = $request->input('sede') == 1300 ? 1300 : 100;
       $u->update();
     }
     return back()->with('success','Se ha actualizado');

@@ -84,6 +84,16 @@
                 </div>
               </div>
 
+               <!-- Agregado por error en ID_SEDE, corresponde a una relacion por defecto que se debe realizar al crear el modelo Usuario -->
+               <div class="col-md-12 mb-3">
+                <label for="sede">Sede<small class="text-danger">*</small></label>
+                <select class="form-control" id="sede" name="sede">
+                  @foreach ($sedes as $s)
+                    <option value="{{ $s->id }}">{{ $s->nombre }}</option>
+                  @endforeach
+                </select>
+              </div>
+
               <div class="col-md-4 mb-3">
                 <label for="admin">Administrador<small class="text-danger">*</small></label>
                 <select class="form-control" id="admin" name="admin">
@@ -91,6 +101,7 @@
                   <option value="2" selected>No</option>
                 </select>
               </div>
+
 
               {{-- <div class="col-md-4">
                 <label for="teams">Team</label>
