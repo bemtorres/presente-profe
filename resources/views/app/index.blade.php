@@ -43,6 +43,25 @@
         <div class="row">
           <div class="col-lg-4 mb-4">
             <div class="card mb-4">
+
+              <div class="card-body">
+                <ul class="list-group cursor">
+                  <li class="list-group-item d-flex justify-content-between align-items-center" id="mostrarLista">
+                    <div class="d-flex align-items-center">
+
+
+                      <buscar-usuario></buscar-usuario>
+                    </div>
+                    {{-- <div class="text-end">
+                      <i class="fa fa-chevron-down"></i>
+                    </div> --}}
+                    <div class="avatar avatar-md">
+                      <i class="fa-solid fa-square fa-2x text-success"></i>
+                      <img class="avatar-img" src="" alt="">
+                    </div>
+                  </li>
+                </ul>
+              </div>
               <div class="card-body">
                 <ul class="list-group cursor">
                   <li class="list-group-item d-flex justify-content-between align-items-center" id="mostrarLista">
@@ -114,6 +133,8 @@
       </div>
     </div>
   </div>
+
+
 </div>
 @endsection
 @push('js')

@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 // import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import HelloWorld from '@/components/example/HelloWorld.vue';
 import CalendarioComparte from '@/components/CalendarioComparte.vue';
+import BuscarUsuario from '@/components/BuscarUsuario.vue';
 // import Calendariomain from '@/components/Calendariomain.vue';
 // import CalendarioUser from '@/components/CalendarioUser.vue';
 // import CalendarioComparte from '@/components/CalendarioComparte.vue';
@@ -18,5 +19,6 @@ createApp({
     components: {
       'calendariocomparte': CalendarioComparte,
       'hello-world': HelloWorld,
+      'buscar-usuario': BuscarUsuario,
     },
 }).mount('#app');

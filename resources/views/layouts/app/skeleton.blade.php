@@ -29,12 +29,13 @@
     @include('layouts._footer')
   </div>
 
-  @vite(['resources/js/app.js'])
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="{{ asset('vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
   <script src="{{ asset('vendors/simplebar/js/simplebar.min.js') }}"></script>
   <script src="{{ asset('vendors/bemtorres/main.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  @vite(['resources/js/app.js'])
   @include('components._toast')
   @stack('js')
 </body>
