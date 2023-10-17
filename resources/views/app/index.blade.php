@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app.app')
 @push('css')
 
 {{-- <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
@@ -21,12 +21,21 @@
 </style>
 @endpush
 @section('content')
-@component('components.button._back')
+{{-- @component('components.button._back')
 @slot('route', '')
 @slot('color', 'secondary')
 @slot('body', '<small>Reserva de sala - <strong>SALA 304</strong></small>')
-@endcomponent
+@endcomponent --}}
 {{-- @include('planes.id.participantes._tabs') --}}
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+    <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+    <li><a href="#" class="nav-link px-2">Features</a></li>
+    <li><a href="#" class="nav-link px-2">Pricing</a></li>
+    <li><a href="#" class="nav-link px-2">FAQs</a></li>
+    <li><a href="#" class="nav-link px-2">About</a></li>
+  </ul>
+</header>
 <div class="row">
   <div class="col-md-12">
     <div class="card shadow mb-4">
@@ -44,7 +53,6 @@
                       </div> --}}
                       <div class="ms-2">
                         <p class="badge rounded-pill text-bg-primary">SEDE SAN JOAQUÍN</p>
-
                         <p class="h6 mt-2 mt-sm-0">SALA 304</p>
                         <p class="small m-0">PISO 2</p>
 
@@ -64,9 +72,9 @@
                 <div class="mb-3">
                   <p class="card-text">🏦 <strong>SEDE</strong></p>
                   <select name="" id="" class="form-select">
-                      <option value="sanjoaquin">SAN JOAQUÍN</option>
-                      <option value="sanjoaquin">SAN BERNARDO</option>
-                      <option value="sanjoaquin">MAIPÚ</option>
+                      @foreach ($sedes as $s)
+                          <option value="{{ $s->id }}">{{ $s->nombre }}</option>
+                      @endforeach
                   </select>
                 </div>
                 <p class="card-text">📖 <strong>Selecione la sala</strong></p>

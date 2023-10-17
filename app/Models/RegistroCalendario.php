@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegistroCalendario extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $table = 'registro_calendario';
+
 }

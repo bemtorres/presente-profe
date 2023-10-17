@@ -25,7 +25,4 @@ Route::middleware('auth.user')->group( function () {
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
 
   Route::resource('admin/usuarios', UsuarioController::class);
-
-
-  Route::get('comparte', [ComparteController::class, 'index'])->name('comparte.index');
 });

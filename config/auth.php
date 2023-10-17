@@ -44,6 +44,10 @@ return [
         'driver' => 'session',
         'provider' => 'usuario',
       ],
+      'device' => [
+        'driver' => 'session',
+        'provider' => 'device',
+      ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'usuario' => [
           'driver' => 'eloquent',
           'model' => App\Models\Usuario::class,
+        ],
+        'Device' => [
+          'driver' => 'eloquent',
+          'model' => App\Models\Device::class,
         ],
 
         // 'users' => [

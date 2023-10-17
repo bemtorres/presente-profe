@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sede extends Model
 {
-    use HasFactory;
-    protected $table = 'sede';
+  use HasFactory;
+  protected $table = 'sede';
 }
