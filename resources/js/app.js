@@ -2,11 +2,11 @@ import './bootstrap';
 
 import { createApp } from 'vue';
 // import { createApp } from 'vue/dist/vue.esm-bundler.js';
-import HelloWorld from '@/components/HelloWorld.vue';
-import Calendario from '@/components/Calendario.vue';
-import Calendariomain from '@/components/Calendariomain.vue';
-import CalendarioUser from '@/components/CalendarioUser.vue';
+import HelloWorld from '@/components/example/HelloWorld.vue';
 import CalendarioComparte from '@/components/CalendarioComparte.vue';
+// import Calendariomain from '@/components/Calendariomain.vue';
+// import CalendarioUser from '@/components/CalendarioUser.vue';
+// import CalendarioComparte from '@/components/CalendarioComparte.vue';
 // import Calendario from '@/components/Calendario.vue'
 
 createApp({
@@ -16,10 +16,7 @@ createApp({
         };
     },
     components: {
-      'hello': HelloWorld,
-      'calendario': Calendario,
-      'calendariouser': CalendarioUser,
       'calendariocomparte': CalendarioComparte,
-      'Calendariomain': Calendariomain
+      'hello-world': HelloWorld,
     },
 }).mount('#app');

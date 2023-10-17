@@ -71,7 +71,7 @@ class Usuario extends Authenticatable
   }
 
   public function getImg() {
-    return $this->info_img() ?? asset('app/img/negro.jpg');
+    return $this->info_img() ?? asset('app/img/people.png');
   }
 
   // public function myQR() {

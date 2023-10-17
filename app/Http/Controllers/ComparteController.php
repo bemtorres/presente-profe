@@ -34,9 +34,9 @@ class ComparteController extends Controller
     //     return $horario->to_raw();
     //   });
     // }
+    $my_horario = [];
+    $horarios = DuocHorario::TIMES;
 
-    // $horarios = DuocHorario::TIMES;
-
-    return view('comparte.index', compact('plan','asociado','u', 'asignaturas_preferidas','my_horario','horarios'));
+    return view('comparte.index', compact('horarios','my_horario'));
   }
 }

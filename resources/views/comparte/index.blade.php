@@ -22,7 +22,7 @@
 @endpush
 @section('content')
 @component('components.button._back')
-@slot('route', route('planes.participantes', $plan->id))
+@slot('route', '')
 @slot('color', 'secondary')
 @slot('body', '<small>Reserva de sala - <strong>SALA 304</strong></small>')
 @endcomponent
@@ -97,34 +97,8 @@
                     </small>
                   </span>
                 </p>
-                <div class="mb-3">
+                <calendariocomparte :horarios=@json($horarios) :myhorario=@json($my_horario) :editable="true" :alertmensaje="alertmensaje"></calendariocomparte>
 
-                  <div class="container">
-                    <label for="semana">Selecciona una semana:</label>
-                    <select class="form-select" id="semana">
-                      <option value="0">TODAS</option>
-                      <option value="1" selected>SEMANA 1 / 07-08-2023 - 13-08-2023</option>
-                      <option value="2">SEMANA 2 / 14-08-2023 - 20-08-2023</option>
-                      <option value="3">SEMANA 3 / 21-08-2023 - 27-08-2023</option>
-                      <option value="4">SEMANA 4 / 28-08-2023 - 03-09-2023</option>
-                      <option value="5">SEMANA 5 / 04-09-2023 - 10-09-2023</option>
-                      <option value="6">SEMANA 6 / 11-09-2023 - 17-09-2023</option>
-                      <option value="7">SEMANA 7 / 18-09-2023 - 24-09-2023</option>
-                      <option value="8">SEMANA 8 / 25-09-2023 - 01-10-2023</option>
-                      <option value="9">SEMANA 9 / 02-10-2023 - 08-10-2023</option>
-                      <option value="10">SEMANA 10 / 09-10-2023 - 15-10-2023</option>
-                      <option value="11">SEMANA 11 / 16-10-2023 - 22-10-2023</option>
-                      <option value="12">SEMANA 12 / 23-10-2023 - 29-10-2023</option>
-                      <option value="13">SEMANA 13 / 30-10-2023 - 05-11-2023</option>
-                      <option value="14">SEMANA 14 / 06-11-2023 - 12-11-2023</option>
-                      <option value="15">SEMANA 15 / 13-11-2023 - 19-11-2023</option>
-                      <option value="16">SEMANA 16 / 20-11-2023 - 26-11-2023</option>
-                      <option value="17">SEMANA 17 / 27-11-2023 - 03-12-2023</option>
-                      <option value="18">SEMANA 18 / 04-12-2023 - 10-12-2023</option>
-                    </select>
-                  </div>
-                </div>
-                <calendariocomparte :horarios=@json($horarios) :myhorario=@json($my_horario) :editable="true"></calendariocomparte>
               </div>
             </div>
           </div>
@@ -151,7 +125,20 @@ $(document).ready(function () {
     // Marcar el elemento seleccionado
     $(this).addClass("list-group-item-selected");
   });
+
+
 });
+
+
+function mainPushData(data){
+  console.log(data);
+}
+
+function alertmensaje(data){
+  console.log(data);
+  alert(data);
+}
+
 </script>
 
 @endpush
