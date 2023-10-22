@@ -1,12 +1,12 @@
 <div class="sidebar sidebar-dark sidebar-fixed text-sm" id="sidebar">
   <div class="sidebar-brand d-none d-md-flex">
     {{-- <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-      <use xlink:href="{{ asset('app/img/planificadoracademico3.png') }}"></use>
+      <use xlink:href="{{ asset('template/img/planificadoracademico3.png') }}"></use>
     </svg>
     <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-      <use xlink:href="{{ asset('app/img/planificadoracademico3.png') }}"></use>
+      <use xlink:href="{{ asset('template/img/planificadoracademico3.png') }}"></use>
     </svg> --}}
-    <img src="{{ asset('app/img/comparte-logo.svg') }}" class="m-3" width="100" alt="">
+    <img src="{{ asset('template/img/comparte-logo.svg') }}" class="m-3" width="100" alt="">
   </div>
   <ul class="sidebar-nav {{ activeTab(["asignaturas*"]) }}" data-coreui="navigation" data-simplebar="">
     <li class="nav-item">

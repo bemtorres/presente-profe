@@ -55,7 +55,7 @@
 
         <h4 class="card-title mt-3">Ver PDF</h4>
 
-        <iframe src="{{ asset('app/pdf/manual_de_usuario_para_Inscripción_AP.pdf') }}" style="width:100%; height:700px;" frameborder="0" ></iframe>
+        <iframe src="{{ asset('template/pdf/manual_de_usuario_para_Inscripción_AP.pdf') }}" style="width:100%; height:700px;" frameborder="0" ></iframe>
 
       </div>
     </div>

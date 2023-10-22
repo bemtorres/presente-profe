@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta name="author" content="Bemtorres">
   <title>Comparte Duoc</title>
-  <link rel="shortcut icon" href="{{ asset('app/img/comparte-icono.svg') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ asset('template/img/comparte-icono.svg') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ asset('vendors/simplebar/css/simplebar.css') }}">
-  <link rel="stylesheet" href="{{ asset('app/css/vendors/simplebar.css') }}">
-  <link href="{{ asset('app/css/style.css') }}" rel="stylesheet">
-  <link href="{{ asset('app/css/comparteduoc.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('template/css/vendors/simplebar.css') }}">
+  <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('template/css/comparteduoc.css') }}" rel="stylesheet">
 
   <style>
     body {
@@ -25,16 +25,16 @@
         <div class="col-lg-9">
           <div class="card shadow-lg">
             <div class="card-body row">
-              <div class="d-none d-sm-none d-md-block col-md-6 py-5" style="background-image: url('{{ asset('app/img/fondo.jpg') }}'); background-size: cover;">
+              <div class="d-none d-sm-none d-md-block col-md-6 py-5" style="background-image: url('{{ asset('template/img/fondo.jpg') }}'); background-size: cover;">
                 <div class="justify-content-center align-content-center d-flex flex-wrap">
                   <div>
-                    <img src="{{ asset('app/img/comparte-logo2.svg') }}" alt="" width="150px" srcset="">
+                    <img src="{{ asset('template/img/comparte-logo2.svg') }}" alt="" width="150px" srcset="">
                   </div>
                 </div>
               </div>
               <div class="col-md-6 p-3">
                 <div class="text-center d-md-none">
-                  <img src="{{ asset('app/img/comparte-logo2.svg') }}" width="120px">
+                  <img src="{{ asset('template/img/comparte-logo2.svg') }}" width="120px">
                 </div>
                 <h1>Acceso</h1>
                 @if (session('info'))

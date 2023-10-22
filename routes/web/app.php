@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Backend\APIUsuarioController;
 use App\Http\Controllers\App\AppController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,6 +9,10 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::middleware('auth.device')->group( function () {
-  Route::get('device', [AppController::class, 'index'])->name('app.index');
+  Route::get('app', [AppController::class, 'index'])->name('app.index');
+
+
+  Route::get('api/backend/usuario', [APIUsuarioController::class, 'index'])->name('api.backend.usuario.index');
+  Route::post('api/backend/usuario', [APIUsuarioController::class, 'buscar'])->name('api.backend.usuario.buscar');
 
 // });
