@@ -18,15 +18,15 @@
   @stack('css')
 </head>
 <body>
-  <div class="wrapper d-flex flex-column min-vh-100 bg-light text-sm">
+  <div class="wrapper d-flex flex-column min-vh-100 text-sm">
     <div class="body flex-grow-1 px-3">
       <div class="container-lg text-sm">
         <div id="app">
           @yield('app')
         </div>
+        @include('layouts._footer')
       </div>
     </div>
-    @include('layouts._footer')
   </div>
 
 
