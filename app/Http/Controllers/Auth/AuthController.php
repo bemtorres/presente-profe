@@ -38,6 +38,7 @@ class AuthController extends Controller
         return back()->with('info','Error. Intente nuevamente.');
       }
     } catch (\Throwable $th) {
+      return $th;
       return back()->with('info','Error. Intente nuevamente.');
     }
   }

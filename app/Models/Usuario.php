@@ -36,8 +36,8 @@ class Usuario extends Authenticatable
     );
   }
 
-  public function scopefindByCorreo($query, $correos){
-    return $query->whereIn('correo',$correos);
+  public function scopefindByCorreo($query, $correo){
+    return $query->where('correo',$correo);
   }
 
   function inte_google_id(){

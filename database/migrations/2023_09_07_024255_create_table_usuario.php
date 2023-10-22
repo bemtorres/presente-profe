@@ -37,7 +37,7 @@ return new class extends Migration
         $u->apellido_paterno = 'admin';
         $u->apellido_materno = 'admin';
         $u->correo = 'admin@gmail.com';
-        $u->password = hash('sha256', 'admin');
+        $u->password = hash('sha256', '123456');
         $u->id_sede = 1300;
         $u->tipo_usuario = 1;
         $u->save();
