@@ -16,14 +16,17 @@ return new class extends Migration
     {
         Schema::create('usuario', function (Blueprint $table) {
             $table->id();
+            $table->string('run')->nullable();
             $table->string('nombre');
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
             $table->string('correo')->unique();
-            $table->string('password', 255);
+            $table->string('password', 256);
             $table->integer('tipo_usuario')->nullable();
             $table->json('info')->nullable();
             $table->json('integrations')->nullable();
+            $table->foreignId('id_sede')->references('id')->on('sede');
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
 
@@ -34,7 +37,8 @@ return new class extends Migration
         $u->apellido_paterno = 'admin';
         $u->apellido_materno = 'admin';
         $u->correo = 'admin@gmail.com';
-        $u->password = hash('sha256', 'admin');
+        $u->password = hash('sha256', '123456');
+        $u->id_sede = 1300;
         $u->tipo_usuario = 1;
         $u->save();
     }

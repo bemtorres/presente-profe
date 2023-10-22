@@ -48,10 +48,13 @@ class Usuario extends Authenticatable
     return $this->info['img'] ?? null;
   }
 
+  function scopeFindCorreo($query, $correo) {
+    return  $query->where('correo', $correo);
+  }
 
-  // public function team(){
-  //   return $this->belongsTo(Team::class,'id_team');
-  // }
+  public function sede(){
+    return $this->belongsTo(Sede::class,'id_sede');
+  }
 
   // public function transacciones(){
   //   return $this->hasMany(Transaccion::class,'id_usuario')->with(['accion','producto'])->orderBy('id', 'desc');
@@ -71,7 +74,11 @@ class Usuario extends Authenticatable
   }
 
   public function getImg() {
-    return $this->info_img() ?? asset('app/img/negro.jpg');
+    if ($this->info_img()) {
+      return asset($this->info_img());
+    }
+
+    return asset('template/img/people.png');
   }
 
   // public function myQR() {
@@ -81,4 +88,18 @@ class Usuario extends Authenticatable
   // public function getCredito() {
   //   return Currency::getConvert($this->credito) ?? 0;
   // }
+
+  public function to_raw() {
+    return [
+      'id' => $this->id,
+      'nombre' => $this->nombre,
+      'apellido_paterno' => $this->apellido_paterno ,
+      'apellido_materno' => $this->apellido_materno,
+      'correo' => $this->correo,
+      'tipo_usuario' => $this->tipo_usuario ? 'admin' : 'normal',
+      'id_sede' => $this->id_sede,
+      'sede' => $this->sede->nombre,
+      'img' => $this->getImg(),
+    ];
+  }
 }
