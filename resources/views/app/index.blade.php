@@ -43,12 +43,6 @@
             <div class="card mb-4">
               <div class="card-body">
                 <buscar-usuario post-buscar='{{ route('api.backend.usuario.buscar') }}'></buscar-usuario>
-              </div>
-              <div class="card-body">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                  Open Modal
-                </button>
-
                 <ul class="list-group cursor">
                   <li class="list-group-item d-flex justify-content-between align-items-center" id="mostrarLista">
                     <div class="d-flex align-items-center">

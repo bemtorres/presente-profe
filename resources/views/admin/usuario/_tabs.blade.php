@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link {{ activeTab(["usuarios"]) }}" href="{{ route('usuarios.index') }}">Usuarios</a>
+    <a class="nav-link {{ activeTab(["admin/usuarios"]) }}" href="{{ route('usuarios.index') }}">Usuarios</a>
   </li>
   {{-- <li class="nav-item"> --}}
     {{-- <a class="nav-link {{ activeTab(["admin/usuario/admins"]) }}" href="{{ route('admin.usuario.admin') }}">Admins</a> --}}

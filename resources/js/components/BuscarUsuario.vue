@@ -1,11 +1,46 @@
+<style>
+  /* .scrollable {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      padding: 10px;
+  } */
+</style>
+
+
 <template>
   <div>
-    <div class="modal" id="myModal">
+    <div class="card shadow mb-3">
+      <div class="row"  v-if="usuarioSeleccionado.img != null">
+        <div class="col-md-4">
+          <img :src="usuarioSeleccionado.img" class="img-fluid rounded-start p-4" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p class="card-title">{{  usuarioSeleccionado.nombre_completo  }}</p>
+            <small>{{ usuarioSeleccionado.run  }}</small>
+            <p class="card-text">{{  usuarioSeleccionado.correo  }}</p>
+            <div class="d-grid">
+              <button class="btn btn-danger btn-sm rounded-5" @click="cambiarUsuario"><strong>Cambiar usuario</strong></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-0" v-if="usuarioSeleccionado.img == null">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBuscarUsuario">
+          Buscar usuario
+        </button>
+      </div>
+    </div>
+      <button ref="btnOpenModal" type="button" hidden data-bs-toggle="modal" data-bs-target="#modalBuscarUsuario"> </button>
+    <div class="modal" id="modalBuscarUsuario">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Buscar usuario</h5>
             <button
+              ref="btnCloseModal"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -20,7 +55,7 @@
                 placeholder="Buscar por apellido o por RUN 11222333K..."
                 aria-label="Buscar..."
                 v-model="nombre"
-                aria-describedby="basic-addon2"
+                v-on:keyup.enter="buscarUsuario"
               />
               <button
                 class="btn btn-primary"
@@ -33,31 +68,20 @@
             </div>
 
             <div class="container">
-              <div class="row">
-                <div class="col-12 mb-3">
-                  <div class="card rounded-5 shadow">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <img
-                            src="image/tracks/realidadvirtual.svg"
-                            style="height: 100px"
-                            alt=""
-                            class="rounded-circle img-thumbnail"
-                          />
-                        </div>
-                        <div class="col-md-8">
-                          <h5 class="mb-1">Desarrollo de proyecto</h5>
-                          <p>Docente Benjamin Mora</p>
-                          <p><small>bej.mora@profesor.duoc.cl</small></p>
-                          <div class="d-grid mt-2 px-3">
-                            <button
-                              class="btn btn-primary btn-sm"
-                              data-bs-toggle="modal"
-                              data-bs-target="#inscripcionModal"
-                            >
-                              Inscribirse
-                            </button>
+              <div class="row overflow-auto scrollable" v-if="usuarios[0] != null" style="height: 500px;">
+                <div class="col-12 mb-3" v-for="usuario, id in usuarios" :key="id">
+                  <div class="card shadow">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <img :src="usuario.img" class="img-fluid rounded-start p-4" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <p class="card-title">{{  usuario.nombre_completo  }}</p>
+                          <small>{{ usuario.run  }}</small>
+                          <p class="card-text">{{  usuario.correo  }}</p>
+                          <div class="d-grid">
+                            <button class="btn btn-success btn-sm rounded-5" @click="seleccionarUsuario(usuario)"><strong>SELECCIONAR</strong></button>
                           </div>
                         </div>
                       </div>
@@ -65,21 +89,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div  class="table-responsive">
-              <table class="table table-hover table-bordered table-sm">
-                <thead>
-                  <tr class="bg-primary">
-                    <th scope="col">RUN</th>
-                    <th scope="col">NOMBRE</th>
-                    <th scope="col">CORREO</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
@@ -93,29 +102,45 @@ import { ref } from "vue";
 
 import {postData} from './conexion/api.js';
 
-const isModalVisible = ref(false);
 const nombre = ref("");
 const usuarios = ref([]);
+const usuarioSeleccionado = ref({
+  img: null
+});
+
+const btnOpenModal = ref(null);
+const btnCloseModal = ref(null);
 
 const props = defineProps({
   postBuscar: String(""),
 });
 
-const showModal = () => {
-  // isModalVisible.value = !isModalVisible;
-  isModalVisible.value = !isModalVisible.value;
-  console.log(isModalVisible.value);
-};
-
 const buscarUsuario = () => {
-  // console.log("buscarUsuario", nombre.value);
   postData(props.postBuscar, { nombre: nombre.value })
     .then((data) => {
-      console.log("data", data);
       usuarios.value = data;
     })
     .catch((error) => {
       console.log("error", error);
     });
+};
+
+
+const seleccionarUsuario = (usuario) => {
+  console.log("seleccionarUsuario", usuario);
+  usuarioSeleccionado.value = usuario;
+  usuarios.value = [];
+  nombre.value = "";
+  btnCloseModal.value.click();
+};
+
+const cambiarUsuario = () => {
+  usuarioSeleccionado.value = {
+    img: null
+  };
+
+  usuarios.value = [];
+  nombre.value = "";
+  btnOpenModal.value.click();
 };
 </script>
