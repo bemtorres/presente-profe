@@ -60,6 +60,10 @@ class Usuario extends Authenticatable
   //   return $this->hasMany(Transaccion::class,'id_usuario')->with(['accion','producto'])->orderBy('id', 'desc');
   // }
 
+  public function revisorSede(){
+    return $this->hasMany(RevisorSede::class,'id_usuario')->with(['sede']);
+  }
+
   // public function present(){
   //   return new UsuarioPresenter($this);
   // }

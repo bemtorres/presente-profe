@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\RevisorSede;
 use App\Models\Sede;
 use App\Models\Usuario;
 use App\Services\Policies\UsuarioPolicy;
@@ -79,6 +80,44 @@ class UsuarioController extends Controller
       $u->id_sede = $request->input('sede') == 1300 ? 1300 : 100;
       $u->update();
     }
+    return back()->with('success','Se ha actualizado');
+  }
+
+  public function sedes($id) {
+    $sedes = Sede::all();
+    $u = Usuario::with('revisorSede')->findOrFail($id);
+
+    foreach ($sedes as $key => $s) {
+      $s->checked = false;
+
+      foreach ($u->revisorSede as $keyR => $r) {
+        if ($s->id == $r->id_sede && $r->activo) {
+          $s->checked = true;
+          break;
+        }
+      }
+    }
+
+    return view('admin.usuario.sedes', compact('u','sedes'));
+  }
+
+  public function sedesUpdate(Request $request, $id) {
+    $sede_id = $request->input('sede_id');
+    $u = Usuario::findOrFail($id);
+    $rs = RevisorSede::where('id_usuario', $u->id)->where('id_sede', $sede_id)->first();
+
+    if ($rs == null) {
+      $rs = new RevisorSede();
+      $rs->id_usuario = $u->id;
+      $rs->id_sede = $sede_id;
+      $rs->activo = true;
+      $rs->save();
+    } else {
+      $rs->activo = !$rs->activo;
+      $rs->update();
+    }
+
+    // return $rs;
     return back()->with('success','Se ha actualizado');
   }
 }

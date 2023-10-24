@@ -25,4 +25,6 @@ Route::middleware('auth.user')->group( function () {
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
 
   Route::resource('admin/usuarios', UsuarioController::class);
+  Route::get('admin/usuarios/{id}/sedes', [UsuarioController::class, 'sedes'])->name('usuarios.sedes');
+  Route::put('admin/usuarios/{id}/sedes', [UsuarioController::class, 'sedesUpdate'])->name('usuarios.sedes');
 });
