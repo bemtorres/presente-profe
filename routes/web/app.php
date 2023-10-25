@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::middleware('auth.device')->group( function () {
   Route::get('app', [AppController::class, 'index'])->name('app.index');
+  Route::get('app2', [AppController::class, 'index2'])->name('app.index2');
 
 
   Route::get('api/backend/usuario', [APIUsuarioController::class, 'index'])->name('api.backend.usuario.index');

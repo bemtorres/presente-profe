@@ -11,19 +11,21 @@ class AppController extends Controller
 {
 
   public function index() {
-    // $my_horario = [];
-    // if ($mis_horarios->count() != 0) {
-    //   $my_horario = $mis_horarios->map(function ($horario) {
-    //     return $horario->to_raw();
-    //   });
-    // }
     $my_horario = [];
     $horarios = DuocHorario::TIMES;
 
+    $sedes = Sede::get();
+
+    return view('app.index', compact('horarios','my_horario','sedes'));
+  }
+
+
+  public function index2() {
+    $my_horario = [];
+    $horarios = DuocHorario::TIMES;
 
     $sedes = Sede::get();
 
-
-    return view('app.index', compact('horarios','my_horario','sedes'));
+    return view('app.index2', compact('horarios','my_horario','sedes'));
   }
 }

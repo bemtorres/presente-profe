@@ -4,7 +4,7 @@ use App\Models\Usuario;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Faker\Factory as FakerFactory;
 return new class extends Migration
 {
     /**
@@ -41,6 +41,21 @@ return new class extends Migration
         $u->id_sede = 1300;
         $u->tipo_usuario = 1;
         $u->save();
+
+        $faker = FakerFactory::create();
+
+        for ($i = 0; $i < 200; $i++) {
+          $u = new Usuario();
+          $u->run = $i%2==0 ? 10000000 + $i : null;
+          $u->nombre = $faker->firstName;
+          $u->apellido_paterno = $faker->lastName;
+          $u->apellido_materno = $faker->lastName;
+          $u->correo = $faker->unique()->safeEmail;
+          $u->password = hash('sha256', '123456');
+          $u->id_sede = 1300;
+          $u->tipo_usuario = 2;
+          $u->save();
+        }
     }
 
     /**

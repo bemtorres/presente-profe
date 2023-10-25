@@ -26,10 +26,10 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 @section('content')
-<nav class="navbar navbar-expand-md bg-dark bg-cd-primary p-2 mb-md-2 sticky-top border-bottom border-5 border-warning" data-bs-theme="dark">
+<nav class="navbar navbar-expand-md bg-dark bg-cd-primary p-2 mb-3 sticky-top border-bottom border-5 border-warning" data-bs-theme="dark">
   <div class="container justify-content-center">
-    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-      <img class="bi me-2" src="{{ asset('template/img/comparte-logo.svg') }}" width="70" height="70">
+    <a href="/app" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+      <img class="bi me-2" src="{{ asset('template/img/comparte-logo.svg') }}" width="50" height="50">
     </a>
   </div>
 </nav>
@@ -43,12 +43,6 @@
             <div class="card mb-4">
               <div class="card-body">
                 <buscar-usuario post-buscar='{{ route('api.backend.usuario.buscar') }}'></buscar-usuario>
-              </div>
-              <div class="card-body">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                  Open Modal
-                </button>
-
                 <ul class="list-group cursor">
                   <li class="list-group-item d-flex justify-content-between align-items-center" id="mostrarLista">
                     <div class="d-flex align-items-center">

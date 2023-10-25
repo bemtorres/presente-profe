@@ -60,6 +60,10 @@ class Usuario extends Authenticatable
   //   return $this->hasMany(Transaccion::class,'id_usuario')->with(['accion','producto'])->orderBy('id', 'desc');
   // }
 
+  public function revisorSede(){
+    return $this->hasMany(RevisorSede::class,'id_usuario')->with(['sede']);
+  }
+
   // public function present(){
   //   return new UsuarioPresenter($this);
   // }
@@ -70,7 +74,7 @@ class Usuario extends Authenticatable
 
 
   public function nombre_completo() {
-    return $this->nombre . ' ' . $this->apellido_paterno;
+    return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
   }
 
   public function getImg() {
@@ -93,8 +97,10 @@ class Usuario extends Authenticatable
     return [
       'id' => $this->id,
       'nombre' => $this->nombre,
+      'run' => $this->run,
       'apellido_paterno' => $this->apellido_paterno ,
       'apellido_materno' => $this->apellido_materno,
+      'nombre_completo' => $this->nombre_completo(),
       'correo' => $this->correo,
       'tipo_usuario' => $this->tipo_usuario ? 'admin' : 'normal',
       'id_sede' => $this->id_sede,

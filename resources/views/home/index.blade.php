@@ -8,5 +8,12 @@
 @endcomponent
 <div class="row">
 
+
+
+  <form action="{{ 'home' }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="excel_file">
+    <button type="submit">Procesar Excel</button>
+  </form>
 </div>
 @endsection

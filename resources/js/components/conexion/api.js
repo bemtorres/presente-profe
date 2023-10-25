@@ -39,33 +39,3 @@ async function deleteData(url, endpoint) {
   }
 }
 
-
-// module.exports.getData = getData;
-// module.exports.postData = postData;
-// module.exports.putData = putData;
-// module.exports.deleteData = deleteData;
-
-// // Ejemplo de uso
-// async function exampleUsage() {
-//   const newData = { name: 'Nuevo elemento', description: 'Descripción del nuevo elemento' };
-
-//   // Realizar una solicitud POST para crear un nuevo elemento
-//   const createdItem = await postData('endpoint', newData);
-//   console.log('Nuevo elemento creado:', createdItem);
-
-//   // Realizar una solicitud GET para obtener elementos
-//   const items = await getData('endpoint');
-//   console.log('Elementos existentes:', items);
-
-//   // Realizar una solicitud PUT para actualizar un elemento
-//   const updatedData = { name: 'Nombre actualizado', description: 'Descripción actualizada' };
-//   const updatedItem = await putData('endpoint/ID', updatedData);
-//   console.log('Elemento actualizado:', updatedItem);
-
-//   // Realizar una solicitud DELETE para eliminar un elemento
-//   const deletedItem = await deleteData('endpoint/ID');
-//   console.log('Elemento eliminado:', deletedItem);
-// }
-
-// // Llama a la función de ejemplo
-// exampleUsage();
