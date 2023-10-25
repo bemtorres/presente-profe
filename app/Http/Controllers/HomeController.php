@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 // use App\Http\Requests\AuthLoginRequest as AuthRequest;
 
@@ -15,6 +15,34 @@ class HomeController extends Controller
 
     return view('home.index');
   }
+
+
+  public function indexPost(Request $request) {
+    $data = [];
+    if ($request->hasFile('excel_file')) {
+      $file = $request->file('excel_file');
+
+      // Procesar el archivo Excel
+      // $data = Excel::toArray([], $file)[0];
+
+      // Procesar archivo csv
+      $data = array_map('str_getcsv', file($file));
+
+      // $data ahora contiene un arreglo con las filas y columnas del archivo Excel
+      return $data;
+      // Puedes iterar sobre $data para procesar cada fila y columna según tus necesidades
+      foreach ($data as $row) {
+          // Procesar cada fila
+          foreach ($row as $cell) {
+              // Procesar cada celda
+              // $cell contiene el valor de la celda
+          }
+      }
+  }
+
+    return $data;
+  }
+
 
   public function tutorial() {
     return view('home.tutorial');

@@ -18,6 +18,7 @@ Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCa
 
 Route::middleware('auth.user')->group( function () {
   Route::get('home', [HomeController::class, 'index'])->name('home.index');
+  Route::post('home', [HomeController::class, 'indexPost'])->name('home');
   Route::get('tutoriales', [HomeController::class, 'tutorial'])->name('home.tutorial');
 
 
