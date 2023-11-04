@@ -23,10 +23,10 @@ class HomeController extends Controller
       $file = $request->file('excel_file');
 
       // Procesar el archivo Excel
-      // $data = Excel::toArray([], $file)[0];
+      $data = Excel::toArray([], $file)[0];
 
       // Procesar archivo csv
-      $data = array_map('str_getcsv', file($file));
+      // $data = array_map('str_getcsv', file($file));
 
       // $data ahora contiene un arreglo con las filas y columnas del archivo Excel
       return $data;

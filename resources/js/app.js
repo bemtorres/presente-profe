@@ -5,6 +5,7 @@ import { createApp } from 'vue';
 import HelloWorld from '@/components/example/HelloWorld.vue';
 import CalendarioComparte from '@/components/CalendarioComparte.vue';
 import BuscarUsuario from '@/components/BuscarUsuario.vue';
+import SalaView from '@/components/SalaView.vue';
 // import Calendariomain from '@/components/Calendariomain.vue';
 // import CalendarioUser from '@/components/CalendarioUser.vue';
 // import CalendarioComparte from '@/components/CalendarioComparte.vue';
@@ -20,5 +21,6 @@ createApp({
       'calendariocomparte': CalendarioComparte,
       'hello-world': HelloWorld,
       'buscar-usuario': BuscarUsuario,
+      'sala-view': SalaView,
     },
 }).mount('#app');

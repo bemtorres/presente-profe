@@ -84,24 +84,9 @@
                     <div class="form-group">
                         <label for="semanaSelect">🚪 <strong>Selecciona una semana</strong></label>
                         <select class="form-select" id="semanaSelect">
-                            <option value="1">SEMANA 1 / 07-08-2023 - 13-08-2023</option>
-                            <option value="2">SEMANA 2 / 14-08-2023 - 20-08-2023</option>
-                            <option value="3">SEMANA 3 / 21-08-2023 - 27-08-2023</option>
-                            <option value="4">SEMANA 4 / 28-08-2023 - 03-09-2023</option>
-                            <option value="5">SEMANA 5 / 04-09-2023 - 10-09-2023</option>
-                            <option value="6">SEMANA 6 / 11-09-2023 - 17-09-2023</option>
-                            <option value="7">SEMANA 7 / 18-09-2023 - 24-09-2023</option>
-                            <option value="8">SEMANA 8 / 25-09-2023 - 01-10-2023</option>
-                            <option value="9">SEMANA 9 / 02-10-2023 - 08-10-2023</option>
-                            <option value="10">SEMANA 10 / 09-10-2023 - 15-10-2023</option>
-                            <option value="11">SEMANA 11 / 16-10-2023 - 22-10-2023</option>
-                            <option value="12">SEMANA 12 / 23-10-2023 - 29-10-2023</option>
-                            <option value="13">SEMANA 13 / 30-10-2023 - 05-11-2023</option>
-                            <option value="14">SEMANA 14 / 06-11-2023 - 12-11-2023</option>
-                            <option value="15">SEMANA 15 / 13-11-2023 - 19-11-2023</option>
-                            <option value="16">SEMANA 16 / 20-11-2023 - 26-11-2023</option>
-                            <option value="17">SEMANA 17 / 27-11-2023 - 03-12-2023</option>
-                            <option value="18">SEMANA 18 / 04-12-2023 - 10-12-2023</option>
+                          @foreach ($semestre->semanas as $semana)
+                            <option value="{{ $semana->semana }}">{{ $semana->getInfo() }}</option>
+                          @endforeach
                         </select>
                     </div>
                 </div>
@@ -144,26 +129,5 @@
             // alert(data);
         }
 
-
-        const exampleModal = document.getElementById('exampleModal')
-        if (exampleModal) {
-            exampleModal.addEventListener('show.bs.modal', event => {
-                // Button that triggered the modal
-                const button = event.relatedTarget
-                // Extract info from data-bs-* attributes
-                // const recipient = button.getAttribute('data-bs-whatever')
-                const recipient = "NICE"
-
-                // If necessary, you could initiate an Ajax request here
-                // and then do the updating in a callback.
-
-                // Update the modal's content.
-                const modalTitle = exampleModal.querySelector('.modal-title')
-                const modalBodyInput = exampleModal.querySelector('.modal-body input')
-
-                modalTitle.textContent = `New message to ${recipient}`
-                modalBodyInput.value = recipient
-            })
-        }
     </script>
 @endpush

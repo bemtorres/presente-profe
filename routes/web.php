@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\GoogleUserController;
-
-use App\Http\Controllers\ComparteController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\SedeController;
+use App\Http\Controllers\Admin\SemestreController;
 use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\Admin\UtilsController;
+
+use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\HomeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +31,15 @@ Route::middleware('auth.user')->group( function () {
   Route::resource('admin/usuarios', UsuarioController::class);
   Route::get('admin/usuarios/{id}/sedes', [UsuarioController::class, 'sedes'])->name('usuarios.sedes');
   Route::put('admin/usuarios/{id}/sedes', [UsuarioController::class, 'sedesUpdate'])->name('usuarios.sedes');
+
+  Route::resource('admin/sedes', SedeController::class);
+  Route::get('admin/sedes/{id}/salas', [SedeController::class, 'salas'])->name('sedes.sala');
+
+  Route::resource('admin/sedes', SedeController::class);
+  Route::get('admin/utils', [UtilsController::class, 'index'])->name('utils.index');
+  Route::get('admin/semestres', [SemestreController::class, 'index'])->name('semestres.index');
+  Route::get('admin/semestres/{codigo}', [SemestreController::class, 'show'])->name('semestres.show');
+
+
+  Route::get('admin/solicitud', [SolicitudController::class, 'index'])->name('solicitud.index');
 });

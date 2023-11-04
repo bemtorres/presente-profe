@@ -13,19 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('registro_calendario', function (Blueprint $table) {
+        Schema::create('solicitud', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha')->nullable();
-            $table->string('codigo')->nullable();
-            $table->string('semestre')->nullable();
-            $table->integer('modulo');
-            $table->integer('semana');
-            $table->foreignId('id_solicitud')->references('id')->on('solicitud');
             $table->foreignId('id_sede')->references('id')->on('sede');
             $table->foreignId('id_sala')->references('id')->on('sala');
             $table->foreignId('id_usuario')->references('id')->on('usuario');
-            $table->integer('tipo')->default(0);
-            $table->integer('estado')->default(0);
+            $table->integer('id_revisor')->nullable();
+            $table->integer('motivo')->default(0);
+            $table->string('comentario')->nullable();
+            $table->integer('estado')->default(1);
             $table->timestamps();
         });
     }
@@ -37,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registro_calendario');
+        Schema::dropIfExists('solicitud');
     }
 };
