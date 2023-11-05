@@ -21,7 +21,7 @@
           <div class="card-body">
             <h4 class="card-title">Semestre actual</h4>
             <p class="card-text">{{ $s->nombre }}</p>
-            <span class="badge bg-success">{{ $s->codigo }}</span>
+            <span class="badge bg-success">{{ $s->periodo }}</span>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
       <div class="col-md-4">
         <div class="list-group">
           @foreach ($semestres as $s)
-            <a href="{{ route('semestres.show', $s->codigo) }}" class="list-group-item list-group-item-action">
+            <a href="{{ route('semestres.show', $s->periodo) }}" class="list-group-item list-group-item-action">
               {{ $s->nombre }}
             </a>
           @endforeach

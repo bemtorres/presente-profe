@@ -24,7 +24,6 @@ class SedeController extends Controller
     $s = Sede::with(['salas'])->findOrFail($id);
     $salas = $s->salas;
 
-    $my_horario = [];
     $horarios = DuocHorario::TIMES;
     $semestre = Semestre::where('activo', true)->with('semanas')->first();
 
@@ -41,7 +40,7 @@ class SedeController extends Controller
       ];
     }
 
-    return view('admin.sede.sala.index', compact('s', 'array_semestre', 'semestre', 'salas', 'my_horario', 'horarios'));
+    return view('admin.sede.sala.index', compact('s', 'array_semestre', 'semestre', 'salas', 'horarios'));
   }
 
 

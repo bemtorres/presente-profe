@@ -65,18 +65,18 @@
 </template>
 
 <script setup>
-  import { ref, isProxy, toRaw, onMounted } from "vue";
+  import { ref, onMounted } from "vue";
   import { postData } from './conexion/api.js';
   import { calcularFechasSiguientes } from './lib/index.js';
+  import { agregarObjeto, actualizarPorId, buscarPorId, eliminarPorId } from './lib/crud.js';
+  import { toastSuccess, toastError, toastInfo } from './lib/toast.js';
 
   const props = defineProps({
     editable: Boolean(false),
     horarios: Array,
-    myhorario: Array,
     salas: Array,
     semestre: {},
     semanasdetall: {},
-    alertmensaje: function () {},
     postBuscarCalendario: String,
     postStoreCalendario: String
   });
@@ -84,19 +84,17 @@
   const semanas = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
   const dias = ["L", "M", "X", "J", "V", "S"];
   const fechaSiguiente = ref([]);
-  const data = ref([]);
+
+  let data = ref([]); // informacion del horario
+
   const vsala = ref("");
   const vsemana = ref("");
 
+  onMounted(() => {
+    initializeData();
+  });
+
   const initializeData = () => {
-    // console.log("semestre", props.semanasdetall);
-
-    if (props.myhorario.length > 0) {
-      data.value = props.myhorario;
-    } else {
-      data.value = [];
-    }
-
     if (props.semanasdetall.length > 0) {
       vsemana.value = props.semanasdetall[0];
     }
@@ -106,11 +104,8 @@
     }
 
     fechaSiguiente.value = calcularFechasSiguientes(vsemana.value.fecha_inicio);
+    handleSelectChange();
   };
-
-  onMounted(() => {
-    initializeData();
-  });
 
   const selectedHorario = (casilla) => {
     if (!props.editable) {
@@ -123,41 +118,26 @@
       dia: arreglo[0],
       modulo: arreglo[1],
       estado: 1,
-      color: "verde",
+      color: "gris",
     };
 
-    var obj = buscarPorId(selecionado.id);
+    var obj = buscarPorId(data ,selecionado.id);
     if (obj != null) {
-      if (obj.color == "verde") {
-        obj.color = "amarillo";
-        obj.estado = 2;
-        actualizarPorId(obj.id, obj);
-      } else if (obj.color == "amarillo") {
-        eliminarPorId(obj.id);
-      } else if (obj.color == "azul") {
-        eliminarPorId(obj.id);
-      }
+      data = eliminarPorId(data, obj.id);
     } else {
-      selecionado.color = "azul";
-      selecionado.estado = 1;
-      agregarObjeto(selecionado);
+      data = agregarObjeto(data, selecionado);
     }
 
-    if (isProxy(data.value)) {
-      // mainPushData(toRaw(data.value));
-      // este es una funcion que existe en front del front
-      alertmensaje("Se ha actualizado el horario correctamente");
-    }
+    console.log("data", data);
   };
 
   const selectClases = (casilla) => {
-    var obj = buscarPorId(casilla);
+    var obj = buscarPorId(data, casilla);
     if (obj != null) {
+      if (obj.color == "gris") {
+        return "bg-dark";
+      }
       if (obj.color == "verde") {
-        return "bg-dark";
-      } else if (obj.color == "amarillo") {
-        return "bg-dark";
-      } else if (obj.color == "azul") {
         return "bg-success";
       }
     } else {
@@ -165,82 +145,54 @@
     }
   };
 
-  const agregarObjeto = (objeto) => {
-    var existe = data.value.some((item) => item.id === objeto.id);
+  const convertToHorario = (horarios) => {
+    data.value = [];
 
-    if (!existe) {
-      data.value.push(objeto);
-      return true; // Éxito
-    }
+    horarios.forEach(horario => {
+      var obj = {
+        id: horario.id,
+        dia: horario.dia,
+        modulo: horario.modulo,
+        estado: 1,
+        color: horario.color,
+      };
 
-    return false; // El objeto ya existe
-  };
-
-  const buscarPorId = (id) => {
-    var obj = data.value.find((item) => item.id === id);
-    return obj || null;
-  };
-
-  const actualizarPorId = (id, nuevoObjeto) => {
-    var index = data.value.findIndex((item) => item.id === id);
-
-    if (index !== -1) {
-      data[index] = nuevoObjeto;
-      return true; // Éxito
-    }
-
-    return false; // No se encontró el objeto
-  };
-
-  const eliminarPorId = (id) => {
-    var index = data.value.findIndex((item) => item.id === id);
-
-    if (index !== -1) {
-      data.value.splice(index, 1);
-      return true; // Éxito
-    }
-
-    return false; // No se encontró el objeto
-  };
+      data = agregarObjeto(data, obj);
+    });
+  }
 
   const handleSelectChange = () => {
     fechaSiguiente.value = calcularFechasSiguientes(vsemana.value.fecha_inicio);
 
     postData(props.postBuscarCalendario,
       {
-        codigo: vsemana.value.codigo_semestre,
+        periodo: vsemana.value.periodo,
         sala: vsala.value.id,
         semana: vsemana.value.semana,
       }
     ).then((data) => {
-
-      console.log("data", data);
-      // usuarios.value = data;
+      convertToHorario(data.data);
+      toastInfo("Horario cargado correctamente");
     })
     .catch((error) => {
+      toastError("Error al cargar el horario")
       console.log("error", error);
     });
   }
 
   const handleAddHorario = () => {
-    console.log("handleAddHorario");
-    console.log("data", data.value);
-    console.log("vsala", vsala.value);
-    console.log("vsemana", vsemana.value);
-
     postData(props.postStoreCalendario,
       {
-        codigo: vsemana.value.codigo_semestre,
+        periodo: vsemana.value.periodo,
         sala: vsala.value.id,
         semana: vsemana.value.semana,
         horarios: data.value,
       }
     ).then((data) => {
-
-      console.log("data", data);
-      // usuarios.value = data;
+      toastSuccess("Horario guardado correctamente");
     })
     .catch((error) => {
+      toastError("Error al guardar el horario")
       console.log("error", error);
     });
   }
