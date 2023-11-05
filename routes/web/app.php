@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Backend\APICalendarioController;
 use App\Http\Controllers\API\Backend\APIUsuarioController;
 use App\Http\Controllers\App\AppController;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 
   Route::get('api/backend/usuario', [APIUsuarioController::class, 'index'])->name('api.backend.usuario.index');
   Route::post('api/backend/usuario', [APIUsuarioController::class, 'buscar'])->name('api.backend.usuario.buscar');
+
+
+  Route::post('api/backend/calendario', [APICalendarioController::class, 'buscar'])->name('api.backend.calendario.buscar');
+  Route::post('api/backend/calendario/new', [APICalendarioController::class, 'store'])->name('api.backend.calendario.store');
 
 // });

@@ -38,4 +38,3 @@ async function deleteData(url, endpoint) {
     console.error('Error en DELETE:', error);
   }
 }
-

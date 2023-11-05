@@ -16,31 +16,42 @@ return new class extends Migration
     {
         Schema::create('semestre', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
+            $table->string('periodo')->unique();
             $table->string('nombre');
+            $table->string('semestre');
             $table->boolean('activo')->default(false);
             $table->timestamps();
         });
 
         $s = new Semestre();
-        $s->codigo = '202301';
-        $s->nombre = '2023-1';
+        $s->periodo = '202301';
+        $s->nombre = '2023-01';
+        $s->semestre = 1;
         $s->save();
 
         $s = new Semestre();
-        $s->codigo = '202302';
-        $s->nombre = '2023-2';
+        $s->periodo = '202302';
+        $s->nombre = '2023-02';
+        $s->semestre = 2;
         $s->activo = true;
         $s->save();
 
         $s = new Semestre();
-        $s->codigo = '202401';
-        $s->nombre = '2024-1';
+        $s->periodo = '2024TAV';
+        $s->nombre = '2024-TAV';
+        $s->semestre = 3;
         $s->save();
 
         $s = new Semestre();
-        $s->codigo = '202402';
-        $s->nombre = '2024-2';
+        $s->periodo = '202401';
+        $s->nombre = '2024-01';
+        $s->semestre = 1;
+        $s->save();
+
+        $s = new Semestre();
+        $s->periodo = '202402';
+        $s->nombre = '2024-02';
+        $s->semestre = 2;
         $s->save();
     }
 

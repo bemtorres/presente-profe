@@ -14,19 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('registro_calendario', function (Blueprint $table) {
-            $table->id();
-            $table->date('fecha')->nullable();
-            $table->string('codigo')->nullable();
-            $table->string('semestre')->nullable();
-            $table->integer('modulo');
-            $table->integer('semana');
-            $table->foreignId('id_solicitud')->references('id')->on('solicitud');
-            $table->foreignId('id_sede')->references('id')->on('sede');
-            $table->foreignId('id_sala')->references('id')->on('sala');
-            $table->foreignId('id_usuario')->references('id')->on('usuario');
-            $table->integer('tipo')->default(0);
-            $table->integer('estado')->default(0);
-            $table->timestamps();
+          $table->id();
+          $table->date('fecha')->nullable();
+          $table->string('periodo'); // "202302"
+          $table->integer('semana'); // 2
+          $table->integer('dia');    // 29
+          $table->integer('modulo'); // 1
+          $table->json('info')->nullable();
+
+          $table->foreignId('id_solicitud')->references('id')->on('solicitud');
+          $table->foreignId('id_sede')->references('id')->on('sede');
+          $table->foreignId('id_sala')->references('id')->on('sala');
+          $table->foreignId('id_usuario')->references('id')->on('usuario');
+
+          $table->integer('tipo')->default(0);
+          $table->integer('estado')->default(0);
+          $table->timestamps();
         });
     }
 

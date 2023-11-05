@@ -21,7 +21,13 @@
           :myhorario=@json($my_horario)
           :editable="true"
           :salas="{{ json_encode($salas)}}"
-          :alertmensaje="alertmensaje"></sala-view>
+          :semestre=@json($semestre)
+          :semanasdetall="{{ json_encode($array_semestre) }}"
+          :alertmensaje="alertmensaje"
+          post-buscar-calendario="{{ route('api.backend.calendario.buscar') }}"
+          post-store-calendario="{{ route('api.backend.calendario.store') }}"
+
+          ></sala-view>
         </div>
       </div>
     </div>

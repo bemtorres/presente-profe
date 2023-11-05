@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sede;
+use App\Models\Semestre;
 use App\Services\DuocHorario;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,22 @@ class SedeController extends Controller
 
     $my_horario = [];
     $horarios = DuocHorario::TIMES;
+    $semestre = Semestre::where('activo', true)->with('semanas')->first();
 
-    return view('admin.sede.sala.index', compact('s', 'salas', 'my_horario', 'horarios'));
+    $array_semestre = [];
+
+    foreach ($semestre->semanas as $keyS => $valueS) {
+      $array_semestre[] = [
+        'periodo' => $semestre->periodo,
+        'semestre' => $semestre->semestre,
+        'info' => $valueS->getInfo(),
+        'semana' => $valueS->semana,
+        'fecha_inicio' => $valueS->fecha_inicio,
+        'fecha_termino' => $valueS->fecha_termino,
+      ];
+    }
+
+    return view('admin.sede.sala.index', compact('s', 'array_semestre', 'semestre', 'salas', 'my_horario', 'horarios'));
   }
 
 

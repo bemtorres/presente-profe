@@ -10,7 +10,7 @@
   @component('components.button._back')
     @slot('route', route('semestres.index'))
     @slot('color', 'secondary')
-    @slot('body', 'Semestre ' . $s->nombre . ' - ' . $s->codigo)
+    @slot('body', 'Semestre ' . $s->nombre . ' - ' . $s->periodo)
   @endcomponent
   <div class="card shadow mb-4">
     <div class="card-body row">
@@ -21,7 +21,7 @@
           <div class="card-body">
             <h4 class="card-title">Semestre</h4>
             <p class="card-text">{{ $s->nombre }}</p>
-            <span class="badge bg-success">{{ $s->codigo }}</span>
+            <span class="badge bg-success">{{ $s->periodo }}</span>
           </div>
         </div>
       </div>

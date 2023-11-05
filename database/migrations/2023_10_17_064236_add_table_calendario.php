@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('calendario', function (Blueprint $table) {
             $table->id();
             $table->date('fecha')->nullable();
-            $table->string('codigo')->nullable();
-            $table->string('semestre')->nullable();
-            $table->integer('modulo');
+            $table->string('periodo'); // "202302"
             $table->integer('semana');
+            $table->integer('dia');
+            $table->integer('modulo');
+            $table->json('info')->nullable();
+            $table->integer('tipo');
             $table->foreignId('id_sede')->references('id')->on('sede');
             $table->foreignId('id_sala')->references('id')->on('sala');
-            $table->integer('tipo');
-
             $table->timestamps();
         });
     }

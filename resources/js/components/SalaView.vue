@@ -4,8 +4,8 @@
       <div class="col-md-3">
         <div class="form-group mb-3">
           <label for="">Seleccionar sala</label>
-          <select class="form-control" name="" id="" v-model="sala">
-            <option v-for="sala, j in salas" :key="j">
+          <select class="form-control" v-model="vsala" @change="handleSelectChange">
+            <option v-for="sala, j in salas" :key="j" :value="sala">
               {{ sala.nombre }}
             </option>
           </select>
@@ -13,6 +13,7 @@
       </div>
       <div class="col-md-2">
         <button class="btn btn-primary btn-sm">Editar</button>
+        <button class="btn btn-primary btn-sm" @click="handleAddHorario">Guardar</button>
       </div>
     </div>
     <div class="col-md-12">
@@ -20,7 +21,7 @@
         <table class="table table-bordered table-hover table-sm">
           <thead>
             <tr>
-              <th colspan="2" style="width:15px">
+              <th colspan="2" style="width:10px">
                 Seleccione la semana a programar
               </th>
               <th class="text-center" v-for="(semana, i) in semanas" :key="i">
@@ -29,14 +30,14 @@
             </tr>
             <tr>
               <th colspan="2">
-                <select class="form-control" name="" id="" v-model="sala">
-                  <option v-for="sala, j in salas" :key="j">
-                    {{ sala.nombre }}
+                <select class="form-control" name="" id="" v-model="vsemana" @change="handleSelectChange">
+                  <option v-for="sd, k in semanasdetall" :value="sd" :key="k">
+                    {{ sd.info }}
                   </option>
                 </select>
               </th>
-              <th class="text-center" v-for="(semana, k) in semanas" :key="k">
-                {{ k }} - 09 - 23
+              <th class="text-center" v-for="fecha in fechaSiguiente" :key="fecha">
+                {{ fecha }}
               </th>
             </tr>
           </thead>
@@ -65,28 +66,46 @@
 
 <script setup>
   import { ref, isProxy, toRaw, onMounted } from "vue";
+  import { postData } from './conexion/api.js';
+  import { calcularFechasSiguientes } from './lib/index.js';
 
   const props = defineProps({
     editable: Boolean(false),
     horarios: Array,
     myhorario: Array,
     salas: Array,
+    semestre: {},
+    semanasdetall: {},
     alertmensaje: function () {},
+    postBuscarCalendario: String,
+    postStoreCalendario: String
   });
 
   const semanas = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
   const dias = ["L", "M", "X", "J", "V", "S"];
+  const fechaSiguiente = ref([]);
   const data = ref([]);
-  const sala = ref("");
+  const vsala = ref("");
+  const vsemana = ref("");
 
   const initializeData = () => {
-    console.log("myhorario", props.salas);
+    // console.log("semestre", props.semanasdetall);
 
     if (props.myhorario.length > 0) {
       data.value = props.myhorario;
     } else {
       data.value = [];
     }
+
+    if (props.semanasdetall.length > 0) {
+      vsemana.value = props.semanasdetall[0];
+    }
+
+    if (props.salas.length > 0) {
+      vsala.value = props.salas[0];
+    }
+
+    fechaSiguiente.value = calcularFechasSiguientes(vsemana.value.fecha_inicio);
   };
 
   onMounted(() => {
@@ -183,4 +202,46 @@
 
     return false; // No se encontró el objeto
   };
+
+  const handleSelectChange = () => {
+    fechaSiguiente.value = calcularFechasSiguientes(vsemana.value.fecha_inicio);
+
+    postData(props.postBuscarCalendario,
+      {
+        codigo: vsemana.value.codigo_semestre,
+        sala: vsala.value.id,
+        semana: vsemana.value.semana,
+      }
+    ).then((data) => {
+
+      console.log("data", data);
+      // usuarios.value = data;
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+  }
+
+  const handleAddHorario = () => {
+    console.log("handleAddHorario");
+    console.log("data", data.value);
+    console.log("vsala", vsala.value);
+    console.log("vsemana", vsemana.value);
+
+    postData(props.postStoreCalendario,
+      {
+        codigo: vsemana.value.codigo_semestre,
+        sala: vsala.value.id,
+        semana: vsemana.value.semana,
+        horarios: data.value,
+      }
+    ).then((data) => {
+
+      console.log("data", data);
+      // usuarios.value = data;
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+  }
 </script>

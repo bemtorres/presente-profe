@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 class SemestreController extends Controller
 {
   public function index() {
-    $semestres = Semestre::orderBy('codigo', 'desc')->get();
+    $semestres = Semestre::get();
 
     $s = Semestre::where('activo', true)->first();
 
     return view('admin.semestre.index', compact('semestres', 's'));
   }
 
-  public function show($codigo) {
-    $s = Semestre::where('codigo',$codigo)->with('semanas')->first();
+  public function show($periodo) {
+    $s = Semestre::where('periodo',$periodo)->with('semanas')->first();
 
 
     return view('admin.semestre.show', compact('s'));
