@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Backend\APICalendarioController;
+use App\Http\Controllers\API\Backend\APISolicitudController;
 use App\Http\Controllers\API\Backend\APIUsuarioController;
 use App\Http\Controllers\App\AppController;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,5 @@ Route::middleware('auth.user')->group( function () {
   Route::post('api/backend/calendario', [APICalendarioController::class, 'buscar'])->name('api.backend.calendario.buscar');
   Route::post('api/backend/calendario/new', [APICalendarioController::class, 'store'])->name('api.backend.calendario.store');
 
+  Route::post('api/backend/app/solicitud', [APISolicitudController::class, 'store'])->name('api.backend.solicitud.store');
 });

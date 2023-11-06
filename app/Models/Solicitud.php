@@ -18,7 +18,6 @@ class Solicitud extends Model
   ];
 
   const MOTIVOS = [
-    1  => 'Motivos de petición',
     10 => 'Recuperación de clases',
     20 => 'Revisión de pruebas',
     30 => 'Reuniones',

@@ -84,8 +84,10 @@
                 :salas="{{ json_encode($salas)}}"
                 :semestre=@json($semestre)
                 :semanasdetall="{{ json_encode($array_semestre) }}"
+                :motivos="{{ json_encode($motivos) }}"
                 post-buscar-calendario="{{ route('api.backend.calendario.buscar') }}"
                 post-store-calendario="{{ route('api.backend.calendario.store') }}"
+                post-store-solicitud="{{ route('api.backend.solicitud.store') }}"
                 ></app-sala-view>
               </div>
             </div>

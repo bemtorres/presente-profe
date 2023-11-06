@@ -5,6 +5,7 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use App\Models\Sede;
 use App\Models\Semestre;
+use App\Models\Solicitud;
 use App\Services\DuocHorario;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class AppController extends Controller
 
   public function index() {
     $sedes = Sede::where('activo', true)->get();
+    $motivos = Solicitud::MOTIVOS;
 
     $s = Sede::with(['salas'])->findOrFail(1300);
     $salas = $s->salas;
@@ -33,7 +35,7 @@ class AppController extends Controller
       ];
     }
 
-    return view('app.index', compact('s', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
+    return view('app.index', compact('s', 'motivos', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
   }
 
 
@@ -48,6 +50,8 @@ class AppController extends Controller
 
     $array_semestre = [];
 
+    $motivos = Solicitud::MOTIVOS;
+
     foreach ($semestre->semanas as $keyS => $valueS) {
       $array_semestre[] = [
         'periodo' => $semestre->periodo,
@@ -59,7 +63,7 @@ class AppController extends Controller
       ];
     }
 
-    return view('app.index', compact('s', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
+    return view('app.index', compact('s', 'motivos', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
   }
 
 

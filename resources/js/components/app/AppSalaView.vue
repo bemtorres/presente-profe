@@ -26,84 +26,93 @@
           <span id="text-guardar">Enviar solicitud</span>
         </button>
       </div>
+    </div>
 
-      <!-- MODAL -->
-      <div class="modal fade" id="modalSolicitud" tabindex="-1" aria-labelledby="modalSolicitudLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="modalSolicitudLabel">Resumen solicitud de sala</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-2" v-if="usuario != null">
-                <div class="row">
-                  <div class="col-3">
-                    <img :src="usuario.img" width="100" class="img-fluid rounded-start" alt="...">
-                  </div>
-                  <div class="col-8">
-                    <div class="card-body">
-                      <p class="card-title">{{  usuario.nombre_completo  }}</p>
-                      <small>{{ usuario.run  }}</small>
-                      <p class="card-text">{{  usuario.correo }}</p>
-                      <span class="badge bg-dark rounded-pill">{{ usuario.sede }}</span>
-                    </div>
+    <!-- MODAL -->
+    <div class="modal fade" id="modalSolicitud" tabindex="-1" aria-labelledby="modalSolicitudLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalSolicitudLabel">Resumen solicitud de sala</h1>
+            <button type="button" ref="btnCloseSolicitudModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-2" v-if="usuario != null">
+              <div class="row">
+                <div class="col-3">
+                  <img :src="usuario.img" width="100" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-8">
+                  <div class="card-body">
+                    <p class="card-title">{{  usuario.nombre_completo  }}</p>
+                    <small>{{ usuario.run  }}</small>
+                    <p class="card-text">{{  usuario.correo }}</p>
+                    <span class="badge bg-dark rounded-pill">{{ usuario.sede }}</span>
                   </div>
                 </div>
               </div>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <tbody>
-                    <tr>
-                      <td class="text-center">
-                        <strong>{{ vsala.nombre }}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <small>{{ vsemana.info }}</small>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <tbody>
-                    <tr>
-                      <td class="text-center bg-dark text-white">
-                        <strong>DÍAS SOLICITADOS</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Jueves 12 de agosto de 2021 <br>
-                        10:00 - 12:00
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Jueves 12 de agosto de 2021 <br>
-                        10:00 - 12:00
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Jueves 12 de agosto de 2021 <br>
-                        10:00 - 12:00
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="d-grid gap-2 mt-3">
-                <button type="button" class="btn btn-success btn-lg">Enviar solicitud</button>
-              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td class="text-center">
+                      <strong>{{ vsala.nombre }}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">
+                      <small>{{ vsemana.info }}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="form-group mb-3">
+              <label for="vmotivo" class="mb-1">Seleccionar el motivo</label>
+              <select class="form-control" id="vmotivo" v-model="vmotivo">
+                <option v-for="motivo, m in props.motivos" :key="m" :value="m">
+                  {{ motivo }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group mb-3" v-if="vmotivo == 100">
+              <label for="vmotivoInput" class="mb-1">Otros motivos</label>
+              <input type="text" class="form-control" id="vmotivoInput" v-model="vmotivoInput">
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td class="text-center bg-dark text-white">
+                      <strong>DÍAS SOLICITADOS</strong>
+                    </td>
+                  </tr>
+                  <tr v-for="(mihorario, mihorarioindex) in meData" :key="mihorarioindex" class="">
+                    <td>
+                      {{ mihorario.info.dia }}, {{ mihorario.info.fecha2 }}  <br>
+                      {{ mihorario.info.hora }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+              <button type="button"
+                @click="handleSolicitud"
+                class="btn btn-success btn-lg"
+                :disabled="meData.length == 0"
+                >
+                Enviar solicitud
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- CONFIG -->
     <div class="col-md-12 row">
       <div class="col-md-6">
         <div class="form-group mb-3">
@@ -126,7 +135,7 @@
       </div>
 
     </div>
-
+    <!-- TABLA -->
     <div class="col-md-12">
       <div class="table-responsive">
         <table class="table table-bordered table-hover table-sm">
@@ -173,20 +182,23 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from "vue";
+  import { ref, onMounted, handleError } from "vue";
   import { postData } from '@/components/conexion/api.js';
-  import { calcularFechasSiguientes } from '@/components/lib/index.js';
+  import { calcularFechasSiguientes, convertirFechaCodigo, orderFecha } from '@/components/lib/index.js';
   import { agregarObjeto, actualizarPorId, buscarPorId, eliminarPorId } from '@/components/lib/crud.js';
+  import { addObjeto } from '@/components/lib/crudArray.js';
   import { toastSuccess, toastError, toastInfo } from '@/components/lib/toast.js';
-  import { alertInfo } from '@/components/lib/alert.js';
+  import { alertSuccess, alertInfo } from '@/components/lib/alert.js';
 
   const props = defineProps({
     horarios: Array,
     salas: Array,
+    motivos: {},
     semestre: {},
     semanasdetall: {},
     postBuscarCalendario: String,
-    postStoreCalendario: String
+    postStoreCalendario: String,
+    postStoreSolicitud: String
   });
 
   const semanas = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -194,14 +206,18 @@
   const fechaSiguiente = ref([]);
 
   let data = ref([]); // informacion del horario
-  // const meData = ref([]); // informacion de mi horario
+  const meData = ref([]); // informacion de mi horario
 
   const vsala = ref("");
   const vsemana = ref("");
+  const vmotivo = ref(10); // default posicion 0
+  const vmotivoInput = ref(""); // default posicion 0
   const editable = ref(false);
 
   // ACTION: save usuario
   const usuario = ref(null);
+  const btnCloseSolicitudModal = ref(null);
+
 
   onMounted(() => {
     initializeData();
@@ -218,6 +234,8 @@
 
     fechaSiguiente.value = calcularFechasSiguientes(vsemana.value.fecha_inicio);
     handleSelectChange();
+
+    console.log("props", props);
   };
 
   const accionEditable = () => {
@@ -260,27 +278,28 @@
     }
 
     miHorarioInfo();
-    // console.log("data me me", meData.value);
   };
 
   const miHorarioInfo = () => {
-    // meHorario = [];
+    let meHorario = [];
 
-    // data.value.forEach(horario => {
-    //   if (horario.color == "verde") {
-    //     var obj = {
-    //       id: horario.id,
-    //       dia: horario.dia,
-    //       modulo: horario.modulo,
-    //       estado: 1,
-    //       color: horario.color,
-    //     };
+    data.value.forEach(h => {
+      if (h.color == "verde") {
+        var info = convertirFechaCodigo(h,props.horarios, fechaSiguiente.value);
+        var obj = {
+          id: h.id,
+          dia: h.dia,
+          modulo: h.modulo,
+          estado: 1,
+          color: h.color,
+          info: info,
+        };
 
-    //     meHorario = addObjeto(meHorario, obj);
-    //   }
+        meHorario = addObjeto(meHorario, obj);
+      }
+    });
 
-    //   meData.value = meHorario;
-    // });
+    meData.value = orderFecha(meHorario);
   }
 
   const selectClases = (casilla) => {
@@ -333,20 +352,38 @@
     });
   }
 
-  const handleAddHorario = () => {
-    // postData(props.postStoreCalendario,
-    //   {
-    //     periodo: vsemana.value.periodo,
-    //     sala: vsala.value.id,
-    //     semana: vsemana.value.semana,
-    //     horarios: data.value,
-    //   }
-    // ).then((data) => {
-    //   toastSuccess("Horario guardado correctamente");
-    // })
-    // .catch((error) => {
-    //   toastError("Error al guardar el horario")
-    //   console.log("error", error);
-    // });
+  const handleSolicitud = () => {
+    if (!isUsuario()) {
+      alertInfo("Información","Debes tener una cuenta de usuario para solicitar una sala");
+      return;
+    }
+    postData(props.postStoreSolicitud,
+      {
+        sala: vsala.value,
+        semana: vsemana.value,
+        horarios: meData.value,
+        usuario: usuario.value,
+        motivo: vmotivo.value,
+        motivoInput: vmotivoInput.value,
+
+      }
+    ).then((data) => {
+      console.log("data solicitud", data)
+      // btnCloseSolicitudModal.value.click();
+      alertSuccess("","Horario guardado correctamente");
+      // Limpiar
+
+      // limpiarTodo();
+    })
+    .catch((error) => {
+      toastError("Error al guardar el horario")
+      console.log("error", error);
+    });
+  }
+
+  const limpiarTodo = () => {
+    data.value = [];
+    meData.value = [];
+    window._USUARIO = null;
   }
 </script>

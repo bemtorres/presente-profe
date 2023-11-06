@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sala extends Model
 {
-    use HasFactory;
-    protected $table = 'sala';
+  use HasFactory;
+  protected $table = 'sala';
 
+  public function sede(){
+    return $this->belongsTo(Sede::class,'id_sede');
+  }
 }
