@@ -218,7 +218,6 @@
   const usuario = ref(null);
   const btnCloseSolicitudModal = ref(null);
 
-
   onMounted(() => {
     initializeData();
   });

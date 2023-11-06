@@ -33,7 +33,7 @@
                   <label for="semestre">Semestres<small class="text-danger">*</small></label>
                   <select class="form-control" id="semestre" name="semestre">
                     @foreach ($semestres as $semestre)
-                      <option value="{{ $semestre->id }}">{{ $semestre->nombre }}</option>
+                      <option value="{{ $semestre->periodo }}">{{ $semestre->nombre }}</option>
                     @endforeach
                   </select>
                 </div>
