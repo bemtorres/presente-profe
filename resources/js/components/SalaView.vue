@@ -11,9 +11,20 @@
           </select>
         </div>
       </div>
-      <div class="col-md-2">
-        <button class="btn btn-primary btn-sm">Editar</button>
-        <button class="btn btn-primary btn-sm" @click="handleAddHorario">Guardar</button>
+      <div class="col-md-5">
+        <button type="button" class="btn btn-sm btn-primary mx-2" @click="accionEditable">
+          Editar
+          <span v-if="!editable" class="badge bg-danger">OFF</span>
+          <span v-if="editable" class="badge bg-success">ON</span>
+        </button>
+
+        <button v-if="editable" class="btn btn-success btn-sm" id="btn-enviar" @click="handleAddHorario">
+          <!-- <span id="spinner-enviar" hidden>
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status"> Guardando...</span>
+          </span> -->
+          <span id="text-guardar">Guardar</span>
+        </button>
       </div>
     </div>
     <div class="col-md-12">
@@ -66,13 +77,12 @@
 
 <script setup>
   import { ref, onMounted } from "vue";
-  import { postData } from './conexion/api.js';
-  import { calcularFechasSiguientes } from './lib/index.js';
-  import { agregarObjeto, actualizarPorId, buscarPorId, eliminarPorId } from './lib/crud.js';
-  import { toastSuccess, toastError, toastInfo } from './lib/toast.js';
+  import { postData } from '@/components/conexion/api.js';
+  import { calcularFechasSiguientes } from '@/components/lib/index.js';
+  import { agregarObjeto, actualizarPorId, buscarPorId, eliminarPorId } from '@/components/lib/crud.js';
+  import { toastSuccess, toastError, toastInfo } from '@/components/lib/toast.js';
 
   const props = defineProps({
-    editable: Boolean(false),
     horarios: Array,
     salas: Array,
     semestre: {},
@@ -89,6 +99,7 @@
 
   const vsala = ref("");
   const vsemana = ref("");
+  const editable = ref(false);
 
   onMounted(() => {
     initializeData();
@@ -107,8 +118,12 @@
     handleSelectChange();
   };
 
+  const accionEditable = () => {
+    editable.value = !editable.value;
+  }
+
   const selectedHorario = (casilla) => {
-    if (!props.editable) {
+    if (!editable.value) {
       return;
     }
 

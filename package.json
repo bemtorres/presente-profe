@@ -12,6 +12,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@popperjs/core": "^2.11.8",
         "@vitejs/plugin-vue": "^4.3.4",
         "vue": "^3.2.36",
         "vue-loader": "^17.2.2"

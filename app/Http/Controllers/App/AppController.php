@@ -12,14 +12,54 @@ class AppController extends Controller
 {
 
   public function index() {
-    $my_horario = [];
-    $horarios = DuocHorario::TIMES;
-
     $sedes = Sede::where('activo', true)->get();
 
+    $s = Sede::with(['salas'])->findOrFail(1300);
+    $salas = $s->salas;
+
+    $horarios = DuocHorario::TIMES;
     $semestre = Semestre::where('activo', true)->with('semanas')->first();
 
-    return view('app.index', compact('horarios','my_horario','sedes','semestre'));
+    $array_semestre = [];
+
+    foreach ($semestre->semanas as $keyS => $valueS) {
+      $array_semestre[] = [
+        'periodo' => $semestre->periodo,
+        'semestre' => $semestre->semestre,
+        'info' => $valueS->getInfo(),
+        'semana' => $valueS->semana,
+        'fecha_inicio' => $valueS->fecha_inicio,
+        'fecha_termino' => $valueS->fecha_termino,
+      ];
+    }
+
+    return view('app.index', compact('s', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
+  }
+
+
+  public function indexSede($id_sede) {
+    $sedes = Sede::where('activo', true)->get();
+
+    $s = Sede::with(['salas'])->findOrFail($id_sede);
+    $salas = $s->salas;
+
+    $horarios = DuocHorario::TIMES;
+    $semestre = Semestre::where('activo', true)->with('semanas')->first();
+
+    $array_semestre = [];
+
+    foreach ($semestre->semanas as $keyS => $valueS) {
+      $array_semestre[] = [
+        'periodo' => $semestre->periodo,
+        'semestre' => $semestre->semestre,
+        'info' => $valueS->getInfo(),
+        'semana' => $valueS->semana,
+        'fecha_inicio' => $valueS->fecha_inicio,
+        'fecha_termino' => $valueS->fecha_termino,
+      ];
+    }
+
+    return view('app.index', compact('s', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
   }
 
 
