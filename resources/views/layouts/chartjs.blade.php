@@ -7,7 +7,7 @@
       <div class="p-3">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Salas pedidas por semana</h4>
+            <h4 class="card-title">Salas pedidas por dia</h4>
             <p class="card-text">Texto</p>
             <canvas id="barras"></canvas>
           </div>
