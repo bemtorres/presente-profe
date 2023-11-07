@@ -1,4 +1,4 @@
-@extends('layouts.skeleton')
+@extends('layouts.skeletonn')
 @section('app')
   @yield('content')
 @endsection
