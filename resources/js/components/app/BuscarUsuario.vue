@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
-      <strong>Comparte duoc!</strong> <br> Buscar al usuario y selecciona la sala y semana.
+      <strong>Comparte duoc!</strong> <br>
+      <small>¡Solicita una sala de manera rápida y sencilla!</small>
     </div>
     <div class="card shadow mb-3">
       <div class="row"  v-if="usuarioSeleccionado.img != null">
         <div class="col-md-4 mb-3 text-center">
           <img :src="usuarioSeleccionado.img" class="img-fluid rounded-start p-4" alt="...">
-
           <span class="badge bg-dark rounded-pill ms-2">{{ usuarioSeleccionado.sede }}</span>
         </div>
         <div class="col-md-8">

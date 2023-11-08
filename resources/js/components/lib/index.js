@@ -1,6 +1,3 @@
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
-
 export const formatFecha = (fecha) => {
   const partes = fecha.split('-');
   if (partes.length === 3) {
@@ -36,6 +33,7 @@ export const calcularFechasSiguientes = (f) => {
 // viene el arreglo de las fechas [2020-10-10, 2020-10-11]
 export const convertirFechaCodigo = (data, modulos, fechas) => {
   const semanas = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   const dias = ["L", "M", "X", "J", "V", "S"];
 
   const n = dias.findIndex((d) => d === data.dia);
@@ -44,7 +42,14 @@ export const convertirFechaCodigo = (data, modulos, fechas) => {
 
   let fecha = fechas[n];
 
-  const fecha2 = format(new Date(fecha), 'dd \'de\' MMMM \'del\' yyyy', { locale: es });
+  let fecha2 = fecha.split('-');
+  fecha2 = fecha2[0] + ' de ' + meses[fecha2[1] - 1] + ' del ' + fecha2[2];
+  // try {
+  //   fecha2 = format(new Date(fecha), 'dd \'de\' MMMM \'del\' yyyy', { locale: es });
+  //   console.log("convertirFechaCodigo FECHA->", fecha2);
+  // } catch (error) {
+  //   console.log("error",error);
+  // }
 
   let info = {
     dia: dia,

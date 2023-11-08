@@ -11,11 +11,11 @@
       border-radius: 10px;
       overflow: hidden;
     }
-    .table thead th {
+    /* .table thead th {
       background-color: #04243c;
       color: #ffffff;
       border-color: #04243c;
-    }
+    } */
     .table tbody tr:hover {
       background-color: #f0f8ff;
     }
@@ -44,8 +44,9 @@
       <div class="modal-body">
         <div class="mb-3">
           <select name="selectedSedes" id="selectedSedes" class="form-select" onchange="seleccionarOpcion()">
+            <option value="{{ $s->id }}">--- SELECIONE UNA SEDE ---</option>
             @foreach ($sedes as $sed)
-              <option value="{{ $sed->id }}">{{ $sed->nombre }}</option>
+              <option value="{{ $sed->id }}" {{ $s->id == $sed->id ? 'selected' : '' }}>{{ $sed->nombre }}</option>
             @endforeach
           </select>
         </div>
