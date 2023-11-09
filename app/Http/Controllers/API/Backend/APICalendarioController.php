@@ -26,6 +26,7 @@ class APICalendarioController extends Controller
     $sala = $request->input('sala');
 
 
+
     $calendarios = Calendario::where('periodo', $periodo)
                             ->where('semana', $semana)
                             ->where('id_sala', $sala)

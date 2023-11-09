@@ -38,7 +38,7 @@ class HomeController extends Controller
               // $cell contiene el valor de la celda
           }
       }
-  }
+    }
 
     return $data;
   }

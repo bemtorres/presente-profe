@@ -18,7 +18,6 @@ class Solicitud extends Model
   ];
 
   const MOTIVOS = [
-    1  => 'Motivos de petición',
     10 => 'Recuperación de clases',
     20 => 'Revisión de pruebas',
     30 => 'Reuniones',
@@ -45,5 +44,13 @@ class Solicitud extends Model
 
   public function registros(){
     return $this->hasMany(RegistroCalendario::class,'id_solicitud');
+  }
+
+  public function getEstado(){
+    return self::ESTADO[$this->estado];
+  }
+
+  public function getMotivo(){
+    return self::MOTIVOS[$this->motivo];
   }
 }

@@ -1,27 +1,21 @@
-<style>
-  /* .scrollable {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 1px solid #e5e5e5;
-      border-radius: 4px;
-      padding: 10px;
-  } */
-</style>
-
-
 <template>
   <div>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <strong>Comparte duoc!</strong> <br>
+      <small>¡Solicita una sala de manera rápida y sencilla!</small>
+    </div>
     <div class="card shadow mb-3">
       <div class="row"  v-if="usuarioSeleccionado.img != null">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3 text-center">
           <img :src="usuarioSeleccionado.img" class="img-fluid rounded-start p-4" alt="...">
+          <span class="badge bg-dark rounded-pill ms-2">{{ usuarioSeleccionado.sede }}</span>
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <p class="card-title">{{  usuarioSeleccionado.nombre_completo  }}</p>
             <small>{{ usuarioSeleccionado.run  }}</small>
-            <p class="card-text">{{  usuarioSeleccionado.correo  }}</p>
-            <div class="d-grid">
+            <small class="card-text">{{  usuarioSeleccionado.correo  }}</small>
+            <div class="d-grid mt-3">
               <button class="btn btn-danger btn-sm rounded-5" @click="cambiarUsuario"><strong>Cambiar usuario</strong></button>
             </div>
           </div>
@@ -33,7 +27,7 @@
         </button>
       </div>
     </div>
-      <button ref="btnOpenModal" type="button" hidden data-bs-toggle="modal" data-bs-target="#modalBuscarUsuario"> </button>
+    <button ref="btnOpenModal" type="button" hidden data-bs-toggle="modal" data-bs-target="#modalBuscarUsuario"> </button>
     <div class="modal" id="modalBuscarUsuario">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -80,7 +74,8 @@
                           <p class="card-title">{{  usuario.nombre_completo  }}</p>
                           <small>{{ usuario.run  }}</small>
                           <p class="card-text">{{  usuario.correo  }}</p>
-                          <div class="d-grid">
+                          <span class="badge bg-dark rounded-pill">{{ usuario.sede }}</span>
+                          <div class="d-grid mt-3">
                             <button class="btn btn-success btn-sm rounded-5" @click="seleccionarUsuario(usuario)"><strong>SELECCIONAR</strong></button>
                           </div>
                         </div>
@@ -98,9 +93,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, toRaw } from "vue";
 
-import {postData} from './conexion/api.js';
+import {postData} from '@/components/conexion/api.js';
 
 const nombre = ref("");
 const usuarios = ref([]);
@@ -112,7 +107,7 @@ const btnOpenModal = ref(null);
 const btnCloseModal = ref(null);
 
 const props = defineProps({
-  postBuscar: String(""),
+  postBuscar: String("")
 });
 
 const buscarUsuario = () => {
@@ -127,7 +122,8 @@ const buscarUsuario = () => {
 
 
 const seleccionarUsuario = (usuario) => {
-  console.log("seleccionarUsuario", usuario);
+  window._USUARIO = toRaw(usuario);
+
   usuarioSeleccionado.value = usuario;
   usuarios.value = [];
   nombre.value = "";
@@ -138,6 +134,7 @@ const cambiarUsuario = () => {
   usuarioSeleccionado.value = {
     img: null
   };
+  window._USUARIO = null;
 
   usuarios.value = [];
   nombre.value = "";

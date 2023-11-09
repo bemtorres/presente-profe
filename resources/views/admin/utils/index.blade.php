@@ -16,6 +16,11 @@
           <a href="{{ route('semestres.index') }}" class="list-group-item list-group-item-action">Semestre</a>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="list-group">
+          <a href="{{ route('utils.calendario') }}" class="list-group-item list-group-item-action">Carga Masiva Calendario</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
