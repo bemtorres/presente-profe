@@ -70,6 +70,19 @@
                       <option value="6">SÁBADO</option>
                     </select>
                   </div>
+
+                  <div class="form-group mb-3">
+                    <p class="card-text">☀️ <strong>Semana</strong></p>
+                    <select name="" id="" class="form-select" multiple>
+                      @for ($i=1 ; $i<10 ; $i++)
+                        <option value="1">Semana {{ $i }}</option>
+                      @endfor
+                    </select>
+                  </div>
+
+                  <div class="d-grid">
+                    <button type="button" class="btn btn-lg btn-primary">Buscar</button>
+                  </div>
                 </div>
             </div>
           </div>

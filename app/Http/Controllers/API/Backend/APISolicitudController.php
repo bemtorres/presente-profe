@@ -17,6 +17,7 @@ class APISolicitudController extends Controller
 {
   public function store(Request $request) {
     // return $request->all();
+
     $sala = $request->input('sala');
     $semana = $request->input('semana');
     $usuario = $request->input('usuario');
@@ -35,6 +36,8 @@ class APISolicitudController extends Controller
     $solicitud->motivo = $motivo;
     $solicitud->comentario = $motivotext;
     $solicitud->estado = 1;
+    $solicitud->semana = $semana['semana'];
+    $solicitud->periodo = $semana['periodo'];
     $solicitud->save();
 
     return response()->json([

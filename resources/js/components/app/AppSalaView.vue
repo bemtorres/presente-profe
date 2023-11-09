@@ -21,11 +21,12 @@
       </div>
       <div class="col-md-6 d-grid mb-3">
         <button
-          v-if="editable && meData.length > 0"
+          v-if="editable && meData.length > 0 && usuario != null"
           class="btn btn-success"
           data-bs-toggle="modal"
           data-bs-target="#modalSolicitud"
           :disabled="meData.length == 0"
+          @click="handleModalSolicitud"
         >
           <span id="text-guardar">Enviar solicitud</span>
         </button>
@@ -132,7 +133,7 @@
                 type="button"
                 @click="handleSolicitud"
                 class="btn btn-success btn-lg"
-                :disabled="meData.length == 0"
+                :disabled="(meData.length == 0 || usuario == null) && !isEnviando"
               >
                 Enviar solicitud
               </button>
@@ -236,6 +237,7 @@ import {
   alertWarning,
   alertInfo,
 } from "@/components/lib/alert.js";
+import { is } from "date-fns/locale";
 
 const props = defineProps({
   horarios: Array,
@@ -261,9 +263,11 @@ const vmotivo = ref(10); // default posicion 0
 const vmotivoInput = ref(""); // default posicion 0
 const editable = ref(false);
 
+
 // ACTION: save usuario
 const usuario = ref(null);
 const btnCloseSolicitudModal = ref(null);
+const isEnviando = ref(false);
 
 onMounted(() => {
   initializeData();
@@ -398,6 +402,10 @@ const handleSelectChange = () => {
     });
 };
 
+const handleModalSolicitud = () => {
+  isUsuario();
+}
+
 const handleSolicitud = () => {
   if (!isUsuario()) {
     alertInfo("Información", "Debes tener una cuenta de usuario para solicitar una sala");
@@ -409,6 +417,8 @@ const handleSolicitud = () => {
     return;
   }
 
+  // isEnviando.value = true;
+
   postData(props.postStoreSolicitud, {
     sala: vsala.value,
     semana: vsemana.value,
@@ -418,9 +428,8 @@ const handleSolicitud = () => {
     motivoInput: vmotivoInput.value,
   })
     .then((data) => {
-      console.log("aa",data);
-      alertSuccessTime("Solicitud enviada", "Se ha generado una solicitud de sala ID: " + data.solicitud.id);
-      // limpiarTodo();
+      console.log("data", data);
+      // alertSuccessTime("Solicitud enviada", "Se ha generado una solicitud de sala ID: " + data.solicitud.id);
     })
     .catch((error) => {
       toastError("Error al guardar el horario");

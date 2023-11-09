@@ -27,7 +27,6 @@
 @section('content')
 <div class="container-fluid">
   <h1 class="h3 mb-2 text-gray-800">Solicitudes de salas</h1>
-  @include('admin.solicitud._tabs')
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="table-responsive">
@@ -45,9 +44,12 @@
             @foreach ($solicitudes as $s)
             <tr class="align-middle">
               <td>
-                <small>
-                  {{helperDateFormat($s->created_at)->getDateVersion() }}
-                </small>
+                {{-- <div class="small text-medium-emphasis">{{ $s->sala->nombre }}</div> --}}
+                <div>
+                  <small>
+                    {{helperDateFormat($s->created_at)->getDateVersion() }}
+                  </small>
+                </div>
               </td>
               <td>
                 <div class="row">
@@ -60,6 +62,7 @@
                   <div class="col">
                     <div>{{ $s->usuario->nombre_completo() }}</div>
                     <div class="small text-medium-emphasis">{{ $s->usuario->correo }}</div>
+
                   </div>
                 </div>
               </td>
@@ -68,8 +71,16 @@
                 <div class="fw-semibold">{{ $s->sala->nombre }}</div>
               </td>
               <td>
-                <div class="small text-medium-emphasis">{{ $s->getMotivo() }}</div>
-                {{-- <div class="fw-semibold">{{ $s->getMotivo() }}</div> --}}
+                @switch($s->estado)
+                  @case(1)
+                    <span class="badge bg-warning">Pendiente</span>
+                    @break
+                  @case(2)
+                    <span class="badge bg-success">Aceptado</span>
+                    @break
+                  @default
+                    <span class="badge bg-danger">Cancelado</span>
+                @endswitch
               </td>
               <td>
                 <div class="dropdown">

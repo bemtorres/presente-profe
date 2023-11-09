@@ -21,6 +21,12 @@
         Solicitudes
       </a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link {{ activeOpen(['admin/mi-solicitud*']) }}" href="{{ route('solicitud.me') }}">
+        <i class="nav-icon fa-solid fa-book"></i>
+        Mis solicitudes
+      </a>
+    </li>
     @if (current_user()->tipo_usuario == 1)
     <li class="nav-title">Configuración</li>
     <li class="nav-group {{ activeOpen(['admin/usuarios*','asignaturas*']) }}"><a class="nav-link nav-group-toggle" href="#">
