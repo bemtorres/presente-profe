@@ -44,7 +44,7 @@ class SolicitudEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.solicitud',
+            view: 'mail.solicitud.confirmar',
         );
     }
 

@@ -108,4 +108,8 @@ class UtilsController extends Controller
 
     return $data;
   }
+
+  public function correo() {
+    return view('admin.utils.correo');
+  }
 }

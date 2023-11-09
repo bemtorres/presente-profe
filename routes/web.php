@@ -39,6 +39,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/utils', [UtilsController::class, 'index'])->name('utils.index');
   Route::get('admin/utils/calendario', [UtilsController::class, 'calendario'])->name('utils.calendario');
   Route::post('admin/utils/calendario', [UtilsController::class, 'calendarioStore'])->name('utils.calendario');
+  Route::get('admin/utils/correo', [UtilsController::class, 'correo'])->name('utils.correo');
 
   Route::get('admin/semestres', [SemestreController::class, 'index'])->name('semestres.index');
   Route::get('admin/semestres/{periodo}', [SemestreController::class, 'show'])->name('semestres.show');

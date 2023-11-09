@@ -8,6 +8,7 @@ use App\Models\RegistroCalendario;
 use App\Models\Sala;
 use App\Models\Sede;
 use App\Models\Usuario;
+use App\Services\CalendarioMixV1;
 use App\Services\Policies\UsuarioPolicy;
 use Illuminate\Http\Request;
 
@@ -25,27 +26,7 @@ class APICalendarioController extends Controller
     $semana = $request->input('semana');
     $sala = $request->input('sala');
 
-
-
-    $calendarios = Calendario::where('periodo', $periodo)
-                            ->where('semana', $semana)
-                            ->where('id_sala', $sala)
-                            ->get();
-
-    $registros = RegistroCalendario::where('periodo', $periodo)
-                          ->where('semana', $semana)
-                          ->where('id_sala', $sala)
-                          ->get();
-
-    $data = [];
-    foreach ($calendarios as $keyCa => $ca) {
-      $data[] = $ca->getRaw();
-    }
-
-                          // return [
-    //   'calendario' => $calendario,
-    //   'registro' => $registro
-    // ];
+    $data = (new CalendarioMixV1($periodo, $semana, $sala))->call();
 
     return Response()->json([
       'message' => 'Se ha encontrado correctamente',

@@ -17,30 +17,38 @@ class CalendarioMixV1 {
     $this->sala = $sala;
   }
 
-  // public function money(){
-  //   return number_format($this->money, $this->decimal, ',', '.');
-  // }
-
   public function call() {
     $calendarios = $this->all_calendarios();
+    $registros = $this->all_registros();
 
-    $registros = RegistroCalendario::where('periodo', $this->periodo)
-      ->where('semana', $this->semana)
-      ->where('id_sala', $this->sala)
-      ->get();
+    $data = $calendarios + $registros;
 
-
+    return $data;
   }
 
   public function all_calendarios() {
     $calendarios = Calendario::where('periodo', $this->periodo)
-      ->where('semana', $this->semana)
-      ->where('id_sala', $this->sala)
-      ->get();
+                            ->where('semana', $this->semana)
+                            ->where('id_sala', $this->sala)
+                            ->get();
 
+    return $this->getRaw($calendarios);
+  }
+
+  public function all_registros() {
+    $registros = RegistroCalendario::where('periodo', $this->periodo)
+                                  ->where('semana', $this->semana)
+                                  ->where('id_sala', $this->sala)
+                                  ->get();
+
+    return $this->getRaw($registros);
+  }
+
+  // PRIVATE FUNCTIONS
+  private function getRaw($listado) {
     $data = [];
-    foreach ($calendarios as $keyCa => $ca) {
-      $data[] = $ca->getRaw();
+    foreach ($listado as $key => $item) {
+      $data[] = $item->getRaw();
     }
     return $data;
   }

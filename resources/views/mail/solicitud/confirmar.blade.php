@@ -251,8 +251,9 @@
                                   style="padding-bottom:10px;padding-left:5px;padding-right:25px;padding-top:35px;text-align:center;width:100%;">
                                   <h3
                                     style="margin: 0; color: #454562; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 33px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
-                                    <span class="tinyMce-placeholder">&iquest;Inteligencia
-                                      Artificial en la Educaci&oacute;n?</span>
+                                    <span class="tinyMce-placeholder">
+                                      Confirmación de solicitud de sala
+                                    </span>
                                   </h3>
                                 </td>
                               </tr>
@@ -267,73 +268,19 @@
                                   <div
                                     style="color:#000000;direction:ltr;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:justify;mso-line-height-alt:19.2px;">
                                     <p style="margin: 0; margin-bottom: 16px;">
-                                      Queridas y queridos docentes:</p>
+                                      Te enviamos los detalles de la sala que solicitaste:</p>
 
                                     <p style="margin: 0; margin-bottom: 16px;">
-                                      <span style="background-color: transparent;">Nos
-                                        encontramos en un momento clave para la
-                                        educaci&oacute;n, donde la fusi&oacute;n
-                                        entre la tecnolog&iacute;a y la
-                                        pedagog&iacute;a est&aacute; dando forma
-                                        a una nueva era de aprendizaje. La
-                                        inteligencia artificial, en particular,
-                                        se ha convertido en un actor clave
-                                        influyendo significativamente en la
-                                        forma en que impartimos y adquirimos
-                                        conocimientos. Como sociedad, somos
-                                        testigos de la masificaci&oacute;n de la
-                                        IA en diversos aspectos de nuestra vida
-                                        y su impacto en la educaci&oacute;n es
-                                        innegable. La presencia cada vez
-                                        m&aacute;s destacada de los Large
-                                        Language Models (LLM), como el
-                                        impresionante ChatGPT, suscita tanto
-                                        inter&eacute;s como
-                                        inquietud.&nbsp;</span>
+                                      <!-- DATOS DE LA SOLICITUD -->
+                                      <span style="background-color: transparent;">
+                                        <ul>
+                                          <li><strong>Sala:</strong> LABORATORIO 5</li>
+                                          <li><strong>Fecha:</strong> Miércoles 8 de Noviembre 2023</li>
+                                          <li><strong>Hora:</strong> 8:31 - 9:50 , 10:01 - 10:40</li>
+                                          <li><strong>Motivo:</strong> Recuperación de clases</li>
+                                        </ul>
+                                      </span>
                                     </p>
-
-                                    <p style="margin: 0; margin-bottom: 16px;">
-                                      <span style="background-color: transparent;">Hace
-                                        unos d&iacute;as recibimos un mensaje de
-                                        nuestro Vicerrector Acad&eacute;mico,
-                                        Kiyoshi Fukushi, dando cuenta de este
-                                        emocionante contexto y de c&oacute;mo en
-                                        Duoc UC estamos firmemente comprometidos
-                                        con la integraci&oacute;n de estas
-                                        nuevas tecnolog&iacute;as en la
-                                        ense&ntilde;anza y el aprendizaje,
-                                        guiados por la convicci&oacute;n de que
-                                        son un elemento fundamental que
-                                        moldear&aacute; el futuro educativo de
-                                        nuestros estudiantes y de todos
-                                        nosotros. En este sentido y para abrazar
-                                        esta nueva era, es esencial que nos
-                                        convirtamos en "amigos" de la
-                                        tecnolog&iacute;a, comprendiendo su
-                                        funcionamiento, l&iacute;mites y
-                                        potencialidades y as&iacute; abrirnos a
-                                        un mundo de oportunidades para mejorar
-                                        la experiencia de aprendizaje de
-                                        nuestros estudiantes.</span>
-                                    </p>
-
-                                    <p style="margin: 0; margin-bottom: 16px;">
-                                      <span style="background-color: transparent;">En
-                                        el presente bolet&iacute;n, les
-                                        invitamos a unirse a nosotros en este
-                                        viaje de descubrimiento, aprendizaje y
-                                        adaptaci&oacute;n, en la medida en que
-                                        revisamos algunas de las
-                                        m&uacute;ltiples posibilidades que las
-                                        tecnolog&iacute;as ofrecen para
-                                        enriquecer nuestras pr&aacute;cticas
-                                        pedag&oacute;gicas y mejorar el futuro
-                                        de la educaci&oacute;n en Duoc UC y
-                                        m&aacute;s
-                                        all&aacute;.&nbsp;&nbsp;</span>
-                                    </p>
-
-                                    <p style="margin: 0;">Un abrazo,</p>
                                   </div>
                                 </td>
                               </tr>
@@ -346,12 +293,16 @@
                               <tr>
                                 <td class="pad">
                                   <div
-                                    style="color:#000000;direction:ltr;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:16.8px;">
-                                    <p style="margin: 0; margin-bottom: 16px;">
-                                      Daniela Rojas B.</p>
+                                    style="color:#000000;direction:ltr;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:16.8px;">
+                                    <p style="text-align: center; margin: 0; margin-bottom: 16px;">
+                                      Si deseas <strong>cancelar</strong> la solicitud de la sala, debes hacerlo a
+                                      través de la página
+                                      oficial.
+                                    </p>
 
-                                    <p style="margin: 0;">Jefa UAP, Sede San Carlos
-                                      de Apoquindo</p>
+                                    <p style="margin: 0;">
+
+                                    </p>
                                   </div>
                                 </td>
                               </tr>
@@ -420,8 +371,7 @@
                                       style="font-size: 12px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #9d9d9d; line-height: 1.2;">
                                       <p
                                         style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;">
-                                        <span style="">S&iacute;guenos en
-                                          Instagram:</span>
+
                                       </p>
                                     </div>
                                   </div>

@@ -36,4 +36,13 @@ class RegistroCalendario extends Model
   public function getDayText(){
     return self::DAYS_TEXT[$this->dia];
   }
+
+  public function getRaw(){
+    return [
+      'id' => self::DAYS[$this->dia] . '-' . $this->modulo,
+      'dia' => self::DAYS[$this->dia],
+      'modulo' => $this->modulo,
+      'color' => 'info'
+    ];
+  }
 }
