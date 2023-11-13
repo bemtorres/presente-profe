@@ -82,27 +82,4 @@ class APIUsuarioController extends Controller
       'usuarios' => $usuariosEnRaw
     ], 200);
   }
-
-
-  // public function update(Request $request, $id) {
-  //   $this->policy->admin(current_user());
-
-  //   $u = Usuario::findOrFail($id);
-
-  //   if ($request->pass) {
-  //     $u->password = hash('sha256', $request->input('pass'));
-  //     $u->update();
-  //   }
-
-  //   if ($request->nombre) {
-  //     $u->correo = $request->input('correo');
-  //     $u->nombre = $request->input('nombre');
-  //     $u->apellido_paterno = $request->input('apellido_p');
-  //     $u->apellido_materno = $request->input('apellido_m');
-  //     $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
-  //     $u->id_sede = $request->input('sede') == 1300 ? 1300 : 100;
-  //     $u->update();
-  //   }
-  //   return back()->with('success','Se ha actualizado');
-  // }
 }

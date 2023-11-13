@@ -17,14 +17,13 @@ class HomeController extends Controller
   public function index() {
     $sede = Sede::findOrFail(current_user()->id_sede);
 
-    $s = Solicitud::find(1);
-    $email = 'bej.mora@profesor.duoc.cl';
-    $mail = (new EmailServices($email, [], $s->id))->solicitud();
-    $mail = (new EmailServices($email, [], $s->id))->solicitudAprobada();
-    $mail = (new EmailServices($email, [], $s->id))->solicitudRechazada();
-    $mail = (new EmailServices($email, [], $s->id))->solicitudCancelado();
-
-    return $mail;
+    // $s = Solicitud::find(1);
+    // $email = 'bej.mora@profesor.duoc.cl';
+    // $mail = (new EmailServices($email, [], $s->id))->solicitud();
+    // $mail = (new EmailServices($email, [], $s->id))->solicitudAprobada();
+    // $mail = (new EmailServices($email, [], $s->id))->solicitudRechazada();
+    // $mail = (new EmailServices($email, [], $s->id))->solicitudCancelado();
+    // return $mail;
     return view('home.index', compact('sede'));
   }
 

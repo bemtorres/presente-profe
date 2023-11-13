@@ -55,12 +55,22 @@
     </li>
     @endif
 
+    @if (current_user()->tipo_usuario == 1 || current_user()->user_app)
     <li class="nav-item">
       <a class="nav-link" href="{{ route('app.sede', current_user()->id_sede) }}">
+        <i class="nav-icon fa-solid fa-mobile-alt"></i>
+        APP GLOBAL
+      </a>
+    </li>
+    @endif
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('app.sede.usuario', current_user()->id_sede) }}">
         <i class="nav-icon fa-solid fa-mobile-alt"></i>
         APP
       </a>
     </li>
+
+
     {{-- <li class="nav-item mt-auto"><a class="nav-link" href="https://coreui.io/docs/templates/installation/"
         target="_blank">
         <svg class="nav-icon">
