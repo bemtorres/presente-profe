@@ -47,13 +47,24 @@
         </div>
       </div>
     </div>
+    <div class="col-6">
+      <div class="p-3">
+        <div id="chart1" class="chart">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
 @endsection
 
 @push('js')
 
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('template/comparte/index.js') }}"></script>
+<link rel="stylesheet" type="text/css" src="{{ asset('template/css/chartjs.css')}}">
 
 <script>
 
@@ -129,6 +140,26 @@
       }]
     }
   })
+  const getOptionsChart1=()=>{
+    return {
+      xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']},
+      yAxis: {
+      type: 'value'},
+      series: [
+      {
+        data: [150, 230, 224, 218, 135, 147, 260],
+        type: 'line'
+      }]
+    };
+  };
+  const initCharts = () => {
+    const chart1 = echarts.init(documento.getElementById("chart1"));
+
+    chart1.setOption(getOptionsChart1());
+  };
+
 
 </script>
 @endpush
