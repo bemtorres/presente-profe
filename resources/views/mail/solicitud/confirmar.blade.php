@@ -267,7 +267,7 @@
                                   </h3>
                                   <p style="text-align: center; margin: 0; margin-bottom: 16px;">
                                     <div class="alert">
-                                      <p>🕛 Debes esperar a que la solicitud se ha aprobada</p>
+                                      <p>🕛 Debes esperar a que la solicitud sea aprobada</p>
                                     </div>
                                   </p>
                                 </td>

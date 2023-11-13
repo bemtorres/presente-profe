@@ -36,26 +36,26 @@ return new class extends Migration
         $u->nombre = 'admin';
         $u->apellido_paterno = 'admin';
         $u->apellido_materno = 'admin';
-        $u->correo = 'admin@gmail.com';
-        $u->password = hash('sha256', '123456');
+        $u->correo = 'benja.mora.torres@gmail.com';
+        $u->password = hash('sha256', 'comparteduoc2023');
         $u->id_sede = 1300;
         $u->tipo_usuario = 1;
         $u->save();
 
-        $faker = FakerFactory::create();
+        // $faker = FakerFactory::create();
 
-        for ($i = 0; $i < 200; $i++) {
-          $u = new Usuario();
-          $u->run = $i%2==0 ? 10000000 + $i : null;
-          $u->nombre = $faker->firstName;
-          $u->apellido_paterno = $faker->lastName;
-          $u->apellido_materno = $faker->lastName;
-          $u->correo = $faker->unique()->safeEmail;
-          $u->password = hash('sha256', '123456');
-          $u->id_sede = 1300;
-          $u->tipo_usuario = 2;
-          $u->save();
-        }
+        // for ($i = 0; $i < 200; $i++) {
+        //   $u = new Usuario();
+        //   $u->run = $i%2==0 ? 10000000 + $i : null;
+        //   $u->nombre = $faker->firstName;
+        //   $u->apellido_paterno = $faker->lastName;
+        //   $u->apellido_materno = $faker->lastName;
+        //   $u->correo = $faker->unique()->safeEmail;
+        //   $u->password = hash('sha256', '123456');
+        //   $u->id_sede = 1300;
+        //   $u->tipo_usuario = 2;
+        //   $u->save();
+        // }
     }
 
     /**
