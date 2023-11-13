@@ -1,5 +1,5 @@
-INSERT INTO sede(id,nombre,img,activo) VALUES(100,"SAN BERNARDO","/sede/sede_sanbernardo.jpg",false);
-INSERT INTO sede(id,nombre,img,activo) VALUES(200,"ANTONIO VARAS","/sede/a_varas.jpg",false);
+INSERT INTO sede(id,nombre,img,activo) VALUES(100,"SAN BERNARDO","/sede/sede_sanbernardo.jpg",true);
+INSERT INTO sede(id,nombre,img,activo) VALUES(200,"ANTONIO VARAS","/sede/a_varas.jpg",true);
 INSERT INTO sede(id,nombre,img,activo) VALUES(300,"ALAMEDA","/sede/sede_alameda.jpg",false);
 INSERT INTO sede(id,nombre,img,activo) VALUES(400,"CAMPUS ARAUCO","/sede/sede_arauco.jpg",false);
 INSERT INTO sede(id,nombre,img,activo) VALUES(500,"MAIPU","/sede/sede_maipu.jpg",false);

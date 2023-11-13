@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 class UtilsController extends Controller
 {
+
+  public $numero = 1;
+
   public function index() {
     return view('admin.utils.index');
   }
@@ -25,7 +28,6 @@ class UtilsController extends Controller
 
   public function calendarioStore(Request $request) {
     // return $request;
-
     $sede = $request->input('sede');
     $periodo = $request->input('semestre');
 
@@ -35,99 +37,94 @@ class UtilsController extends Controller
 
       $data = Excel::toArray([], $file)[0];
 
-
+      //return $data;
       $salas = $this->getSala($data, $sede, $periodo);
 
       $calendario = [];
       foreach ($data as $key => $v) {
         if ($key == 0) { continue; }
-        if (empty($v[35])) { continue; }
+        if (empty($v[36])) { continue; } // sala null
 
 
-        $sala = null;
-
-        // return $salas;
+        $sala = new Sala;
 
         foreach ($salas as $keyS => $valueS) {
-          if ($valueS->codigo == $v[34]) {
+          if ($valueS->codigo == $v[36]) {
             $sala = $valueS;
             break;
           }
         }
 
-        $info = [
-          'plan'=> $v[7],
-          'escuela' => $v[8],
-          'jornada' => $v[9],
-          'nivel' => $v[10],
-        ];
+        // $info = [
+        //   'plan'=> $v[7],
+        //   'escuela' => $v[8],
+        //   'jornada' => $v[10],
+        //   'nivel' => $v[11],
+        // ];
 
-        $seccion = [
-          'id' => $v[12],
-          'seccion' => $v[13],
-          'nombre' => $v[14],
-          'asignatura' => [
-            'id' => $v[18],
-            'codigo' => $v[19],
-            'nombre' => $v[20],
-          ],
-          'metodologia' => $v[27],
-          'docente' => [
-            'id' => $v[30],
-            'rut' => $v[31],
-            'nombre' => $v[32],
-          ],
-        ];
+        // $seccion = [
+        //   'id' => $v[12],
+        //   'seccion' => $v[13],
+        //   'nombre' => $v[14],
+        //   'asignatura' => [
+        //     'id' => $v[20],
+        //     'codigo' => $v[21],
+        //     'nombre' => $v[22],
+        //   ],
+        //   'metodologia' => $v[29],
+        //   'docente' => [
+        //     'id' => $v[32],
+        //     'rut' => $v[33],
+        //     'nombre' => $v[34],
+        //   ],
+        // ];
 
         $dias = [
-          'L' => $v[39],
-          'M' => $v[40],
-          'X' => $v[41],
-          'J' => $v[42],
-          'V' => $v[43],
-          'S' => $v[44],
+          'L' => $v[41],
+          'M' => $v[42],
+          'X' => $v[43],
+          'J' => $v[44],
+          'V' => $v[45],
+          'S' => $v[46],
         ];
 
         $clase = [
-          'hora_inicio' => $this->getTime($v[37]),
-          'hora_termino' => $this->getTime($v[38]),
+          'hi' => $v[39],
+          'ht' => $v[40],
+          'hora_inicio' => $this->getTime($v[39]),
+          'hora_termino' => $this->getTime($v[40]),
           'dia' => $this->validateDay($dias),
+          'id_sala' => $sala->id ?? null,
+          'modulo' => 0
         ];
 
         $clase['modulo'] =  $this->getModulo($clase['hora_inicio'], $clase['hora_termino']) + 1 ?? 0;
 
-        $c = [
-          'info' => $info,
-          'seccion' => $seccion,
-          'clase' => $clase,
-          'sala' => $sala,
-        ];
-
-        array_push($calendario, $c);
+        array_push($calendario, $clase);
       }
 
+      // return $calendario;
 
       foreach ($calendario as $keyC => $vc) {
         for ($i=1; $i <= 18; $i++) {
           $c = new Calendario();
           $c->periodo = $periodo;
           $c->semana = $i;
-          $c->dia = $vc['clase']['dia'][1];
-          $c->modulo = $vc['clase']['dia'][1];
-          $c->info = $vc['seccion'];
+          $c->dia = $vc['dia'][1];
+          $c->modulo = $vc['modulo'];
           $c->id_sede = $sede;
-          $c->id_sala = $vc['sala']->id;
+          $c->id_sala = $vc['id_sala'];
           $c->tipo = 2;
           $c->save();
         }
       }
     }
 
-    return 'ok';
+    return Calendario::get();
   }
 
 
-  private function getTime($time) {
+  private function getTime(string $time) {
     $hora = Date::excelToDateTimeObject($time);
     $time = $hora->format('H:i');
     return $time;
@@ -145,16 +142,17 @@ class UtilsController extends Controller
   }
 
   private function validateDay($arreglo) {
+    //var_dump($arreglo); // Agrega esta línea para depurar
     $n = 1;
     foreach ($arreglo as $key => $value) {
-      if (trim(strtolower($value) == 'x')) {
-        return [$key, $n];
-      }
-      $n++;
+        if (trim(strtolower($value)) == 'x') {
+            return [$key, $n];
+        }
+        $n++;
     }
-
     return null;
-  }
+}
+
 
   private function getSala($data, $sede, $periodo) {
     $salas = [];
@@ -162,8 +160,8 @@ class UtilsController extends Controller
     foreach ($data as $keyF => $valueF) {
       if ($keyF > 0) {
         $s = [
-          'aula' => $valueF[34] ?? 'SALAFANTASMA',
-          'denominacion' => $valueF[35] ?? 'SALAFANTASMA',
+          'aula' => $valueF[36] ?? 'SALAFANTASMA',
+          'denominacion' => $valueF[37] ?? 'SALAFANTASMA',
         ];
         array_push($salas, $s);
       }
