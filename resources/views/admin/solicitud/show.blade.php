@@ -146,12 +146,17 @@
         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
-        <form action="{{ route('solicitud.update', $s->id) }}" method="post">
+        <form class="form-submit" action="{{ route('solicitud.update', $s->id) }}" method="post">
           @csrf
           @method('PUT')
           <div class="d-grid gap-3">
             <button type="submit" class="btn btn-success btn-lg" value="aprobar" name="btnSolicitud">Aceptar solicitud</button>
+          </div>
+        </form>
+        <form class="form-submit" action="{{ route('solicitud.update.rechazar', $s->id) }}" method="post">
+          @csrf
+          @method('PUT')
+          <div class="d-grid gap-3 mt-3">
             <button type="submit" class="btn btn-danger btn-lg" value="rechazar" name="btnSolicitud">Rechazar solicitud</button>
           </div>
         </form>

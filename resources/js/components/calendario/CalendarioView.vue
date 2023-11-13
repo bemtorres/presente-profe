@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, toRaw } from "vue";
 import { postData } from "@/components/conexion/api.js";
 import {
   calcularFechasSiguientes,
@@ -122,14 +122,15 @@ const handleSelectChange = () => {
     periodo: vsemana.value.periodo,
     sala: vsala.value.id,
     semana: vsemana.value.semana,
+    solicitud: props.solicitud.id,
   })
     .then((data) => {
       convertToHorario(data.data);
-      // console.log(data.data);
+      console.log(toRaw(data));
     })
     .catch((error) => {
       toastError("Error al cargar el horario");
-      // console.log("error", error);
+      console.log("error", error);
     });
 };
 

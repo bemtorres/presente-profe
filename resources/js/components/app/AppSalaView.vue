@@ -135,7 +135,7 @@
                 type="button"
                 @click="handleSolicitud"
                 class="btn btn-success btn-lg"
-                :disabled="(meData.length == 0 || usuario == null) && !isEnviando"
+                :disabled="(meData.length == 0 || usuario == null) || isEnviando"
               >
                 Enviar solicitud
               </button>
@@ -427,7 +427,7 @@ const handleSolicitud = () => {
     return;
   }
 
-  // isEnviando.value = true;
+  isEnviando.value = true;
 
   postData(props.postStoreSolicitud, {
     sala: vsala.value,

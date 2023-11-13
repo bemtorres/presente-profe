@@ -9,6 +9,7 @@ use App\Models\Sala;
 use App\Models\Sede;
 use App\Models\Usuario;
 use App\Services\CalendarioMixV1;
+use App\Services\CalendarioMixV2;
 use App\Services\Policies\UsuarioPolicy;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,9 @@ class APICalendarioController extends Controller
     $periodo = $request->input('periodo');
     $semana = $request->input('semana');
     $sala = $request->input('sala');
+    $solicitud_id = $request->input('solicitud');
 
-    $data = (new CalendarioMixV1($periodo, $semana, $sala, false))->call();
+    $data = (new CalendarioMixV2($periodo, $semana, $sala, false, $solicitud_id))->call();
 
     return Response()->json([
       'message' => 'Se ha encontrado correctamente',

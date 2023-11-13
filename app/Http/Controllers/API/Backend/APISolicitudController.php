@@ -10,6 +10,7 @@ use App\Models\Sede;
 use App\Models\Semana;
 use App\Models\Solicitud;
 use App\Models\Usuario;
+use App\Services\EmailServices;
 use App\Services\Policies\UsuarioPolicy;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,8 @@ class APISolicitudController extends Controller
       $r->estado = true;
       $r->save();
     }
+
+    $email = (new EmailServices($u->correo, [], $solicitud->id))->solicitud();
 
     return response()->json([
       'solicitud' => $solicitud,

@@ -111,9 +111,9 @@
 
     .alert {
             padding: 15px;
-            background-color: #f1B634; /* Color amarillo claro */
-            color: #000000; /* Color del texto */
-            border: 1px solid #c1c1c1; /* Borde */
+            background-color: #04243c; /* Color amarillo claro */
+            color: #ffffff; /* Color del texto */
+            border: 1px solid rgb(73, 0, 190); /* Borde */
             border-radius: 4px; /* Esquinas redondeadas */
             margin-bottom: 15px; /* Espacio inferior */
         }
@@ -123,7 +123,7 @@
             margin: 0; /* Elimina el margen interior */
         }
   </style>
-  <meta property="og:title" content="Solicitud de sala">
+  <meta property="og:title" content="Solicitud de sala?">
 </head>
 
 <body style="background-color: #fff; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
@@ -260,16 +260,11 @@
                                 <td class="pad"
                                   style="padding-bottom:10px;padding-left:5px;padding-right:25px;padding-top:35px;text-align:center;width:100%;">
                                   <h3
-                                    style="margin: 0; color: #454562; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 33px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
+                                    style="margin: 0; color: #454562; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 30px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
                                     <span class="tinyMce-placeholder">
-                                      Se ha solicitado la reserva de la sala
+                                      🎉 Tu solicitud de sala ha sido aceptada 🎉
                                     </span>
                                   </h3>
-                                  <p style="text-align: center; margin: 0; margin-bottom: 16px;">
-                                    <div class="alert">
-                                      <p>🕛 Debes esperar a que la solicitud se ha aprobada</p>
-                                    </div>
-                                  </p>
                                 </td>
                               </tr>
                             </tbody>
@@ -282,6 +277,17 @@
                                 <td class="pad">
                                   <div
                                     style="color:#000000;direction:ltr;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:justify;mso-line-height-alt:19.2px;">
+                                    <p style="margin: 0; margin-bottom: 16px;">
+                                      <div class="alert">
+                                        ⭐ Recomendaciones:
+                                        <ul>
+                                          <li>No olvides llevar contigo todos tus objetos personales al abandonar la sala.</li>
+                                          <li>Mantener el orden y limpieza.</li>
+                                          <li>Respetar los horarios establecidos.</li>
+                                          <li>Cuidar el mobiliario y equipo.</li>
+                                        </ul>
+                                      </div>
+                                    </p>
                                     <p style="margin: 0; margin-bottom: 16px;">
                                       Te enviamos los detalles de la sala que solicitaste:</p>
 
@@ -309,6 +315,7 @@
                                       @endforeach
 
                                     </p>
+
                                   </div>
                                 </td>
                               </tr>

@@ -108,22 +108,12 @@
         border-left: 0;
       }
     }
-
-    .alert {
-            padding: 15px;
-            background-color: #f1B634; /* Color amarillo claro */
-            color: #000000; /* Color del texto */
-            border: 1px solid #c1c1c1; /* Borde */
-            border-radius: 4px; /* Esquinas redondeadas */
-            margin-bottom: 15px; /* Espacio inferior */
-        }
-
-        /* Estilos para el texto de la alerta */
-        .alert p {
-            margin: 0; /* Elimina el margen interior */
-        }
   </style>
-  <meta property="og:title" content="Solicitud de sala">
+  <meta property="og:title" content="&iquest;Inteligencia Artificial en la Educaci&oacute;n?">
+  <meta property="og:image"
+    content="https://staticcl1.fidelizador.com/duocinterno/campaign/5430/2b4bd41a16f89821cf1decd76c1d01da.png">
+  <meta property="og:url"
+    content="https://publiccl1.fidelizador.com/duocinterno/public/campaign/2b4bd41a16f89821cf1decd76c1d01da">
 </head>
 
 <body style="background-color: #fff; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
@@ -262,14 +252,9 @@
                                   <h3
                                     style="margin: 0; color: #454562; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 33px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
                                     <span class="tinyMce-placeholder">
-                                      Se ha solicitado la reserva de la sala
+                                      Confirmación de solicitud de sala
                                     </span>
                                   </h3>
-                                  <p style="text-align: center; margin: 0; margin-bottom: 16px;">
-                                    <div class="alert">
-                                      <p>🕛 Debes esperar a que la solicitud se ha aprobada</p>
-                                    </div>
-                                  </p>
                                 </td>
                               </tr>
                             </tbody>
@@ -289,25 +274,12 @@
                                       <!-- DATOS DE LA SOLICITUD -->
                                       <span style="background-color: transparent;">
                                         <ul>
-                                          <li><strong>Sala: </strong>{{ $params['sala'] }} </li>
-                                          <li><strong>Semana:</strong> {{ $params['semana_text'] }}</li>
-                                          <li><strong>Motivo:</strong> {{ $params['motivo'] }}</li>
-
-                                          @if ($params['motivo'] == 'otros')
-                                            <li><strong>Motivo:</strong> {{ $params['comentario'] }}</li>
-                                          @endif
+                                          <li><strong>Sala:</strong> LABORATORIO 5</li>
+                                          <li><strong>Fecha:</strong> Miércoles 8 de Noviembre 2023</li>
+                                          <li><strong>Hora:</strong> 8:31 - 9:50 , 10:01 - 10:40</li>
+                                          <li><strong>Motivo:</strong> Recuperación de clases</li>
                                         </ul>
                                       </span>
-                                      @foreach ($params['registro'] as $registro)
-                                        <p scope="row"><strong>Fecha:</strong> {{ $registro['fecha'] }}</p>
-                                        <ul>
-                                          @foreach ($registro['modulos'] as $modulo)
-                                            <li>{{ $modulo['horario'] }} <small style="color: red;">[{{ $modulo['modulo'] }}]</small></li>
-                                          @endforeach
-
-                                        </ul>
-                                      @endforeach
-
                                     </p>
                                   </div>
                                 </td>
@@ -326,6 +298,10 @@
                                       Si deseas <strong>cancelar</strong> la solicitud de la sala, debes hacerlo a
                                       través de la página
                                       oficial.
+                                    </p>
+
+                                    <p style="margin: 0;">
+
                                     </p>
                                   </div>
                                 </td>

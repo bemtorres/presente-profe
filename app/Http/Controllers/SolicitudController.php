@@ -6,6 +6,7 @@ use App\Models\Semana;
 use App\Models\Semestre;
 use App\Models\Solicitud;
 use App\Services\DuocHorario;
+use App\Services\EmailServices;
 use App\Services\Policies\UsuarioPolicy;
 use App\Services\RegistroDias;
 use Illuminate\Http\Request;
@@ -108,6 +109,8 @@ class SolicitudController extends Controller
     public function show($id)
     {
       // $s = Solicitud::findOrFail($id);
+      $this->policy->admin(current_user());
+
       $s = Solicitud::with(['registros','usuario'])->findOrFail($id);
       $semestre = Semestre::where('activo', true)->firstOrFail();
 
@@ -180,37 +183,60 @@ class SolicitudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-      $btn = $request->input('btnSolicitud');
-      if ($btn == 'cancelar') { // el creador de su misma solicitud puede cancelar
-        $s = Solicitud::where('id_usuario', current_user()->id)->with('registros')->findOrFail($id);
-        $s->estado = 4;
-        $s->update();
+    public function update(Request $request, $id) {
+      $this->policy->admin(current_user());
 
-        foreach ($s->registros as $key => $r) {
-          $r->estado = 4;
-          $r->update();
-        }
+      $s = Solicitud::with(['registros'])->findOrFail($id);
+      $s->id_revisor = current_user()->id;
+      $estado = 2;
 
-        return back()->with('success','Se ha cancelado correctamente la solicitud');
-      } else {
-        $s = Solicitud::with('registros')->findOrFail($id);
-        $s->id_revisor = current_user()->id;
-        $estado = $btn == 'aprobar' ? 2 : 3;
+      $s->estado = $estado;
+      $s->update();
 
-        $s->estado = $estado;
-        $s->update();
-
-        foreach ($s->registros as $key => $r) {
-          $r->estado = $estado;
-          $r->update();
-        }
+      foreach ($s->registros as $key => $r) {
+        $r->estado = $estado;
+        $r->update();
       }
+
+      $email = new EmailServices($s->usuario->correo, [], $s->id);
+      $email->solicitudAprobada();
 
       return back()->with('success','Se ha actualizado correctamente la solicitud');
     }
 
+    public function updateRechazar(Request $request, $id) {
+      $this->policy->admin(current_user());
+
+      $s = Solicitud::with(['registros'])->findOrFail($id);
+      $s->id_revisor = current_user()->id;
+      $estado = 3;
+
+      $s->estado = $estado;
+      $s->update();
+
+      foreach ($s->registros as $key => $r) {
+        $r->estado = $estado;
+        $r->update();
+      }
+
+      $email = (new EmailServices($s->usuario->correo, [], $s->id))->solicitudRechazada();
+      return back()->with('success','Se ha actualizado correctamente la solicitud');
+    }
+
+    public function updateCancelar(Request $request, $id)
+    {
+      $s = Solicitud::where('id_usuario', current_user()->id)->with('registros')->findOrFail($id);
+      $s->estado = 4;
+      $s->update();
+
+      foreach ($s->registros as $key => $r) {
+        $r->estado = 4;
+        $r->update();
+      }
+
+      $mail = (new EmailServices(current_user()->correo, [], $s->id))->solicitudCancelado();
+      return back()->with('success','Se ha cancelado correctamente la solicitud');
+    }
     /**
      * Remove the specified resource from storage.
      *

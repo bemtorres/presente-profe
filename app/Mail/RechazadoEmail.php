@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SolicitudEmail extends Mailable
+class RechazadoEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -46,7 +46,7 @@ class SolicitudEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.solicitud.confirmar',
+            view: 'mail.solicitud.rechazado',
 
       );
     }

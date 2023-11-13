@@ -17,6 +17,10 @@ class RegistroDias {
     return $this->data;
   }
 
+  public function resumen() {
+    return $this->build_resumen();
+  }
+
   private function build_params($array) {
     $data = [];
     foreach ($array as $key => $r) {
@@ -81,5 +85,26 @@ class RegistroDias {
       6 => 'Sabado',
     ];
     return $dia[$d];
+  }
+
+  private function build_resumen() {
+    $calendario = [];
+    foreach ($this->data as $key => $value) {
+      $modulos = [];
+
+      foreach ($value['modulos'] as $keya => $v) {
+        $modulos[] = [
+          'horario' => $v['horario'],
+          'modulo' => $v['modulo'],
+        ];
+      }
+
+      $calendario[$key] = [
+        'fecha' => $value['fecha_text'],
+        'modulos' => $modulos,
+      ];
+    }
+
+    return $calendario;
   }
 }

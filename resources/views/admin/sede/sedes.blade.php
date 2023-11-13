@@ -68,7 +68,7 @@
                                 @endif
                               </td>
                               <td>
-                                <form action="{{ route('usuarios.sedes', $u->id) }}" method="POST">
+                                <form class="form-submit" action="{{ route('usuarios.sedes', $u->id) }}" method="POST">
                                   @csrf
                                   @method('PUT')
                                   <input type="hidden" name="sede_id" value="{{ $s->id }}">

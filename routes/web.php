@@ -56,5 +56,7 @@ Route::middleware('auth.user')->group( function () {
 
   Route::get('admin/solicitud/{id}', [SolicitudController::class, 'show'])->name('solicitud.show');
   Route::put('admin/solicitud/{id}', [SolicitudController::class, 'update'])->name('solicitud.update');
+  Route::put('admin/solicitud/{id}/cancelar', [SolicitudController::class, 'updateCancelar'])->name('solicitud.update.cancelar');
+  Route::put('admin/solicitud/{id}/rechazar', [SolicitudController::class, 'updateRechazar'])->name('solicitud.update.rechazar');
 
 });

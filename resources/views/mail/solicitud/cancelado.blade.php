@@ -111,9 +111,9 @@
 
     .alert {
             padding: 15px;
-            background-color: #f1B634; /* Color amarillo claro */
-            color: #000000; /* Color del texto */
-            border: 1px solid #c1c1c1; /* Borde */
+            background-color: rgba(255, 88, 93, 1); /* Color amarillo claro */
+            color: white; /* Color del texto */
+            border: 1px solid #ffeeba; /* Borde */
             border-radius: 4px; /* Esquinas redondeadas */
             margin-bottom: 15px; /* Espacio inferior */
         }
@@ -123,7 +123,7 @@
             margin: 0; /* Elimina el margen interior */
         }
   </style>
-  <meta property="og:title" content="Solicitud de sala">
+  <meta property="og:title" content="Cancelado de sala">
 </head>
 
 <body style="background-color: #fff; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
@@ -262,12 +262,12 @@
                                   <h3
                                     style="margin: 0; color: #454562; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 33px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
                                     <span class="tinyMce-placeholder">
-                                      Se ha solicitado la reserva de la sala
+                                      Has cancelado tu solicitud de sala
                                     </span>
                                   </h3>
                                   <p style="text-align: center; margin: 0; margin-bottom: 16px;">
                                     <div class="alert">
-                                      <p>🕛 Debes esperar a que la solicitud se ha aprobada</p>
+                                      <p><strong>🖐️ Puedes volver agendar</strong></p>
                                     </div>
                                   </p>
                                 </td>
@@ -283,7 +283,7 @@
                                   <div
                                     style="color:#000000;direction:ltr;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:justify;mso-line-height-alt:19.2px;">
                                     <p style="margin: 0; margin-bottom: 16px;">
-                                      Te enviamos los detalles de la sala que solicitaste:</p>
+                                      Te enviamos los detalles de la sala:</p>
 
                                     <p style="margin: 0; margin-bottom: 16px;">
                                       <!-- DATOS DE LA SOLICITUD -->
@@ -322,11 +322,11 @@
                                 <td class="pad">
                                   <div
                                     style="color:#000000;direction:ltr;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:16.8px;">
-                                    <p style="text-align: center; margin: 0; margin-bottom: 16px;">
+                                    {{-- <p style="text-align: center; margin: 0; margin-bottom: 16px;">
                                       Si deseas <strong>cancelar</strong> la solicitud de la sala, debes hacerlo a
                                       través de la página
                                       oficial.
-                                    </p>
+                                    </p> --}}
                                   </div>
                                 </td>
                               </tr>

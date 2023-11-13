@@ -150,7 +150,7 @@
         <h5 class="text-center">
           ¿Está seguro de cancelar la solicitud?
         </h5>
-        <form action="{{ route('solicitud.update', $s->id) }}" method="post">
+        <form class="form-submit" action="{{ route('solicitud.update.cancelar', $s->id) }}" method="post">
           @csrf
           @method('PUT')
           <div class="d-grid gap-3">

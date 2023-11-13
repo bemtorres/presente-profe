@@ -15,6 +15,7 @@
   <link href="{{ asset('template/css/comparteduoc.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" integrity="sha512-rSWTr6dChYCbhpHaT1hg2tf4re2jUxBWTuZbujxKg96+T87KQJriMzBzW5aqcb8jmzBhhNSx4XYGA6/Y+ok1vQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.cdnfonts.com/css/merriweather" rel="stylesheet">
+  <script src="{{ asset('vendors/bemtorres/main.js') }}"></script>
   @vite(['resources/js/app.js'])
   <style>
     body {
