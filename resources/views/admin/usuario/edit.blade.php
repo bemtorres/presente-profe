@@ -67,6 +67,15 @@
                 </div>
               </div>
 
+              <div class="col-md-12 mb-3">
+                <label for="sede">Sede<small class="text-danger">*</small></label>
+                <select class="form-control" id="sede" name="sede">
+                  @foreach ($sedes as $s)
+                    <option value="{{ $s->id }}" {{ $s->id == $u->id_sede ? 'selected' : '' }}>{{ $s->nombre }}</option>
+                  @endforeach
+                </select>
+              </div>
+
               <div class="col-md-4 mb-3">
                 <label for="admin">Administrador<small class="text-danger">*</small></label>
                 <select class="form-control" id="admin" name="admin">

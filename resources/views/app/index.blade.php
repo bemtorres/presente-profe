@@ -84,7 +84,7 @@
                 :horarios=@json($horarios)
                 :salas="{{ json_encode($salas)}}"
                 :semestre=@json($semestre)
-                :semanasdetall="{{ json_encode($array_semestre) }}"
+                :semanasdetall="{{ json_encode($array_semanas) }}"
                 :motivos="{{ json_encode($motivos) }}"
                 post-buscar-calendario="{{ route('api.backend.calendario.buscar') }}"
                 post-store-calendario="{{ route('api.backend.calendario.store') }}"
@@ -98,7 +98,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
   <div class="modal-dialog">

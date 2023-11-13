@@ -278,7 +278,11 @@ onMounted(() => {
 
 const initializeData = () => {
   if (props.semanasdetall.length > 0) {
-    vsemana.value = props.semanasdetall[0];
+    props.semanasdetall.forEach((semana) => {
+      if (semana.today) {
+        vsemana.value = semana;
+      }
+    });
   }
 
   if (props.salas.length > 0) {

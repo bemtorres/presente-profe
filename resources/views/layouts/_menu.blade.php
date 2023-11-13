@@ -15,19 +15,20 @@
         Inicio
       </a>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link {{ activeOpen(['admin/me-solicitudes','admin/me-solicitudes*']) }}" href="{{ route('solicitud.me') }}">
+        <i class="nav-icon fa-solid fa-book"></i>
+        Mis solicitudes
+      </a>
+    </li>
+    @if (current_user()->tipo_usuario == 1)
     <li class="nav-item">
       <a class="nav-link {{ activeOpen(['admin/solicitud*']) }}" href="{{ route('solicitud.index') }}">
         <i class="nav-icon fa-solid fa-book"></i>
         Solicitudes
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link {{ activeOpen(['admin/mi-solicitud*']) }}" href="{{ route('solicitud.me') }}">
-        <i class="nav-icon fa-solid fa-book"></i>
-        Mis solicitudes
-      </a>
-    </li>
-    @if (current_user()->tipo_usuario == 1)
     <li class="nav-title">Configuración</li>
     <li class="nav-group {{ activeOpen(['admin/usuarios*','asignaturas*']) }}"><a class="nav-link nav-group-toggle" href="#">
       <i class="nav-icon fa-solid fa-gear"></i> Admin</a>
@@ -54,7 +55,12 @@
     </li>
     @endif
 
-
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('app.sede', current_user()->id_sede) }}">
+        <i class="nav-icon fa-solid fa-mobile-alt"></i>
+        APP
+      </a>
+    </li>
     {{-- <li class="nav-item mt-auto"><a class="nav-link" href="https://coreui.io/docs/templates/installation/"
         target="_blank">
         <svg class="nav-icon">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sede;
 use Auth;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,8 +13,9 @@ use Maatwebsite\Excel\Facades\Excel;
 class HomeController extends Controller
 {
   public function index() {
+    $sede = Sede::findOrFail(current_user()->id_sede);
 
-    return view('home.index');
+    return view('home.index', compact('sede'));
   }
 
 

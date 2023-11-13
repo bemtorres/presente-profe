@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\ConvertDatetime;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,16 @@ class Semana extends Model
 
   public function getWeeks() {
     return (new ConvertDatetime($this->fecha_inicio))->getAllDay(7);
+  }
+
+  public function isToday(){
+    $hoy = Carbon::now();
+    $fi = Carbon::parse($this->fecha_inicio);
+    $ft = Carbon::parse($this->fecha_termino);
+
+    if ($hoy->between($fi, $ft)) {
+        return true;
+    }
+    return false;
   }
 }

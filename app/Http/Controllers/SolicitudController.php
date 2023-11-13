@@ -7,12 +7,21 @@ use App\Models\Semestre;
 use App\Models\Solicitud;
 use App\Services\ConvertDatetime;
 use App\Services\DuocHorario;
+use App\Services\Policies\UsuarioPolicy;
 use App\Services\RegistroDias;
 use Illuminate\Http\Request;
 
 class SolicitudController extends Controller
 {
+  private $policy;
+
+  public function __construct() {
+    $this->policy = new UsuarioPolicy();
+  }
+
   public function index() {
+    $this->policy->admin(current_user());
+
     $id_sede = current_user()->sede->id;
     $semestre = Semestre::where('activo', true)->firstOrFail();
 
@@ -23,6 +32,8 @@ class SolicitudController extends Controller
   }
 
   public function indexRealizados() {
+    $this->policy->admin(current_user());
+
     $id_sede = current_user()->sede->id;
     $semestre = Semestre::where('activo', true)->firstOrFail();
 
@@ -33,6 +44,8 @@ class SolicitudController extends Controller
   }
 
   public function indexCancelados() {
+    $this->policy->admin(current_user());
+
     $id_sede = current_user()->sede->id;
     $semestre = Semestre::where('activo', true)->firstOrFail();
 

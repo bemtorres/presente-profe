@@ -26,13 +26,13 @@ return new class extends Migration
             $table->json('info')->nullable();
             $table->json('integrations')->nullable();
             $table->foreignId('id_sede')->references('id')->on('sede');
+            $table->boolean('user_app')->default(false);
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
 
 
         $u = new Usuario();
-
         $u->nombre = 'admin';
         $u->apellido_paterno = 'admin';
         $u->apellido_materno = 'admin';

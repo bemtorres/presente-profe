@@ -58,7 +58,8 @@ class UsuarioController extends Controller
     $this->policy->admin(current_user());
 
     $u = Usuario::findOrFail($id);
-    return view('admin.usuario.edit', compact('u'));
+    $sedes = Sede::all();
+    return view('admin.usuario.edit', compact('u', 'sedes'));
   }
 
   public function update(Request $request, $id) {

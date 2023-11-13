@@ -30,10 +30,11 @@ class AuthController extends Controller
         Auth::guard('usuario')->loginUsingId($u->id);
         // $this->start_sesions($u);
 
-        return redirect()->route('home.index');
-        // if ($u->admin) {
-        // }
-        // return redirect()->route('login');
+        if ($u->user_app) {
+          return redirect()->route('app.index');
+        } else {
+          return redirect()->route('home.index');
+        }
       }else{
         return back()->with('info','Error. Intente nuevamente.');
       }
