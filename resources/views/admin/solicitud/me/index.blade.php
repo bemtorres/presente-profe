@@ -4,25 +4,6 @@
 
 <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
-<style>
-  /* Personalización de la clase media */
-.custom-media {
-    border: 1px solid #ccc; /* Añadir un borde al componente media */
-    padding: 10px; /* Agregar espacio interno al componente media */
-    background-color: #f5f5f5; /* Cambiar el color de fondo del componente media */
-}
-
-/* Personalización de la imagen dentro de la clase media */
-.custom-media img {
-    border-radius: 50%; /* Agregar un borde redondeado a la imagen */
-}
-
-/* Personalización del contenido dentro de la clase media-body */
-.custom-media .media-body {
-    font-size: 18px; /* Cambiar el tamaño de fuente del contenido */
-    color: #333; /* Cambiar el color del texto del contenido */
-}
-</style>
 @endpush
 @section('content')
 <div class="container-fluid">
@@ -36,6 +17,7 @@
               <th>Fecha solicitud</th>
               <th class="text-center">Usuario</th>
               <th>Sala</th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
@@ -71,6 +53,9 @@
                 <div class="fw-semibold">{{ $s->sala->nombre }}</div>
               </td>
               <td>
+                <div class="small text-medium-emphasis">{{ $s->getMotivo() }}</div>
+              </td>
+              <td>
                 @switch($s->estado)
                   @case(1)
                     <span class="badge bg-warning">Pendiente</span>
@@ -88,7 +73,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM1.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm13 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"></path></svg>
                   </button>
                   <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="{{ route('solicitud.show', $s->id ) }}">Información</a>
+                    <a class="dropdown-item" href="{{ route('solicitud.me.show', $s->id ) }}">Información</a>
                     {{-- <a class="dropdown-item" href="#">Edit</a> --}}
                     {{-- <a class="dropdown-item text-danger" href="#">Delete</a></div> --}}
                 </div>

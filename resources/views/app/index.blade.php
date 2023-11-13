@@ -98,45 +98,44 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Información</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Some borders are removed -->
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="i fa fa-circle text-dark"></div> En clases
+          </li>
+          <li class="list-group-item">
+            <div class="i fa fa-circle text-secondary"></div> Tomado por docente
+          </li>
+          <li class="list-group-item">
+            <div class="i fa fa-circle text-warning"></div> Seleccionado por el usuario
+          </li>
+        </ul>
+      </div>
+      {{-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div> --}}
+    </div>
+  </div>
+
 @endsection
 @push('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-
       window._USUARIO = null;
 
-      $(document).ready(function() {
-            $('.js-basic-single').select2();
-        });
-
-        function _saveUser(usuario) {
-          window._USUARIO = usuario;
-
-          console.log("usuario seleccionado",_USUARIO)
-        }
-
-        // function mainPushData(data) {
-        //     console.log(data);
-        // }
-
-        // function alertmensaje(data) {
-        //     console.log(data);
-        //     // alert(data);
-        // }
-
-
-        // // selectedSedes
-        // document.getElementById('selectedSedes').addEventListener('change', function() {
-        //     // Función que se ejecutará cuando cambie el valor del select
-        //     console.log('El valor seleccionado es: ' + this.value);
-        //     console.log(this.value);
-        //     //
-        // });
-
-        function seleccionarOpcion() {
-          var select = document.getElementById("selectedSedes");
-          var sedeId = select.value;
-          window.location.href = "{{ route('app.index') }}" + "/" + sedeId;
-        }
+      function seleccionarOpcion() {
+        var select = document.getElementById("selectedSedes");
+        var sedeId = select.value;
+        window.location.href = "{{ route('app.index') }}" + "/" + sedeId;
+      }
     </script>
 @endpush

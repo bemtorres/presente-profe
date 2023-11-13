@@ -42,6 +42,10 @@ class Solicitud extends Model
     return $this->belongsTo(Sede::class,'id_sede');
   }
 
+  public function sem(){
+    return $this->belongsTo(Semana::class,'semana','id');
+  }
+
   public function registros(){
     return $this->hasMany(RegistroCalendario::class,'id_solicitud');
   }

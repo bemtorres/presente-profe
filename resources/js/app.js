@@ -7,6 +7,7 @@ import CalendarioComparte from '@/components/CalendarioComparte.vue';
 import SalaView from '@/components/SalaView.vue';
 import AppSalaView from '@/components/app/AppSalaView.vue';
 import BuscarUsuario from '@/components/app/BuscarUsuario.vue';
+import CalendarioView from '@/components/calendario/CalendarioView.vue';
 // import Calendariomain from '@/components/Calendariomain.vue';
 // import CalendarioUser from '@/components/CalendarioUser.vue';
 // import CalendarioComparte from '@/components/CalendarioComparte.vue';
@@ -24,5 +25,6 @@ createApp({
       'buscar-usuario': BuscarUsuario,
       'sala-view': SalaView,
       'app-sala-view': AppSalaView,
+      'calendario-view': CalendarioView,
     },
 }).mount('#app');

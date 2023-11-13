@@ -29,6 +29,7 @@ class APISolicitudController extends Controller
     $s = Sala::with(['sede'])->findOrFail($sala['id']);
     $sede = $s->sede;
 
+    // return $horarios;
     $solicitud = new Solicitud();
     $solicitud->id_sede = $sede->id;
     $solicitud->id_sala = $s->id;
@@ -36,46 +37,32 @@ class APISolicitudController extends Controller
     $solicitud->motivo = $motivo;
     $solicitud->comentario = $motivotext;
     $solicitud->estado = 1;
-    $solicitud->semana = $semana['semana'];
+    $solicitud->semana = $semana['semana']; // 2 - No es el id es la semana
     $solicitud->periodo = $semana['periodo'];
     $solicitud->save();
 
+    foreach ($horarios as $hkey => $horario) {
+      $dia_numero = array_flip(Calendario::DAYS)[$horario['dia']];
+
+      $r = new RegistroCalendario();
+      $r->fecha = date_format(date_create($horario['info']['fecha']),'Y-m-d');
+      $r->periodo = $semana['periodo'];
+      $r->semana = $semana['semana'];
+      $r->dia = $dia_numero;
+      $r->modulo = $horario['modulo'];
+      $r->id_sede = $sede->id;
+      $r->id_sala = $s->id;
+      $r->id_usuario = $u->id;
+      $r->id_solicitud = $solicitud->id;
+      $r->estado = true;
+      $r->save();
+    }
+
     return response()->json([
       'solicitud' => $solicitud,
+      'registros' => $solicitud->registros,
       'status' => 'success'
     ]);
-
-    // foreach ($horarios as $hkey => $horario) {
-    //   $dia_numero = array_flip(Calendario::DAYS)[$horario['dia']];
-
-    //   $r = new RegistroCalendario();
-    //   $r->fecha = $horario['info']['fecha'];
-    //   $r->periodo = $semana['periodo'];
-    //   $r->semana = $semana['semana'];
-    //   $r->dia = $dia_numero;
-    //   $r->modulo = $horario['modulo'];
-    //   $r->id_sede = $sede->id;
-    //   $r->id_sala = $sala['id'];
-    //   $r->id_usuario = $u->id;
-    //   $r->id_solicitud = $solicitud->id;
-    //   $r->save();
-      // $table->date('fecha')->nullable();
-      // $table->string('periodo'); // "202302"
-      // $table->integer('semana'); // 2
-      // $table->integer('dia');    // 29
-      // $table->integer('modulo'); // 1
-      // $table->json('info')->nullable();
-
-      // $table->foreignId('id_solicitud')->references('id')->on('solicitud');
-      // $table->foreignId('id_sede')->references('id')->on('sede');
-      // $table->foreignId('id_sala')->references('id')->on('sala');
-      // $table->foreignId('id_usuario')->references('id')->on('usuario');
-
-      // $table->integer('tipo')->default(0);
-      // $table->integer('estado')->default(0);
-      // $table->timestamps();
-    // }
-
 
   }
 }

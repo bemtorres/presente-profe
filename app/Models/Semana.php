@@ -23,4 +23,8 @@ class Semana extends Model
     // SEMANA 1 / 07-08-2023 - 13-08-2023
     return 'SEMANA ' . $this->semana . ' / ' . $this->getFechaInicio()->getDate() . ' - ' . $this->getFechaTermino()->getDate();
   }
+
+  public function getWeeks() {
+    return (new ConvertDatetime($this->fecha_inicio))->getAllDay(7);
+  }
 }

@@ -35,7 +35,9 @@ class AppController extends Controller
       ];
     }
 
-    return view('app.index', compact('s', 'motivos', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
+    // return $array_semestre;
+
+    return view('app.index', compact('s', 'semestre','motivos', 'sedes', 'array_semestre', 'semestre', 'salas', 'horarios'));
   }
 
 

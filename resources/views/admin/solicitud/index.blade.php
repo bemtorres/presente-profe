@@ -3,26 +3,6 @@
 @push('css')
 
 <link href="{{ asset('vendors/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
-<style>
-  /* Personalización de la clase media */
-.custom-media {
-    border: 1px solid #ccc; /* Añadir un borde al componente media */
-    padding: 10px; /* Agregar espacio interno al componente media */
-    background-color: #f5f5f5; /* Cambiar el color de fondo del componente media */
-}
-
-/* Personalización de la imagen dentro de la clase media */
-.custom-media img {
-    border-radius: 50%; /* Agregar un borde redondeado a la imagen */
-}
-
-/* Personalización del contenido dentro de la clase media-body */
-.custom-media .media-body {
-    font-size: 18px; /* Cambiar el tamaño de fuente del contenido */
-    color: #333; /* Cambiar el color del texto del contenido */
-}
-</style>
 @endpush
 @section('content')
 <div class="container-fluid">

@@ -4,9 +4,11 @@
       <div class="col-md-12 mb-3">
         <p class="card-text d-flex justify-content-between align-items-center">
           <span>📅<strong>Calendario de disponibilidad de salas</strong></span>
-          <span class="badge bg-primary rounded-pill">
-            <strong>{{ props.semestre.nombre }}</strong>
-          </span>
+          <div>
+            <span class="badge bg-dark cursor rounded-pill" data-bs-toggle="modal" data-bs-target="#questionModal">
+              <i class="fa fa-2x fa-question"></i>
+            </span>
+          </div>
         </p>
       </div>
 
@@ -206,7 +208,8 @@
                 @click="selectedHorario(dia + '-' + (index + 1))"
                 :class="selectClases(dia + '-' + (index + 1))"
                 class="item-selected"
-              ></td>
+              >
+              </td>
             </tr>
           </tbody>
         </table>
@@ -357,6 +360,8 @@ const selectClases = (casilla) => {
   if (obj != null) {
     if (obj.color == "gris") {
       return "bg-dark";
+    } else if (obj.color == "info") {
+      return "bg-secondary";
     } else if (obj.color == "verde") {
       return "bg-warning";
     }
@@ -395,6 +400,7 @@ const handleSelectChange = () => {
   })
     .then((data) => {
       convertToHorario(data.data);
+      console.log(data.data);
     })
     .catch((error) => {
       toastError("Error al cargar el horario");
@@ -428,8 +434,8 @@ const handleSolicitud = () => {
     motivoInput: vmotivoInput.value,
   })
     .then((data) => {
-      console.log("data", data);
-      // alertSuccessTime("Solicitud enviada", "Se ha generado una solicitud de sala ID: " + data.solicitud.id);
+      // console.log("data", data);
+      alertSuccessTime("Solicitud enviada", "Se ha generado una solicitud de sala ID: " + data.solicitud.id);
     })
     .catch((error) => {
       toastError("Error al guardar el horario");

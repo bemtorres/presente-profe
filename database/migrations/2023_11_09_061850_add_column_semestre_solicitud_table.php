@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('solicitud', function (Blueprint $table) {
           $table->string('periodo')->nullable()->after('estado'); // "202302"
-          $table->integer('semana')->nullable()->after('periodo'); // 2
+          $table->integer('semana')->nullable()->after('periodo'); // 2 id o numero de semana
         });
     }
 

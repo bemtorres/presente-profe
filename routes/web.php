@@ -45,8 +45,12 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/semestres/{periodo}', [SemestreController::class, 'show'])->name('semestres.show');
 
   Route::get('admin/solicitud', [SolicitudController::class, 'index'])->name('solicitud.index');
+  Route::get('admin/solicitud-realizadas', [SolicitudController::class, 'indexRealizados'])->name('solicitud.indexR');
+  Route::get('admin/solicitud-canceladas', [SolicitudController::class, 'indexCancelados'])->name('solicitud.indexC');
   Route::get('admin/me-solicitudes', [SolicitudController::class, 'meindex'])->name('solicitud.me');
+  Route::get('admin/me-solicitudes/{id}', [SolicitudController::class, 'meshow'])->name('solicitud.me.show');
 
   Route::get('admin/solicitud/{id}', [SolicitudController::class, 'show'])->name('solicitud.show');
+  Route::put('admin/solicitud/{id}', [SolicitudController::class, 'update'])->name('solicitud.update');
 
 });

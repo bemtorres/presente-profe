@@ -21,7 +21,8 @@ class CalendarioMixV1 {
     $calendarios = $this->all_calendarios();
     $registros = $this->all_registros();
 
-    $data = $calendarios + $registros;
+    $data = array_merge($calendarios,$registros);
+
 
     return $data;
   }
@@ -39,6 +40,8 @@ class CalendarioMixV1 {
     $registros = RegistroCalendario::where('periodo', $this->periodo)
                                   ->where('semana', $this->semana)
                                   ->where('id_sala', $this->sala)
+                                  ->where('estado', true)
+                                  ->with(['usuario','usuario.sede'])
                                   ->get();
 
     return $this->getRaw($registros);

@@ -20,7 +20,7 @@ class UsuarioController extends Controller
   public function index() {
     $this->policy->admin(current_user());
 
-    $usuarios = Usuario::get();
+    $usuarios = Usuario::with('sede')->get();
     return view('admin.usuario.index', compact('usuarios'));
   }
 
