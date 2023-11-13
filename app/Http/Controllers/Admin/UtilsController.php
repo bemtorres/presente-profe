@@ -33,39 +33,9 @@ class UtilsController extends Controller
 
       $data = Excel::toArray([], $file)[0];
 
-      $salas = [];
 
-      foreach ($data as $keyF => $valueF) {
-        if ($keyF > 0) {
-          $s = [
-            'aula' => $valueF[34] ?? 'SALAFANTASMA',
-            'denominacion' => $valueF[35] ?? 'SALAFANTASMA',
-          ];
-          array_push($salas, $s);
-        }
-      }
-
+      $salas = $this->getSala($data, $sede, $periodo);
       return $salas;
-
-      $salas = array_filter($salas, function ($value) {
-        return $value !== null;
-      });
-
-      $uniques = array_map("unserialize", array_unique(array_map("serialize", $salas)));
-
-      // Vuelve a indexar el arreglo resultante
-      $uniques = array_values($uniques);
-
-      foreach ($uniques as $key => $value) {
-        $s = new Sala();
-        $s->periodo = $periodo;
-        $s->nombre = $value['denominacion'];
-        $s->codigo = $value['aula'];
-        $s->id_sede = $sede;
-        $s->save();
-      }
-
-      $salas = Sala::where('id_sede', $sede)->where('periodo', $periodo)->get();
 
       $horarios = [];
       foreach ($data as $keyF => $valueF) {
@@ -107,6 +77,70 @@ class UtilsController extends Controller
     }
 
     return $data;
+  }
+
+
+  private function getSala($data, $sede, $periodo) {
+    $salas = [];
+
+    foreach ($data as $keyF => $valueF) {
+      if ($keyF > 0) {
+        $s = [
+          'aula' => $valueF[34] ?? 'SALAFANTASMA',
+          'denominacion' => $valueF[35] ?? 'SALAFANTASMA',
+        ];
+        array_push($salas, $s);
+      }
+    }
+
+    $salas = array_filter($salas, function ($value) {
+      return $value !== null;
+    });
+
+    $uniques = array_map("unserialize", array_unique(array_map("serialize", $salas)));
+
+    // Vuelve a indexar el arreglo resultante
+    $uniques = array_values($uniques);
+
+
+    $salas = Sala::where('id_sede', $sede)->where('periodo', $periodo)->get();
+
+
+    foreach ($uniques as $keyu => $value) {
+      if ($value['aula'] == 'SALAFANTASMA') {
+        continue;
+      }
+
+      $uniques[$keyu]['found'] = false;
+      foreach ($salas as $keys => $sala) {
+        if ($value['aula'] == $sala['codigo']) {
+          $uniques[$keyu]['found'] = true;
+          break;
+        }
+      }
+    }
+
+
+    return $uniques;
+
+    foreach ($uniques as $key => $value) {
+      if ($value['aula'] == 'SALAFANTASMA') {
+        continue;
+      }
+
+      if ($value['found']) {
+        continue;
+      }
+
+      $s = new Sala();
+      $s->periodo = $periodo;
+      $s->nombre = $value['denominacion'];
+      $s->codigo = $value['aula'];
+      $s->id_sede = $sede;
+      $s->save();
+    }
+
+    return Sala::where('id_sede', $sede)->where('periodo', $periodo)->get();
   }
 
   public function correo() {
