@@ -106,7 +106,7 @@ class UtilsController extends Controller
       // return $calendario;
 
       foreach ($calendario as $keyC => $vc) {
-        for ($i=1; $i <= 18; $i++) {
+        for ($i=15; $i <= 18; $i++) {
           $c = new Calendario();
           $c->periodo = $periodo;
           $c->semana = $i;
@@ -120,7 +120,9 @@ class UtilsController extends Controller
       }
     }
 
-    return Calendario::get();
+    // return Calendario::get();
+
+    return back()->with('success','Se ha cargado correctamente');
   }
 
 
