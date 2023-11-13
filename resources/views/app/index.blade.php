@@ -65,7 +65,7 @@
               <div class="card-body">
                 <buscar-usuario
                   post-buscar='{{ route('api.backend.usuario.buscar') }}'
-                  >
+                >
                 </buscar-usuario>
                 <div class="card text-white bg-dark">
                   <img class="card-img-top" src="{{ $s->getImg() }}" alt="Title">
@@ -129,7 +129,7 @@
 @endsection
 @push('js')
     <script>
-      window._USUARIO = null;
+      window._USUARIO = @json(current_user());
 
       function seleccionarOpcion() {
         var select = document.getElementById("selectedSedes");

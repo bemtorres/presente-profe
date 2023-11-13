@@ -14,7 +14,7 @@ class Solicitud extends Model
     1 => 'Pendiente',
     2 => 'Aprobado',
     3 => 'Rechazado',
-    4 => 'Cancelado',
+    4 => 'Cancelado', // por el usuario
   ];
 
   const MOTIVOS = [

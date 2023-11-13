@@ -7,7 +7,7 @@
   @component('components.button._back')
     @slot('route', route('solicitud.index'))
     @slot('color', 'dark')
-    @slot('body', 'Solicitud #' . $s->id)
+    @slot('body', 'Solicitud de sala #' . $s->id)
   @endcomponent
   <div class="card shadow mb-4">
     <div class="card-body row">
@@ -53,29 +53,15 @@
 
         <div class="card mt-3 text-start">
           <div class="card-body">
-            <div class="my-3 text-center">
-              <div class="small text-medium-emphasis">
-                @switch($s->estado)
-                  @case(1)
-                    <div class="alert alert-warning" role="alert"><strong>Pendiente de aprobación</strong></div>
-                    @break
-                  @case(2)
-                    <div class="alert alert-success" role="alert"><strong>Aceptado</strong></div>
-                    @break
-                  @default
-                    <div class="alert alert-danger" role="alert"><strong>Cancelado</strong></div>
-                @endswitch
-              </div>
-            </div>
+            @include('admin.solicitud._estado')
 
-
-            @if ($s->estado == 1 || $s->estado == 2)
+            {{-- @if ($s->estado == 1 || $s->estado == 2) --}}
             <div class="d-grid">
-              <button type="button" class="btn btn-danger" data-coreui-toggle="modal" data-coreui-target="#estadoModal">
-                Cancelar solicitud
+              <button type="button" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#estadoModal">
+                Validar solcitud
               </button>
             </div>
-            @endif
+            {{-- @endif --}}
 
             @if ($s->revisor)
             <div class="d-grid my-3 text-center">
@@ -107,7 +93,7 @@
                       :solicitud="{{ json_encode($s)}}"
                       :semestre=@json($semestre)
                       :semanasdetall="{{ json_encode($array_semestre) }}"
-                      post-buscar-calendario="{{ route('api.backend.calendario.buscar') }}"
+                      post-buscar-calendario="{{ route('api.backend.calendario.buscar.all') }}"
                     >
                     </calendario-view>
                   </div>
@@ -156,7 +142,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modicar estado de solicitud</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modificar estado de solicitud</h5>
         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

@@ -21,7 +21,12 @@
               <p class="lead mb-4">
               </p>
               <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-                <a href="{{ route('app.sede', $sede->id) }}" class="btn btn-primary btn-lg px-4 me-sm-3">Agendar Sala</a>
+
+                @if (current_user()->admin)
+                  <a href="{{ route('app.sede', $sede->id) }}" class="btn btn-primary btn-lg px-4 me-sm-3">Salas</a>
+                @endif
+
+                <a href="{{ route('app.sede.usuario', $sede->id) }}" class="btn btn-primary btn-lg px-4 me-sm-3">Agendar Sala</a>
                 <a href="{{ route('solicitud.me') }}" class="btn btn-outline-secondary btn-lg px-4">Mis Solicitudes</a>
               </div>
             </div>

@@ -20,6 +20,7 @@
       font-family: 'Lato', 'Merriweather', sans-serif;
     }
   </style>
+  @laravelPWA
 </head>
   <div class="bg-cd-primary min-vh-100 d-flex flex-row align-items-center">
     <div class="container">

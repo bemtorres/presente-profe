@@ -22,13 +22,15 @@ Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCa
 Route::middleware('auth.user')->group( function () {
   Route::get('home', [HomeController::class, 'index'])->name('home.index');
   Route::post('home', [HomeController::class, 'indexPost'])->name('home');
-  Route::get('tutoriales', [HomeController::class, 'tutorial'])->name('home.tutorial');
+  // Route::get('tutoriales', [HomeController::class, 'tutorial'])->name('home.tutorial');
 
 
   Route::get('admin/perfil', [HomeController::class, 'perfil'])->name('admin.perfil');
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
 
   Route::resource('admin/usuarios', UsuarioController::class);
+  Route::get('admin/usuarios-app', [UsuarioController::class, 'indexApp'])->name('usuario.index.app');
+  Route::get('admin/usuarios-admin', [UsuarioController::class, 'indexAdmin'])->name('usuario.index.admin');
   Route::get('admin/usuarios/{id}/sedes', [UsuarioController::class, 'sedes'])->name('usuarios.sedes');
   Route::put('admin/usuarios/{id}/sedes', [UsuarioController::class, 'sedesUpdate'])->name('usuarios.sedes');
 
@@ -45,8 +47,10 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/semestres/{periodo}', [SemestreController::class, 'show'])->name('semestres.show');
 
   Route::get('admin/solicitud', [SolicitudController::class, 'index'])->name('solicitud.index');
-  Route::get('admin/solicitud-realizadas', [SolicitudController::class, 'indexRealizados'])->name('solicitud.indexR');
+  Route::get('admin/solicitud-aceptadas', [SolicitudController::class, 'indexAceptadas'])->name('solicitud.indexA');
+  Route::get('admin/solicitud-rechazadas', [SolicitudController::class, 'indexRechazadas'])->name('solicitud.indexR');
   Route::get('admin/solicitud-canceladas', [SolicitudController::class, 'indexCancelados'])->name('solicitud.indexC');
+
   Route::get('admin/me-solicitudes', [SolicitudController::class, 'meindex'])->name('solicitud.me');
   Route::get('admin/me-solicitudes/{id}', [SolicitudController::class, 'meshow'])->name('solicitud.me.show');
 

@@ -20,7 +20,22 @@ class UsuarioController extends Controller
   public function index() {
     $this->policy->admin(current_user());
 
-    $usuarios = Usuario::with('sede')->get();
+    $usuarios = Usuario::with('sede')->where('tipo_usuario', 2)->get();
+    return view('admin.usuario.index', compact('usuarios'));
+  }
+
+  public function indexAdmin() {
+    $this->policy->admin(current_user());
+
+    $usuarios = Usuario::with('sede')->where('tipo_usuario', 1)->get();
+    return view('admin.usuario.index', compact('usuarios'));
+  }
+
+
+  public function indexApp() {
+    $this->policy->admin(current_user());
+
+    $usuarios = Usuario::with('sede')->where('user_app', true)->get();
     return view('admin.usuario.index', compact('usuarios'));
   }
 
@@ -40,6 +55,7 @@ class UsuarioController extends Controller
     $u->apellido_materno = $request->input('apellido_m');
     $u->apellido_paterno = $request->input('apellido_p');
     $u->password = hash('sha256', $request->input('pass'));
+    $u->user_app = $request->input('user_app') == 'si' ? true : false;
     $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
     $u->id_sede = $request->input('sede');
     $u->save();
@@ -79,6 +95,7 @@ class UsuarioController extends Controller
       $u->apellido_materno = $request->input('apellido_m');
       $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
       $u->id_sede = $request->input('sede') == 1300 ? 1300 : 100;
+      $u->user_app = $request->input('user_app') == 'si' ? true : false;
       $u->update();
     }
     return back()->with('success','Se ha actualizado');

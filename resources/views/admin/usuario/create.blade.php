@@ -101,7 +101,13 @@
                   <option value="2" selected>No</option>
                 </select>
               </div>
-
+              <div class="col-md-4 mb-3">
+                <label for="admin">User only tablet<small class="text-danger">*</small></label>
+                <select class="form-control" id="user_app" name="user_app">
+                  <option value="si">Si</option>
+                  <option value="no" selected>No</option>
+                </select>
+              </div>
 
               {{-- <div class="col-md-4">
                 <label for="teams">Team</label>

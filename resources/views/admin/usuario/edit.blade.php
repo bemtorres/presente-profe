@@ -83,6 +83,15 @@
                   <option value="2" {{ $u->tipo_usuario == 2 ? 'selected' : '' }}>No</option>
                 </select>
               </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="admin">User only tablet<small class="text-danger">*</small></label>
+                <select class="form-control" id="user_app" name="user_app">
+                  <option value="si" {{ $u->user_app ? 'selected' : '' }}>Si</option>
+                  <option value="no" {{ $u->user_app ? '' : 'selected' }}>Noi</option>
+                </select>
+              </div>
+
             </div>
             <div class="form-group d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Guardar</button>

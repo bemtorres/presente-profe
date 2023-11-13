@@ -10,11 +10,13 @@ class CalendarioMixV1 {
   protected $periodo;
   protected $semana;
   protected $sala;
+  protected $onlyActivos;
 
-  public function __construct(string $periodo,int $semana = 0, int $sala = 0){
+  public function __construct(string $periodo,int $semana = 0, int $sala = 0, bool $onlyActivos = true){
     $this->periodo = $periodo;
     $this->semana = $semana;
     $this->sala = $sala;
+    $this->onlyActivos = $onlyActivos;
   }
 
   public function call() {
@@ -37,12 +39,21 @@ class CalendarioMixV1 {
   }
 
   public function all_registros() {
-    $registros = RegistroCalendario::where('periodo', $this->periodo)
+    // ESTADO = [
+    //   1 => 'Pendiente',
+    //   2 => 'Aprobado',
+    //   3 => 'Rechazado',
+    //   4 => 'Cancelado',
+    // ];
+    $query = RegistroCalendario::where('periodo', $this->periodo)
                                   ->where('semana', $this->semana)
-                                  ->where('id_sala', $this->sala)
-                                  ->where('estado', true)
-                                  ->with(['usuario','usuario.sede'])
-                                  ->get();
+                                  ->where('id_sala', $this->sala);
+
+    if ($this->onlyActivos) {
+      $query = $query->whereIn('estado',[1,2]);
+    }
+
+    $registros = $query->with(['usuario','usuario.sede'])->get();
 
     return $this->getRaw($registros);
   }

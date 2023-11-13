@@ -13,7 +13,8 @@
         "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
-        "rap2hpoutre/fast-excel": "^5.3"
+        "rap2hpoutre/fast-excel": "^5.3",
+        "silviolleite/laravelpwa": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

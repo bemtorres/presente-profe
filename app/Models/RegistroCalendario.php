@@ -13,6 +13,13 @@ class RegistroCalendario extends Model
 
   protected $table = 'registro_calendario';
 
+  const ESTADO = [
+    1 => 'Pendiente',
+    2 => 'Aprobado',
+    3 => 'Rechazado',
+    4 => 'Cancelado',
+  ];
+
   CONST DAYS = [
     1 => 'L',
     2 => 'M',

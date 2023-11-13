@@ -44,7 +44,6 @@
                   <div class="col">
                     <div>{{ $s->usuario->nombre_completo() }}</div>
                     <div class="small text-medium-emphasis">{{ $s->usuario->correo }}</div>
-
                   </div>
                 </div>
               </td>
@@ -54,6 +53,9 @@
               </td>
               <td>
                 <div class="small text-medium-emphasis">{{ $s->getMotivo() }}</div>
+                <div class="fw-semibold">
+                  <small>{{ $s->sem->getInfo() }}</small>
+                </div>
               </td>
               <td>
                 @switch($s->estado)
@@ -63,8 +65,11 @@
                   @case(2)
                     <span class="badge bg-success">Aceptado</span>
                     @break
+                  @case(3)
+                    <span class="badge bg-danger">Rechazado</span>
+                    @break
                   @default
-                    <span class="badge bg-danger">Cancelado</span>
+                    <span class="badge bg-dark">Cancelado</span>
                 @endswitch
               </td>
               <td>

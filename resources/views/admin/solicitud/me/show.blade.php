@@ -7,7 +7,7 @@
   @component('components.button._back')
     @slot('route', route('solicitud.me'))
     @slot('color', 'dark')
-    @slot('body', 'Solicitud #' . $s->id)
+    @slot('body', 'Mi solicitud de sala #' . $s->id)
   @endcomponent
   <div class="card shadow mb-4">
     <div class="card-body row">
@@ -53,22 +53,7 @@
 
         <div class="card mt-3 text-start">
           <div class="card-body">
-            <div class="my-3 text-center">
-              <div class="small text-medium-emphasis">
-                @switch($s->estado)
-                  @case(1)
-                    <div class="alert alert-warning" role="alert"><strong>Pendiente de aprobación</strong></div>
-                    @break
-                  @case(2)
-                    <div class="alert alert-success" role="alert"><strong>Aceptado</strong></div>
-                    @break
-                  @default
-                    <div class="alert alert-danger" role="alert"><strong>Cancelado</strong></div>
-                @endswitch
-              </div>
-            </div>
-
-
+            @include('admin.solicitud._estado')
             @if ($s->estado == 1 || $s->estado == 2)
             <div class="d-grid">
               <button type="button" class="btn btn-danger" data-coreui-toggle="modal" data-coreui-target="#estadoModal">
@@ -107,7 +92,7 @@
                       :solicitud="{{ json_encode($s)}}"
                       :semestre=@json($semestre)
                       :semanasdetall="{{ json_encode($array_semestre) }}"
-                      post-buscar-calendario="{{ route('api.backend.calendario.buscar') }}"
+                      post-buscar-calendario="{{ route('api.backend.calendario.buscar.all') }}"
                     >
                     </calendario-view>
                   </div>

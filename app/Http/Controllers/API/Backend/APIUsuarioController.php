@@ -67,7 +67,7 @@ class APIUsuarioController extends Controller
     $usuarios = Usuario::where(function($query) use ($busqueda) {
       $query->where('correo', 'like', "%$busqueda%")
             ->orWhere('nombre', 'like', "%$busqueda%");
-    })->get();
+    })->where('user_app',false)->get();
 
     // return $usuarios;
 

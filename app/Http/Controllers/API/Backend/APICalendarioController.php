@@ -34,6 +34,21 @@ class APICalendarioController extends Controller
     ], 200);
   }
 
+
+  public function buscarAll(Request $request) {
+    // $this->policy->admin(current_user());
+    $periodo = $request->input('periodo');
+    $semana = $request->input('semana');
+    $sala = $request->input('sala');
+
+    $data = (new CalendarioMixV1($periodo, $semana, $sala, false))->call();
+
+    return Response()->json([
+      'message' => 'Se ha encontrado correctamente',
+      'data' => $data
+    ], 200);
+  }
+
   public function store(Request $request) {
     $periodo = $request->input('periodo');
     $semana = $request->input('semana');

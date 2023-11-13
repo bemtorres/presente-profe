@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Semana;
 use App\Models\Semestre;
 use App\Models\Solicitud;
-use App\Services\ConvertDatetime;
 use App\Services\DuocHorario;
 use App\Services\Policies\UsuarioPolicy;
 use App\Services\RegistroDias;
@@ -31,7 +30,7 @@ class SolicitudController extends Controller
     return view('admin.solicitud.index', compact('solicitudes','semestre'));
   }
 
-  public function indexRealizados() {
+  public function indexAceptadas() {
     $this->policy->admin(current_user());
 
     $id_sede = current_user()->sede->id;
@@ -50,7 +49,19 @@ class SolicitudController extends Controller
     $semestre = Semestre::where('activo', true)->firstOrFail();
 
     $solicitudes = Solicitud::where('id_sede', $id_sede )
-                            ->where('estado', 3)
+                            ->where('estado',4)
+                            ->get();
+    return view('admin.solicitud.index', compact('solicitudes','semestre'));
+  }
+
+  public function indexRechazadas() {
+    $this->policy->admin(current_user());
+
+    $id_sede = current_user()->sede->id;
+    $semestre = Semestre::where('activo', true)->firstOrFail();
+
+    $solicitudes = Solicitud::where('id_sede', $id_sede )
+                            ->where('estado',3)
                             ->get();
     return view('admin.solicitud.index', compact('solicitudes','semestre'));
   }
@@ -172,25 +183,30 @@ class SolicitudController extends Controller
     public function update(Request $request, $id)
     {
       $btn = $request->input('btnSolicitud');
-
       if ($btn == 'cancelar') { // el creador de su misma solicitud puede cancelar
-        $s = Solicitud::where('id_usuario', current_user()->id)->findOrFail($id);
+        $s = Solicitud::where('id_usuario', current_user()->id)->with('registros')->findOrFail($id);
         $s->estado = 4;
         $s->update();
-        return back()->with('success','Se ha cancelado correctamente la solicitud');
-      } else {
-        $s = Solicitud::findOrFail($id);
-        $s->id_revisor = current_user()->id;
 
-        if ($btn == 'aprobar') {
-          $s->estado = 2;
-        } else {
-          $s->estado = 3;
+        foreach ($s->registros as $key => $r) {
+          $r->estado = 4;
+          $r->update();
         }
 
-        $s->update();
-      }
+        return back()->with('success','Se ha cancelado correctamente la solicitud');
+      } else {
+        $s = Solicitud::with('registros')->findOrFail($id);
+        $s->id_revisor = current_user()->id;
+        $estado = $btn == 'aprobar' ? 2 : 3;
 
+        $s->estado = $estado;
+        $s->update();
+
+        foreach ($s->registros as $key => $r) {
+          $r->estado = $estado;
+          $r->update();
+        }
+      }
 
       return back()->with('success','Se ha actualizado correctamente la solicitud');
     }

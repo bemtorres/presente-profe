@@ -446,10 +446,4 @@ const handleSolicitud = () => {
       console.log("error", error);
     });
 };
-
-const limpiarTodo = () => {
-  data.value = [];
-  meData.value = [];
-  window._USUARIO = null;
-};
 </script>
