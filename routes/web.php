@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\GoogleUserController;
 use App\Http\Controllers\ComparteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\ReporteController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('tutoriales', [HomeController::class, 'tutorial'])->name('home.tutorial');
 
 
-  Route::get('chartjs',function(){return view('layouts.chartjs');});
+  Route::get('reportes', [ReporteController::class, 'reportes'])->name('reportes.reporte');
 
   Route::get('admin/perfil', [HomeController::class, 'perfil'])->name('admin.perfil');
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
