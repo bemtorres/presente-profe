@@ -9,4 +9,16 @@ class Sede extends Model
 {
   use HasFactory;
   protected $table = 'sede';
+
+  public function scopeFindActivo($query) {
+    return $query->where('estado', true);
+  }
+
+  public function salas(){
+    return $this->hasMany(Sala::class,'id_sede');
+  }
+
+  public function getImg() {
+    return asset('template/img'. $this->img);
+  }
 }

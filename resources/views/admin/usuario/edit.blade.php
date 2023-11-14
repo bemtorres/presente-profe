@@ -67,6 +67,15 @@
                 </div>
               </div>
 
+              <div class="col-md-12 mb-3">
+                <label for="sede">Sede<small class="text-danger">*</small></label>
+                <select class="form-control" id="sede" name="sede">
+                  @foreach ($sedes as $s)
+                    <option value="{{ $s->id }}" {{ $s->id == $u->id_sede ? 'selected' : '' }}>{{ $s->nombre }}</option>
+                  @endforeach
+                </select>
+              </div>
+
               <div class="col-md-4 mb-3">
                 <label for="admin">Administrador<small class="text-danger">*</small></label>
                 <select class="form-control" id="admin" name="admin">
@@ -74,6 +83,15 @@
                   <option value="2" {{ $u->tipo_usuario == 2 ? 'selected' : '' }}>No</option>
                 </select>
               </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="admin">User only tablet<small class="text-danger">*</small></label>
+                <select class="form-control" id="user_app" name="user_app">
+                  <option value="si" {{ $u->user_app ? 'selected' : '' }}>Si</option>
+                  <option value="no" {{ $u->user_app ? '' : 'selected' }}>Noi</option>
+                </select>
+              </div>
+
             </div>
             <div class="form-group d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Guardar</button>

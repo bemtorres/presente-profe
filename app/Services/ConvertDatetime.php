@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-
+use Carbon\Carbon;
 class ConvertDatetime
 {
   protected $date;
@@ -112,8 +112,23 @@ class ConvertDatetime
     return array('start' => $start,'end' => $end);
   }
 
+  public function getAllDay($n_days) {
+
+    $fechaInicio = Carbon::create($this->date);
+    $fechas = [];
+    $fechas[] = $this->getDate();
+
+    for ($i = 1; $i <= $n_days; $i++) {
+        $fecha = $fechaInicio->addDay();
+        $fechas[] = $fecha->format('d-m-Y');
+    }
+
+    return $fechas;
+  }
+
   // PRIVATE
   private function format($date, string $format){
     return date_format(date_create($date),$format);
   }
+
 }

@@ -71,9 +71,20 @@
   background: linear-gradient(-45deg, rgba(0, 164, 153, 0) 50%, rgba(0, 164, 153, 1) 50%);
 }
 
-
 .bg-cd-warning {
-  background: #f6b21c;
+  background: #f1B634;
+}
+
+.bg-cd-gray {
+  background: #666666;
+}
+
+.bg-cd-white {
+  background: #ffffff;
+}
+
+.bg-cd-dark {
+  background: #1A1A1A;
 }
 
 .bd-cd-primary {

@@ -102,7 +102,7 @@ class Usuario extends Authenticatable
       'apellido_materno' => $this->apellido_materno,
       'nombre_completo' => $this->nombre_completo(),
       'correo' => $this->correo,
-      'tipo_usuario' => $this->tipo_usuario ? 'admin' : 'normal',
+      'tipo_usuario' => $this->tipo_usuario == 1 ? 'admin' : 'normal',
       'id_sede' => $this->id_sede,
       'sede' => $this->sede->nombre,
       'img' => $this->getImg(),

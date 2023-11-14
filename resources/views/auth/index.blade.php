@@ -12,12 +12,15 @@
   <link rel="stylesheet" href="{{ asset('template/css/vendors/simplebar.css') }}">
   <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('template/css/comparteduoc.css') }}" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" integrity="sha512-rSWTr6dChYCbhpHaT1hg2tf4re2jUxBWTuZbujxKg96+T87KQJriMzBzW5aqcb8jmzBhhNSx4XYGA6/Y+ok1vQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.cdnfonts.com/css/merriweather" rel="stylesheet">
   <style>
     body {
       background: #04243c;
+      font-family: 'Lato', 'Merriweather', sans-serif;
     }
   </style>
+  @laravelPWA
 </head>
   <div class="bg-cd-primary min-vh-100 d-flex flex-row align-items-center">
     <div class="container">
@@ -37,16 +40,14 @@
                   <img src="{{ asset('template/img/comparte-logo2.svg') }}" width="120px">
                 </div>
                 <h1>Acceso</h1>
-                @if (session('info'))
-                <div class="col-12 text-center mt-4">
-                    <span class="badge bg-info">Error. intente nuevamente</span>
-                </div>
-                @endif
+
                 {{-- <p class="text-medium-emphasis">Sign In to your account</p> --}}
                 <form class="form-sample form-submit" action="{{ route('login') }}" method="POST">
                   @csrf
                   <div class="mb-3">
-                    <label for="correo" class="form-label">Correo electrónico</label>
+                    <label for="correo" class="form-label">Correo electrónico @if (session('info'))
+                      <span class="badge bg-danger">Error. intente nuevamente</span>
+                    @endif</label>
                     <input type="email" class="form-control" id="correo" name="correo" value="" required>
                   </div>
                   <div class="mb-3">

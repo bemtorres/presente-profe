@@ -19,12 +19,13 @@
             <div class="row mb-3">
               <div class="col-md-12 mb-3">
                 <div class="d-flex align-items-center justify-content-center ">
-                  <div class="avatar avatar-md">
+                  <div class="avatar avatar-xl">
                     <img class="avatar-img" src="{{ current_user()->getImg() }}" alt="">
                   </div>
                   <div class="ms-2">
-                    <span class="h6 mt-2 mt-sm-0">{{ current_user()->nombre_completo() }}</span>
+                    <p class="h6 mt-2 mt-sm-0">{{ current_user()->nombre_completo() }}</p>
                     <p class="small m-0">{{ current_user()->correo }}</p>
+                    <p class="badge badge-pill bg-dark">{{ current_user()->sede->nombre }}</p>
                   </div>
                 </div>
               </div>

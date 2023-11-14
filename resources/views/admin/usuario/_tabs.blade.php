@@ -2,6 +2,12 @@
   <li class="nav-item">
     <a class="nav-link {{ activeTab(["admin/usuarios"]) }}" href="{{ route('usuarios.index') }}">Usuarios</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link {{ activeTab(["admin/usuarios-admin"]) }}" href="{{ route('usuario.index.admin') }}">Administradores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ activeTab(["admin/usuarios-app"]) }}" href="{{ route('usuario.index.app') }}">Dispositivos</a>
+  </li>
   {{-- <li class="nav-item"> --}}
     {{-- <a class="nav-link {{ activeTab(["admin/usuario/admins"]) }}" href="{{ route('admin.usuario.admin') }}">Admins</a> --}}
   {{-- </li> --}}

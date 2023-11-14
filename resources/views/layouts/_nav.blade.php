@@ -29,10 +29,10 @@
               <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}"></use>
             </svg> Perfil
           </a>
-          <a class="dropdown-item" href="{{  route('home.tutorial') }}">
+          {{-- <a class="dropdown-item" href="{{  route('home.tutorial') }}">
             <i class="fa-brands fa-youtube icon me-2 text-danger"></i>
             Tutoriales
-          </a>
+          </a> --}}
           <a class="dropdown-item" href="{{ route('logout') }}">
             <svg class="icon me-2">
               <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-account-logout') }}"></use>

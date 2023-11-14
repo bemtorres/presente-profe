@@ -4,10 +4,59 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 
 class Calendario extends Model
 {
   use HasFactory;
 
   protected $table = 'calendario';
+
+  protected function info(): Attribute {
+    return Attribute::make(
+        get: fn ($value) => json_decode($value, true),
+        set: fn ($value) => json_encode($value),
+    );
+  }
+
+  CONST DAYS = [
+    1 => 'L',
+    2 => 'M',
+    3 => 'X',
+    4 => 'J',
+    5 => 'V',
+    6 => 'S'
+  ];
+
+  CONST DAYS_TEXT = [
+    1 => 'LUNES',
+    2 => 'MARTES',
+    3 => 'MIERCÓLES',
+    4 => 'JUEVES',
+    5 => 'VIERNES',
+    6 => 'SÁBADO'
+  ];
+
+  CONST TIPO = [
+    1 => 'MANUAL',
+    2 => 'CARGA MASIVA'
+  ];
+
+  public function getDay(){
+    return self::DAYS[$this->dia];
+  }
+
+  public function getDayText(){
+    return self::DAYS_TEXT[$this->dia];
+  }
+
+  public function getRaw(){
+    return [
+      'id' => self::DAYS[$this->dia] . '-' . $this->modulo,
+      'dia' => self::DAYS[$this->dia],
+      'modulo' => $this->modulo,
+      'color' => 'gris'
+    ];
+  }
 }

@@ -18,6 +18,7 @@
               <th>id</th>
               <th>Correo</th>
               <th>Nombre</th>
+              <th>Sede</th>
               <th></th>
             </tr>
           </thead>
@@ -27,6 +28,7 @@
               <td>{{ $u->id }}</td>
               <td><a href="{{ route('usuarios.show',$u->id) }}">{{ $u->correo }}</a></td>
               <td>{{ $u->nombre_completo() }}</td>
+              <td><small>{{ $u->sede->nombre }}</small></td>
               <td>
                 @if ($u->tipo_usuario == 1)
                   <i class="fa-solid fa-user-shield"></i>
