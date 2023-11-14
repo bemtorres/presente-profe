@@ -25,7 +25,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('tutoriales', [HomeController::class, 'tutorial'])->name('home.tutorial');
 
 
-  Route::get('reportes', [ReporteController::class, 'reportes'])->name('reportes.reporte');
+  Route::get('reportes', [ReporteController::class, 'index'])->name('reportes.index');
 
   Route::get('admin/perfil', [HomeController::class, 'perfil'])->name('admin.perfil');
   Route::put('admin/perfil', [HomeController::class, 'perfilUpdate'])->name('admin.perfil');
