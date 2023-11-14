@@ -36,7 +36,7 @@
                     <td>{{ $s->sala->nombre }}</td>
                   </tr>
                   <tr>
-                    <td>{{ $s->sem->getInfo() ?? '' }}</td>
+                    <td>{{ $s->seman->getInfo() ?? '' }}</td>
                   </tr>
                   <tr>
                     @if ($s->motivo == 100)

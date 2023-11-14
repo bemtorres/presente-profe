@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\UtilsController;
 
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\ReporteController;
 
 use Illuminate\Support\Facades\Route;
@@ -48,6 +47,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/utils/calendario', [UtilsController::class, 'calendario'])->name('utils.calendario');
   Route::post('admin/utils/calendario', [UtilsController::class, 'calendarioStore'])->name('utils.calendario');
   Route::get('admin/utils/correo', [UtilsController::class, 'correo'])->name('utils.correo');
+  Route::put('admin/utils/correo', [UtilsController::class, 'correoUpdate'])->name('utils.correo');
 
   Route::get('admin/semestres', [SemestreController::class, 'index'])->name('semestres.index');
   Route::get('admin/semestres/{periodo}', [SemestreController::class, 'show'])->name('semestres.show');

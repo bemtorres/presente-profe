@@ -7,6 +7,7 @@ use App\Models\Calendario;
 use App\Models\Sala;
 use App\Models\Sede;
 use App\Models\Semestre;
+use App\Models\Sistema;
 use App\Services\DuocHorario;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -211,6 +212,26 @@ class UtilsController extends Controller
   }
 
   public function correo() {
-    return view('admin.utils.correo');
+    $s = Sistema::first();
+    return view('admin.utils.correo' , compact('s') );
+  }
+
+  public function correoUpdate(Request $request) {
+    $s = Sistema::first();
+
+    $opc = $request->input('opcion');
+    $info = $s->info;
+    if ($opc == 1) {
+      $info['send_email_solicitud'] = $request->input('s_solicitud') ? true : false ?? false;
+      $info['send_email_cancelar'] = $request->input('s_cancelar') ? true : false ?? false;
+      $info['send_email_aceptar'] = $request->input('s_aprobado') ? true : false ?? false;
+      $info['send_email_rechazado'] = $request->input('s_rechazados') ? true : false ?? false;
+    } else {
+      $info['is_email_test'] = $request->input('s_email_test') ? true: false ?? false;
+      $info['email_test'] = $request->input('email_test') ?? null;
+    }
+    $s->info = $info;
+    $s->update();
+    return back()->with('success','Se ha actualizado correctamente');
   }
 }

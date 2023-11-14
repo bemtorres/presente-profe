@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\API\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Auditoria\AudRegistroCalendario;
 use App\Models\Calendario;
 use App\Models\RegistroCalendario;
 use App\Models\Sala;
-use App\Models\Sede;
-use App\Models\Semana;
 use App\Models\Solicitud;
 use App\Models\Usuario;
 use App\Services\EmailServices;
@@ -17,8 +16,6 @@ use Illuminate\Http\Request;
 class APISolicitudController extends Controller
 {
   public function store(Request $request) {
-    // return $request->all();
-
     $sala = $request->input('sala');
     $semana = $request->input('semana');
     $usuario = $request->input('usuario');
@@ -38,7 +35,8 @@ class APISolicitudController extends Controller
     $solicitud->motivo = $motivo;
     $solicitud->comentario = $motivotext;
     $solicitud->estado = 1;
-    $solicitud->semana = $semana['semana']; // 2 - No es el id es la semana
+    $solicitud->id_semana = $semana['id_semana']; // ID de la semana ojo
+    $solicitud->semana = $semana['semana']; // n° semana
     $solicitud->periodo = $semana['periodo'];
     $solicitud->save();
 
@@ -57,6 +55,16 @@ class APISolicitudController extends Controller
       $r->id_solicitud = $solicitud->id;
       $r->estado = true;
       $r->save();
+    }
+
+    if (current_user()->user_app) {
+      $ar = new AudRegistroCalendario();
+      $ar->id_sede = $s->id;
+      $ar->id_solicitud = $solicitud->id;
+      $ar->id_devise = current_user()->id;
+      $ar->id_usuario = $u->id;
+      $ar->tipo = 1;
+      $ar->save();
     }
 
     $email = (new EmailServices($u->correo, [], $solicitud->id))->solicitud();

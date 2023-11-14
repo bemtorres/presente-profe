@@ -404,7 +404,7 @@ const handleSelectChange = () => {
   })
     .then((data) => {
       convertToHorario(data.data);
-      console.log(data.data);
+      // console.log(data.data);
     })
     .catch((error) => {
       toastError("Error al cargar el horario");

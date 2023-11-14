@@ -6,14 +6,16 @@ use App\Mail\AprobadoEmail;
 use App\Mail\CanceladoEmail;
 use App\Mail\RechazadoEmail;
 use App\Mail\SolicitudEmail;
+use App\Models\Sistema;
 use App\Models\Solicitud;
 use Illuminate\Support\Facades\Mail;
 
 class EmailServices
 {
-  private $mailClients;
-  private $mailAdmins;
+  private $mail_client;
+  private $mail_admin;
   private $solicitud_id;
+  private $sistema;
 
   const subjets = [
     'solicitud' => 'Solicitud de reserva de sala',
@@ -22,13 +24,17 @@ class EmailServices
     'solicitudCancelada' => 'Solicitud de reserva de sala cancelada',
   ];
 
-  public function __construct($mailClients,$mailAdmins = [], int $solicitud_id){
-    $this->mailClients = $mailClients;
-    $this->mailAdmins = $mailAdmins;
+  public function __construct($mail_client,$mail_admin = [], int $solicitud_id){
+    $this->sistema = $this->build_sistema();
+    $this->mail_client = $mail_client;
+    $this->mail_admin = $mail_admin;
     $this->solicitud_id = $solicitud_id;
+    $this->active_mail_test();
   }
 
   public function solicitud() {
+    if (!$this->sistema->isSendEmailSolicitud()) { return true; }
+
     $subject = self::subjets['solicitud'];
     $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
 
@@ -38,17 +44,19 @@ class EmailServices
       'registro' => $registros ?? null,
       'motivo' => $s->getMotivo(),
       'comentario' => $s->comentario ?? '',
-      'semana_text' => $s->sem->getInfo()
+      'semana_text' => $s->seman->getInfo()
     ];
 
     $mail = new SolicitudEmail($subject, $info);
     // return $mail;
-    Mail::to($this->mailClients)->queue($mail);
+    Mail::to($this->mail_client)->queue($mail);
 
     return true;
   }
 
   public function solicitudAprobada() {
+    if (!$this->sistema->isSendEmailAceptar()) { return true; }
+
     $subject = self::subjets['solicitudAprobada'];
     $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
 
@@ -58,17 +66,19 @@ class EmailServices
       'registro' => $registros ?? null,
       'motivo' => $s->getMotivo(),
       'comentario' => $s->comentario ?? '',
-      'semana_text' => $s->sem->getInfo()
+      'semana_text' => $s->seman->getInfo()
     ];
 
     $mail = new AprobadoEmail($subject, $info);
     // return $mail;
-    Mail::to($this->mailClients)->queue($mail);
+    Mail::to($this->mail_client)->queue($mail);
 
     return true;
   }
 
   public function solicitudRechazada() {
+    if (!$this->sistema->isSendEmailRechazado()) { return true; }
+
     $subject = self::subjets['solicitudRechazada'];
     $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
 
@@ -78,16 +88,18 @@ class EmailServices
       'registro' => $registros ?? null,
       'motivo' => $s->getMotivo(),
       'comentario' => $s->comentario ?? '',
-      'semana_text' => $s->sem->getInfo()
+      'semana_text' => $s->seman->getInfo()
     ];
 
     $mail = new RechazadoEmail($subject, $info);
-    Mail::to($this->mailClients)->queue($mail);
+    Mail::to($this->mail_client)->queue($mail);
 
     return true;
   }
 
   public function solicitudCancelado() {
+    if (!$this->sistema->isSendEmailCancelar()) { return true; }
+
     $subject = self::subjets['solicitudCancelada'];
     $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
 
@@ -97,12 +109,27 @@ class EmailServices
       'registro' => $registros ?? null,
       'motivo' => $s->getMotivo(),
       'comentario' => $s->comentario ?? '',
-      'semana_text' => $s->sem->getInfo()
+      'semana_text' => $s->seman->getInfo()
     ];
 
     $mail = new CanceladoEmail($subject, $info);
-    Mail::to($this->mailClients)->queue($mail);
+    Mail::to($this->mail_client)->queue($mail);
 
     return true;
+  }
+
+  // PRIVATE
+
+  private function build_sistema() {
+    return Sistema::first();
+  }
+
+  private function active_mail_test() {
+    if ($this->sistema->isInfoEmail()) {
+      $email = $this->sistema->getInfoEmailTest();
+      if (!empty($email)) {
+        $this->mail_client = $email;
+      }
+    }
   }
 }

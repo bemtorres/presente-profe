@@ -54,7 +54,7 @@
               <td>
                 <div class="small text-medium-emphasis">{{ $s->getMotivo() }}</div>
                 <div class="fw-semibold">
-                  <small>{{ $s->sem->getInfo() }}</small>
+                  <small>{{ $s->seman->getInfo() }}</small>
                 </div>
               </td>
               <td>

@@ -42,8 +42,8 @@ class Solicitud extends Model
     return $this->belongsTo(Sede::class,'id_sede');
   }
 
-  public function sem(){
-    return $this->belongsTo(Semana::class,'semana','id');
+  public function seman(){
+    return $this->belongsTo(Semana::class,'id_semana');
   }
 
   public function registros(){

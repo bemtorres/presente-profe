@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Sistema;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('solicitud', function (Blueprint $table) {
-          $table->string('periodo')->nullable()->after('estado'); // "202302"
-          // $table->integer('id_semana')->nullable()->after('periodo'); // ID SEMANA
+        Schema::create('sistema', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->json('info')->nullable();
+            $table->json('config')->nullable();
+            $table->timestamps();
         });
+
+        $s = new Sistema();
+        $s->nombre = "Comparte duoc";
+        $s->save();
     }
 
     /**
@@ -26,9 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('solicitud', function (Blueprint $table) {
-          $table->dropColumn('periodo');
-          $table->dropColumn('semana');
-        });
+        Schema::dropIfExists('sistema');
     }
 };

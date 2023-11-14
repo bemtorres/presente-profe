@@ -88,7 +88,7 @@
                 <label for="admin">User only tablet<small class="text-danger">*</small></label>
                 <select class="form-control" id="user_app" name="user_app">
                   <option value="si" {{ $u->user_app ? 'selected' : '' }}>Si</option>
-                  <option value="no" {{ $u->user_app ? '' : 'selected' }}>Noi</option>
+                  <option value="no" {{ $u->user_app ? '' : 'selected' }}>No</option>
                 </select>
               </div>
 

@@ -129,7 +129,7 @@
 @endsection
 @push('js')
     <script>
-      window._USUARIO = @json(current_user());
+      window._USUARIO = null;
 
       function seleccionarOpcion() {
         var select = document.getElementById("selectedSedes");

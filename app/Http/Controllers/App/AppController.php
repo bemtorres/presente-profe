@@ -76,6 +76,7 @@ class AppController extends Controller
     $semanas = [];
     foreach ($semestre->semanas as $keyS => $valueS) {
       $semanas[] = [
+        'id_semana' => $valueS->id,
         'periodo' => $semestre->periodo,
         'semestre' => $semestre->semestre,
         'info' => $valueS->getInfo(),
@@ -118,6 +119,7 @@ class AppController extends Controller
     $semanas = [];
     foreach ($semestre->semanas as $keyS => $valueS) {
       $semanas[] = [
+        'id_semana' => $valueS->id,
         'periodo' => $semestre->periodo,
         'semestre' => $semestre->semestre,
         'info' => $valueS->getInfo(),
