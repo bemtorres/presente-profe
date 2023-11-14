@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Import;
+namespace App\Services\Imports;
 
 use App\Models\Calendario;
 use App\Models\Sala;
