@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sede;
 use App\Models\Semestre;
 use App\Models\Sistema;
-use App\Services\Import\CalendarioImport;
+use App\Services\Imports\CalendarioImport;
 use Illuminate\Http\Request;
 class UtilsController extends Controller
 {
@@ -27,7 +27,7 @@ class UtilsController extends Controller
 
     $calendario = (new CalendarioImport($request))->call();
 
-    return $calendario;
+    // return $calendario;
 
     return back()->with('success','Se ha cargado correctamente');
   }
