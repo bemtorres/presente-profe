@@ -27,7 +27,6 @@ class UtilsController extends Controller
   }
 
   public function calendarioStore(Request $request) {
-    // return $request;
     $sede = $request->input('sede');
     $periodo = $request->input('semestre');
 
@@ -37,14 +36,12 @@ class UtilsController extends Controller
 
       $data = Excel::toArray([], $file)[0];
 
-      //return $data;
       $salas = $this->getSala($data, $sede, $periodo);
 
       $calendario = [];
       foreach ($data as $key => $v) {
         if ($key == 0) { continue; }
         if (empty($v[36])) { continue; } // sala null
-
 
         $sala = new Sala;
 
@@ -103,8 +100,6 @@ class UtilsController extends Controller
         array_push($calendario, $clase);
       }
 
-      // return $calendario;
-
       foreach ($calendario as $keyC => $vc) {
         for ($i=15; $i <= 18; $i++) {
           $c = new Calendario();
@@ -119,8 +114,6 @@ class UtilsController extends Controller
         }
       }
     }
-
-    // return Calendario::get();
 
     return back()->with('success','Se ha cargado correctamente');
   }

@@ -112,13 +112,13 @@ class SolicitudController extends Controller
       $this->policy->admin(current_user());
 
       $s = Solicitud::with(['registros','usuario'])->findOrFail($id);
-      $semestre = Semestre::where('activo', true)->firstOrFail();
+      // $semestre = Semestre::where('activo', true)->firstOrFail();
+      $semestre = Semestre::where('activo', true)->with('semanas')->first();
 
       $semana = Semana::where('id_semestre', $semestre->id)->where('semana', $s->semana)->first();
       $dias =  $semana->getWeeks();
 
       $horarios = DuocHorario::TIMES;
-      $semestre = Semestre::where('activo', true)->with('semanas')->first();
 
       $array_semestre = [];
 

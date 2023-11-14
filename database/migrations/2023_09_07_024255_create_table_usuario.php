@@ -33,11 +33,11 @@ return new class extends Migration
 
 
         $u = new Usuario();
-        $u->nombre = 'admin';
-        $u->apellido_paterno = 'admin';
-        $u->apellido_materno = 'admin';
-        $u->correo = 'benja.mora.torres@gmail.com';
-        $u->password = hash('sha256', 'comparteduoc2023');
+        $u->nombre = 'Benjamin';
+        $u->apellido_paterno = 'Mora';
+        $u->apellido_materno = 'Torres';
+        $u->correo = 'bej.mora@profesor.duoc.cl';
+        $u->password = hash('sha256', '199191919192AASDDS');
         $u->id_sede = 1300;
         $u->tipo_usuario = 1;
         $u->save();

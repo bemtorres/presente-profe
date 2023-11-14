@@ -2,5 +2,3 @@
 @section('app')
   @yield('content')
 @endsection
-
-
