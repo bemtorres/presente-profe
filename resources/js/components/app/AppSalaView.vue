@@ -150,16 +150,29 @@
       <div class="col-md-6">
         <div class="form-group mb-3">
           <label for="vsala" class="mb-1">Seleccionar sala</label>
-          <select
+          <!-- <select
             class="form-control"
             id="vsala"
             v-model="vsala"
             @change="handleSelectChange"
           >
+
+
             <option v-for="(sala, j) in salas" :key="j" :value="sala">
               {{ sala.nombre }}
             </option>
-          </select>
+          </select> -->
+
+          <VueMultiselect
+            v-model="vsala"
+            :options="salas"
+            label="nombre"
+            :allow-empty="false"
+            placeholder="Seleccione una sala"
+            selectLabel=""
+            @input="handleSelectChange"
+            >
+          </VueMultiselect>
         </div>
       </div>
       <div class="col-md-6">
@@ -240,7 +253,8 @@ import {
   alertWarning,
   alertInfo,
 } from "@/components/lib/alert.js";
-import { is } from "date-fns/locale";
+
+import VueMultiselect from 'vue-multiselect';
 
 const props = defineProps({
   horarios: Array,
@@ -259,7 +273,6 @@ const fechaSiguiente = ref([]);
 
 let data = ref([]); // informacion del horario
 const meData = ref([]); // informacion de mi horario
-
 const vsala = ref("");
 const vsemana = ref("");
 const vmotivo = ref(10); // default posicion 0

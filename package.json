@@ -16,6 +16,7 @@
         "@vitejs/plugin-vue": "^4.3.4",
         "date-fns": "^2.30.0",
         "vue": "^3.2.36",
-        "vue-loader": "^17.2.2"
+        "vue-loader": "^17.2.2",
+        "vue-multiselect": "^3.0.0-beta.3"
     }
 }

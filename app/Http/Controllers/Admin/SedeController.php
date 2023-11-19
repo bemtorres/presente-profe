@@ -20,6 +20,11 @@ class SedeController extends Controller
     return view('admin.sede.show', compact('s'));
   }
 
+  public function email($id) {
+    $s = Sede::with(['salas'])->findOrFail($id);
+    return view('admin.sede.email.index', compact('s'));
+  }
+
   public function salas($id) {
     $s = Sede::with(['salas'])->findOrFail($id);
     $salas = $s->salas;

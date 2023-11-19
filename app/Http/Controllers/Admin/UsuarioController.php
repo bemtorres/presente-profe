@@ -102,7 +102,7 @@ class UsuarioController extends Controller
   }
 
   public function sedes($id) {
-    $sedes = Sede::all();
+    $sedes = Sede::orderBy('activo', 'desc')->orderBy('nombre', 'asc')->get();
     $u = Usuario::with('revisorSede')->findOrFail($id);
 
     foreach ($sedes as $key => $s) {

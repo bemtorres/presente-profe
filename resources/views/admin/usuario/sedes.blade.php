@@ -16,7 +16,7 @@
       <div class="card shadow mb-4">
         <div class="card-body">
           <div class="row">
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-3 mb-4">
               <div class="card mb-4">
                 <div class="card-body">
                   <div class="col-md-12 mb-3">
@@ -39,35 +39,41 @@
                   <div class="table-responsive">
                     <table class="table
                     table-hover
-                    table-borderless
+                    table-bordered
                     align-middle">
                       <thead>
                         <tr>
                           <th>Sede</th>
                           <th></th>
+                          <th class="text-center">Recepción de solicitudes</th>
+                          <th>Copia correo</th>
                           <th></th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
                           @foreach ($sedes as $s)
                             <tr>
-                              <td scope="row">
-                                @if ($s->checked)
-                                  <i class="fa fa-circle-check text-success"></i>
-                                @else
-                                  <i class="fa fa-times text-danger"></i>
-                                @endif
-                                {{ $s->nombre }}
-
+                              <td>
+                                <div class="d-flex align-items-center">
+                                  <div class="">
+                                    <img src="{{ $s->getImg() }}" width="50" alt="">
+                                  </div>
+                                  <div class="ms-2">
+                                    <span class="h6 mt-2 mt-sm-0">{{ $s->nombre }}</span>
+                                    @if ($s->checked)
+                                      <i class="ms-2 fa fa-circle-check text-success"></i>
+                                    @else
+                                      <i class="ms-2 fa fa-times text-danger"></i>
+                                    @endif
+                                  </div>
+                                </div>
                               </td>
                               <td>
-
                                 @if (!$s->activo)
-
-                                  <span class="badge bg-dark">Inactiva</span>
+                                  <span class="badge bg-dark">Fuera de servicio</span>
                                 @endif
                               </td>
-                              <td>
+                              <td class="text-center">
                                 <form class="form-submit" action="{{ route('usuarios.sedes', $u->id) }}" method="POST">
                                   @csrf
                                   @method('PUT')
@@ -84,7 +90,6 @@
                         </tbody>
                     </table>
                   </div>
-
                 </div>
               </div>
             </div>

@@ -41,6 +41,7 @@ Route::middleware('auth.user')->group( function () {
 
   Route::resource('admin/sedes', SedeController::class);
   Route::get('admin/sedes/{id}/salas', [SedeController::class, 'salas'])->name('sedes.sala');
+  Route::get('admin/sedes/{id}/email', [SedeController::class, 'email'])->name('sedes.email');
 
   Route::resource('admin/sedes', SedeController::class);
   Route::get('admin/utils', [UtilsController::class, 'index'])->name('utils.index');

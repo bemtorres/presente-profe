@@ -15,7 +15,7 @@ class Sede extends Model
   }
 
   public function salas(){
-    return $this->hasMany(Sala::class,'id_sede');
+    return $this->hasMany(Sala::class,'id_sede')->orderBy('nombre');
   }
 
   public function getImg() {

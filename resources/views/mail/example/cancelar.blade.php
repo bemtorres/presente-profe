@@ -190,7 +190,7 @@
                                 <td class="pad" style="text-align:center;width:100%;">
                                   <h1
                                     style="margin: 0; color: #393d47; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: normal; line-height: 120%; text-align: right; margin-top: 0; margin-bottom: 0;">
-                                    <span class="tinyMce-placeholder">Sistema de solicitud de sala</span>
+                                    <span class="tinyMce-placeholder">Sistema de solicitud de salas</span>
                                   </h1>
                                 </td>
                               </tr>

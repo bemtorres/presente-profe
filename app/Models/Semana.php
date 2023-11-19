@@ -32,11 +32,9 @@ class Semana extends Model
   public function isToday(){
     $hoy = Carbon::now();
     $fi = Carbon::parse($this->fecha_inicio);
-    $ft = Carbon::parse($this->fecha_termino);
+    $ft = Carbon::parse($this->fecha_termino.' 23:59:59');
+    $ft = $ft->setTime(23, 59, 59);
 
-    if ($hoy->between($fi, $ft)) {
-        return true;
-    }
-    return false;
+    return $hoy->between($fi, $ft);
   }
 }

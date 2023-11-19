@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sede;
 use App\Models\Semestre;
 use App\Models\Solicitud;
+use App\Services\CalendarioMixV1;
 use App\Services\DuocHorario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -62,8 +63,9 @@ class AppController extends Controller
     }
 
     $sedes = Sede::where('activo', true)->get();
-
     $s = Sede::with(['salas'])->findOrFail($id_sede);
+
+    // $s = Sede::with(['salas'])->findOrFail($id_sede);
     $salas = $s->salas;
 
     $horarios = DuocHorario::TIMES;
@@ -148,6 +150,18 @@ class AppController extends Controller
     $horarios = DuocHorario::TIMES;
 
     $sedes = Sede::get();
+
+
+    $id_sede = 1300;
+    $semanas = [17];
+    $dias = [1];
+    $periodo = '202102';
+    $sala = 1;
+    $data = (new CalendarioMixV1($periodo, $semanas[0], $sala))->call();
+
+
+    // $sala =
+
 
     return view('app.index2', compact('horarios','my_horario','sedes'));
   }
