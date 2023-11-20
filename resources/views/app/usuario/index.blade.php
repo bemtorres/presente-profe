@@ -20,6 +20,7 @@
       background-color: #f0f8ff;
     }
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.6/dist/vue-multiselect.min.css">
 @endpush
 @section('content')
 <nav class="navbar navbar-expand-md bg-dark bg-cd-primary p-2 mb-3 sticky-top border-bottom border-5 border-warning" data-bs-theme="dark">
