@@ -26,6 +26,8 @@ class UtilsController extends Controller
   public function calendarioStore(Request $request) {
     try {
       $calendario = (new CalendarioImport($request))->call();
+
+      return $calendario;
       return back()->with('success','Se ha cargado correctamente');
       //code...
     } catch (\Throwable $th) {
