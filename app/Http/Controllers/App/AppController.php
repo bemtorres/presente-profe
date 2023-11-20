@@ -159,8 +159,6 @@ class AppController extends Controller
     $sala = 1;
     $data = (new CalendarioMixV1($periodo, $semanas[0], $sala))->call();
 
-
-
     return view('app.index2', compact('horarios','my_horario','sedes'));
   }
 }

@@ -21,8 +21,92 @@ class SedeController extends Controller
   }
 
   public function email($id) {
-    $s = Sede::with(['salas'])->findOrFail($id);
+    $s = Sede::findOrFail($id);
+
+
     return view('admin.sede.email.index', compact('s'));
+  }
+
+
+  public function emailStore(Request $request, $id) {
+    $s = Sede::findOrFail($id);
+    $correo = $request->input('correo');
+
+    $info = $s->getInfoCorreo();
+
+    $correos_new = [
+      'status' => true,
+      'correo' => $correo,
+    ];
+
+    $encontrado = false;
+    foreach ($info as $key => $correo_copia) {
+      if ($correo_copia['correo'] == $correo) {
+        $encontrado = true;
+        break;
+      }
+    }
+
+    if ($encontrado) {
+      return back()->with('danger','El correo ya existe');
+    }
+
+    array_push($info, $correos_new);
+
+    $array_info = $s->info;
+    $array_info['correos_copia'] = $info;
+    $s->info = $array_info;
+    $s->update();
+
+    return back()->with('success','Se ha añadido el correo');
+  }
+
+  public function emailUpdate(Request $request, $id) {
+    $s = Sede::findOrFail($id);
+    $correo = $request->input('correo');
+
+    $info = $s->getInfoCorreo();
+    $encontrado = false;
+
+      foreach ($info as $key => $correo_copia) {
+      if ($correo_copia['correo'] == $correo) {
+        $encontrado = true;
+        $info[$key]['status'] = !$info[$key]['status'];
+        // $correo_copia['status'] = true;
+
+        $array_info = $s->info;
+        $array_info['correos_copia'] = $info;
+        $s->info = $array_info;
+        $s->update();
+        break;
+      }
+    }
+
+    if ($encontrado) {
+      return back()->with('success','Se ha actualizdo el correo');
+    }
+
+    return back()->with('danger','El correo ya existe');
+  }
+
+  public function emailDelete(Request $request, $id) {
+    $s = Sede::findOrFail($id);
+    $correo = $request->input('correo');
+
+    $info = $s->getInfoCorreo();
+
+    foreach ($info as $key => $correo_copia) {
+      if ($correo_copia['correo'] == $correo) {
+        unset($info[$key]);
+        $array_info = $s->info;
+        $array_info['correos_copia'] = $info;
+        $s->info = $array_info;
+        $s->update();
+        return back()->with('success','Se ha actualizdo el correo');
+      }
+    }
+
+    return back()->with('danger','El correo ya existe');
   }
 
   public function salas($id) {

@@ -20,8 +20,6 @@ Route::any('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('auth/google', [GoogleUserController::class, 'redirectToGoogle' ]);
 Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCallback' ]);
 
-
-
 Route::middleware('auth.user')->group( function () {
   Route::get('home', [HomeController::class, 'index'])->name('home.index');
   Route::post('home', [HomeController::class, 'indexPost'])->name('home');
@@ -42,6 +40,9 @@ Route::middleware('auth.user')->group( function () {
   Route::resource('admin/sedes', SedeController::class);
   Route::get('admin/sedes/{id}/salas', [SedeController::class, 'salas'])->name('sedes.sala');
   Route::get('admin/sedes/{id}/email', [SedeController::class, 'email'])->name('sedes.email');
+  Route::post('admin/sedes/{id}/email', [SedeController::class, 'emailStore'])->name('sedes.email');
+  Route::put('admin/sedes/{id}/email', [SedeController::class, 'emailUpdate'])->name('sedes.email');
+  Route::delete('admin/sedes/{id}/email', [SedeController::class, 'emailDelete'])->name('sedes.email');
 
   Route::resource('admin/sedes', SedeController::class);
   Route::get('admin/utils', [UtilsController::class, 'index'])->name('utils.index');

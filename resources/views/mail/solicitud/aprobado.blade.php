@@ -295,6 +295,7 @@
                                       <!-- DATOS DE LA SOLICITUD -->
                                       <span style="background-color: transparent;">
                                         <ul>
+                                          <li><strong>Usuario solicitante: </strong>{{ $params['nombre'] }} </li>
                                           <li><strong>Sala: </strong>{{ $params['sala'] }} </li>
                                           <li><strong>Semana:</strong> {{ $params['semana_text'] }}</li>
                                           <li><strong>Motivo:</strong> {{ $params['motivo'] }}</li>

@@ -57,6 +57,19 @@
                   </h4>
                 </div> --}}
               </div>
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h4 class="m-0 font-weight-bold">Correos que recibiran correos</h4>
+                  <ul class="list-group">
+                    @foreach ($s->getInfoCorreo() as $correo)
+                      @continue(!$correo['status'])
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ $correo['correo'] }}
+                      </li>
+                    @endforeach
+                  </ul>
+                </div>
+              </div>
             </div>
 
             {{-- <div class="col-lg-8 mb-4">

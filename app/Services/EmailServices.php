@@ -6,6 +6,7 @@ use App\Mail\AprobadoEmail;
 use App\Mail\CanceladoEmail;
 use App\Mail\RechazadoEmail;
 use App\Mail\SolicitudEmail;
+use App\Models\Sede;
 use App\Models\Sistema;
 use App\Models\Solicitud;
 use Illuminate\Support\Facades\Mail;
@@ -36,7 +37,9 @@ class EmailServices
     if (!$this->sistema->isSendEmailSolicitud()) { return true; }
 
     $subject = self::subjets['solicitud'];
-    $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
+    $s = Solicitud::with(['registros','sede'])->findOrFail($this->solicitud_id);
+
+    $cc_correos = $this->getEmailsCC($s->sede);
 
     $registros = (new RegistroDias($s->registros))->resumen();
     $info = [
@@ -49,16 +52,21 @@ class EmailServices
 
     $mail = new SolicitudEmail($subject, $info);
     // return $mail;
-    Mail::to($this->mail_client)->queue($mail);
+    $m = Mail::to($this->mail_client);
+    if (sizeof($cc_correos) > 0 && !$this->activeDemo()) {
+      $m->cc($cc_correos);
+    }
+
+    $m->queue($mail);
 
     return true;
   }
 
   public function solicitudAprobada() {
     if (!$this->sistema->isSendEmailAceptar()) { return true; }
-
     $subject = self::subjets['solicitudAprobada'];
-    $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
+    $s = Solicitud::with(['registros','sede','usuario'])->findOrFail($this->solicitud_id);
+    $cc_correos = $this->getEmailsCC($s->sede);
 
     $registros = (new RegistroDias($s->registros))->resumen();
     $info = [
@@ -66,12 +74,19 @@ class EmailServices
       'registro' => $registros ?? null,
       'motivo' => $s->getMotivo(),
       'comentario' => $s->comentario ?? '',
-      'semana_text' => $s->seman->getInfo()
+      'semana_text' => $s->seman->getInfo(),
+      'nombre' => $s->usuario->nombre_completo()
     ];
 
     $mail = new AprobadoEmail($subject, $info);
     // return $mail;
-    Mail::to($this->mail_client)->queue($mail);
+    // return $mail;
+    $m = Mail::to($this->mail_client);
+    if (sizeof($cc_correos) > 0 && !$this->activeDemo()) {
+      $m->cc($cc_correos);
+    }
+
+    $m->queue($mail);
 
     return true;
   }
@@ -80,7 +95,8 @@ class EmailServices
     if (!$this->sistema->isSendEmailRechazado()) { return true; }
 
     $subject = self::subjets['solicitudRechazada'];
-    $s = Solicitud::with(['registros'])->findOrFail($this->solicitud_id);
+    $s = Solicitud::with(['registros','sede'])->findOrFail($this->solicitud_id);
+    $cc_correos = $this->getEmailsCC($s->sede);
 
     $registros = (new RegistroDias($s->registros))->resumen();
     $info = [
@@ -92,7 +108,12 @@ class EmailServices
     ];
 
     $mail = new RechazadoEmail($subject, $info);
-    Mail::to($this->mail_client)->queue($mail);
+    $m = Mail::to($this->mail_client);
+    if (sizeof($cc_correos) > 0) {
+      $m->cc($cc_correos);
+    }
+
+    $m->queue($mail);
 
     return true;
   }
@@ -124,12 +145,22 @@ class EmailServices
     return Sistema::first();
   }
 
+  private function activeDemo() {
+    return $this->sistema->isInfoEmail();
+  }
+
   private function active_mail_test() {
-    if ($this->sistema->isInfoEmail()) {
+    if ($this->activeDemo()) {
       $email = $this->sistema->getInfoEmailTest();
       if (!empty($email)) {
         $this->mail_client = $email;
       }
     }
+  }
+
+  private function getEmailsCC(Sede $sede) {
+    $cc_correos = json_decode($sede->getInfoCorreoActivo(), true);
+
+    return array_column($cc_correos, 'correo');
   }
 }
