@@ -170,9 +170,11 @@
             :allow-empty="false"
             placeholder="Seleccione una sala"
             selectLabel=""
-            @input="handleSelectChange"
+            @select="handleSelectChange"
             >
           </VueMultiselect>
+
+
         </div>
       </div>
       <div class="col-md-6">
@@ -305,7 +307,7 @@ const initializeData = () => {
   fechaSiguiente.value = calcularFechasSiguientes(vsemana.value.fecha_inicio);
   handleSelectChange();
 
-  console.log("props", props);
+  // console.log("props", props);
 };
 
 const accionEditable = () => {
@@ -451,8 +453,8 @@ const handleSolicitud = () => {
     motivoInput: vmotivoInput.value,
   })
     .then((data) => {
-      // console.log("data", data);
       alertSuccessTime("Solicitud enviada", "Se ha generado una solicitud de sala ID: " + data.solicitud.id);
+      // console.log("data", data);
     })
     .catch((error) => {
       toastError("Error al guardar el horario");

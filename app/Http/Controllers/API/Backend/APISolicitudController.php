@@ -58,7 +58,7 @@ class APISolicitudController extends Controller
 
     if (current_user()->user_app) {
       $ar = new AudRegistroCalendario();
-      $ar->id_sede = $s->id;
+      $ar->id_sede = $sede->id;
       $ar->id_solicitud = $solicitud->id;
       $ar->id_devise = current_user()->id;
       $ar->id_usuario = $u->id;
