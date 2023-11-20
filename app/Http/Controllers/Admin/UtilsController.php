@@ -24,12 +24,14 @@ class UtilsController extends Controller
   }
 
   public function calendarioStore(Request $request) {
-
-    $calendario = (new CalendarioImport($request))->call();
-
-    // return $calendario;
-
-    return back()->with('success','Se ha cargado correctamente');
+    try {
+      $calendario = (new CalendarioImport($request))->call();
+      return back()->with('success','Se ha cargado correctamente');
+      //code...
+    } catch (\Throwable $th) {
+      return $th;
+      //throw $th;
+    }
   }
 
 
