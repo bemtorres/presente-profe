@@ -42,43 +42,125 @@
           <div class="col-lg-4 mb-4">
             <div class="card">
                 <div class="card-body">
-                  <p>Busqueda personalizada</p>
-                  <div class="mb-3">
-                      <p class="card-text">🏦 <strong>SEDE</strong></p>
-                      <select name="" id="" class="form-select js-basic-single">
-                          @foreach ($sedes as $s)
-                              <option value="{{ $s->id }}">{{ $s->nombre }}</option>
-                          @endforeach
-                      </select>
+                  <div class="alert alert-primary" role="alert">
+                    <strong>Busqueda personalizada</strong>
                   </div>
                   <div class="form-group mb-3">
-                    <p class="card-text">⌚ <strong>Cantidad de horas</strong></p>
+                    <p class="card-text"><strong>Semana</strong></p>
                     <select name="" id="" class="form-select">
-                        @for ($i = 1; $i <= 3; $i++)
-                            <option value="{{ $i }}">{{ $i }} </option>
-                        @endfor
-                    </select>
-                  </div>
-                  <div class="form-group mb-3">
-                    <p class="card-text">⌚ <strong>Dias de la semana</strong></p>
-                    <select name="" id="" class="form-select" multiple>
-                      <option value="1">LUNES</option>
-                      <option value="2">MARTES</option>
-                      <option value="3">MIERCOLES</option>
-                      <option value="4">JUEVES</option>
-                      <option value="5">VIERNES</option>
-                      <option value="6">SÁBADO</option>
-                    </select>
-                  </div>
+                      @foreach ($array_semanas as $semana)
+                        <option value="1">Semana {{ $semana['info'] }}</option>
 
-                  <div class="form-group mb-3">
-                    <p class="card-text">☀️ <strong>Semana</strong></p>
-                    <select name="" id="" class="form-select" multiple>
-                      @for ($i=1 ; $i<10 ; $i++)
-                        <option value="1">Semana {{ $i }}</option>
-                      @endfor
+                      @endforeach
                     </select>
                   </div>
+                  {{-- <div class="form-group mb-3">
+                    <p class="card-text"><strong>Cantidad de horas</strong></p>
+                    <div class="row">
+                      <div class="col-md-6 row align-items-center">
+                        <label class="card-text col-6 text-end">Mín</label>
+                        <select name="" id="minSelect" class="col form-select">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="{{ $i }}">{{ $i }} </option>
+                            @endfor
+                        </select>
+                      </div>
+                      <div class="col-md-6 row align-items-center">
+                        <label class="card-text col-6 text-end">Máx</label>
+                        <select name="" id="maxSelect" class="col form-select">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="{{ $i }}">{{ $i }} </option>
+                            @endfor
+                        </select>
+                      </div>
+                      <span id="errorSpan" style="color: red;"></span>
+                    </div>
+                  </div> --}}
+                  <div class="form-group mb-3">
+                    <p class="card-text"><strong>Cantidad de horas</strong></p>
+                    <div class="row justify-content-center align-items-center">
+                      @for ($i = 1; $i <= 5; $i++)
+                      <div class="col-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="check-horas[]" value="" id="check-hora-{{ $i }}">
+                          <label class="form-check-label" for="check-hora-{{ $i }}">
+                            <strong><small>{{ $i }}</small></strong>
+                          </label>
+                        </div>
+                      </div>
+                      @endfor
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <p class="card-text"><strong>Números de módulos</strong></p>
+                    <div class="row justify-content-center align-items-center">
+                      @for ($i = 1; $i <= 5; $i++)
+                      <div class="col-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="check-modulos[]" value="" id="check-modulo-{{ $i }}">
+                          <label class="form-check-label" for="check-modulo-{{ $i }}">
+                            <strong><small>{{ $i }}{{ $i == 1 ? 'hr' : 'hrs' }}</small></strong>
+                          </label>
+                        </div>
+                      </div>
+                      @endfor
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <p class="card-text"><strong>Dias de la semana</strong></p>
+                    <div class="row text-center justify-content-center align-items-center">
+                      @foreach ($days as $kd => $d)
+                      <div class="col-4 mb-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="check-dias[]" value="" id="check-{{ $kd }}">
+                          <label class="form-check-label" for="check-{{ $kd }}">
+                            <small>{{ $d }}</small>
+                          </label>
+                        </div>
+                      </div>
+                      @endforeach
+                    </div>
+                  </div>
+                  {{-- <div class="form-group mb-3">
+                    <p class="card-text">⌚ <strong>Dias de la semana</strong></p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="check-lunes" value="" id="checkL">
+                      <label class="form-check-label" for="checkL">
+                        LUNES
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="check-martes" value="" id="checkM">
+                      <label class="form-check-label" for="checkM">
+                        MARTES
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="check-miercoles" value="" id="checkX">
+                      <label class="form-check-label" for="checkX">
+                        MIERCOLES
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="check-jueves" value="" id="checkJ">
+                      <label class="form-check-label" for="checkJ">
+                        JUEVES
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="check-viernes" value="" id="checkV">
+                      <label class="form-check-label" for="checkV">
+                        VIERNES
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="check-sabado" value="" id="checkS">
+                      <label class="form-check-label" for="checkS">
+                        SÁBADO
+                      </label>
+                    </div>
+                  </div> --}}
+
 
                   <div class="d-grid">
                     <button type="button" class="btn btn-lg btn-primary">Buscar</button>
@@ -156,6 +238,39 @@
 @endsection
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+
+    <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    const minSelect = document.getElementById('minSelect');
+    const maxSelect = document.getElementById('maxSelect');
+    const errorSpan = document.getElementById('errorSpan');
+
+    maxSelect.addEventListener('change', function () {
+      const minValue = parseInt(minSelect.value);
+      const maxValue = parseInt(maxSelect.value);
+
+      if (minValue > maxValue) {
+        errorSpan.textContent = 'El valor mínimo no puede ser mayor que el valor máximo.';
+      } else {
+        errorSpan.textContent = '';
+      }
+    });
+
+    minSelect.addEventListener('change', function () {
+      const minValue = parseInt(minSelect.value);
+      const maxValue = parseInt(maxSelect.value);
+
+      if (maxValue < minValue) {
+        errorSpan.textContent = 'El valor máximo no puede ser menor que el valor mínimo.';
+      } else {
+        errorSpan.textContent = '';
+      }
+    });
+  });
+    </script>
 
     <script>
         $(document).ready(function() {

@@ -120,7 +120,7 @@ class CalendarioImport {
 
         foreach ($calendario as $keyC => $vc) {
           // desde la semana 15 a la 18
-          for ($i=15; $i <= 18; $i++) {
+          for ($i=16; $i <= 18; $i++) {
             $c = new Calendario();
             $c->periodo = $periodo;
             $c->semana = $i;

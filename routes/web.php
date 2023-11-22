@@ -50,6 +50,8 @@ Route::middleware('auth.user')->group( function () {
   Route::post('admin/utils/calendario', [UtilsController::class, 'calendarioStore'])->name('utils.calendario');
   Route::get('admin/utils/correo', [UtilsController::class, 'correo'])->name('utils.correo');
   Route::put('admin/utils/correo', [UtilsController::class, 'correoUpdate'])->name('utils.correo');
+  Route::get('admin/utils/usuarios', [UtilsController::class, 'usuarios'])->name('utils.usuarios');
+  Route::post('admin/utils/usuarios', [UtilsController::class, 'usuariosStore'])->name('utils.usuarios');
 
   Route::get('admin/semestres', [SemestreController::class, 'index'])->name('semestres.index');
   Route::get('admin/semestres/{periodo}', [SemestreController::class, 'show'])->name('semestres.show');

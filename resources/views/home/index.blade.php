@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="col-6">
-      <div class="card shadow mb-3">
+      <div class="card shadow mb-2">
         {{-- <img src="imagen_anuncio_5.jpg" class="card-img-top" alt="Anuncio 5"> --}}
         <div class="card-body">
           <h5 class="card-title">Tu Espacio, Tu Horario, Tu Elección</h5>
@@ -52,36 +52,34 @@
       </div>
     </div>
     <div class="col-6">
-      <div class="card shadow mb-3">
-        {{-- <img src="imagen_anuncio_4.jpg" class="card-img-top" alt="Anuncio 4"> --}}
+      <div class="card shadow mb-2">
+        <img src="{{ asset('template/img/info/pexels-fauxels-3183197.jpg') }}"  class="card-img-top" alt="Anuncio 2">
         <div class="card-body">
-          <h5 class="card-title">Libera el Potencial de tus Espacios Educativos</h5>
-          <p class="card-text">Docentes y administrativos, ¡la solución para la gestión eficiente de espacios ha llegado! Reserva salas para recuperación de clases, reuniones productivas y capacitaciones inspiradoras. ¡Haz que cada espacio cuente!</p>
-          {{-- <a href="#" class="btn btn-primary">Descubre Más</a> --}}
+          <h5 class="card-title">Transforma Tu Manera de Enseñar y Aprender</h5>
+          <p class="card-text">Descubre la innovadora herramienta de agendamiento creada en colaboración con el CITT, diseñada para docentes y administrativos de Duoc UC. ¡Reserva salas estratégicas con facilidad y eficiencia!</p>
+          {{-- <a href="#" class="btn btn-primary">Más información</a> --}}
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-4 row">
     <div class="col-12">
-      <div class="card shadow mb-3">
+      <div class="card shadow mb-2">
+        <img src="{{ asset('template/img/info/duocuc.png') }}" class="card-img-top" alt="Anuncio 4">
+        <div class="card-body">
+          <h5 class="card-title">Libera el Potencial de tus Espacios Educativos</h5>
+          <p class="card-text">Docentes y administrativos, ¡la solución para la gestión eficiente de espacios ha llegado! Reserva salas para recuperación de clases, reuniones productivas y capacitaciones inspiradoras. ¡Haz que cada espacio cuente!</p>
+          {{-- <a href="#" class="btn btn-primary">Descubre Más</a> --}}
+        </div>
+      </div>
+    {{-- </div>
+    <div class="col-12"> --}}
+      <div class="card shadow mb-2">
         <img src="{{ asset('template/img/info/pexels-cowomen-2041627.jpg') }}" class="card-img-top" alt="Anuncio 1">
         <div class="card-body">
           <h5 class="card-title">Optimiza tu Tiempo, Maximiza tu Espacio</h5>
           <p class="card-text">Descubre nuestra nueva plataforma web que te permite reservar espacios estratégicos para clases recuperativas, reuniones, capacitaciones ¡y más! ¡Comparte Duoc, maximiza el potencial de cada espacio y optimiza tu tiempo!</p>
           {{-- <a href="#" class="btn btn-primary">Regístrate ahora</a> --}}
-        </div>
-      </div>
-    </div>
-
-    <!-- Anuncio 2 -->
-    <div class="col-12">
-      <div class="card shadow mb-3">
-        <img src="{{ asset('template/img/info/pexels-fauxels-3183197.jpg') }}"  class="card-img-top" alt="Anuncio 2">
-        <div class="card-body">
-          <h5 class="card-title">Transforma Tu Manera de Enseñar y Aprender</h5>
-          <p class="card-text">Descubre la innovadora herramienta de agendamiento creada en colaboración con el CITT, diseñada para docentes y administrativos de Duoc UC. ¡Reserva salas estratégicas con facilidad y eficiencia!</p>
-          {{-- <a href="#" class="btn btn-primary">Más información</a> --}}
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ use App\Models\Sede;
 use App\Models\Semestre;
 use App\Models\Solicitud;
 use App\Services\CalendarioMixV1;
+use App\Services\ConvertDatetime;
 use App\Services\DuocHorario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -111,13 +112,11 @@ class AppController extends Controller
     $s = Sede::with(['salas'])->findOrFail($id_sede);
     $salas = $s->salas;
 
-    $horarios = DuocHorario::TIMES;
-    $semestre = Semestre::where('activo', true)->with('semanas')->first();
-
-
     $motivos = Solicitud::MOTIVOS;
 
     // VALIDA Y CHEQUEA LAS SEMANAS
+    $horarios = DuocHorario::TIMES;
+    $semestre = Semestre::where('activo', true)->with('semanas')->first();
     $semanas = [];
     foreach ($semestre->semanas as $keyS => $valueS) {
       $semanas[] = [
@@ -145,13 +144,38 @@ class AppController extends Controller
   }
 
 
-  public function index2() {
+  public function index2($id_sede) {
     $my_horario = [];
     $horarios = DuocHorario::TIMES;
+    $days = ConvertDatetime::DAYS;
+    array_shift($days);
+    $days = array_map('strtoupper', $days);
 
-    $sedes = Sede::get();
+    // return $days;
 
+    $semestre = Semestre::where('activo', true)->with('semanas')->first();
+    $semanas = [];
+    foreach ($semestre->semanas as $keyS => $valueS) {
+      $semanas[] = [
+        'id_semana' => $valueS->id,
+        'periodo' => $semestre->periodo,
+        'semestre' => $semestre->semestre,
+        'info' => $valueS->getInfo(),
+        'semana' => $valueS->semana,
+        'fecha_inicio' => $valueS->fecha_inicio,
+        'fecha_termino' => $valueS->fecha_termino,
+        'today' => $valueS->isToday()
+      ];
+    }
 
+    $array_semanas = [];
+    $is_check = false;
+    foreach ($semanas as $key => $semana) {
+      if ($semana['today']) { $is_check = true; }
+      if ($is_check) { $array_semanas[] = $semana; }
+    }
+
+    $s = Sede::with(['salas'])->findOrFail($id_sede);
     $id_sede = 1300;
     $semanas = [17];
     $dias = [1];
@@ -159,6 +183,12 @@ class AppController extends Controller
     $sala = 1;
     $data = (new CalendarioMixV1($periodo, $semanas[0], $sala))->call();
 
-    return view('app.index2', compact('horarios','my_horario','sedes'));
+    return view('app.index2',
+      compact('horarios',
+              'my_horario',
+              's',
+              'days',
+              'array_semanas'
+            ));
   }
 }

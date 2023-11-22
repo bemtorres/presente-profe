@@ -16,7 +16,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('appgo', [AppController::class, 'appgo'])->name('app.sede.appgo');
   Route::get('app/{id_sede}/calendario', [AppController::class, 'indexUserSede'])->name('app.sede.usuario');
   Route::get('app/{id_sede}', [AppController::class, 'indexSede'])->name('app.sede');
-  Route::get('app2', [AppController::class, 'index2'])->name('app.index2');
+  Route::get('app-global/{id_sede}', [AppController::class, 'index2'])->name('app.index2');
 
 
   Route::get('api/backend/usuario', [APIUsuarioController::class, 'index'])->name('api.backend.usuario.index');
