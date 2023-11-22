@@ -17,6 +17,11 @@ Route::get('/', [AuthController::class, 'index'])->name('root');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::any('logout', [AuthController::class, 'logout'])->name('logout');
 
+
+Route::get('recuperar', [AuthController::class, 'recuperar'])->name('recuperar');
+Route::post('recuperar', [AuthController::class, 'recuperarStore'])->name('recuperar');
+
+
 Route::get('auth/google', [GoogleUserController::class, 'redirectToGoogle' ]);
 Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCallback' ]);
 

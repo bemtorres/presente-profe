@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
+use App\Services\EmailUser;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,30 @@ class AuthController extends Controller
   public function index() {
     return view('auth.index');
   }
+
+  public function recuperar() {
+    return view('auth.recuperar');
+  }
+
+  public function recuperarStore(Request $request) {
+    // return view('auth.recuperar');
+    try {
+      $u = Usuario::findByCorreo($request->correo)->firstOrFail();
+
+      $time = time() + 60*60*24;
+
+      $u->password = hash('sha256', $time);
+      $u->save();
+
+      (new EmailUser($u, $time))->password_reset();
+
+      return back()->with('success','Se ha cambiado la contraseña correctamente.');
+    } catch (\Throwable $th) {
+      // return $th;
+      return back()->with('info','Error. Intente nuevamente.');
+    }
+  }
+
 
   public function home() {
     return view('blank');

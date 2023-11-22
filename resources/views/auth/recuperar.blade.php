@@ -39,35 +39,24 @@
                 <div class="text-center d-md-none">
                   <img src="{{ asset('template/img/comparte-logo2.svg') }}" width="120px">
                 </div>
-                <h1>Acceso</h1>
+                <h1>Recuperar contraseña</h1>
 
                 {{-- <p class="text-medium-emphasis">Sign In to your account</p> --}}
-                <form class="form-sample form-submit" action="{{ route('login') }}" method="POST">
+                <form class="form-sample form-submit" action="{{ route('recuperar') }}" method="POST">
                   @csrf
                   <div class="mb-3">
                     <label for="correo" class="form-label">Correo electrónico @if (session('info'))
                       <span class="badge bg-danger">Error. intente nuevamente</span>
-                    @endif</label>
-                    <input type="email" class="form-control" id="correo" name="correo" value="" required>
+                    @endif
+                    @if (session('success'))
+                    <span class="badge bg-success">Se ha enviado una solicitud a tu correo</span>
+                  @endif
+                  </label>
+                    <input type="email" class="form-control" autofocus autocomplete="off" id="correo" name="correo" value="" required>
                   </div>
-                  <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                  </div>
-
-                  <div class="text-end mb-3">
-                    <a href="{{ route('recuperar') }}" class="">¿Has olvidado tu contraseña?</a>
-                  </div>
-
                   <div class="d-grid">
-                      <button class="btn btn-primary" type="submit">Iniciar sesión</button>
-
-                      <br>
-
-                      <a href="{{ url('auth/google') }}" class="btn btn-sm btn-light btn-lg">
-                        <span aria-hidden="true" class="NA_Img dkWypw"><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M20.64 12.2c0-.63-.06-1.25-.16-1.84H12v3.49h4.84a4.14 4.14 0 0 1-1.8 2.71v2.26h2.92a8.78 8.78 0 0 0 2.68-6.62z" fill="#4285F4"></path><path d="M12 21a8.6 8.6 0 0 0 5.96-2.18l-2.91-2.26a5.4 5.4 0 0 1-8.09-2.85h-3v2.33A9 9 0 0 0 12 21z" fill="#34A853"></path><path d="M6.96 13.71a5.41 5.41 0 0 1 0-3.42V7.96h-3a9 9 0 0 0 0 8.08l3-2.33z" fill="#FBBC05"></path><path d="M12 6.58c1.32 0 2.5.45 3.44 1.35l2.58-2.59A9 9 0 0 0 3.96 7.95l3 2.34A5.36 5.36 0 0 1 12 6.58z" fill="#EA4335"></path></g></svg></span>
-                        Inicio de sesión <strong>Docentes</strong>
-                      </a>
+                      <button class="btn btn-warning mb-3" type="submit"><strong>Resetear contraseña</strong></button>
+                      <a class="btn btn-dark" href="{{ route('root') }}">Volver</a>
                   </div>
                   <div class="col-12 text-end mt-4">
                       {{-- <button class="btn btn-link px-0" type="button"><small>¿He olvidado mi contraseña?</small></button> --}}
