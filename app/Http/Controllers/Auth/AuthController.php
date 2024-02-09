@@ -14,7 +14,8 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
   public function index() {
-    return view('auth.index');
+    return view('www.index');
+    // return view('auth.index');
   }
 
   public function recuperar() {
@@ -39,6 +40,9 @@ class AuthController extends Controller
       return back()->with('info','Error. Intente nuevamente.');
     }
   }
+  public function inicio() {
+    return view('inicio');
+  }
 
 
   public function home() {
@@ -55,11 +59,11 @@ class AuthController extends Controller
         Auth::guard('usuario')->loginUsingId($u->id);
         // $this->start_sesions($u);
 
-        if ($u->user_app) {
-          return redirect()->route('app.index');
-        } else {
-          return redirect()->route('home.index');
-        }
+        // if ($u->user_app) {
+          // return redirect()->route('app.index');
+        // } else {
+          // return redirect()->route('home.index');
+        // }
       }else{
         return back()->with('info','Error. Intente nuevamente.');
       }

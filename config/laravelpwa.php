@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'name' => 'Comparte DUOC',
+    'name' => 'Sistema completo',
     'manifest' => [
-        'name' => 'Comparte DUOC',
-        'short_name' => 'Comparte DUOC',
-        'start_url' => '/appgo',
+        'name' => 'Sistema completo',
+        'short_name' => 'Sistema completo',
+        'start_url' => '/',
         'background_color' => '#04243c',
         'theme_color' => '#1A1A1A',
         'display' => 'standalone',

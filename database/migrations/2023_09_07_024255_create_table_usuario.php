@@ -22,11 +22,11 @@ return new class extends Migration
             $table->string('apellido_materno')->nullable();
             $table->string('correo')->unique();
             $table->string('password', 256);
-            $table->integer('tipo_usuario')->nullable();
+            $table->string('imagen')->nullable();
+            $table->boolean('admin')->default(false);
             $table->json('info')->nullable();
             $table->json('integrations')->nullable();
-            $table->foreignId('id_sede')->references('id')->on('sede');
-            $table->boolean('user_app')->default(false);
+            $table->boolean('verificado')->default(false);
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
@@ -38,8 +38,8 @@ return new class extends Migration
         $u->apellido_materno = 'Torres';
         $u->correo = 'bej.mora@profesor.duoc.cl';
         $u->password = hash('sha256', '199191919192AASDDS');
-        $u->id_sede = 1300;
-        $u->tipo_usuario = 1;
+        $u->admin = true;
+        $u->verificado = true;
         $u->save();
 
         // $faker = FakerFactory::create();

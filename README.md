@@ -1,12 +1,18 @@
-# 🚀 Comparte DUOC 🚀
+# 🚀 PRESENTE PROFE 🚀
 
 <center>
 <img src="public/app/img/comparte-logo2.svg" width="100px">
 </center>
 
+https://chromewebstore.google.com/detail/presente-profe/cdlobfdkmnceddliohfkoiijnifbebgm?hl=es
+
 ## Descripción
 
-Plataforma de registro de tomas de salas en horarios disponibles
+La extension que a todo profe le gustaría tener para pasar la lista de clase de forma didactica y entretenida
+
+El problema de pasar la asistencia en clases es ir gritando el nombre y apellido de cada alumnos. Esta extensión facilita de forma visual una tarjeta dinamica del nombre de cada uno de los alumnos. Moviendose con las flechas puedes pasar la asistencia de manera rapida y agil. 
+
+En la actualización v1.2 agregamos audio para hacer esta tarea mas fácil!!!!
 
 ## Requisitos
 
