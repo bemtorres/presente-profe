@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('apellido_materno')->nullable();
             $table->string('correo')->unique();
             $table->string('password', 256);
+            $table->string('token')->nullable();
+            $table->string('codigo_inivitacion')->nullable();
             $table->string('imagen')->nullable();
+            $table->boolean('premium')->default(false);
             $table->boolean('admin')->default(false);
             $table->json('info')->nullable();
             $table->json('integrations')->nullable();
@@ -34,28 +37,37 @@ return new class extends Migration
 
         $u = new Usuario();
         $u->nombre = 'Benjamin';
-        $u->apellido_paterno = 'Mora';
+        $u->apellido_paterno = 'Admin';
         $u->apellido_materno = 'Torres';
-        $u->correo = 'bej.mora@profesor.duoc.cl';
-        $u->password = hash('sha256', '199191919192AASDDS');
+        $u->correo = 'admin@presenteprofe.cl';
+        $u->password = hash('sha256', 'admin123');
+        $u->codigo_inivitacion = 'admin123';
         $u->admin = true;
+        $u->premium = true;
         $u->verificado = true;
         $u->save();
 
-        // $faker = FakerFactory::create();
+        $u = new Usuario();
+        $u->nombre = 'Benjamin';
+        $u->apellido_paterno = 'Mora';
+        $u->apellido_materno = 'Torres';
+        $u->correo = 'profesor@presenteprofe.cl';
+        $u->password = hash('sha256', 'admin123');
+        $u->admin = false;
+        $u->premium = true;
+        $u->verificado = true;
+        $u->save();
 
-        // for ($i = 0; $i < 200; $i++) {
-        //   $u = new Usuario();
-        //   $u->run = $i%2==0 ? 10000000 + $i : null;
-        //   $u->nombre = $faker->firstName;
-        //   $u->apellido_paterno = $faker->lastName;
-        //   $u->apellido_materno = $faker->lastName;
-        //   $u->correo = $faker->unique()->safeEmail;
-        //   $u->password = hash('sha256', '123456');
-        //   $u->id_sede = 1300;
-        //   $u->tipo_usuario = 2;
-        //   $u->save();
-        // }
+        $u = new Usuario();
+        $u->nombre = 'Elias';
+        $u->apellido_paterno = 'Torres';
+        $u->apellido_materno = 'Torres';
+        $u->correo = 'estudiante@presenteprofe.cl';
+        $u->password = hash('sha256', 'admin123');
+        $u->admin = false;
+        $u->premium = false;
+        $u->verificado = true;
+        $u->save();
     }
 
     /**

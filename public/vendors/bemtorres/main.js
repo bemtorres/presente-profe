@@ -19,12 +19,12 @@ if (window.jQuery) {
     // console.error('jQuery no está cargado en la página.');
     document.addEventListener('DOMContentLoaded', function() {
         var formSubmit = document.querySelector('.form-submit');
-    
+
         if (formSubmit) {
             formSubmit.addEventListener('submit', function(event) {
                 // Evitar el envío del formulario
                 event.preventDefault();
-    
+
                 // Deshabilitar el botón dentro del formulario
                 var submitButton = formSubmit.querySelector('button');
                 if (submitButton) {

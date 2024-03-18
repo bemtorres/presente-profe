@@ -14,56 +14,31 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
   public function index() {
-    return view('www.index');
-    // return view('auth.index');
-  }
-
-  public function recuperar() {
-    return view('auth.recuperar');
-  }
-
-  public function recuperarStore(Request $request) {
-    // return view('auth.recuperar');
-    try {
-      $u = Usuario::findByCorreo($request->correo)->firstOrFail();
-
-      $time = time() + 60*60*24;
-
-      $u->password = hash('sha256', $time);
-      $u->save();
-
-      (new EmailUser($u, $time))->password_reset();
-
-      return back()->with('success','Se ha cambiado la contraseña correctamente.');
-    } catch (\Throwable $th) {
-      // return $th;
-      return back()->with('info','Error. Intente nuevamente.');
-    }
-  }
-  public function inicio() {
-    return view('inicio');
+    return view('auth.index');
   }
 
 
-  public function home() {
-    return view('blank');
+  public function registro() {
+    return view('auth.registro');
   }
+
+  // public function home() {
+  //   return view('blank');
+  // }
 
   public function login(Request $request){
     try {
       $u = Usuario::findByCorreo($request->correo)->firstOrFail();
-
       $pass =  hash('sha256', $request->password);
+
       if($u->password==$pass){
 
         Auth::guard('usuario')->loginUsingId($u->id);
-        // $this->start_sesions($u);
-
-        // if ($u->user_app) {
-          // return redirect()->route('app.index');
-        // } else {
-          // return redirect()->route('home.index');
-        // }
+        if ($u->admin || $u->premium) {
+          return redirect()->route('admin.index');
+        } else {
+          return redirect()->route('app.index');
+        }
       }else{
         return back()->with('info','Error. Intente nuevamente.');
       }
@@ -71,6 +46,55 @@ class AuthController extends Controller
       return back()->with('info','Error. Intente nuevamente.');
     }
   }
+
+  public function registroStore(Request $request) {
+    $codigo = $request->input('codigo');
+
+    $u = Usuario::findByCodigoInivitacion($codigo)->first();
+
+    if($u){
+      $u->nombre = $request->input('nombre');
+      $u->apellido = $request->input('apellido');
+      $u->correo = $request->input('correo');
+      $u->password = hash('sha256', $request->input('password'));
+      $u->save();
+
+      Auth::guard('usuario')->loginUsingId($u->id);
+      // $this->start_sesions($u);
+    }
+
+      // if ($u->user_app) {
+        // return redirect()->route('app.index');
+      // } else {
+        // return redirect()->route('home.index');
+      // }
+
+    return view('auth.registro');
+  }
+
+
+  // public function recuperar() {
+  //   return view('auth.recuperar');
+  // }
+
+  // public function recuperarStore(Request $request) {
+  //   // return view('auth.recuperar');
+  //   try {
+  //     $u = Usuario::findByCorreo($request->correo)->firstOrFail();
+
+  //     $time = time() + 60*60*24;
+
+  //     $u->password = hash('sha256', $time);
+  //     $u->save();
+
+  //     (new EmailUser($u, $time))->password_reset();
+
+  //     return back()->with('success','Se ha cambiado la contraseña correctamente.');
+  //   } catch (\Throwable $th) {
+  //     // return $th;
+  //     return back()->with('info','Error. Intente nuevamente.');
+  //   }
+  // }
 
   public function logout(){
     close_sessions();
