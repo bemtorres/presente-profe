@@ -13,7 +13,7 @@
       <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
         <ul class="app-menu list-unstyled accordion" id="menu-accordion">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">
+            <a class="nav-link {{ activeTab(['admin']) }}" href="{{ route('admin.index') }}">
               <span class="nav-icon">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
@@ -41,8 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-            <a class="nav-link" href="orders.html">
+            <a class="nav-link {{ activeTab(['admin/usuarios*']) }}" href="{{ route('admin.usuario.index') }}">
               <span class="nav-icon">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +54,7 @@
                   <circle cx="3.5" cy="10.5" r=".5" />
                 </svg>
               </span>
-              <span class="nav-link-text">Orders</span>
+              <span class="nav-link-text">Usuarios</span>
             </a>
           </li>
           {{-- <li class="nav-item has-submenu">
