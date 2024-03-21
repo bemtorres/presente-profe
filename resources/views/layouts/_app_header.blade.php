@@ -135,8 +135,8 @@
               {{ current_user()->nombre_completo() }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-              <li><a class="dropdown-item" href="account.html">Cuenta</a></li>
-              <li><a class="dropdown-item" href="settings.html">Configuración</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.perfil.index') }}">Cuenta</a></li>
+              {{-- <li><a class="dropdown-item" href="settings.html">Configuración</a></li> --}}
               <li>
                 <hr class="dropdown-divider">
               </li>

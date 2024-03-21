@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('correo')->unique();
             $table->string('password', 256);
             $table->string('token')->nullable();
-            $table->string('codigo_inivitacion')->nullable();
+            $table->string('codigo_invitacion')->nullable();
             $table->string('imagen')->nullable();
             $table->boolean('premium')->default(false);
             $table->boolean('admin')->default(false);
@@ -41,7 +41,7 @@ return new class extends Migration
         $u->apellido_materno = 'Torres';
         $u->correo = 'admin@presenteprofe.cl';
         $u->password = hash('sha256', 'admin123');
-        $u->codigo_inivitacion = 'admin123';
+        $u->codigo_invitacion = 'admin123';
         $u->admin = true;
         $u->premium = true;
         $u->verificado = true;

@@ -41,14 +41,18 @@ class Usuario extends Authenticatable
   }
 
 
-  public function scopefindByCodigoInivitacion($query, $codigo){
-    return $query->where('codigo_inivitacion',$codigo);
+  public function scopefindByCodigoInvitacion($query, $codigo){
+    return $query->where('codigo_invitacion',$codigo);
   }
 
 
   // function inte_google_id(){
   //   return $this->integrations['google_id'] ?? null;
   // }
+
+  public function getInfoInvitar() {
+    return $this->info['invitar'] ?? false;
+  }
 
   function info_img(){
     return $this->info['img'] ?? null;
