@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Sala;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +23,7 @@ return new class extends Migration
             $table->string('codigo_unirse')->unique();
             $table->string('codigo_registro')->unique();
             $table->integer('registro_activo')->default(true);
+            $table->string('imagen')->nullable();
             $table->json('info')->nullable();
             $table->json('web')->nullable();
             $table->foreignId('id_usuario')->references('id')->on('usuario');

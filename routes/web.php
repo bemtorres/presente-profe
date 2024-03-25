@@ -5,9 +5,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\APIAsignaturaController;
 use App\Http\Controllers\API\APIAsistenciaController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\EspacioController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
+
+Route::any('correo', [EmailController::class, 'index']);
 
 Route::get('/', [AuthController::class, 'index'])->name('root');
 Route::any('logout', [AuthController::class, 'logout'])->name('logout');
@@ -38,6 +42,9 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/usuarios_premium', [UsuarioController::class, 'indexPremium' ])->name('admin.usuario.premium');
   Route::get('admin/usuarios_normal', [UsuarioController::class, 'indexNormal'])->name('admin.usuario.normal');
   Route::put('admin/usuarios/{id}/password', [UsuarioController::class, 'updatePassword'])->name('admin.usuario.password');
+
+
+  Route::resource('admin/espacios', EspacioController::class)->names('admin.espacio');
 
   // PERFIL
   Route::get('admin/perfil', [PerfilController::class, 'index'])->name('admin.perfil.index');

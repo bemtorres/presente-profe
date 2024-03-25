@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
-use function Symfony\Component\String\b;
 
 class UsuarioController extends Controller
 {

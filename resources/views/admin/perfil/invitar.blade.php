@@ -14,14 +14,13 @@
     <div class="row g-4 settings-section">
       <div class="col-12 col-md-4">
         <h3 class="section-title">Invitaciones</h3>
-        <div class="section-intro">Settings section intro goes here. Duis velit massa, faucibus non hendrerit eget.
-        </div>
+        <div class="section-intro">Puedes invitar a otras personas.</div>
       </div>
       <div class="col-12 col-md-8">
         <div class="app-card app-card-settings shadow-sm p-4">
           <div class="app-card-body">
             <div class="alert alert-success" role="alert">
-              <strong>Cantidad de invitados </strong> 0
+              <strong>Cantidad de invitados: </strong> {{ $u->getInfoInvitarCount() }}
             </div>
 
             <div class="mb-3 col-md-12">

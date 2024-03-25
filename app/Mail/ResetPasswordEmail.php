@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -46,7 +45,7 @@ class ResetPasswordEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.auth.reset_password',
+            view: 'mail.auth.mail_registro',
 
       );
     }

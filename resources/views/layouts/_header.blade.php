@@ -12,7 +12,7 @@
       </div>
       <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
         <ul class="app-menu list-unstyled accordion" id="menu-accordion">
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link {{ activeTab(['admin']) }}" href="{{ route('admin.index') }}">
               <span class="nav-icon">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor"
@@ -24,9 +24,8 @@
               </span>
               <span class="nav-link-text">Overview</span>
             </a>
-          </li>
-          <li class="nav-item">
-            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+          </li> --}}
+          {{-- <li class="nav-item">
             <a class="nav-link" href="docs.html">
               <span class="nav-icon">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder" fill="currentColor"
@@ -39,7 +38,7 @@
               </span>
               <span class="nav-link-text">Docs</span>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link {{ activeTab(['admin/usuarios*']) }}" href="{{ route('admin.usuario.index') }}">
               <span class="nav-icon">
@@ -117,8 +116,7 @@
 
 
           <li class="nav-item">
-            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link {{ activeTab(['admin/espacios*']) }}" href="{{ route('admin.espacio.index') }}">
               <span class="nav-icon">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
@@ -143,8 +141,7 @@
             </a>
           </li> --}}
 
-          <li class="nav-item">
-            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+          {{-- <li class="nav-item">
             <a class="nav-link" href="help.html">
               <span class="nav-icon">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor"
@@ -157,9 +154,9 @@
               </span>
               <span class="nav-link-text">Help</span>
             </a>
-          </li>
-        </ul><!--//app-menu-->
-      </nav><!--//app-nav-->
+          </li> --}}
+        </ul>
+      </nav>
       <div class="app-sidepanel-footer">
         <nav class="app-nav app-nav-footer">
           <ul class="app-menu footer-menu list-unstyled">

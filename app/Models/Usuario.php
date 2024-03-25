@@ -6,8 +6,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
-
 
 class Usuario extends Authenticatable
 {
@@ -41,7 +39,7 @@ class Usuario extends Authenticatable
   }
 
 
-  public function scopefindByCodigoInvitacion($query, $codigo){
+  public function scopefindCodeInvitacion($query, $codigo){
     return $query->where('codigo_invitacion',$codigo);
   }
 
@@ -54,11 +52,15 @@ class Usuario extends Authenticatable
     return $this->info['invitar'] ?? false;
   }
 
-  function info_img(){
+  public function getInfoInvitarCount() {
+    return $this->info['invitar_count'] ?? 0;
+  }
+
+  public function info_img(){
     return $this->info['img'] ?? null;
   }
 
-  function scopeFindCorreo($query, $correo) {
+  public function scopeFindCorreo($query, $correo) {
     return  $query->where('correo', $correo);
   }
 

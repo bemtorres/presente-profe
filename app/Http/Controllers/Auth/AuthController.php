@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
+use App\Models\UsuarioInvitado;
 use App\Services\EmailUser;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 
 // use App\Http\Requests\AuthLoginRequest as AuthRequest;
@@ -48,20 +50,49 @@ class AuthController extends Controller
   }
 
   public function registroStore(Request $request) {
+
+    // return $request;
     $codigo = $request->input('codigo');
 
-    $u = Usuario::findByCodigoInivitacion($codigo)->first();
+    $usuario_main = Usuario::findCodeInvitacion($codigo)->firstOrFail();
 
-    if($u){
-      $u->nombre = $request->input('nombre');
-      $u->apellido = $request->input('apellido');
-      $u->correo = $request->input('correo');
-      $u->password = hash('sha256', $request->input('password'));
-      $u->save();
+    $exist = Usuario::findByCorreo($request->correo)->first();
 
-      Auth::guard('usuario')->loginUsingId($u->id);
-      // $this->start_sesions($u);
+    if ($usuario_main->getInfoInvitar()) {
+      if (empty($exist)) {
+        $codigo =  Str::random(8);
+
+        $u = new Usuario();
+        $u->run = $request->input('run');
+        $u->nombre = $request->input('nombre');
+        $u->apellido_paterno = $request->input('paterno');
+        $u->apellido_materno = $request->input('materno');
+        $u->correo = $request->input('correo');
+        $u->password = hash('sha256', $codigo);
+        $u->save();
+
+        $info = $usuario_main->info;
+        $info['invitar_count'] = $usuario_main->getInfoInvitarCount() + 1;
+        $usuario_main->info = $info;
+        $usuario_main->update();
+
+        $uinvitado = new UsuarioInvitado();
+        $uinvitado->id_usuario = $usuario_main->id;
+        $uinvitado->id_invitado = $u->id;
+        $uinvitado->save();
+
+        (new EmailUser($u, $codigo))->registro();
+
+        return redirect()->route('root')->with('success','Se ha enviado correo a su cuenta.');
+      } else {
+        return back()->with('info','Correo ya esta registrado.');
+      }
+    } else {
+      return back()->with('info','Codigo de invitacion no valido.');
     }
+
+
+
 
       // if ($u->user_app) {
         // return redirect()->route('app.index');

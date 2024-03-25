@@ -4,7 +4,6 @@ use App\Models\Usuario;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Faker\Factory as FakerFactory;
 return new class extends Migration
 {
     /**
@@ -18,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('run')->nullable();
             $table->string('nombre');
+            $table->string('nickname')->nullable();
             $table->string('apellido_paterno')->nullable();
             $table->string('apellido_materno')->nullable();
             $table->string('correo')->unique();

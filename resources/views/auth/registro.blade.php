@@ -7,73 +7,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="favicon.ico">
   <script defer src="{{ asset('template/assets/plugins/fontawesome/js/all.min.js') }}"></script>
-  <link id="theme-style" rel="stylesheet" href="{{ asset('template/assets/css/portal.css') }}">
   <link href="{{ asset('vendors/toastify/toastify.min.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/logins/login-9/assets/css/login-9.css">
   <style>
-    .app-auth-wrapper {
-      /* background-color: #cdcdcd !important; */
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      text-align: left;
+      background: rgb(0,0,0);
+      background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(26,26,26,1) 22%, rgba(26,26,26,1) 88%);
+
+      /* background-color: 8f9fc; */
     }
   </style>
 </head>
-<body class=" app-login p-0">
-  <div class="row g-0 app-auth-wrapper">
-    {{-- <div class="d-none d-md-block col p-5">
-      <img src="{{ asset('images/check.svg') }}" width="100%" alt="">
-    </div> --}}
-    <div class="col-12 text-center">
-      <div class="d-flex flex-column ">
-        <div class="app-auth-body mx-auto">
-          <div class="app-auth-branding mb-4">
-            <img class="logo-icon me-2" src="{{ asset('images/presenteprofe1.png') }}" width="200px" alt="logo">
-          </div>
-          {{-- <h2 class="auth-heading text-center mb-3">Log in to Portal</h2> --}}
-          <div class="text-start">
-            <form action="{{ route('auth.registro') }}" method="post" class="form-submit row">
-              @csrf
-              <div class="mb-3">
-                <label for="run" class="form-label">Rut<small class="text-danger">*</small></label>
-                <input type="text" class="form-control" name="run" placeholder=""
-                    required="" maxlength="9" min="8" autocomplete="off" onkeyup="this.value = validarRut(this.value)">
-              </div>
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre<small class="text-danger">*</small></label>
-                <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombre" required>
-              </div>
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Apellido paterno<small class="text-danger">*</small></label>
-                <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombre" required>
-              </div>
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Apellido materno<small class="text-danger">*</small></label>
-                <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombre" required>
-              </div>
-              <div class="mb-3 col-md-12">
-                <label for="correo" class="form-label">Correo<small class="text-danger">*</small></label>
-                <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correo" required>
-              </div>
-              <div class="mb-3 col-md-12">
-                <label for="codigo" class="form-label">Código de invitación<small class="text-danger">*</small></label>
-                <input type="text" class="form-control" id="codigo" name="codigo" aria-describedby="codigo" required>
-              </div>
-              <div class="d-grid gap-3">
-                <button type="submit" class="btn app-btn-primary mb-3">REGISTRAR</button>
-                <a href="{{ route('root') }}" class="btn app-btn-secondary">VOLVER</a>
-              </div>
-            </form>
+<body class="">
+  <section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+      <div class="row gy-4 align-items-center">
+        <div class="col-12 col-md-6 col-xl-7 d-none d-md-block">
+          <div class="d-flex justify-content-center">
+            <div class="col-12 col-xl-9">
+              <img class="img-fluid rounded mb-4"  src="{{ asset('img/presenteprofe.webp') }}" alt="">
+            </div>
           </div>
         </div>
-        <footer class="app-auth-footer" hidden>
-          <div class="container text-center py-3">
-            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"
-                style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com"
-                target="_blank">Xiaoying Riley</a> for developers</small>
-
+        <div class="col-12 col-md-6 col-xl-5">
+          <div class="card border-0 rounded-4">
+            <div class="card-body p-3 p-md-4 p-xl-5">
+              <div class="row">
+                <div class="col-12">
+                  <div class="mb-1">
+                    {{-- <h3></h3> --}}
+                    <img src="{{ asset('img/logo-presente-profe.png') }}" class="img-fluid rounded mb-4"  alt="" srcset="">
+                    {{-- <p>Don't have an account? <a href="#!">Sign up</a></p> --}}
+                  </div>
+                </div>
+              </div>
+              <form action="{{ route('auth.registro') }}" method="post" class="form-submit row">
+                @csrf
+                <div class="mb-3">
+                  <label for="run" class="form-label">Rut<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" name="run" placeholder=""
+                      required="" maxlength="9" min="8" autocomplete="off" onkeyup="this.value = validarRut(this.value)">
+                </div>
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="mb-3 col-6">
+                  <label for="paterno" class="form-label">Apellido paterno<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="paterno" name="paterno" required>
+                </div>
+                <div class="mb-3 col-6">
+                  <label for="materno" class="form-label">Apellido materno<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="materno" name="materno" required>
+                </div>
+                <div class="mb-3 col-md-12">
+                  <label for="correo" class="form-label">Correo<small class="text-danger">*</small></label>
+                  <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correo" required>
+                </div>
+                <div class="mb-3 col-md-12">
+                  <label for="codigo" class="form-label">Código de invitación<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="codigo" name="codigo" aria-describedby="codigo" required>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-success btn-lg" type="submit">REGISTRAR</button>
+                  <a href="{{ route('root') }}" class="btn btn-dark btn-lg mt-2">VOLVER</a>
+                </div>
+              </form>
+            </div>
           </div>
-        </footer>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="{{ asset('vendors/bemtorres/validate-run.js') }}"></script>
   <script src="{{ asset('vendors/bemtorres/main.js') }}"></script>
