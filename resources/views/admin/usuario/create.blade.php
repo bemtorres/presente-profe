@@ -18,7 +18,7 @@
           <div class="app-card app-card-settings shadow-sm p-4">
 
             <div class="app-card-body">
-              <form class="settings-form row" action="{{ route('admin.usuario.store') }}" method="POST">
+              <form class="settings-form row" action="{{ route('admin.usuario.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3 col-md-12">
                   <label for="run" class="form-label">Rut<small class="text-danger">*</small></label>

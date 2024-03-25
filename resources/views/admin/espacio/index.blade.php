@@ -40,7 +40,7 @@
           @foreach ($espacios as $e)
             <tr>
               {{-- <td class="cell">#15346</td> --}}
-              {{-- <td class="cell">{{ $u->nombre_completo() }}</td> --}}
+              <td class="cell"><img src="{{ asset($e->getPhoto()) }}" width="60px" alt=""></td>
               <td class="cell"><a href="{{ route('admin.espacio.show', $e->id) }}">{{ $e->nombre }}</a></td>
               <td class="cell"><a href="{{ route('admin.espacio.show', $e->id) }}">{{ $e->sigla }}</a></td>
               <td class="cell">< href="{{ $e->institucion }}</td>

@@ -131,7 +131,7 @@
           </div> --}}
           <div class="app-utility-item app-user-dropdown dropdown">
             <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-              aria-expanded="false"><img src="{{ asset('template/assets/images/user.png') }}" alt="user profile">
+              aria-expanded="false"><img src="{{ asset(current_user()->getPhoto()) }}"  class="rounded-circle" alt="user profile">
               {{ current_user()->nombre_completo() }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">

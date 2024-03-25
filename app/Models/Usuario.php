@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Imagen;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,13 +69,21 @@ class Usuario extends Authenticatable
     return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
   }
 
-  public function getImg() {
-    if ($this->info_img()) {
-      return asset($this->info_img());
-    }
+  public function getPhoto(){
+    $folder = "assets/usuario";
+    $folder_default = "img/";
+    $imgDefault = $folder_default.'profile.png';
 
-    return asset('template/img/people.png');
+    $img = $this->imagen;
+
+    if (strpos($this->imagen, "image") !== false) {
+      // $folder = $folder_default.$this->imagen;
+      $imgDefault = $folder_default.$this->imagen;
+      $img = null;
+    }
+    return (new Imagen($img, $folder, $imgDefault))->call();
   }
+
 
   // public function to_raw() {
   //   return [

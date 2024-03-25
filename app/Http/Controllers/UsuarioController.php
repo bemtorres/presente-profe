@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
+use App\Services\ImportImage;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
@@ -42,6 +43,18 @@ class UsuarioController extends Controller
       $u->password = hash('sha256', $request->pass);
       $u->admin = empty($request->input('check-admin')) ? false : true;
       $u->premium = empty($request->input('check-premium')) ? false : true;
+
+
+      if(!empty($request->file('image'))){
+        $request->validate([
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        $filename = time() . '-' . Str::random(3);
+        $folder = 'public/assets/usuario/';
+        $u->imagen = ImportImage::save($request, 'image', $filename, $folder);
+      }
+
       $u->save();
 
       return redirect()->route('admin.usuario.index')->with('success', 'Usuario creado correctamente');
@@ -79,5 +92,24 @@ class UsuarioController extends Controller
     $u->password = hash('sha256', $request->pass);
     $u->update();
     return back()->with('success', 'Usuario actualizado correctamente');
+  }
+
+  public function updateImg(Request $request, $id) {
+    try {
+      $u = Usuario::find($id);
+      if(!empty($request->file('image'))){
+        $request->validate([
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        $filename = time() . '-' . Str::random(3);
+        $folder = 'public/assets/usuario/';
+        $u->imagen = ImportImage::save($request, 'image', $filename, $folder);
+      }
+      $u->update();
+      return back()->with('success', 'Usuario actualizado correctamente');
+    } catch (\Throwable $th) {
+      return back()->with('error', 'Error al actualizar usuario');
+    }
   }
 }

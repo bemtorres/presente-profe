@@ -15,6 +15,15 @@
           <div class="section-intro"></div>
         </div> --}}
         @include('admin.perfil._tabs')
+      </div>
+
+      <hr class="my-4">
+      <div class="row g-4 settings-section">
+        <div class="col-12 col-md-4">
+          <h3 class="section-title">Información cuenta</h3>
+          <div class="section-intro">Settings section intro goes here. Morbi vehicula, est eget fermentum
+            ornare. </div>
+        </div>
         <div class="col-12 col-md-8">
           <div class="app-card app-card-settings shadow-sm p-4">
 
@@ -70,8 +79,16 @@
 
           </div>
         </div>
+      </div>
+      <hr class="my-4">
+      <div class="row g-4 settings-section">
         <div class="col-12 col-md-4">
-          <div class="app-card app-card-settings shadow-sm p-4 mt-3">
+          <h3 class="section-title">Cambiar contraseña</h3>
+          <div class="section-intro">Settings section intro goes here. Duis velit massa, faucibus non
+            hendrerit eget.</div>
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="app-card app-card-settings shadow-sm p-4">
             <div class="app-card-body">
               <form class="settings-form row" action="{{ route('admin.perfil.password',$u->id) }}" method="POST">
                 @csrf
@@ -87,105 +104,50 @@
                 </div>
               </form>
             </div>
-
-          </div>
-        </div>
-      </div>
-
-      {{-- <hr class="my-4">
-      <div class="row g-4 settings-section">
-        <div class="col-12 col-md-4">
-          <h3 class="section-title">Data &amp; Privacy</h3>
-          <div class="section-intro">Settings section intro goes here. Morbi vehicula, est eget fermentum
-            ornare. </div>
-        </div>
-        <div class="col-12 col-md-8">
-          <div class="app-card app-card-settings shadow-sm p-4">
-            <div class="app-card-body">
-              <form class="settings-form">
-
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-2" checked>
-                  <label class="form-check-label" for="settings-checkbox-2">
-                    Keep user app preferences
-                  </label>
-                </div>
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-3">
-                  <label class="form-check-label" for="settings-checkbox-3">
-                    Keep user app search history
-                  </label>
-                </div>
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-4">
-                  <label class="form-check-label" for="settings-checkbox-4">
-                    Lorem ipsum dolor sit amet
-                  </label>
-                </div>
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-5">
-                  <label class="form-check-label" for="settings-checkbox-5">
-                    Aenean quis pharetra metus
-                  </label>
-                </div>
-                <div class="mt-3">
-                  <button type="submit" class="btn app-btn-primary">Save Changes</button>
-                </div>
-              </form>
-            </div>
           </div>
         </div>
       </div>
       <hr class="my-4">
       <div class="row g-4 settings-section">
         <div class="col-12 col-md-4">
-          <h3 class="section-title">Notifications</h3>
-          <div class="section-intro">Settings section intro goes here. Duis velit massa, faucibus non
-            hendrerit eget.</div>
+          <h3 class="section-title">Cambiar Imagen</h3>
+          <div class="section-intro">
+            <img src="{{ asset($u->getPhoto()) }}" width="200" height="100%" alt="">
+          </div>
+
         </div>
         <div class="col-12 col-md-8">
           <div class="app-card app-card-settings shadow-sm p-4">
             <div class="app-card-body">
-              <form class="settings-form">
-                <div class="form-check form-switch mb-3">
-                  <input class="form-check-input" type="checkbox" id="settings-switch-1" checked>
-                  <label class="form-check-label" for="settings-switch-1">Project
-                    notifications</label>
+
+              <form class="settings-form row" action="{{ route('admin.perfil.img',$u->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group">
+                  <label class="col-form-label" for="hf-rut">Imagen <small>(Opcional)</small></label>
+                  <div class="input-group">
+                    <!-- <img src=""  class='Responsive image img-thumbnail'  width='200px' height='200px' alt=""> -->
+                    <input type="file" name="image" accept="image/*" onchange="preview(this)" />
+                    <br>
+                  </div>
                 </div>
-                <div class="form-check form-switch mb-3">
-                  <input class="form-check-input" type="checkbox" id="settings-switch-2">
-                  <label class="form-check-label" for="settings-switch-2">Web browser push
-                    notifications</label>
+                <div class="form-group center-text">
+                  <div id="preview"></div>
                 </div>
-                <div class="form-check form-switch mb-3">
-                  <input class="form-check-input" type="checkbox" id="settings-switch-3" checked>
-                  <label class="form-check-label" for="settings-switch-3">Mobile push
-                    notifications</label>
-                </div>
-                <div class="form-check form-switch mb-3">
-                  <input class="form-check-input" type="checkbox" id="settings-switch-4">
-                  <label class="form-check-label" for="settings-switch-4">Lorem ipsum
-                    notifications</label>
-                </div>
-                <div class="form-check form-switch mb-3">
-                  <input class="form-check-input" type="checkbox" id="settings-switch-5">
-                  <label class="form-check-label" for="settings-switch-5">Lorem ipsum
-                    notifications</label>
-                </div>
-                <div class="mt-3">
-                  <button type="submit" class="btn app-btn-primary">Save Changes</button>
+
+                <div class="text-end">
+                  <button type="submit" class="btn app-btn-primary">Guardar</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <hr class="my-4"> --}}
-
   {{-- </div> --}}
 {{-- </div> --}}
 @endsection
 @push('js')
   <script src="{{ asset('vendors/bemtorres/validate-run.js') }}"></script>
-
+  <script src="{{ asset('vendors/bemtorres/preview.js') }}"></script>
 @endpush

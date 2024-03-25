@@ -42,6 +42,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/usuarios_premium', [UsuarioController::class, 'indexPremium' ])->name('admin.usuario.premium');
   Route::get('admin/usuarios_normal', [UsuarioController::class, 'indexNormal'])->name('admin.usuario.normal');
   Route::put('admin/usuarios/{id}/password', [UsuarioController::class, 'updatePassword'])->name('admin.usuario.password');
+  Route::put('admin/usuarios/{id}/img', [UsuarioController::class, 'updateImg'])->name('admin.usuario.img');
 
 
   Route::resource('admin/espacios', EspacioController::class)->names('admin.espacio');
@@ -50,6 +51,7 @@ Route::middleware('auth.user')->group( function () {
   Route::get('admin/perfil', [PerfilController::class, 'index'])->name('admin.perfil.index');
   Route::put('admin/perfil', [PerfilController::class, 'update'])->name('admin.perfil.update');
   Route::put('admin/perfil/password', [PerfilController::class, 'updatePassword'])->name('admin.perfil.password');
+  Route::put('admin/perfil/img', [PerfilController::class, 'updateImg'])->name('admin.perfil.img');
   Route::get('admin/perfil/invitar', [PerfilController::class, 'invitar'])->name('admin.perfil.invitar');
   Route::put('admin/perfil/invitar', [PerfilController::class, 'invitarUpdate'])->name('admin.perfil.invitar');
   Route::put('admin/perfil/codigo', [PerfilController::class, 'codigoUpdate'])->name('admin.perfil.codigo');

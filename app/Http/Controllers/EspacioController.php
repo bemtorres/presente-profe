@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Espacio;
 use App\Models\Usuario;
+use App\Services\ImportImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -33,6 +34,17 @@ class EspacioController extends Controller
       $e->codigo_unirse = $this->codigoUpdate('codigo_unirse');
       $e->codigo_registro = $this->codigoUpdate('codigo_registro');
       $e->registro_activo = false;
+
+      if(!empty($request->file('image'))){
+        $request->validate([
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        ]);
+
+        $filename = time() . '-' . Str::random(3);
+        $folder = 'public/assets/espacios/';
+        $e->imagen = ImportImage::save($request, 'image', $filename, $folder);
+      }
+
       $e->save();
       return redirect()->route('admin.espacio.index')->with('success', 'Usuario creado correctamente');
     } catch (\Throwable $th) {

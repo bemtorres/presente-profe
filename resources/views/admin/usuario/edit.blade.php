@@ -96,7 +96,41 @@
           </div>
         </div>
       </div>
+      <hr class="my-4">
+      <div class="row g-4 settings-section">
+        <div class="col-12 col-md-4">
+          <h3 class="section-title">Cambiar Imagen</h3>
+          <div class="section-intro">
+            <img src="{{ asset($u->getPhoto()) }}" width="200" height="100%" alt="">
+          </div>
 
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="app-card app-card-settings shadow-sm p-4">
+            <div class="app-card-body">
+              <form class="settings-form row" action="{{ route('admin.usuario.img',$u->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                  <label class="col-form-label" for="hf-rut">Imagen <small>(Opcional)</small></label>
+                  <div class="input-group">
+                    <!-- <img src=""  class='Responsive image img-thumbnail'  width='200px' height='200px' alt=""> -->
+                    <input type="file" name="image" accept="image/*" onchange="preview(this)" />
+                    <br>
+                  </div>
+                </div>
+                <div class="form-group center-text">
+                  <div id="preview"></div>
+                </div>
+
+                <div class="text-end">
+                  <button type="submit" class="btn app-btn-primary">Guardar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       {{-- <hr class="my-4">
       <div class="row g-4 settings-section">
         <div class="col-12 col-md-4">
@@ -192,5 +226,7 @@
 @endsection
 @push('js')
   <script src="{{ asset('vendors/bemtorres/validate-run.js') }}"></script>
+  <script src="{{ asset('vendors/bemtorres/preview.js') }}"></script>
+
 
 @endpush
