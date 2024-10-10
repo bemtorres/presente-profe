@@ -46,6 +46,15 @@ Route::middleware('auth.user')->group( function () {
 
 
   Route::resource('admin/espacios', EspacioController::class)->names('admin.espacio');
+  Route::get('admin/espacios/{id}/compartir', [EspacioController::class,'compartir'])->name('admin.espacio.compartir');
+  Route::get('admin/espacios/{id}/matricula', [EspacioController::class,'matricula'])->name('admin.espacio.matricula');
+  Route::get('admin/espacios/{id}/clases', [EspacioController::class,'clases'])->name('admin.espacio.clases');
+  Route::post('admin/espacios/{id}/clases', [EspacioController::class,'clasesStore'])->name('admin.espacio.clases');
+  Route::post('admin/espacios/{id}/clases/{id_clases}', [EspacioController::class,'clasesShow'])->name('admin.espacio.clases.show');
+
+ // API INTERNA
+  Route::put('admin/espacios/{id}/matricula/active', [EspacioController::class,'matriculaActive'])->name('admin.espacio.matricla.active');
+  //
 
   // PERFIL
   Route::get('admin/perfil', [PerfilController::class, 'index'])->name('admin.perfil.index');
@@ -57,7 +66,14 @@ Route::middleware('auth.user')->group( function () {
   Route::put('admin/perfil/codigo', [PerfilController::class, 'codigoUpdate'])->name('admin.perfil.codigo');
 
 
+  // CALENDAIRO
+  Route::get('admin/calendario', [AdminController::class, 'calendario'])->name('admin.calendario.index');
   // APP
   Route::get('app', [AppController::class, 'index'])->name('app.index');
+
+
+
+ ;
+
 
 });

@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('asistencia_espacio', function (Blueprint $table) {
+        Schema::create('clase_espacio', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('run')->nullable();
-            $table->foreignId('id_matricula_espacio')->references('id')->on('matricula_espacio');
+            $table->dateTime('fecha');
+            $table->foreignId('id_usuario')->references('id')->on('usuario');
+            $table->foreignId('id_espacio')->references('id')->on('espacio');
             $table->json('info')->nullable();
+            $table->string('codigo_web')->unique();
+            $table->boolean('activo')->dafault(false);
             $table->timestamps();
         });
       }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asistencia_espacio');
+        Schema::dropIfExists('clase_espacio');
     }
 };

@@ -15,28 +15,28 @@ const alerts = [...alertList].map(element => new bootstrap.Alert(element))
 
 
 /* ===== Responsive Sidepanel ====== */
-const sidePanelToggler = document.getElementById('sidepanel-toggler'); 
-const sidePanel = document.getElementById('app-sidepanel');  
-const sidePanelDrop = document.getElementById('sidepanel-drop'); 
-const sidePanelClose = document.getElementById('sidepanel-close'); 
+const sidePanelToggler = document.getElementById('sidepanel-toggler');
+const sidePanel = document.getElementById('app-sidepanel');
+const sidePanelDrop = document.getElementById('sidepanel-drop');
+const sidePanelClose = document.getElementById('sidepanel-close');
 
 window.addEventListener('load', function(){
-	responsiveSidePanel(); 
+	responsiveSidePanel();
 });
 
 window.addEventListener('resize', function(){
-	responsiveSidePanel(); 
+	responsiveSidePanel();
 });
 
 
 function responsiveSidePanel() {
     let w = window.innerWidth;
 	if(w >= 1200) {
-	    // if larger 
+	    // if larger
 	    //console.log('larger');
 		sidePanel.classList.remove('sidepanel-hidden');
 		sidePanel.classList.add('sidepanel-visible');
-		
+
 	} else {
 	    // if smaller
 	    //console.log('smaller');
@@ -50,7 +50,7 @@ sidePanelToggler.addEventListener('click', () => {
 		console.log('visible');
 		sidePanel.classList.remove('sidepanel-visible');
 		sidePanel.classList.add('sidepanel-hidden');
-		
+
 	} else {
 		console.log('hidden');
 		sidePanel.classList.remove('sidepanel-hidden');
@@ -72,25 +72,25 @@ sidePanelDrop.addEventListener('click', (e) => {
 
 
 /* ====== Mobile search ======= */
-const searchMobileTrigger = document.querySelector('.search-mobile-trigger');
-const searchBox = document.querySelector('.app-search-box');
+// const searchMobileTrigger = document.querySelector('.search-mobile-trigger');
+// const searchBox = document.querySelector('.app-search-box');
 
-searchMobileTrigger.addEventListener('click', () => {
+// searchMobileTrigger.addEventListener('click', () => {
 
-	searchBox.classList.toggle('is-visible');
-	
-	let searchMobileTriggerIcon = document.querySelector('.search-mobile-trigger-icon');
-	
-	if(searchMobileTriggerIcon.classList.contains('fa-magnifying-glass')) {
-		searchMobileTriggerIcon.classList.remove('fa-magnifying-glass');
-		searchMobileTriggerIcon.classList.add('fa-xmark');
-	} else {
-		searchMobileTriggerIcon.classList.remove('fa-xmark');
-		searchMobileTriggerIcon.classList.add('fa-magnifying-glass');
-	}
-	
-		
-	
-});
+// 	searchBox.classList.toggle('is-visible');
+
+// 	let searchMobileTriggerIcon = document.querySelector('.search-mobile-trigger-icon');
+
+// 	if(searchMobileTriggerIcon.classList.contains('fa-magnifying-glass')) {
+// 		searchMobileTriggerIcon.classList.remove('fa-magnifying-glass');
+// 		searchMobileTriggerIcon.classList.add('fa-xmark');
+// 	} else {
+// 		searchMobileTriggerIcon.classList.remove('fa-xmark');
+// 		searchMobileTriggerIcon.classList.add('fa-magnifying-glass');
+// 	}
+
+
+
+// });
 
 

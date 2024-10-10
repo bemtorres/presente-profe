@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('descripcion')->nullable();
             $table->string('sigla')->nullable();
             $table->string('institucion')->nullable();
-            $table->string('codigo_unirse')->unique();
-            $table->string('codigo_registro')->unique();
-            $table->integer('registro_activo')->default(true);
+            $table->string('codigo_unirse')->unique(); // para los compañeros
+            $table->boolean('unirse_activo')->default(false);
+            $table->string('codigo_matricula')->unique(); // los alumnos
+            $table->boolean('matricula_activo')->default(false);
             $table->string('imagen')->nullable();
             $table->json('info')->nullable();
             $table->json('web')->nullable();

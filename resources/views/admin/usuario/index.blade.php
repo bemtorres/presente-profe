@@ -27,25 +27,27 @@
       <table class="table app-table-hover table-sm mb-0 text-left">
         <thead>
           <tr>
-            {{-- <th class="cell">Order</th> --}}
+            <th class="cell"></th>
             <th class="cell">Nombre</th>
             <th class="cell">Correo</th>
-            <th class="cell">Date</th>
-            <th class="cell">Status</th>
-            <th class="cell">Total</th>
-            <th class="cell"></th>
+            {{-- <th class="cell">Date</th> --}}
+            {{-- <th class="cell">Status</th> --}}
+            {{-- <th class="cell">Total</th> --}}
+            {{-- <th class="cell"></th> --}}
           </tr>
         </thead>
         <tbody>
           @foreach ($usuarios as $u)
             <tr>
-              {{-- <td class="cell">#15346</td> --}}
+              <td class="cell">
+                <img src="{{ asset($u->getPhoto()) }}" width="50" alt="">
+              </td>
               <td class="cell">{{ $u->nombre_completo() }}</td>
               <td class="cell"><a href="{{ route('admin.usuario.show', $u->id) }}">{{ $u->correo }}</a></td>
-              <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
-              <td class="cell"><span class="badge bg-success">Paid</span></td>
-              <td class="cell">$259.35</td>
-              <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+              {{-- <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td> --}}
+              {{-- <td class="cell"><span class="badge bg-success">Paid</span></td> --}}
+              <td class="cell"></td>
+              {{-- <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td> --}}
             </tr>
           @endforeach
         </tbody>

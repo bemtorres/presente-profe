@@ -35,7 +35,8 @@ class AuthController extends Controller
 
       if($u->password==$pass){
 
-        Auth::guard('usuario')->loginUsingId($u->id);
+        Auth::guard('usuario')->loginUsingId($u->id, true);
+        // Auth::guard('usuario')->login();
         if ($u->admin || $u->premium) {
           return redirect()->route('admin.index');
         } else {
@@ -45,6 +46,7 @@ class AuthController extends Controller
         return back()->with('info','Error. Intente nuevamente.');
       }
     } catch (\Throwable $th) {
+      // return $th;
       return back()->with('info','Error. Intente nuevamente.');
     }
   }

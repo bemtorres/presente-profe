@@ -20,6 +20,6 @@ class AccessUsuario
         return $next($request);
       }
 
-      return redirect('/')->with('danger','Usuario deshabilitado.');
+      return redirect('/')->with('info','Usuario no ha iniciado sesión.');
     }
 }

@@ -15,9 +15,6 @@ return new class extends Migration
     {
         Schema::create('matricula_espacio', function (Blueprint $table) {
             $table->id();
-            // $table->string('run')->nullable();
-            // $table->string('correo')->nullable();
-            // $table->string('nombres')->nullable();
             $table->foreignId('id_estudiante')->references('id')->on('usuario');
             $table->foreignId('id_espacio')->references('id')->on('espacio');
             $table->json('info')->nullable();

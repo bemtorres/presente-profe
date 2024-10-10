@@ -12,6 +12,16 @@ class Espacio extends Model
   use HasFactory;
   protected $table = 'espacio';
 
+
+  public function matriculas() {
+      return $this->hasMany(MatriculaEspacio::class, 'id_espacio');
+  }
+
+  public function clases() {
+    return $this->hasMany(ClaseEspacio::class, 'id_espacio');
+  }
+
+
   public function getPhoto(){
     $folder = "assets/espacios";
     $folder_default = "img/template";
@@ -34,5 +44,8 @@ class Espacio extends Model
     }
     return (new Imagen($img, $folder, $imgDefault))->call();
   }
+
+
+
 
 }

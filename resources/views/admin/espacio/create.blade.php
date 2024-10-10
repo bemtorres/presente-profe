@@ -33,39 +33,43 @@ $table->integer('activo')->default(true); --}}
             <div class="app-card-body">
               <form class="settings-form row" action="{{ route('admin.espacio.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-12">
                   <label for="nombre" class="form-label">Nombre espacio<small class="text-danger">*</small></label>
                   <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-12">
                   <label for="nombre" class="form-label">Sigla<small class="text-danger">*</small></label>
                   <input type="text" class="form-control" id="sigla" name="sigla" value="" placeholder="DYP2002" required>
                 </div>
-                <div class="mb-3 col-md-4">
+                {{-- <div class="mb-3 col-md-6">
                   <label for="nombre" class="form-label">Periodo<small class="text-danger">*</small></label>
                   <select class="form-select" name="periodo" id="periodo">
                     <option value="12024">01-2024</option>
                   </select>
-                </div>
-                <div class="mb-3">
-                  <label for="descripcion" class="form-label">Descripción</label>
-                  <textarea class="form-control" name="descripcion" id="descripcion" name="descripcion" rows="4"></textarea>
-                </div>
+                </div> --}}
 
                 <div class="mb-3 col-md-12">
                   <label for="institucion" class="form-label">Institución</label>
                   <input type="text" class="form-control" id="institucion" name="institucion" value="" required>
                 </div>
 
+                {{-- textarea.form-control {
+                  max-height: 600px;
+                } --}}
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripción</label>
+                  <textarea class="form-control" name="descripcion" id="descripcion" name="descripcion" rows="3"></textarea>
+                </div>
+
                 <div class="form-group">
                   <label class="col-form-label" for="hf-rut">Imagen <small>(Opcional)</small></label>
                   <div class="input-group">
                     <!-- <img src=""  class='Responsive image img-thumbnail'  width='200px' height='200px' alt=""> -->
-                    <input type="file" name="image" accept="image/*" onchange="preview(this)" />
+                    <input type="file" class="form-control" name="image" accept="image/*" onchange="preview(this)" />
                     <br>
                   </div>
                 </div>
-                <div class="form-group center-text">
+                <div class="form-group text-center mb-3">
                   <div id="preview"></div>
                 </div>
                 <div class="text-end">
