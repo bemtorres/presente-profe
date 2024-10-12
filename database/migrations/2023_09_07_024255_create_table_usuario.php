@@ -18,15 +18,13 @@ return new class extends Migration
             $table->string('run')->nullable();
             $table->string('nombre');
             $table->string('nickname')->nullable();
-            $table->string('apellido_paterno')->nullable();
-            $table->string('apellido_materno')->nullable();
+            $table->string('apellido')->nullable();
             $table->string('correo')->unique();
             $table->string('password', 256);
             $table->string('remember_token')->nullable();
             $table->string('codigo_invitacion')->nullable();
             $table->string('imagen')->nullable();
-            $table->boolean('premium')->default(false);
-            $table->boolean('admin')->default(false);
+            $table->integer('perfil')->default(3);
             $table->json('info')->nullable();
             $table->json('integrations')->nullable();
             $table->boolean('verificado')->default(false);
@@ -35,48 +33,49 @@ return new class extends Migration
         });
 
         $u = new Usuario();
-        $u->nombre = 'Benjamin';
-        $u->apellido_paterno = 'Admin';
-        $u->apellido_materno = 'Torres';
-        $u->correo = 'bej.mora@profesor.duoc.cl';
-        $u->password = hash('sha256', 'admin123');
-        $u->codigo_invitacion = 'admin123';
-        $u->admin = true;
-        $u->premium = true;
-        $u->verificado = true;
-        $u->save();
-
-        $u = new Usuario();
-        $u->nombre = 'Benjamin';
-        $u->apellido_paterno = 'Admin';
-        $u->apellido_materno = 'Torres';
+        $u->nombre = 'Tomas';
+        $u->apellido = 'Admin';
         $u->correo = 'admin@presenteprofe.cl';
         $u->password = hash('sha256', 'admin123');
         $u->codigo_invitacion = 'admin123';
-        $u->admin = true;
-        $u->premium = true;
+        $u->perfil = 1;
         $u->verificado = true;
         $u->save();
 
         $u = new Usuario();
         $u->nombre = 'Benjamin';
-        $u->apellido_paterno = 'Mora';
-        $u->apellido_materno = 'Torres';
+        $u->apellido = 'profe';
         $u->correo = 'profesor@presenteprofe.cl';
         $u->password = hash('sha256', 'admin123');
-        $u->admin = false;
-        $u->premium = true;
+        $u->perfil = 2;
         $u->verificado = true;
         $u->save();
 
         $u = new Usuario();
         $u->nombre = 'Elias';
-        $u->apellido_paterno = 'Torres';
-        $u->apellido_materno = 'Torres';
+        $u->apellido = 'alumno';
         $u->correo = 'estudiante@presenteprofe.cl';
         $u->password = hash('sha256', 'admin123');
-        $u->admin = false;
-        $u->premium = false;
+        $u->perfil = 3;
+        $u->verificado = true;
+        $u->save();
+
+
+        $u = new Usuario();
+        $u->nombre = 'Elias';
+        $u->apellido = 'torres';
+        $u->correo = 'benja.mora.torres@gmail.com';
+        $u->password = hash('sha256', 'admin123');
+        $u->perfil = 2;
+        $u->verificado = true;
+        $u->save();
+
+        $u = new Usuario();
+        $u->nombre = 'Elias';
+        $u->apellido = 'Mora';
+        $u->correo = 'bej.mora@profesor.duoc.cl';
+        $u->password = hash('sha256', 'admin123');
+        $u->perfil = 3;
         $u->verificado = true;
         $u->save();
     }

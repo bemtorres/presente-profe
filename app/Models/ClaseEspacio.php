@@ -13,9 +13,12 @@ class ClaseEspacio extends Model
   protected $table = 'clase_espacio';
 
   public function espacio() {
-      return $this->belongsTo(Espacio::class, 'id_espacio');
+    return $this->belongsTo(Espacio::class, 'id_espacio');
   }
 
+  public function asistencias() {
+    return $this->hasMany(AsistenciaEspacio::class, 'id_clase_espacio')->orderBy('fecha', 'desc');
+  }
 
   public function getDate() {
     return (new ConvertDatetime($this->fecha));

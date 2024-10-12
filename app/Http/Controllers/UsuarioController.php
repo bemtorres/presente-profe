@@ -11,19 +11,19 @@ use Illuminate\Support\Str;
 class UsuarioController extends Controller
 {
   public function index() {
-    $usuarios = Usuario::where('admin', true)->get();
+    $usuarios = Usuario::where('perfil', 1)->get();
 
     return view('admin.usuario.index', compact('usuarios'));
   }
 
   public function indexPremium() {
-    $usuarios = Usuario::where('premium', true)->get();
+    $usuarios = Usuario::where('perfil', 2)->get();
 
     return view('admin.usuario.index', compact('usuarios'));
   }
 
   public function indexNormal() {
-    $usuarios = Usuario::where('premium', false)->where('admin', false)->get();
+    $usuarios = Usuario::where('perfil', 3)->get();
 
     return view('admin.usuario.index', compact('usuarios'));
   }
@@ -37,13 +37,10 @@ class UsuarioController extends Controller
       $u = new Usuario();
       $u->run = $request->input('run');
       $u->nombre = $request->input('nombre');
-      $u->apellido_paterno = $request->input('apellido_paterno');
-      $u->apellido_materno = $request->input('apellido_materno');
+      $u->apellido = $request->input('apellido');
       $u->correo = $request->input('correo');
       $u->password = hash('sha256', $request->pass);
-      $u->admin = empty($request->input('check-admin')) ? false : true;
-      $u->premium = empty($request->input('check-premium')) ? false : true;
-
+      $u->perfil = $request->input('perfil');
 
       if(!empty($request->file('image'))){
         $request->validate([
@@ -78,11 +75,9 @@ class UsuarioController extends Controller
     $u = Usuario::find($id);
     $u->run = $request->input('run');
     $u->nombre = $request->input('nombre');
-    $u->apellido_paterno = $request->input('apellido_paterno');
-    $u->apellido_materno = $request->input('apellido_materno');
+    $u->apellido = $request->input('apellido');
     $u->correo = $request->input('correo');
-    $u->admin = empty($request->input('check-admin')) ? false : true;
-    $u->premium = empty($request->input('check-premium')) ? false : true;
+    $u->perfil = $request->input('perfil');
     $u->update();
     return back()->with('success', 'Usuario actualizado correctamente');
   }

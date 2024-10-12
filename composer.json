@@ -7,6 +7,8 @@
     "require": {
         "php": "^8.0.2",
         "barryvdh/laravel-dompdf": "^2.0",
+        "darkaonline/l5-swagger": "^8.6",
+        "doctrine/annotations": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
@@ -14,7 +16,8 @@
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
         "rap2hpoutre/fast-excel": "^5.3",
-        "silviolleite/laravelpwa": "^2.0"
+        "silviolleite/laravelpwa": "^2.0",
+        "zircote/swagger-php": "^4.11"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

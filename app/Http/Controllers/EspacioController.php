@@ -142,28 +142,6 @@ class EspacioController extends Controller
     return back()->with('success', 'Código de clase actualizado correctamente');
   }
 
-
-  // public function update(Request $request, $id) {
-  //   $u = Usuario::find($id);
-  //   $u->run = $request->input('run');
-  //   $u->nombre = $request->input('nombre');
-  //   $u->apellido_paterno = $request->input('apellido_paterno');
-  //   $u->apellido_materno = $request->input('apellido_materno');
-  //   $u->correo = $request->input('correo');
-  //   $u->admin = empty($request->input('check-admin')) ? false : true;
-  //   $u->premium = empty($request->input('check-premium')) ? false : true;
-  //   $u->update();
-  //   return back()->with('success', 'Usuario actualizado correctamente');
-  // }
-
-  // public function updatePassword(Request $request, $id) {
-  //   $u = Usuario::find($id);
-  //   $u->password = hash('sha256', $request->pass);
-  //   $u->update();
-  //   return back()->with('success', 'Usuario actualizado correctamente');
-  // }
-
-
   // API INTERNA
   public function matriculaActive($id) {
     $e = Espacio::where('id_usuario', current_user()->id)->find($id);

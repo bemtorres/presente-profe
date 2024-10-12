@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordEmail;
 use App\Models\Usuario;
 use App\Models\UsuarioInvitado;
 use App\Services\EmailUser;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 
@@ -32,28 +34,24 @@ class AuthController extends Controller
     try {
       $u = Usuario::findByCorreo($request->correo)->firstOrFail();
       $pass =  hash('sha256', $request->password);
-
       if($u->password==$pass){
-
         Auth::guard('usuario')->loginUsingId($u->id, true);
-        // Auth::guard('usuario')->login();
-        if ($u->admin || $u->premium) {
+        if ($u->perfil == 1) {
           return redirect()->route('admin.index');
+        } else if ($u->perfil == 2) {
+          return redirect()->route('webappdocente.index');
         } else {
-          return redirect()->route('app.index');
+          return redirect()->route('webappalumno.index');
         }
       }else{
         return back()->with('info','Error. Intente nuevamente.');
       }
     } catch (\Throwable $th) {
-      // return $th;
       return back()->with('info','Error. Intente nuevamente.');
     }
   }
 
   public function registroStore(Request $request) {
-
-    // return $request;
     $codigo = $request->input('codigo');
 
     $usuario_main = Usuario::findCodeInvitacion($codigo)->firstOrFail();
@@ -67,10 +65,10 @@ class AuthController extends Controller
         $u = new Usuario();
         $u->run = $request->input('run');
         $u->nombre = $request->input('nombre');
-        $u->apellido_paterno = $request->input('paterno');
-        $u->apellido_materno = $request->input('materno');
+        $u->apellido = $request->input('apellido');
         $u->correo = $request->input('correo');
         $u->password = hash('sha256', $codigo);
+        $u->perfil = 3;
         $u->save();
 
         $info = $usuario_main->info;
@@ -93,41 +91,39 @@ class AuthController extends Controller
       return back()->with('info','Codigo de invitacion no valido.');
     }
 
-
-
-
-      // if ($u->user_app) {
-        // return redirect()->route('app.index');
-      // } else {
-        // return redirect()->route('home.index');
-      // }
-
     return view('auth.registro');
   }
 
 
-  // public function recuperar() {
-  //   return view('auth.recuperar');
-  // }
+  public function recuperar() {
+    return view('auth.recuperar');
+  }
 
-  // public function recuperarStore(Request $request) {
-  //   // return view('auth.recuperar');
-  //   try {
-  //     $u = Usuario::findByCorreo($request->correo)->firstOrFail();
+  public function recuperarStore(Request $request) {
+    try {
+      $u = Usuario::findByCorreo($request->correo)->firstOrFail();
 
-  //     $time = time() + 60*60*24;
+      $time = time() + 60*60*24;
 
-  //     $u->password = hash('sha256', $time);
-  //     $u->save();
+      $u->password = hash('sha256', $time);
+      $u->save();
 
-  //     (new EmailUser($u, $time))->password_reset();
+      // (new EmailUser($u, $time))->password_reset();
 
-  //     return back()->with('success','Se ha cambiado la contraseña correctamente.');
-  //   } catch (\Throwable $th) {
-  //     // return $th;
-  //     return back()->with('info','Error. Intente nuevamente.');
-  //   }
-  // }
+      $info = [
+        'nombre' => $u->nombre_completo() ?? '',
+        'password' => $time,
+        'email' => $u->correo ?? '',
+      ];
+
+      $mail = new ResetPasswordEmail('🔑 RECUPERACION DE CREDENCIALES 🔑', $info);
+      $m = Mail::to($u->correo)->queue($mail);
+
+      return back()->with('success','Se ha cambiado la contraseña correctamente.');
+    } catch (\Throwable $th) {
+      return back()->with('info','Error. Intente nuevamente.');
+    }
+  }
 
   public function logout(){
     close_sessions();

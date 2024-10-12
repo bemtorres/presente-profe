@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'name' => 'Sistema completo',
+    'name' => 'Presente profe app',
     'manifest' => [
-        'name' => 'Sistema completo',
-        'short_name' => 'Sistema completo',
+        'name' => 'Presente profe app',
+        'short_name' => 'Presente profe app',
         'start_url' => '/',
         'background_color' => '#04243c',
         'theme_color' => '#1A1A1A',

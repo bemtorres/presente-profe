@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('clase_espacio', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha');
+            $table->date('fecha');
+            $table->time('hora_inicio')->nullable();
+            $table->time('hora_termino')->nullable();
             $table->foreignId('id_usuario')->references('id')->on('usuario');
             $table->foreignId('id_espacio')->references('id')->on('espacio');
             $table->json('info')->nullable();

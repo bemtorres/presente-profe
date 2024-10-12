@@ -63,7 +63,16 @@
                 </div>
                 <div class="d-grid">
                   <button class="btn btn-success btn-lg" type="submit">INICIAR SESIÓN</button>
-                  <a href="{{ route('auth.registro') }}" class="btn btn-dark btn-lg mt-2">CREAR NUEVA CUENTA</a>
+                </div>
+                <br>
+                <div class="w-100"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <a href="{{ route('auth.registro') }}" class="btn btn-dark btn-sm mt-2">CREAR NUEVA CUENTA</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="{{ route('auth.recuperar') }}" class="btn btn-warning btn-sm mt-2">RECUPERAR CONTRASEÑA</a>
+                  </div>
                 </div>
               </form>
             </div>

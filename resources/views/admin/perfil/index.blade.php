@@ -42,12 +42,8 @@
                   <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $u->nombre }}" required>
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="apellido_paterno" class="form-label">Apellido Paterno<small class="text-danger">*</small></label>
-                  <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="{{ $u->apellido_paterno }}" required>
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="apellido_materno" class="form-label">Apellido Materno</label>
-                  <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="{{ $u->apellido_materno }}">
+                  <label for="apellido" class="form-label">Apellido<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="apellido" name="apellido" value="{{ $u->apellido }}" required>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="correo" class="form-label">Correo<small class="text-danger">*</small></label>

@@ -21,8 +21,7 @@ class PerfilController extends Controller
     $u = current_user();
     $u->run = $request->input('run');
     $u->nombre = $request->input('nombre');
-    $u->apellido_paterno = $request->input('apellido_paterno');
-    $u->apellido_materno = $request->input('apellido_materno');
+    $u->apellido = $request->input('apellido');
     $u->correo = $request->input('correo');
     if ($u->admin) {
       // $u->admin = empty($request->input('check-admin')) ? false : true;

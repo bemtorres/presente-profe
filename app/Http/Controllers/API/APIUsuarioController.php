@@ -6,8 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\GlobalAsignatura;
 use Illuminate\Http\Request;
 
+
 class APIUsuarioController extends Controller
 {
+
+/**
+ * @OA\PathItem(
+ *   path="/usuarios",
+ *   @OA\Get(
+ *     tags={"Usuarios"},
+ *     summary="Obtener lista de usuarios",
+ *     description="Devuelve una lista de usuarios",
+ *     @OA\Response(
+ *       response=200,
+ *       description="Operación exitosa"
+ *     )
+ *   )
+ * )
+ */
+
+
   public function auth(Request $request) {
 
     $u = $request->user();

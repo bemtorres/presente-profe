@@ -16,10 +16,11 @@ class Usuario extends Authenticatable
   protected $table = 'usuario';
   protected $guard = 'usuario';
 
-  // const TIPOS = [
-  //   1 => 'admin',
-  //   2 => 'normal',
-  // ];
+  const PERFIL = [
+    1 => 'admin',
+    2 => 'docente',
+    3 => 'estudiante',
+  ];
 
   protected function info(): Attribute {
     return Attribute::make(
@@ -66,7 +67,7 @@ class Usuario extends Authenticatable
   }
 
   public function nombre_completo() {
-    return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
+    return $this->nombre . ' ' . $this->apellido;
   }
 
   public function getPhoto(){
@@ -90,8 +91,7 @@ class Usuario extends Authenticatable
   //     'id' => $this->id,
   //     'nombre' => $this->nombre,
   //     'run' => $this->run,
-  //     'apellido_paterno' => $this->apellido_paterno ,
-  //     'apellido_materno' => $this->apellido_materno,
+  //     'apellido' => $this->apellido ,
   //     'nombre_completo' => $this->nombre_completo(),
   //     'correo' => $this->correo,
   //     'tipo_usuario' => $this->tipo_usuario == 1 ? 'admin' : 'normal',

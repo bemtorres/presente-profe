@@ -31,12 +31,8 @@
                   <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="apellido_paterno" class="form-label">Apellido Paterno<small class="text-danger">*</small></label>
-                  <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="" required>
-                </div>
-                <div class="mb-3 col-md-6">
-                  <label for="apellido_materno" class="form-label">Apellido Materno</label>
-                  <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="">
+                  <label for="apellido" class="form-label">Apellido<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="apellido" name="apellido" value="" required>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="correo" class="form-label">Correo<small class="text-danger">*</small></label>
@@ -47,7 +43,17 @@
                   <input type="password" class="form-control" id="pass" name="pass" value="" required>
                 </div>
 
-                <div class="mb-3">
+                {{-- select de perfiles --}}
+                <div class="mb-3 col-md-6">
+                  <label for="perfil" class="form-label">Perfil<small class="text-danger">*</small></label>
+                  <select class="form-select" name="perfil" id="perfil" required>
+                    <option value="1">ADMIN</option>
+                    <option value="2">DOCENTE</option>
+                    <option value="3">ALUMNO</option>
+                  </select>
+                </div>
+
+                {{-- <div class="mb-3">
                   <label for="setting-input-2" class="form-label">Configuración</label>
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" name="check-admin" id="admin">
@@ -61,7 +67,7 @@
                       Premium User
                     </label>
                   </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group">
                   <label class="col-form-label" for="hf-rut">Imagen <small>(Opcional)</small></label>

@@ -19,5 +19,5 @@ class MatriculaEspacio extends Model
 
   public function estudiante() {
     return $this->belongsTo(Usuario::class, 'id_estudiante');
-}
+  }
 }

@@ -12,13 +12,13 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link {{ activeTab(['admin/usuarios']) }}" aria-current="page" href="{{ route('admin.usuario.index') }}">Admin</a>
+    <a class="nav-link {{ activeTab(['admin/usuarios']) }}" aria-current="page" href="{{ route('admin.usuario.index') }}">Administradores</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ activeTab(['admin/usuarios_premium']) }}" href="{{ route('admin.usuario.premium') }}">Premiums</a>
+    <a class="nav-link {{ activeTab(['admin/usuarios_premium']) }}" href="{{ route('admin.usuario.premium') }}">Docentes</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ activeTab(['admin/usuarios_normal']) }}" href="{{ route('admin.usuario.normal') }}">Usuarios</a>
+    <a class="nav-link {{ activeTab(['admin/usuarios_normal']) }}" href="{{ route('admin.usuario.normal') }}">Estudiantes</a>
   </li>
 </ul>
 <div class="card text-start">

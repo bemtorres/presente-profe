@@ -9,6 +9,8 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EspacioController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\WebappAlumnoController;
+use App\Http\Controllers\WebappDocenteController;
 use Illuminate\Support\Facades\Route;
 
 Route::any('correo', [EmailController::class, 'index']);
@@ -17,19 +19,17 @@ Route::get('/', [AuthController::class, 'index'])->name('root');
 Route::any('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
 
-Route::get('registro', [AuthController::class, 'registro'])->name('auth.registro');
-Route::post('registro', [AuthController::class, 'registroStore'])->name('auth.registro');
+Route::get('auth/registro', [AuthController::class, 'registro'])->name('auth.registro');
+Route::post('auth/registro', [AuthController::class, 'registroStore'])->name('auth.registro');
+
+Route::get('auth/recuperar', [AuthController::class, 'recuperar'])->name('auth.recuperar');
+Route::post('auth/recuperar', [AuthController::class, 'recuperarStore'])->name('auth.recuperar');
+
 
 
 Route::get('api/v1/global_asignatura', [APIAsignaturaController::class, 'index'])->name('api.global_asignatura.index');
 Route::get('api/v1/global_asignatura/{siglas}', [APIAsignaturaController::class, 'show'])->name('api.global_asignatura.show');
 Route::get('api/v1/asistencia/{siglas}', [APIAsistenciaController::class, 'show'])->name('api.asistencia.show');
-
-
-
-
-// Route::get('recuperar', [AuthController::class, 'recuperar'])->name('recuperar');
-// Route::post('recuperar', [AuthController::class, 'recuperarStore'])->name('recuperar');
 
 
 // Route::get('auth/google', [GoogleUserController::class, 'redirectToGoogle' ]);
@@ -68,8 +68,24 @@ Route::middleware('auth.user')->group( function () {
 
   // CALENDAIRO
   Route::get('admin/calendario', [AdminController::class, 'calendario'])->name('admin.calendario.index');
+
+
+  // APP DOCENTE
+  Route::get('webapp-docente', [WebappDocenteController::class, 'index'])->name('webappdocente.index');
+  Route::post('webapp-docente/espacios', [WebappDocenteController::class, 'espaciosStore'])->name('webappdocente.espacios.store');
+  Route::get('webapp-docente/espacios/{id}', [WebappDocenteController::class, 'espaciosShow'])->name('webappdocente.espacios.show');
+  Route::get('webapp-docente/espacios/{id}/edit', [WebappDocenteController::class, 'espaciosEdit'])->name('webappdocente.espacios.edit');
+  Route::put('webapp-docente/espacios/{id}/edit', [WebappDocenteController::class, 'espaciosUpdate'])->name('webappdocente.espacios.update');
+  Route::get('webapp-docente/espacios/{id}/matricula', [WebappDocenteController::class, 'matriculaIndex'])->name('webappdocente.espacios.matricula.index');
+  Route::get('webapp-docente/espacios/{id}/anuncios', [WebappDocenteController::class, 'anunciosShow'])->name('webappdocente.espacios.anuncio');
+  Route::post('webapp-docente/espacios/{id}/anuncios', [WebappDocenteController::class, 'anunciosStore'])->name('webappdocente.espacios.anuncio.store');
+  Route::get('webapp-docente/espacios/{id}/clases', [WebappDocenteController::class, 'clasesIndex'])->name('webappdocente.espacios.clases');
+  Route::get('webapp-docente/espacios/{id}/clases-calendario', [WebappDocenteController::class, 'clasesCalendarioShow'])->name('webappdocente.espacios.clases-calendario');
+  Route::post('webapp-docente/espacios/{id}/clases', [WebappDocenteController::class, 'clasesStore'])->name('webappdocente.clases.store');
+  Route::get('webapp-docente/espacios/{id}/clases/{id_c}', [WebappDocenteController::class, 'clasesShow'])->name('webappdocente.espacios.clases.show');
+
   // APP
-  Route::get('app', [AppController::class, 'index'])->name('app.index');
+  Route::get('webapp-alumno', [WebappAlumnoController::class, 'index'])->name('webappalumno.index');
 
 
 
@@ -77,3 +93,5 @@ Route::middleware('auth.user')->group( function () {
 
 
 });
+Route::get('api/v1/cursos', [AppController::class, 'cursos']);
+Route::get('api/v1/cursos', [AppController::class, 'cursos']);

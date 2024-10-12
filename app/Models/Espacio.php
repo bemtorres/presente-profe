@@ -12,13 +12,16 @@ class Espacio extends Model
   use HasFactory;
   protected $table = 'espacio';
 
+  public function anuncios() {
+    return $this->hasMany(AnuncioEspacio::class, 'id_espacio')->orderBy('created_at', 'desc');
+  }
 
   public function matriculas() {
       return $this->hasMany(MatriculaEspacio::class, 'id_espacio');
   }
 
   public function clases() {
-    return $this->hasMany(ClaseEspacio::class, 'id_espacio');
+    return $this->hasMany(ClaseEspacio::class, 'id_espacio')->orderBy('fecha', 'desc');
   }
 
 

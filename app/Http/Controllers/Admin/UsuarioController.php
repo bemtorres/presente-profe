@@ -42,9 +42,7 @@ class UsuarioController extends Controller
   public function create() {
     $this->policy->admin(current_user());
 
-    $tipos = Usuario::TIPOS;
-    $sedes = Sede::all();
-    return view('admin.usuario.create', compact('tipos','sedes'));
+    return view('admin.usuario.create', compact('tipos'));
   }
 
   public function store(Request $request) {
@@ -52,8 +50,7 @@ class UsuarioController extends Controller
     $u = new Usuario();
     $u->correo = $request->input('correo');
     $u->nombre = $request->input('nombre');
-    $u->apellido_materno = $request->input('apellido_m');
-    $u->apellido_paterno = $request->input('apellido_p');
+    $u->apellido = $request->input('apellido');
     $u->password = hash('sha256', $request->input('pass'));
     $u->user_app = $request->input('user_app') == 'si' ? true : false;
     $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
@@ -74,8 +71,7 @@ class UsuarioController extends Controller
     $this->policy->admin(current_user());
 
     $u = Usuario::findOrFail($id);
-    $sedes = Sede::all();
-    return view('admin.usuario.edit', compact('u', 'sedes'));
+    return view('admin.usuario.edit', compact('u'));
   }
 
   public function update(Request $request, $id) {
@@ -91,8 +87,7 @@ class UsuarioController extends Controller
     if ($request->nombre) {
       $u->correo = $request->input('correo');
       $u->nombre = $request->input('nombre');
-      $u->apellido_paterno = $request->input('apellido_p');
-      $u->apellido_materno = $request->input('apellido_m');
+      $u->apellido = $request->input('apellido');
       $u->tipo_usuario = $request->input('admin') == 1 ? 1 : 2;
       $u->id_sede = $request->input('sede') == 1300 ? 1300 : 100;
       $u->user_app = $request->input('user_app') == 'si' ? true : false;

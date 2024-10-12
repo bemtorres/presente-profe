@@ -1,0 +1,39 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API Documentation",
+        "contact": {
+            "email": "info@yeagger.com"
+        },
+        "version": "0.1"
+    },
+    "servers": [
+        {
+            "url": "https://foo.localhost:8000/api/",
+            "description": "Learning env"
+        }
+    ],
+    "paths": {
+        "/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Obtener lista de usuarios",
+                "description": "Devuelve una lista de usuarios",
+                "operationId": "1c6ab2605cd9928b0784a66c80e650cb",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Usuarios",
+            "description": "Usuarios"
+        }
+    ]
+}

@@ -56,17 +56,13 @@
                   <input type="text" class="form-control" name="run" placeholder=""
                       required="" maxlength="9" min="8" autocomplete="off" onkeyup="this.value = validarRut(this.value)">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 col-6">
                   <label for="nombre" class="form-label">Nombre<small class="text-danger">*</small></label>
                   <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
                 <div class="mb-3 col-6">
-                  <label for="paterno" class="form-label">Apellido paterno<small class="text-danger">*</small></label>
-                  <input type="text" class="form-control" id="paterno" name="paterno" required>
-                </div>
-                <div class="mb-3 col-6">
-                  <label for="materno" class="form-label">Apellido materno<small class="text-danger">*</small></label>
-                  <input type="text" class="form-control" id="materno" name="materno" required>
+                  <label for="apellido" class="form-label">Apellido<small class="text-danger">*</small></label>
+                  <input type="text" class="form-control" id="apellido" name="apellido" required>
                 </div>
                 <div class="mb-3 col-md-12">
                   <label for="correo" class="form-label">Correo<small class="text-danger">*</small></label>
