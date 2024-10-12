@@ -31,43 +31,51 @@ window.addEventListener('resize', function(){
 
 function responsiveSidePanel() {
     let w = window.innerWidth;
-	if(w >= 1200) {
-	    // if larger
-	    //console.log('larger');
-		sidePanel.classList.remove('sidepanel-hidden');
-		sidePanel.classList.add('sidepanel-visible');
+    if (sidePanel) {
 
-	} else {
-	    // if smaller
-	    //console.log('smaller');
-	    sidePanel.classList.remove('sidepanel-visible');
-		sidePanel.classList.add('sidepanel-hidden');
-	}
+      if(w >= 1200) {
+          // if larger
+          //console.log('larger');
+        sidePanel.classList.remove('sidepanel-hidden');
+        sidePanel.classList.add('sidepanel-visible');
+
+      } else {
+          // if smaller
+          //console.log('smaller');
+          sidePanel.classList.remove('sidepanel-visible');
+        sidePanel.classList.add('sidepanel-hidden');
+      }
+    }
 };
 
-sidePanelToggler.addEventListener('click', () => {
-	if (sidePanel.classList.contains('sidepanel-visible')) {
-		console.log('visible');
-		sidePanel.classList.remove('sidepanel-visible');
-		sidePanel.classList.add('sidepanel-hidden');
+if (sidePanelToggler) {
+  sidePanelToggler.addEventListener('click', () => {
+    if (sidePanel.classList.contains('sidepanel-visible')) {
+      console.log('visible');
+      sidePanel.classList.remove('sidepanel-visible');
+      sidePanel.classList.add('sidepanel-hidden');
 
-	} else {
-		console.log('hidden');
-		sidePanel.classList.remove('sidepanel-hidden');
-		sidePanel.classList.add('sidepanel-visible');
-	}
-});
+    } else {
+      console.log('hidden');
+      sidePanel.classList.remove('sidepanel-hidden');
+      sidePanel.classList.add('sidepanel-visible');
+    }
+  });
 
+}
 
+if (sidePanelClose) {
+  sidePanelClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    sidePanelToggler.click();
+  });
+}
 
-sidePanelClose.addEventListener('click', (e) => {
-	e.preventDefault();
-	sidePanelToggler.click();
-});
-
-sidePanelDrop.addEventListener('click', (e) => {
-	sidePanelToggler.click();
-});
+if (sidePanelDrop) {
+  sidePanelDrop.addEventListener('click', (e) => {
+    sidePanelToggler.click();
+  });
+}
 
 
 

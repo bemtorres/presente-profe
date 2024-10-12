@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class WebappDocenteController extends Controller
 {
   public function index() {
-    $espacios = Espacio::get();
+    $espacios = Espacio::where('id_usuario', current_user()->id)->get();
 
     return view('webapp_docente.index', compact('espacios'));
   }

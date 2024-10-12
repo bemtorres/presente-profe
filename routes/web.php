@@ -86,12 +86,17 @@ Route::middleware('auth.user')->group( function () {
 
   // APP
   Route::get('webapp-alumno', [WebappAlumnoController::class, 'index'])->name('webappalumno.index');
+  Route::post('webapp-alumno/matricula', [WebappAlumnoController::class, 'matriculaStore'])->name('webappalumno.matricula.store');
+  Route::post('webapp-alumno/registro', [WebappAlumnoController::class, 'registroStore'])->name('webappalumno.registro.store');
+  Route::get('webapp-alumno/curso/{m_id}/historial', [WebappAlumnoController::class, 'historial'])->name('webappalumno.historial');
 
+  Route::post('webapp-alumno/reporte', [WebappAlumnoController::class, 'reporteStore'])->name('webappalumno.reporte.store');
 
-
- ;
 
 
 });
+
+Route::get('api/v1-free/cursos', [AppController::class, 'cursos']);
+
 Route::get('api/v1/cursos', [AppController::class, 'cursos']);
 Route::get('api/v1/cursos', [AppController::class, 'cursos']);

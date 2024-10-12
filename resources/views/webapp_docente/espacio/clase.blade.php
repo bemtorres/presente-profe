@@ -32,11 +32,11 @@
         <h4 class="card-title">Registro de clases
           <button class="btn app-btn-primary btn-xs"  data-bs-toggle="modal" data-bs-target="#newClase">Nueva clase</button>
         </h4>
-
         <div class="table-responsive ">
           <table class="table app-table-hover table-sm mb-0 text-left">
             <thead>
               <tr>
+                <th class="cell">#</th>
                 <th class="cell">Dia</th>
                 <th class="cell">Fecha</th>
                 <th class="cell">Cantidad</th>
@@ -47,16 +47,19 @@
               @foreach ($e->clases as $c)
                 <tr>
                   <td>
+                    {{ $c->codigo_web }}
+                  </td>
+                  <td>
                     {{ $c->getDate()->getDayTextSP() }}
                   </td>
                   <td class="cell">
-                    {{-- <img src="{{ asset($u->getPhoto()) }}" width="50" alt=""> --}}
                     {{ $c->getDate()->getDateEuropa() }}
                   </td>
                   <td>
                     {{ $c->asistencias->count() ?? 0 }}
                   </td>
-                  <td class="cell"><a class="btn-sm btn btn-secondary" href="{{ route('admin.espacio.clases.show', [$e->id, $c->id]) }}">Ver</a></td>
+                  <td class="cell"><a class="btn-sm btn btn-secondary" href="{{ route('webappdocente.espacios.clases.show', [$e->id, $c->id]) }}">Ver</a></td>
+                  <td class="cell"><button data-bs-toggle="modal" data-code="{{ $c->codigo_web }}" data-bs-target="#modalQR" class="btn-sm btn btn-danger">QR</button></td>
                 </tr>
               @endforeach
             </tbody>
@@ -100,8 +103,51 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="modalQR" tabindex="-1" aria-labelledby="modalQrLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newClaseLabel">QR PARA REGISTRAR</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <div id="qrcode" class="text-center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 @endsection
 @push('js')
 
+<script src="{{ asset('vendors/qrcode.min.js') }}"></script>
+<script type="text/javascript">
+  var modalQR = document.getElementById('modalQR');
+  modalQR.addEventListener('show.bs.modal', function (event) {
+    // Botón que activó el modal
+    var button = event.relatedTarget;
 
+    // Extraer el data-code del botón
+    var code = button.getAttribute('data-code');
+
+    // Borrar el QR code previo, si existe
+    document.getElementById('qrcode').innerHTML = "";
+
+    // Generar el nuevo código QR con el valor extraído de data-code
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+      text: code, // Modificamos el texto dinámicamente con el data-code
+      width: 300,
+      height: 300,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+  });
+  </script>
 @endpush

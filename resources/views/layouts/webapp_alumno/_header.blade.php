@@ -7,9 +7,9 @@
 
       <ul class="nav col-auto me-auto mb-2 justify-content-center mb-0">
         <li>
-          <a href="#" class="ms-4 nav-link px-2 text-white btn app-btn-primary">
+          {{-- <a href="#" class="ms-4 nav-link px-2 text-white btn app-btn-primary">
             COINS 0
-          </a>
+          </a> --}}
         </li>
         {{-- <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
         <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>

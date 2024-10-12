@@ -12,6 +12,10 @@ class Espacio extends Model
   use HasFactory;
   protected $table = 'espacio';
 
+  public function usuario() {
+    return $this->belongsTo(Usuario::class, 'id_usuario');
+  }
+
   public function anuncios() {
     return $this->hasMany(AnuncioEspacio::class, 'id_espacio')->orderBy('created_at', 'desc');
   }

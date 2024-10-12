@@ -29,6 +29,15 @@
               <a class="app-card-link-mask" href="#"></a>
             </div>
           </div>
+          <div class="col-6 col-lg-3">
+            <div class="app-card app-card-stat shadow-sm h-100">
+              <div class="app-card-body p-3 p-lg-4">
+                <h4 class="stats-type mb-1">Codigo Matricula</h4>
+                <div class="stats-figure">{{ $e->codigo_matricula }}</div>
+              </div>
+              <a class="app-card-link-mask" href="#"></a>
+            </div>
+          </div>
           <h1 class="app-page-title">
             <button class="ms-2 px-2 btn-sm btn app-btn-secondary" data-bs-toggle="modal" data-bs-target="#modalUnirse">
               Nueva clase
