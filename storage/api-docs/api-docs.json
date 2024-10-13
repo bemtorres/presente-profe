@@ -1,39 +1,1073 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My First API Documentation",
+        "title": "Presente profe API 2024",
         "contact": {
-            "email": "info@yeagger.com"
+            "name": "Benjamin Mora",
+            "email": "bej.mora@profesor.duoc.cl"
         },
         "version": "0.1"
     },
     "servers": [
         {
-            "url": "https://foo.localhost:8000/api/",
-            "description": "Learning env"
+            "url": "https://www.presenteprofe.test/",
+            "description": "Production"
+        },
+        {
+            "url": "https://presenteprofe.test/",
+            "description": "Ambiente de desarrollo"
         }
     ],
     "paths": {
-        "/usuarios": {
+        "/api/v1/auth": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Iniciar sesión y generar token de autenticación",
+                "operationId": "956b567bea82b5707296567cb2bf27c6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "correo",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "correo": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "example@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "mypassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inicio de sesión exitoso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "correo": {
+                                                    "type": "string",
+                                                    "example": "example@example.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "auth": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "Bearer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error en las credenciales",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Detalles del error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/me": {
             "get": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Obtener mi informacion de usuario",
+                "operationId": "8bb633895a24921f8bb59f4db5a8e17e",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Correo electrónico del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "email",
+                            "example": "correo@gmail.com"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informacion de usuario obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "run": {
+                                                    "type": "string",
+                                                    "example": "12345678-9"
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Juan"
+                                                },
+                                                "apellido": {
+                                                    "type": "string",
+                                                    "example": "Pérez"
+                                                },
+                                                "nombre_completo": {
+                                                    "type": "string",
+                                                    "example": "Juan Pérez"
+                                                },
+                                                "correo": {
+                                                    "type": "string",
+                                                    "example": "juan.perez@example.com"
+                                                },
+                                                "perfil": {
+                                                    "type": "string",
+                                                    "example": "estudiante"
+                                                },
+                                                "img": {
+                                                    "type": "string",
+                                                    "example": "http://example.com/path/to/image.jpg"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/usuarios": {
+            "post": {
                 "tags": [
                     "Usuarios"
                 ],
-                "summary": "Obtener lista de usuarios",
-                "description": "Devuelve una lista de usuarios",
-                "operationId": "1c6ab2605cd9928b0784a66c80e650cb",
+                "summary": "Registrar un nuevo usuario mediante código de invitación",
+                "operationId": "6b4700583a55930d0b80dd98f98f2a71",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "codigo": {
+                                        "type": "string",
+                                        "example": "presenteprofe"
+                                    },
+                                    "run": {
+                                        "type": "string",
+                                        "example": "12345678-9"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "correo@gmail.com"
+                                    },
+                                    "perfil": {
+                                        "type": "string",
+                                        "enum": [
+                                            "docente",
+                                            "estudiante"
+                                        ],
+                                        "example": "docente|estudiante"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
-                    "200": {
-                        "description": "Operación exitosa"
+                    "201": {
+                        "description": "Usuario registrado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuario registrado exitosamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error de validación, falta el perfil"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Código de invitación no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Código de invitación no válido"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
+            }
+        },
+        "/api/v1/auth/recuperar": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Recuperar la contraseña del usuario",
+                "operationId": "1d8ea1cade6e2980537e5793ecbd2e53",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "correo"
+                                ],
+                                "properties": {
+                                    "correo": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "correo@gmail.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Solicitud de recuperación de contraseña enviada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Solicitud de recuperación de contraseña enviada correctamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuario no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Ocurrió un error durante la recuperación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ocurrió un error durante la recuperación"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Descripción del error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/cursos": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtener cursos del usuario autenticado o por correo",
+                "operationId": "eaf07827d2641e47c4b2e8800917495f",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Correo electrónico del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "email",
+                            "example": "correo@gmail.com"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de cursos obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "cursos": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Curso de Laravel"
+                                                    },
+                                                    "descripcion": {
+                                                        "type": "string",
+                                                        "example": "Introducción a Laravel"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Crear un nuevo curso",
+                "operationId": "ff8b56dfa321fb0711ed8f2a58bb9c57",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "sigla",
+                                    "institucion"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Curso de Laravel"
+                                    },
+                                    "sigla": {
+                                        "type": "string",
+                                        "example": "LAR101"
+                                    },
+                                    "institucion": {
+                                        "type": "string",
+                                        "example": "Duoc UC"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Introducción a Laravel"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Curso creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso creado exitosamente"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Curso de Laravel"
+                                                },
+                                                "sigla": {
+                                                    "type": "string",
+                                                    "example": "LAR101"
+                                                },
+                                                "institucion": {
+                                                    "type": "string",
+                                                    "example": "Duoc UC"
+                                                },
+                                                "descripcion": {
+                                                    "type": "string",
+                                                    "example": "Introducción a Laravel"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error de validación"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/cursos/{id}": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtener información del curso por ID o por correo del usuario",
+                "operationId": "49edb97e94ec4b0245a2af250ac92e92",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Correo electrónico del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "email",
+                            "example": "correo@gmail.com"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Curso obtenido correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso obtenido correctamente"
+                                        },
+                                        "curso": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Curso de Laravel"
+                                                },
+                                                "descripcion": {
+                                                    "type": "string",
+                                                    "example": "Introducción a Laravel"
+                                                },
+                                                "user": {
+                                                    "type": "string",
+                                                    "example": "correo@gmail.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Usuario no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/cursos/{id}/clase": {
+            "post": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Crear una nueva clase para un curso",
+                "operationId": "6a3afb7c76e377cab7efe86150582e1d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso al que se le quiere agregar la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "fecha": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-10-12"
+                                    },
+                                    "hora_inicio": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "10:00:00"
+                                    },
+                                    "hora_termino": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "12:00:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Clase creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Clase creada exitosamente"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/cursos/{id}/clases/{code}/asistentes": {
+            "get": {
+                "tags": [
+                    "Clases"
+                ],
+                "summary": "Obtener historial de asistencia de una clase",
+                "operationId": "0a54d54b1ca1f6eb7bd975ae77e4d590",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso al que pertenece la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código web de la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "abc12345"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de asistencia a la clase",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de asistencia a la clase"
+                                        },
+                                        "codigo": {
+                                            "type": "string",
+                                            "example": "abc12345"
+                                        },
+                                        "clase": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Clase de Matemáticas"
+                                                },
+                                                "fecha": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-10-12"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 25
+                                        },
+                                        "asistencias": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nombre_estudiante": {
+                                                        "type": "string",
+                                                        "example": "Juan Pérez"
+                                                    },
+                                                    "hora_asistencia": {
+                                                        "type": "string",
+                                                        "format": "time",
+                                                        "example": "10:00:00"
+                                                    },
+                                                    "presente": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Clase o curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Clase o curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/clases/{code}/asistencia": {
+            "post": {
+                "tags": [
+                    "Asistencia"
+                ],
+                "summary": "Registrar asistencia a una clase",
+                "operationId": "5a777ebf60d486af7c0551235acdad7a",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código web de la clase",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "abc12345"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Asistencia registrada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Asistencia registrada con éxito"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Asistencia ya registrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ya has registrado tu asistencia"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Código de clase incorrecto o no matriculado en este espacio",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Código de clase incorrecto"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
     "tags": [
         {
+            "name": "Autenticación",
+            "description": "Autenticación"
+        },
+        {
             "name": "Usuarios",
             "description": "Usuarios"
+        },
+        {
+            "name": "Cursos",
+            "description": "Cursos"
+        },
+        {
+            "name": "Clases",
+            "description": "Clases"
+        },
+        {
+            "name": "Asistencia",
+            "description": "Asistencia"
         }
     ]
 }

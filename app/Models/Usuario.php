@@ -7,11 +7,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Laravel\Sanctum\HasApiTokens;
 
 class Usuario extends Authenticatable
 {
   use Notifiable;
   use HasFactory;
+  use HasApiTokens;
 
   protected $table = 'usuario';
   protected $guard = 'usuario';
@@ -85,19 +87,21 @@ class Usuario extends Authenticatable
     return (new Imagen($img, $folder, $imgDefault))->call();
   }
 
+  public function getPefil() {
+    return self::PERFIL[$this->perfil];
+  }
 
-  // public function to_raw() {
-  //   return [
-  //     'id' => $this->id,
-  //     'nombre' => $this->nombre,
-  //     'run' => $this->run,
-  //     'apellido' => $this->apellido ,
-  //     'nombre_completo' => $this->nombre_completo(),
-  //     'correo' => $this->correo,
-  //     'tipo_usuario' => $this->tipo_usuario == 1 ? 'admin' : 'normal',
-  //     'id_sede' => $this->id_sede,
-  //     'sede' => $this->sede->nombre,
-  //     'img' => $this->getImg(),
-  //   ];
-  // }
+  public function to_raw() {
+    return [
+      'id' => $this->id,
+      'run' => $this->run,
+      'nombre' => $this->nombre,
+      'apellido' => $this->apellido ,
+      'nombre_completo' => $this->nombre_completo(),
+      'correo' => $this->correo,
+      'perfil' => $this->getPefil(),
+      // 'tipo_usuario' => $this->tipo_usuario == 1 ? 'admin' : 'normal',
+      'img' => asset($this->getPhoto())
+    ];
+  }
 }

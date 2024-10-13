@@ -144,7 +144,7 @@ class WebappDocenteController extends Controller
     $clase->hora_termino = $request->input('hora_termino');
 
     $clase->codigo_web = $this->findCodigoClaseUpdate('codigo_web');
-    $clase->activo = false;
+    $clase->activo = true;
     $clase->save();
 
     return back()->with('success', 'Clase creada correctamente');

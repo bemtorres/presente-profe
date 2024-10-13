@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Presente profe</title>
+  <title>Presente profe | La mejor plataforma para tus clases</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="shortcut icon" href="{{ asset('img/profile.png') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <script defer src="{{ asset('template/assets/plugins/fontawesome/js/all.min.js') }}"></script>
   <link id="theme-style" rel="stylesheet" href="{{ asset('template/assets/css/portal.css') }}">

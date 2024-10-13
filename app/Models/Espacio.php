@@ -53,6 +53,19 @@ class Espacio extends Model
   }
 
 
+  public function to_raw() {
+    return [
+      'id' => $this->id,
+      'nombre' => $this->nombre,
+      'descripcion' => $this->descripcion,
+      'imagen' => asset($this->getPhoto()),
+      'id_usuario' => $this->id_usuario,
+      'usuario' => $this->usuario->to_raw(),
+      // 'created_at' => $this->created_at,
+      // 'updated_at' => $this->updated_at,
+    ];
+  }
+
 
 
 }

@@ -308,14 +308,12 @@
                                       <br>
                                       <small>  (Por tu seguridad, te recomendamos cambiar esta contraseña tras tu primer inicio de sesión)</small>
 
-
-
                                       <br>   <br>
                                       Para acceder a la plataforma,
                                       <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">
                                         <strong>
                                           <span style="font-size:16px;">
-                                          <a style="color: #ffffff !important;" class="button_link2" href="https://app.presenteprofe.cl/">
+                                          <a style="color: #ffffff !important;" class="button_link2" href="https://www.presenteprofe.cl/">
                                             Ir a la página PresenteProfe
                                           </a>
                                         </span></strong>
@@ -323,7 +321,7 @@
 
                                       <br><br>
 
-                                      Gracias por unirte a nosotros en esta misión de enriquecer la educación. ¡Estamos emocionados de verte transformar el aprendizaje en tu aula con PresenteProfe!
+                                      Gracias por unirte a nosotros en esta misión de enriquecer la educación. <br>¡Estamos emocionados de verte transformar el aprendizaje en tu aula con PresenteProfe!
                                     </p>
 
                                   </div>

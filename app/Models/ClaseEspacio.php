@@ -23,4 +23,14 @@ class ClaseEspacio extends Model
   public function getDate() {
     return (new ConvertDatetime($this->fecha));
   }
+
+  public function to_raw() {
+    return [
+      'id' => $this->id,
+      'fecha' => $this->fecha,
+      'hora_inicio' => $this->hora_inicio,
+      'hora_termino' => $this->hora_termino,
+      'codigo_web' => $this->codigo_web,
+    ];
+  }
 }

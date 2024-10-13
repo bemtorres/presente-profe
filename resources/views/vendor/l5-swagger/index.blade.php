@@ -114,8 +114,13 @@
 </head>
 
 <body @if(config('l5-swagger.defaults.ui.display.dark_mode')) id="dark-mode" @endif>
+<img src="{{ asset('img/banner.png') }}" width="100%" alt="">
 <div id="swagger-ui"></div>
-
+<br>
+<br>
+<br>
+<img src="{{ asset('img/banner.png') }}" width="100%" alt="">
+{{-- <img src="{{ asset('img/footer.png') }}" width="100%" alt=""> --}}
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-bundle.js') }}"></script>
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-standalone-preset.js') }}"></script>
 <script>

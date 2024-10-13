@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\API\APIAsignaturaController;
-use App\Http\Controllers\API\APIAsistenciaController;
-use App\Http\Controllers\AppController;
+use App\Http\Controllers\API\v1\AuthController as V1AuthController;
+use App\Http\Controllers\API\v1\CursoController as V1CursoController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EspacioController;
 use App\Http\Controllers\PerfilController;
@@ -24,13 +23,6 @@ Route::post('auth/registro', [AuthController::class, 'registroStore'])->name('au
 
 Route::get('auth/recuperar', [AuthController::class, 'recuperar'])->name('auth.recuperar');
 Route::post('auth/recuperar', [AuthController::class, 'recuperarStore'])->name('auth.recuperar');
-
-
-
-Route::get('api/v1/global_asignatura', [APIAsignaturaController::class, 'index'])->name('api.global_asignatura.index');
-Route::get('api/v1/global_asignatura/{siglas}', [APIAsignaturaController::class, 'show'])->name('api.global_asignatura.show');
-Route::get('api/v1/asistencia/{siglas}', [APIAsistenciaController::class, 'show'])->name('api.asistencia.show');
-
 
 // Route::get('auth/google', [GoogleUserController::class, 'redirectToGoogle' ]);
 // Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCallback' ]);
@@ -92,11 +84,28 @@ Route::middleware('auth.user')->group( function () {
 
   Route::post('webapp-alumno/reporte', [WebappAlumnoController::class, 'reporteStore'])->name('webappalumno.reporte.store');
 
-
-
 });
 
-Route::get('api/v1-free/cursos', [AppController::class, 'cursos']);
+// API
 
-Route::get('api/v1/cursos', [AppController::class, 'cursos']);
-Route::get('api/v1/cursos', [AppController::class, 'cursos']);
+
+Route::post('api/v1/auth', [V1AuthController::class, 'login']);
+Route::post('api/v1/auth/recuperar', [V1AuthController::class, 'recuperar']);
+Route::get('api/v1/auth/me', [V1AuthController::class, 'me']);
+Route::post('api/v1/usuarios', [V1AuthController::class, 'store']);
+Route::get('api/v1/cursos', [V1CursoController::class, 'index']);
+Route::post('api/v1/cursos', [V1CursoController::class, 'store']);
+Route::get('api/v1/cursos/{id}', [V1CursoController::class, 'show']);
+Route::post('api/v1/cursos/{id}/clase', [V1CursoController::class, 'clasesStore']);
+Route::get('api/v1/cursos/{id}/clase/{code}', [V1CursoController::class, 'clasesAsistentes']);
+
+
+Route::post('api/v1/clase/{code}/asistencia', [V1CursoController::class, 'asistenciaStore']);
+
+// Route::middleware('auth:sanctum')->get('api/v1/cursos', [V1CursoController::class, 'index']);
+
+// Route::get('auth/registro', [AuthController::class, 'registro'])->name('auth.registro');
+// Route::post('auth/registro', [AuthController::class, 'registroStore'])->name('auth.registro');
+
+// Route::get('auth/recuperar', [AuthController::class, 'recuperar'])->name('auth.recuperar');
+// Route::post('auth/recuperar', [AuthController::class, 'recuperarStore'])->name('auth.recuperar');
