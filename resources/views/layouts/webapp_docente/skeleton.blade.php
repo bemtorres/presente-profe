@@ -9,8 +9,6 @@
   <script defer src="{{ asset('template/assets/plugins/fontawesome/js/all.min.js') }}"></script>
   <link id="theme-style" rel="stylesheet" href="{{ asset('template/assets/css/portal.css') }}">
   <link href="{{ asset('vendors/toastify/toastify.min.css') }}" rel="stylesheet" />
-
-
   <style>
     body {
       background-color: #f4f7fa;
