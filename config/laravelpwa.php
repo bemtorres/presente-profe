@@ -8,8 +8,8 @@ return [
         'start_url' => '/home',
         'background_color' => '#04243c',
         'theme_color' => '#1A1A1A',
-        'display' => 'standalone',
-        'orientation'=> 'landscape',
+        "display" => "standalone",
+        "orientation" => "portrait",
         'status_bar'=> 'black',
         'icons' => [
             '72x72' => [
