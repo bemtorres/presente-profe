@@ -28,6 +28,7 @@
     }
   </style>
   @stack('css')
+  @laravelPWA
 </head>
 
 <body class="">

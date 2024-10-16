@@ -11,6 +11,7 @@
   <link id="theme-style" rel="stylesheet" href="{{ asset('template/assets/css/portal.css') }}">
   <link href="{{ asset('vendors/toastify/toastify.min.css') }}" rel="stylesheet" />
   @stack('css')
+  @laravelPWA
 </head>
 <body class="app">
   @yield('app')
