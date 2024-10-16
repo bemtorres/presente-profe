@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => 'Presente profe app',
         'short_name' => 'Presente profe app',
-        'start_url' => '/',
+        'start_url' => '/home',
         'background_color' => '#04243c',
         'theme_color' => '#1A1A1A',
         'display' => 'standalone',

@@ -28,6 +28,8 @@ Route::post('auth/recuperar', [AuthController::class, 'recuperarStore'])->name('
 // Route::get('auth/google/callback', [GoogleUserController::class, 'handleGoogleCallback' ]);
 
 Route::middleware('auth.user')->group( function () {
+  Route::get('home', [AdminController::class, 'home'])->name('homeee');
+
   // ADMIN
   Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
   Route::resource('admin/usuarios', UsuarioController::class)->names('admin.usuario');

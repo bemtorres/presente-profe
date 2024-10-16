@@ -26,4 +26,10 @@ class AdminController extends Controller
     return view('admin.calendario', compact('calendarios'));
   }
 
+  public function home() {
+    if (current_user()->perfil == 2 ) {
+      return redirect()->route('webappdocente.index');
+    }
+    return redirect()->route('webappalumno.index');
+  }
 }
