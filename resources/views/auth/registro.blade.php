@@ -68,9 +68,22 @@
                   <label for="correo" class="form-label">Correo<small class="text-danger">*</small></label>
                   <input type="email" class="form-control" id="correo" name="correo" aria-describedby="correo" required>
                 </div>
-                <div class="mb-3 col-md-12">
+                <div class="mb-3 col-md-6">
                   <label for="codigo" class="form-label">Código de invitación<small class="text-danger">*</small></label>
                   <input type="text" class="form-control" id="codigo" name="codigo" aria-describedby="codigo" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="" class="form-label">Pefil</label>
+                    <select
+                      class="form-select form-select-lg"
+                      name="pefil"
+                      id="perfil"
+                      required
+                    >
+                      <option value="estudiante">Estudiante</option>
+                      <option value="docente">Docente</option>
+                    </select>
+
                 </div>
                 <div class="d-grid">
                   <button class="btn btn-success btn-lg" type="submit">REGISTRAR</button>

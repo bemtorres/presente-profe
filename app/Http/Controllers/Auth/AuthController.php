@@ -74,7 +74,7 @@ class AuthController extends Controller
         $u->apellido = $request->input('apellido');
         $u->correo = $request->input('correo');
         $u->password = hash('sha256', $codigo);
-        $u->perfil = 3;
+        $u->perfil = $request->input('perfil') == 'docente' ? 2 : 3;
         $u->save();
 
         $info = $usuario_main->info;
