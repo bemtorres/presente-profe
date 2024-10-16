@@ -17,7 +17,7 @@
 <div class="row g-3 mb-4 align-items-center justify-content-between">
   @component('components.button._back')
     @slot('body', "Espacio <strong> $e->nombre </strong>")
-    @slot('route', route('webappdocente.index'))
+    @slot('route', route('webappalumno.index'))
   @endcomponent
 </div>
 
