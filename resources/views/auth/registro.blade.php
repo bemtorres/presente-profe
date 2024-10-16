@@ -10,6 +10,7 @@
   <link href="{{ asset('vendors/toastify/toastify.min.css') }}" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/logins/login-9/assets/css/login-9.css">
+  @laravelPWA
   <style>
 
     body {
