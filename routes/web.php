@@ -98,6 +98,7 @@ Route::post('api/v1/usuarios', [V1AuthController::class, 'store']);
 Route::get('api/v1/cursos', [V1CursoController::class, 'index']);
 Route::post('api/v1/cursos', [V1CursoController::class, 'store']);
 Route::get('api/v1/cursos/{id}', [V1CursoController::class, 'show']);
+Route::get('api/v1/cursos/{id}/clase', [V1CursoController::class, 'clasesIndex']);
 Route::post('api/v1/cursos/{id}/clase', [V1CursoController::class, 'clasesStore']);
 Route::get('api/v1/cursos/{id}/clase/{code}', [V1CursoController::class, 'clasesAsistentes']);
 

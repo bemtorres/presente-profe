@@ -714,6 +714,97 @@
             }
         },
         "/api/v1/cursos/{id}/clase": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtener las clases de un curso",
+                "description": "Devuelve las clases relacionadas con el curso para un usuario autenticado.",
+                "operationId": "7d5bd1b9a218b9e88ebabb18d3e91b8d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de clases del curso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de clases del curso"
+                                        },
+                                        "curso": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 1,
+                                                "nombre": "Curso de Matemáticas"
+                                            }
+                                        },
+                                        "clases": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 1,
+                                                    "nombre": "Clase 1"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Clases"

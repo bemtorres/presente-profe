@@ -213,6 +213,69 @@ class CursoController extends APIController
   }
 
 
+/**
+ * @OA\Get(
+ *     path="/api/v1/cursos/{id}/clase",
+ *     summary="Obtener las clases de un curso",
+ *     description="Devuelve las clases relacionadas con el curso para un usuario autenticado.",
+ *     tags={"Cursos"},
+ *     security={{"bearerAuth":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID del curso",
+ *         required=true,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Listado de clases del curso",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="message", type="string", example="Listado de clases del curso"),
+ *             @OA\Property(property="curso", type="object", example={"id": 1, "nombre": "Curso de Matemáticas"}),
+ *             @OA\Property(property="clases", type="array", @OA\Items(type="object", example={"id": 1, "nombre": "Clase 1"}))
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="No autenticado",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="message", type="string", example="No autenticado")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Curso no encontrado",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="message", type="string", example="Curso no encontrado")
+ *         )
+ *     )
+ * )
+ */
+  public function clasesIndex($id, Request $request) {
+    if (!$this->user_auth) {
+        return response()->json([
+            'message' => 'No autenticado',
+        ], 401);
+    }
+
+    // Obtener los cursos relacionados con el usuario
+    $curso = Espacio::with(['clases'])->where('id_usuario', $this->user_auth->id)->find($id);
+
+    if (!$curso) {
+        return response()->json([
+            'message' => 'Curso no encontrado',
+        ], 404);
+    }
+    return response()->json(['message' => 'Listado de clases del curso','curso' => $curso->to_raw(),'clases' => $curso->clases], 200);
+  }
+
+
+
+
   /**
    * @OA\Post(
    *     path="/api/v1/cursos/{id}/clase",
