@@ -103,7 +103,7 @@ Route::post('api/v1/cursos/{id}/clase', [V1CursoController::class, 'clasesStore'
 Route::get('api/v1/cursos/{id}/clase/{code}', [V1CursoController::class, 'clasesAsistentes']);
 
 
-Route::post('api/v1/clase/{code}/asistencia', [V1CursoController::class, 'asistenciaStore']);
+Route::post('api/v1/clases/{code}/asistencia', [V1CursoController::class, 'asistenciaStore']);
 
 // Route::middleware('auth:sanctum')->get('api/v1/cursos', [V1CursoController::class, 'index']);
 
