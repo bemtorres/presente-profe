@@ -325,4 +325,76 @@ class AuthController extends APIController {
         ], 500);
     }
   }
+
+
+/**
+ * @OA\Put(
+ *     path="/api/v1/usuarios/password",
+ *     summary="Actualizar la contraseña del usuario autenticado",
+ *     tags={"Usuarios"},
+ *     security={{"BearerAuth": {}}},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"password"},
+ *             @OA\Property(property="password", type="string", format="password", example="NuevaContraseña123")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Contraseña actualizada exitosamente",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Contraseña actualizada correctamente")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="No autenticado. El usuario no está autenticado.",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="No autenticado")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Contraseña no proporcionada o inválida.",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="La contraseña no es válida")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=500,
+ *         description="Ocurrió un error al actualizar la contraseña",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Error interno al procesar la solicitud"),
+ *             @OA\Property(property="error", type="string", example="Descripción del error")
+ *         )
+ *     )
+ * )
+ */
+public function updatePassword(Request $request)
+{
+    // Asegurarse de que el usuario está autenticado
+    if (!$this->user_auth) {
+        return response()->json([
+            'message' => 'No autenticado',
+        ], 401);
+    }
+
+    // Obtener el usuario autenticado
+    $user = $this->user_auth;
+    $password = $request->input('password');
+
+    // Verificar que la nueva contraseña es válida
+    if (empty($password)) {
+        return response()->json([
+            'message' => 'La contraseña no es válida',
+        ], 400);
+    }
+
+    // Actualizar la contraseña del usuario
+    $user->password = hash('sha256', $password);
+    $user->update();
+
+    return response()->json(['message' => 'Contraseña actualizada correctamente'], 200);
+  }
 }
