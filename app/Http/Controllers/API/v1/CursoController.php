@@ -355,7 +355,7 @@ class CursoController extends APIController
 
     /**
    * @OA\Get(
-   *     path="/api/v1/cursos/{id}/clases/{code}/asistentes",
+   *     path="/api/v1/cursos/{id}/clases/{code}",
    *     summary="Obtener historial de asistencia de una clase",
    *     tags={"Clases"},
    *     security={{ "bearerAuth": {} }},

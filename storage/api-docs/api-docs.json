@@ -1014,13 +1014,13 @@
                 ]
             }
         },
-        "/api/v1/cursos/{id}/clases/{code}/asistentes": {
+        "/api/v1/cursos/{id}/clases/{code}": {
             "get": {
                 "tags": [
                     "Clases"
                 ],
                 "summary": "Obtener historial de asistencia de una clase",
-                "operationId": "0a54d54b1ca1f6eb7bd975ae77e4d590",
+                "operationId": "747490bfb99e45ace43e04a018f3016d",
                 "parameters": [
                     {
                         "name": "id",

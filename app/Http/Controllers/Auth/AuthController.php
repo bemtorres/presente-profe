@@ -74,8 +74,16 @@ class AuthController extends Controller
         $u->apellido = $request->input('apellido');
         $u->correo = $request->input('correo');
         $u->password = hash('sha256', $codigo);
-        $u->perfil = $request->input('perfil') == 'docente' ? 2 : 3;
+
+        if ($request->input('perfil') == 'docente') {
+          $u->perfil = 2;
+        } else{
+          $u->perfil = 3;
+        }
+
         $u->save();
+
+
 
         $info = $usuario_main->info;
         $info['invitar_count'] = $usuario_main->getInfoInvitarCount() + 1;
