@@ -1154,6 +1154,155 @@
                 ]
             }
         },
+        "/api/v1/cursos/{id}/inasistencias": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtener reportes de inasistencias de un curso",
+                "operationId": "0608a0751434b56474ed4b53efec55b4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de inasistencias del curso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de inasistencias del curso"
+                                        },
+                                        "curso": {
+                                            "description": "Información del curso",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Curso de Matemáticas"
+                                                },
+                                                "descripcion": {
+                                                    "type": "string",
+                                                    "example": "Curso avanzado de matemáticas"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "reportes": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID de la matrícula",
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "estudiante": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Juan Pérez"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "juan.perez@example.com"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "cantidad_reporte": {
+                                                        "description": "Cantidad de reportes de inasistencia",
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "inasistencias": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "integer",
+                                                                    "example": 10
+                                                                },
+                                                                "fecha_inicio": {
+                                                                    "type": "string",
+                                                                    "format": "date",
+                                                                    "example": "2024-11-18"
+                                                                },
+                                                                "mensaje": {
+                                                                    "type": "string",
+                                                                    "example": "Razones médicas"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/cursos/{id}/anuncios": {
             "post": {
                 "tags": [
@@ -1715,6 +1864,162 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Código de clase incorrecto"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "api/v1/estudiante/cursos/{id}/reportar-inasistencia": {
+            "post": {
+                "tags": [
+                    "Estudiante"
+                ],
+                "summary": "Reportar una inasistencia para un curso",
+                "operationId": "0db266ec5046f6713780da34e2966439",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fecha",
+                                    "mensaje"
+                                ],
+                                "properties": {
+                                    "fecha": {
+                                        "description": "Fecha de la inasistencia",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-11-18"
+                                    },
+                                    "mensaje": {
+                                        "description": "Razón o mensaje explicando la inasistencia",
+                                        "type": "string",
+                                        "example": "Razones médicas"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Inasistencia reportada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Inasistencia reportada"
+                                        },
+                                        "reporte": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "ID del reporte",
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "fecha_inicio": {
+                                                    "description": "Fecha de inicio de la inasistencia",
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2024-11-18"
+                                                },
+                                                "mensaje": {
+                                                    "description": "Mensaje del reporte",
+                                                    "type": "string",
+                                                    "example": "Razones médicas"
+                                                },
+                                                "id_matricula_espacio": {
+                                                    "description": "ID de la matrícula asociada",
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "created_at": {
+                                                    "description": "Fecha de creación del reporte",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-11-18T12:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "description": "Última fecha de actualización del reporte",
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-11-18T12:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso o matrícula no encontrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno al reportar inasistencia",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error al reportar inasistencia"
                                         }
                                     },
                                     "type": "object"

@@ -28,7 +28,6 @@ class Espacio extends Model
     return $this->hasMany(ClaseEspacio::class, 'id_espacio')->orderBy('fecha', 'desc');
   }
 
-
   public function getPhoto(){
     $folder = "assets/espacios";
     $folder_default = "img/template";

@@ -99,6 +99,7 @@ Route::put('api/v1/usuarios/password', [V1AuthController::class, 'updatePassword
 Route::get('api/v1/cursos', [V1CursoController::class, 'index']);
 Route::post('api/v1/cursos', [V1CursoController::class, 'store']);
 Route::get('api/v1/cursos/{id}', [V1CursoController::class, 'show']);
+Route::get('api/v1/cursos/{id}/inaistencias', [V1CursoController::class, 'inasistencias']);
 Route::get('api/v1/cursos/{id}/anuncios', [V1CursoController::class, 'anuncios']);
 Route::post('api/v1/cursos/{id}/anuncios', [V1CursoController::class, 'anunciosStore']);
 
@@ -111,6 +112,7 @@ Route::get('api/v1/cursos/{id}/clase/{code}', [V1CursoController::class, 'clases
 
 Route::get('api/v1/estudiante/cursos', [V1CursoController::class, 'misCursos']);
 Route::get('api/v1/estudiante/cursos/{id}', [V1CursoController::class, 'misCursoAsistencia']);
+Route::post('api/v1/estudiante/cursos/{id}/reportar-inasistencia', [V1CursoController::class, 'reportarInasistencia']);
 
 Route::post('api/v1/clases/{code}/asistencia', [V1CursoController::class, 'asistenciaStore']);
 

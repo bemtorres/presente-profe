@@ -8,6 +8,7 @@ use App\Models\AsistenciaEspacio;
 use App\Models\ClaseEspacio;
 use App\Models\Espacio;
 use App\Models\MatriculaEspacio;
+use App\Models\ReporteInasistencia;
 use Illuminate\Http\Request;
 use Str;
 
@@ -234,6 +235,10 @@ class CursoController extends APIController
     return response()->json($respuesta, 200);
   }
 
+  public function justificarStore($id, Request $request) {
+
+  }
+
     /**
    * @OA\Post(
    *     path="/api/v1/cursos",
@@ -452,6 +457,100 @@ class CursoController extends APIController
       'message' => 'Listado de anuncios del curso',
       'curso' => $curso->to_raw(),
       'anuncios' => $anuncios
+    ];
+
+    return response()->json($respuesta, 200);
+  }
+
+  /**
+   * @OA\Get(
+   *     path="/api/v1/cursos/{id}/inasistencias",
+   *     summary="Obtener reportes de inasistencias de un curso",
+   *     tags={"Cursos"},
+   *     security={{"bearerAuth":{}}},
+   *     @OA\Parameter(
+   *         name="id",
+   *         in="path",
+   *         description="ID del curso",
+   *         required=true,
+   *         @OA\Schema(type="integer")
+   *     ),
+   *     @OA\Response(
+   *         response=200,
+   *         description="Listado de inasistencias del curso",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="Listado de inasistencias del curso"),
+   *             @OA\Property(property="curso", type="object", description="Información del curso",
+   *                 @OA\Property(property="id", type="integer", example=1),
+   *                 @OA\Property(property="nombre", type="string", example="Curso de Matemáticas"),
+   *                 @OA\Property(property="descripcion", type="string", example="Curso avanzado de matemáticas"),
+   *             ),
+   *             @OA\Property(property="reportes", type="array",
+   *                 @OA\Items(
+   *                     @OA\Property(property="id", type="integer", example=5, description="ID de la matrícula"),
+   *                     @OA\Property(property="estudiante", type="object",
+   *                         @OA\Property(property="id", type="integer", example=2),
+   *                         @OA\Property(property="nombre", type="string", example="Juan Pérez"),
+   *                         @OA\Property(property="email", type="string", example="juan.perez@example.com")
+   *                     ),
+   *                     @OA\Property(property="cantidad_reporte", type="integer", example=2, description="Cantidad de reportes de inasistencia"),
+   *                     @OA\Property(property="inasistencias", type="array",
+   *                         @OA\Items(
+   *                             @OA\Property(property="id", type="integer", example=10),
+   *                             @OA\Property(property="fecha_inicio", type="string", format="date", example="2024-11-18"),
+   *                             @OA\Property(property="mensaje", type="string", example="Razones médicas"),
+   *                         )
+   *                     )
+   *                 )
+   *             )
+   *         )
+   *     ),
+   *     @OA\Response(
+   *         response=401,
+   *         description="No autenticado",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="No autenticado")
+   *         )
+   *     ),
+   *     @OA\Response(
+   *         response=404,
+   *         description="Curso no encontrado",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="Curso no encontrado")
+   *         )
+   *     )
+   * )
+   */
+  public function inasistencias($id) {
+    if (!$this->user_auth) {
+      return response()->json([
+        'message' => 'No autenticado',
+      ], 401);
+    }
+    // Obtener los cursos relacionados con el usuario
+    $curso = Espacio::with(['matriculas.reportes','matriculas.estudiante'])->where('id_usuario', $this->user_auth->id)->find($id);
+
+    if (!$curso) {
+      return response()->json(['message' => 'Curso no encontrado',], 404);
+    }
+
+    $reportes = [];
+    foreach ($curso->matriculas as $ma) {
+      if ($ma->activo && $ma->habilitado) {
+        $reportes[] = [
+          'id' => $ma->id,
+          'estudiante' => $ma->estudiante->to_raw(),
+          'cantidad_reporte' => $ma->reportes->count() ?? 0,
+          'inasistencias' => $ma->reportes ?? [],
+        ];
+      }
+    }
+
+    // anuncios
+    $respuesta = [
+      'message' => 'Listado de anuncios del curso',
+      'curso' => $curso->to_raw(),
+      'reportes' => $reportes
     ];
 
     return response()->json($respuesta, 200);
@@ -844,8 +943,100 @@ class CursoController extends APIController
   }
 
 
+  /**
+   * @OA\Post(
+   *     path="api/v1/estudiante/cursos/{id}/reportar-inasistencia",
+   *     summary="Reportar una inasistencia para un curso",
+   *     tags={"Estudiante"},
+   *     security={{"bearerAuth":{}}},
+   *     @OA\Parameter(
+   *         name="id",
+   *         in="path",
+   *         description="ID del curso",
+   *         required=true,
+   *         @OA\Schema(type="integer")
+   *     ),
+   *     @OA\RequestBody(
+   *         required=true,
+   *         @OA\JsonContent(
+   *             required={"fecha", "mensaje"},
+   *             @OA\Property(property="fecha", type="string", format="date", example="2024-11-18", description="Fecha de la inasistencia"),
+   *             @OA\Property(property="mensaje", type="string", example="Razones médicas", description="Razón o mensaje explicando la inasistencia")
+   *         )
+   *     ),
+   *     @OA\Response(
+   *         response=201,
+   *         description="Inasistencia reportada exitosamente",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="Inasistencia reportada"),
+   *             @OA\Property(property="reporte", type="object",
+   *                 @OA\Property(property="id", type="integer", example=1, description="ID del reporte"),
+   *                 @OA\Property(property="fecha_inicio", type="string", format="date", example="2024-11-18", description="Fecha de inicio de la inasistencia"),
+   *                 @OA\Property(property="mensaje", type="string", example="Razones médicas", description="Mensaje del reporte"),
+   *                 @OA\Property(property="id_matricula_espacio", type="integer", example=5, description="ID de la matrícula asociada"),
+   *                 @OA\Property(property="created_at", type="string", format="date-time", example="2024-11-18T12:00:00Z", description="Fecha de creación del reporte"),
+   *                 @OA\Property(property="updated_at", type="string", format="date-time", example="2024-11-18T12:00:00Z", description="Última fecha de actualización del reporte")
+   *             )
+   *         )
+   *     ),
+   *     @OA\Response(
+   *         response=401,
+   *         description="No autenticado",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="No autenticado")
+   *         )
+   *     ),
+   *     @OA\Response(
+   *         response=404,
+   *         description="Curso o matrícula no encontrados",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="Curso no encontrado")
+   *         )
+   *     ),
+   *     @OA\Response(
+   *         response=500,
+   *         description="Error interno al reportar inasistencia",
+   *         @OA\JsonContent(
+   *             @OA\Property(property="message", type="string", example="Error al reportar inasistencia")
+   *         )
+   *     )
+   * )
+   */
 
+  public  function reportarInasistencia(Request $request, $id){
+    if (!$this->user_auth) {
+      return response()->json([
+          'message' => 'No autenticado',
+      ], 401);
+    }
 
+    try {
+      $fecha = $request->input('fecha');
+      $mensaje = $request->input('mensaje');
+
+      $curso = Espacio::find($id);
+
+      if (!$curso) {
+        return response()->json(['message' => 'Curso no encontrado'], 404);
+      }
+
+      $matricula = MatriculaEspacio::where('id_estudiante', $this->user_auth->id)->where('id_espacio', $curso->id)->first();
+
+      if (!$matricula) {
+        return response()->json(['message' => 'Usuario no está matriculado en este curso'], 403);
+      }
+
+      $reporte = new ReporteInasistencia();
+      $reporte->fecha_inicio = $fecha;
+      $reporte->mensaje = $mensaje;
+      $reporte->id_matricula_espacio = $matricula->id;
+      $reporte->save();
+
+      return response()->json(['message' => 'Inasistencia reportada', 'reporte' => $reporte], 201);
+    } catch (\Throwable $th) {
+      return response()->json(['message' => 'Error al reportar inasistencia'], 500);
+    }
+  }
 
 
 
