@@ -123,7 +123,7 @@
   <div class="row">
     <h1>Comunicación API-MODELO-APP</h1>
     <p>Para consumir los servicios de la API, se debe tener en cuenta el siguiente modelo de endpoint:</p>
-    <img src="{{ asset('ModeloPresenteprofe.svg') }}" width="100%" alt="" srcset="">
+    <img src="{{ asset('ModeloPF.svg') }}" width="100%" alt="" srcset="">
 
     <br><br>
     <h1>BASE DE DATOS</h1>
