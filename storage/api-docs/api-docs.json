@@ -710,6 +710,217 @@
                 ]
             }
         },
+        "/api/v1/estudiante/cursos": {
+            "get": {
+                "tags": [
+                    "Estudiante"
+                ],
+                "summary": "Obtener cursos matriculados por el estudiante",
+                "operationId": "cecdb39a5d629dac9a863fc8da3f9004",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Correo electrónico del usuario",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "email",
+                            "example": "correo@gmail.com"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de cursos obtenida correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "cursos": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string",
+                                                        "example": "Curso de Laravel"
+                                                    },
+                                                    "descripcion": {
+                                                        "type": "string",
+                                                        "example": "Introducción a Laravel"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/estudiante/cursos/{id}": {
+            "get": {
+                "tags": [
+                    "Estudiante"
+                ],
+                "summary": "Obtener asistencia de un curso",
+                "operationId": "c59461c904e451fe96daa6bb40f895d2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Asistencias del curso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "total_clases": {
+                                            "description": "Total de clases del curso",
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "total_asistencias": {
+                                            "description": "Total de asistencias del estudiante",
+                                            "type": "integer",
+                                            "example": 8
+                                        },
+                                        "historial_clases": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "ID de la clase",
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "nombre": {
+                                                        "description": "Nombre de la clase",
+                                                        "type": "string",
+                                                        "example": "Clase 1"
+                                                    },
+                                                    "hora_inicio": {
+                                                        "description": "Hora de inicio de la clase",
+                                                        "type": "string",
+                                                        "example": "08:00:00"
+                                                    },
+                                                    "hora_termino": {
+                                                        "description": "Hora de término de la clase",
+                                                        "type": "string",
+                                                        "example": "09:30:00"
+                                                    },
+                                                    "asistencia": {
+                                                        "description": "Indica si el estudiante asistió a la clase",
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Usuario no matriculado en el curso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuario no está matriculado en este curso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/cursos/{id}": {
             "get": {
                 "tags": [
@@ -802,6 +1013,283 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "api/v1/cursos/{id}/anuncios": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtener anuncios de un curso específico",
+                "operationId": "7a5271276337f1a686e94e662e9e32a4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de anuncios del curso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Listado de anuncios del curso"
+                                        },
+                                        "curso": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Curso de Laravel"
+                                                },
+                                                "descripcion": {
+                                                    "type": "string",
+                                                    "example": "Un curso para aprender Laravel"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "anuncios": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_espacio": {
+                                                        "type": "integer",
+                                                        "example": 10
+                                                    },
+                                                    "titulo": {
+                                                        "type": "string",
+                                                        "example": "Nuevo anuncio"
+                                                    },
+                                                    "mensaje": {
+                                                        "type": "string",
+                                                        "example": "Clase suspendida el lunes"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-11-18T10:00:00Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-11-18T12:00:00Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/cursos/{id}/anuncios": {
+            "post": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Crear un nuevo anuncio para un curso",
+                "operationId": "509e4ee2f4cbf18da471238753f3e685",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del curso",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titulo",
+                                    "mensaje"
+                                ],
+                                "properties": {
+                                    "titulo": {
+                                        "description": "Título del anuncio",
+                                        "type": "string",
+                                        "example": "Nuevo anuncio"
+                                    },
+                                    "mensaje": {
+                                        "description": "Contenido del anuncio",
+                                        "type": "string",
+                                        "example": "Este es un anuncio importante."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Anuncio creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Anuncio creado exitosamente"
+                                        },
+                                        "anuncio": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "id_espacio": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "titulo": {
+                                                    "type": "string",
+                                                    "example": "Nuevo anuncio"
+                                                },
+                                                "mensaje": {
+                                                    "type": "string",
+                                                    "example": "Este es un anuncio importante."
+                                                },
+                                                "activo": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "estado": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-11-18T10:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-11-18T10:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Curso no encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Curso no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Errores de validación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "titulo": [
+                                                    "El campo título es obligatorio."
+                                                ],
+                                                "mensaje": [
+                                                    "El campo mensaje es obligatorio."
+                                                ]
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -1014,13 +1502,13 @@
                 ]
             }
         },
-        "/api/v1/cursos/{id}/clases/{code}": {
+        "/api/v1/cursos/{id}/clase/{code}": {
             "get": {
                 "tags": [
                     "Clases"
                 ],
                 "summary": "Obtener historial de asistencia de una clase",
-                "operationId": "747490bfb99e45ace43e04a018f3016d",
+                "operationId": "6d68fb7b012fca7c442ed59e985e6e0e",
                 "parameters": [
                     {
                         "name": "id",
@@ -1255,6 +1743,10 @@
         {
             "name": "Cursos",
             "description": "Cursos"
+        },
+        {
+            "name": "Estudiante",
+            "description": "Estudiante"
         },
         {
             "name": "Clases",

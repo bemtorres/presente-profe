@@ -95,14 +95,22 @@ Route::post('api/v1/auth', [V1AuthController::class, 'login']);
 Route::post('api/v1/auth/recuperar', [V1AuthController::class, 'recuperar']);
 Route::get('api/v1/auth/me', [V1AuthController::class, 'me']);
 Route::post('api/v1/usuarios', [V1AuthController::class, 'store']);
-Route::put('api/v1/usuarios/password', [V1AuthController::class, 'password']);
+Route::put('api/v1/usuarios/password', [V1AuthController::class, 'updatePassword']);
 Route::get('api/v1/cursos', [V1CursoController::class, 'index']);
 Route::post('api/v1/cursos', [V1CursoController::class, 'store']);
 Route::get('api/v1/cursos/{id}', [V1CursoController::class, 'show']);
+Route::get('api/v1/cursos/{id}/anuncios', [V1CursoController::class, 'anuncios']);
+Route::post('api/v1/cursos/{id}/anuncios', [V1CursoController::class, 'anunciosStore']);
+
+
+
 Route::get('api/v1/cursos/{id}/clase', [V1CursoController::class, 'clasesIndex']);
 Route::post('api/v1/cursos/{id}/clase', [V1CursoController::class, 'clasesStore']);
 Route::get('api/v1/cursos/{id}/clase/{code}', [V1CursoController::class, 'clasesAsistentes']);
 
+
+Route::get('api/v1/estudiante/cursos', [V1CursoController::class, 'misCursos']);
+Route::get('api/v1/estudiante/cursos/{id}', [V1CursoController::class, 'misCursoAsistencia']);
 
 Route::post('api/v1/clases/{code}/asistencia', [V1CursoController::class, 'asistenciaStore']);
 

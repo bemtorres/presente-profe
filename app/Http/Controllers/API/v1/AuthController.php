@@ -190,26 +190,27 @@ class AuthController extends APIController {
  * )
  */
   public function store(Request $request) {
-    $codigo = Str::lower($request->input('codigo'));
+    $codigo_invitacion = Str::lower($request->input('codigo'));
 
-    if ($codigo == "presenteprofe") {
+    if ($codigo_invitacion == "presenteprofe") {
       $usuario_main = Usuario::first();
     } else {
-      $usuario_main = Usuario::findCodeInvitacion($codigo)->firstOrFail();
+      $usuario_main = Usuario::findCodeInvitacion($codigo_invitacion)->firstOrFail();
     }
 
     $exist = Usuario::findByCorreo($request->correo)->first();
 
-    if ($usuario_main->getInfoInvitar() || $codigo == "presenteprofe") {
+    if ($usuario_main->getInfoInvitar() || $codigo_invitacion == "presenteprofe") {
       if (empty($exist)) {
-        $codigo = Str::random(8);
+        // $codigo = Str::random(8);
+        $password_new = 123456; // :FIX:ERROR_EMAIL
 
         $u = new Usuario();
         $u->run = $request->input('run');
         $u->nombre = $request->input('nombre');
         $u->apellido = $request->input('apellido');
         $u->correo = $request->input('correo');
-        $u->password = hash('sha256', $codigo);
+        $u->password = hash('sha256', $password_new);
 
         $perfil = $request->input('perfil');
 
@@ -237,7 +238,7 @@ class AuthController extends APIController {
         $uinvitado->id_invitado = $u->id;
         $uinvitado->save();
 
-        (new EmailUser($u, $codigo))->registro();
+        (new EmailUser($u, $password_new))->registro();
 
         return response()->json([
           'message' => 'Success',
@@ -293,39 +294,36 @@ class AuthController extends APIController {
     ]);
 
     try {
-        // Buscar usuario por correo
-        $u = Usuario::findByCorreo($request->correo)->first();
+      // Buscar usuario por correo
+      $u = Usuario::findByCorreo($request->correo)->first();
 
-        if (!$u) {
-            return response()->json([
-                'message' => 'Usuario no encontrado',
-            ], 404);
-        }
-
-        // Generar un token de recuperación o una nueva contraseña temporal
-        $time = time() + 60 * 60 * 24;
-        $tempPassword = hash('sha256', $time);
-
-        // Actualizar contraseña
-        $u->password = $tempPassword;
-        $u->save();
-
-        // Enviar correo de recuperación de contraseña
-        (new EmailUser($u, $time))->password_reset();
-
+      if (!$u) {
         return response()->json([
-            'message' => 'Solicitud de recuperación de contraseña enviada correctamente',
-        ], 200);
+          'message' => 'Usuario no encontrado',
+        ], 404);
+      }
 
+      // Generar un token de recuperación o una nueva contraseña temporal
+      $password_new = 123456; // :FIX:ERROR_EMAIL
+
+      // Actualizar contraseña
+      $u->password = hash('sha256', $password_new);
+      $u->save();
+
+      // Enviar correo de recuperación de contraseña
+      (new EmailUser($u, $password_new))->password_reset();
+
+      return response()->json([
+          'message' => 'Solicitud de recuperación de contraseña enviada correctamente',
+      ], 200);
     } catch (\Throwable $th) {
-        // Devolver respuesta de error con detalles
-        return response()->json([
-            'message' => 'Ocurrió un error durante la recuperación',
-            'error' => $th->getMessage()
-        ], 500);
+      // Devolver respuesta de error con detalles
+      return response()->json([
+        'message' => 'Ocurrió un error durante la recuperación',
+        'error' => $th->getMessage()
+      ], 500);
     }
   }
-
 
 /**
  * @OA\Put(
