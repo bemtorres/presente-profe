@@ -111,6 +111,7 @@
             }
         </style>
     @endif
+    <link id="theme-style" rel="stylesheet" href="{{ asset('template/assets/css/portal.css') }}">
 </head>
 
 <body @if(config('l5-swagger.defaults.ui.display.dark_mode')) id="dark-mode" @endif>
@@ -118,9 +119,24 @@
 <div id="swagger-ui"></div>
 <br>
 <br>
+<div class="container">
+  <div class="row">
+    <h1>Comunicación API-MODELO-APP</h1>
+    <p>Para consumir los servicios de la API, se debe tener en cuenta el siguiente modelo de endpoint:</p>
+    <img src="{{ asset('ModeloPresenteprofe.svg') }}" width="100%" alt="" srcset="">
+
+    <br><br>
+    <h1>BASE DE DATOS</h1>
+    <img src="{{ asset('ModeloBD.svg') }}" width="100%" alt="" srcset="">
+  </div>
+</div>
 <br>
 <img src="{{ asset('img/banner.png') }}" width="100%" alt="">
 {{-- <img src="{{ asset('img/footer.png') }}" width="100%" alt=""> --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="{{ asset('template/assets/plugins/popper.min.js') }}"></script>
+  <script src="{{ asset('template/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('template/assets/js/app.js') }}"></script>
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-bundle.js') }}"></script>
 <script src="{{ l5_swagger_asset($documentation, 'swagger-ui-standalone-preset.js') }}"></script>
 <script>
