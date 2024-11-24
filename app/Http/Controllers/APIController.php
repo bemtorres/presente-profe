@@ -20,6 +20,14 @@ use Laravel\Sanctum\PersonalAccessToken;
  *          email="bej.mora@profesor.duoc.cl"
  *      ),
  * ),
+*   @OA\Tag(
+*        name="Auth:Autenticación",
+*        description="Endpoints relacionados inicio de sesión y registro de usuarios"
+*     ),
+*   @OA\Tag(
+*        name="Auth:Usuarios",
+*        description="Endpoints relacionados con la gestión de usuarios"
+*     ),
  *  @OA\Server(
  *      description="Production",
  *      url="https://www.presenteprofe.test/"
@@ -28,6 +36,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  *      description="Ambiente de desarrollo",
  *      url="https://presenteprofe.test/"
  *  ),
+ *
  */
 class APIController extends BaseController {
 

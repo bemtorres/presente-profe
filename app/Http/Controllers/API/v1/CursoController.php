@@ -186,6 +186,8 @@ class CursoController extends APIController
    *     )
    * )
    */
+
+  //  :TODO EXAMINAR
   public function misCursoAsistencia($id) {
     if (!$this->user_auth) {
       return response()->json([
@@ -845,6 +847,10 @@ class CursoController extends APIController
     $curso = Espacio::where('id_usuario', $this->user_auth->id)->find($id);
     $clase = ClaseEspacio::where('id_espacio', $curso->id)->where('codigo_web', $code)->first();
 
+    $alumnos =  [];
+    // foreach ($clases->inaistencias )
+
+
     return response()->json(
       [ 'message' => 'Listado de asistencia a la clase',
         'codigo' => $code,
@@ -1038,7 +1044,37 @@ class CursoController extends APIController
     }
   }
 
+  public function anunciosEstudiante($id) {
+    // anuncios del curso del estudiante
+    if (!$this->user_auth) {
+      return response()->json([
+        'message' => 'No autenticado',
+      ], 401);
+    }
+    // Obtener los cursos relacionados con el usuario
+    $curso = Espacio::with(['anuncios'])->find($id);
+    // ordenar por el mas nuevo
 
+    if (!$curso) {
+      return response()->json(['message' => 'Curso no encontrado',], 404);
+    }
+
+    $anuncios = [];
+    foreach ($curso->anuncios as $anuncio) {
+      if ($anuncio->activo && $anuncio->estado == 1) {
+        $anuncios[] = $anuncio->to_raw();
+      }
+    }
+
+    // anuncios
+    $respuesta = [
+      'message' => 'Listado de anuncios del curso',
+      'curso' => $curso->to_raw(),
+      'anuncios' => $anuncios
+    ];
+
+    return response()->json($respuesta, 200);
+  }
 
    // PRIVATE
 

@@ -17,7 +17,7 @@ class AuthController extends APIController {
  * @OA\Post(
  *     path="/api/v1/auth",
  *     summary="Iniciar sesión y generar token de autenticación",
- *     tags={"Autenticación"},
+ *     tags={"Auth:Autenticación"},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -97,7 +97,7 @@ class AuthController extends APIController {
    * @OA\Get(
    *     path="/api/v1/auth/me",
    *     summary="Obtener mi informacion de usuario",
-   *     tags={"Autenticación"},
+   *     tags={"Auth:Usuarios"},
    *     security={{ "bearerAuth": {} }},
    *     @OA\Parameter(
    *         name="user",
@@ -154,7 +154,7 @@ class AuthController extends APIController {
  * @OA\Post(
  *     path="/api/v1/usuarios",
  *     summary="Registrar un nuevo usuario mediante código de invitación",
- *     tags={"Usuarios"},
+ *     tags={"Auth:Autenticación"},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -255,7 +255,7 @@ class AuthController extends APIController {
    * @OA\Post(
    *     path="/api/v1/auth/recuperar",
    *     summary="Recuperar la contraseña del usuario",
-   *     tags={"Autenticación"},
+   *     tags={"Auth:Autenticación"},
    *     @OA\RequestBody(
    *         required=true,
    *         @OA\JsonContent(
@@ -329,7 +329,7 @@ class AuthController extends APIController {
  * @OA\Put(
  *     path="/api/v1/usuarios/password",
  *     summary="Actualizar la contraseña del usuario autenticado",
- *     tags={"Usuarios"},
+ *     tags={"Auth:Usuarios"},
  *     security={{"BearerAuth": {}}},
  *     @OA\RequestBody(
  *         required=true,

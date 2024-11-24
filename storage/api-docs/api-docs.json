@@ -22,7 +22,7 @@
         "/api/v1/auth": {
             "post": {
                 "tags": [
-                    "Autenticación"
+                    "Auth:Autenticación"
                 ],
                 "summary": "Iniciar sesión y generar token de autenticación",
                 "operationId": "956b567bea82b5707296567cb2bf27c6",
@@ -143,7 +143,7 @@
         "/api/v1/auth/me": {
             "get": {
                 "tags": [
-                    "Autenticación"
+                    "Auth:Usuarios"
                 ],
                 "summary": "Obtener mi informacion de usuario",
                 "operationId": "8bb633895a24921f8bb59f4db5a8e17e",
@@ -241,7 +241,7 @@
         "/api/v1/usuarios": {
             "post": {
                 "tags": [
-                    "Usuarios"
+                    "Auth:Autenticación"
                 ],
                 "summary": "Registrar un nuevo usuario mediante código de invitación",
                 "operationId": "6b4700583a55930d0b80dd98f98f2a71",
@@ -341,7 +341,7 @@
         "/api/v1/auth/recuperar": {
             "post": {
                 "tags": [
-                    "Autenticación"
+                    "Auth:Autenticación"
                 ],
                 "summary": "Recuperar la contraseña del usuario",
                 "operationId": "1d8ea1cade6e2980537e5793ecbd2e53",
@@ -424,7 +424,7 @@
         "/api/v1/usuarios/password": {
             "put": {
                 "tags": [
-                    "Usuarios"
+                    "Auth:Usuarios"
                 ],
                 "summary": "Actualizar la contraseña del usuario autenticado",
                 "operationId": "ab7d44dd753e5b8f414502b9bac5bac4",
@@ -2038,12 +2038,12 @@
     },
     "tags": [
         {
-            "name": "Autenticación",
-            "description": "Autenticación"
+            "name": "Auth:Autenticación",
+            "description": "Endpoints relacionados inicio de sesión y registro de usuarios"
         },
         {
-            "name": "Usuarios",
-            "description": "Usuarios"
+            "name": "Auth:Usuarios",
+            "description": "Endpoints relacionados con la gestión de usuarios"
         },
         {
             "name": "Cursos",
